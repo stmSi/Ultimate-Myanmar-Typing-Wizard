@@ -12,12 +12,10 @@ var pending_shift_node: KeyButton = null
 
 func _ready() -> void:
 	EventBus.current_char_changed.connect(self._on_current_char_changed)
-	pass # Replace with function body.
 
 
 func _on_new_key_node_added(key_name, node) -> void:
 	key_node_mapping[key_name] = node
-	pass # Replace with function body.
 
 
 func _input(event: InputEvent) -> void:
@@ -32,18 +30,17 @@ func _input(event: InputEvent) -> void:
 			keycode_str, 
 			event.shift_pressed
 		)[1] ### [Success, Char]
-		
+			
 
 		if len(converted_char) > 1: # Shift/Alt/Ctrl
 			### Allow 'Backkspace' and 'Delete'
-			if converted_char != "Backspace" and converted_char != "Delete":
+			if converted_char != "Backspace" and converted_char != "Delete" and converted_char != "Simicolon":
 				return
 		
 		if current_char == converted_char:
 			pending_node.correct_animation()
 			
 			if pending_shift_node:
-				print('shifted')
 				pending_shift_node.correct_animation()
 				
 		else:

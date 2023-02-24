@@ -15,5 +15,4 @@ func need_shift(char: String) -> String:
 	elif use_r_shift_ids.find(idx) != -1:
 		return 'r_shift'
 	else:
-		print(idx)
 		return 'l_shift'

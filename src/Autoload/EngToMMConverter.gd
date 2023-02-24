@@ -1,6 +1,11 @@
 extends Node
 
 func convert_char(eng_char: String, use_shift = false) -> Array: # [Success, String]
+	if eng_char.begins_with("Semi"):
+		if use_shift:
+			return [true, "ဂ"]
+		return [true, "း"]
+	
 	var use_mm_chars = GlobalHardCoded.mm_chars
 	if use_shift:
 		use_mm_chars = GlobalHardCoded.mm_shift_chars
@@ -14,7 +19,7 @@ func convert_char(eng_char: String, use_shift = false) -> Array: # [Success, Str
 func convert_str(eng_str: String) -> String:
 	var new_str = ''
 	for eng_char in eng_str:
-		
+			
 		var idx = GlobalHardCoded.eng_chars.find(eng_char)
 		if idx != -1:
 			new_str += GlobalHardCoded.mm_chars[idx]

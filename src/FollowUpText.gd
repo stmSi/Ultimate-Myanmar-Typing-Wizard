@@ -16,11 +16,9 @@ func _ready():
 
 
 func _set_raw_text(t: String) -> void:
-	self.text = ""
-	push_color(Color.DARK_GOLDENROD)
 	raw_text = t
-	add_text(t)
-	pop()
+	_on_written_string_changed('')
+
 
 func _on_written_string_changed(str: String):
 	written_text = str
@@ -30,7 +28,7 @@ func _on_written_string_changed(str: String):
 	var i: int = 0
 	var correct: bool = false
 	var wrong: bool = false
-	while(i < len(written_text)):
+	while(i < len(written_text) and i < len(raw_text)):
 		
 		if written_text[i] == raw_text[i]:
 			
@@ -63,21 +61,27 @@ func _on_written_string_changed(str: String):
 		i += 1
 	pop()
 	
-	## show the rest
+	# color the current character where cursor will locate
 	if(i < len(raw_text)):
-		push_color(current_char_color)
-		push_bgcolor(current_char_bgcolor)
-		push_underline()
-		add_text(raw_text[i])
-		pop()
-		pop()
-		pop()
+		_color_cursor_character(i)
 		i += 1
 		
-	
+
+	## show the rest	
 	while(i < len(raw_text)):
 		add_text(raw_text[i])
 		i += 1
 	
-	print(text)
 	## End of while loop
+
+func _color_cursor_character(i: int = 0):
+	push_color(current_char_color)
+	push_bgcolor(current_char_bgcolor)
+	push_underline()
+	push_bold()
+	add_text(raw_text[i])
+	pop()
+	pop()
+	pop()
+	pop()
+	
