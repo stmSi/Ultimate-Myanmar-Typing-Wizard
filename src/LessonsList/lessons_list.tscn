@@ -1,0 +1,54 @@
+[gd_scene load_steps=2 format=3 uid="uid://byqdf77kmaj7"]
+
+[ext_resource type="Script" path="res://src/LessonsList/lessons_list.gd" id="1_8ri4n"]
+
+[node name="LessonsList" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_8ri4n")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_right = 88.0
+grow_vertical = 2
+
+[node name="BasicLessonsLbl" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "Basic Lessons"
+
+[node name="BasicLessons" type="ItemList" parent="VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+item_count = 1
+item_0/text = "Hi"
+
+[node name="InterLessonsLbl" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "intermediate Lessons"
+
+[node name="IntermediateLessons" type="ItemList" parent="VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+item_count = 1
+item_0/text = "Hi"
+
+[node name="AdvanceLessonsLbl" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "Advanced Lessons"
+
+[node name="AdvanceLessons" type="ItemList" parent="VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+item_count = 1
+item_0/text = "Hi"
+
+[connection signal="item_selected" from="VBoxContainer/BasicLessons" to="." method="_on_basic_lessons_item_selected"]

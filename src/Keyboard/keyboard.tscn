@@ -1,0 +1,172 @@
+[gd_scene load_steps=10 format=3 uid="uid://bu35jrqg64j60"]
+
+[ext_resource type="Script" path="res://src/Keyboard/keyboard.gd" id="1_ceo6d"]
+[ext_resource type="PackedScene" uid="uid://6ji1y6g83r7r" path="res://src/Keyboard/key_button.tscn" id="1_ik4w2"]
+[ext_resource type="Script" path="res://src/Keyboard/populator.gd" id="1_xnj8i"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_scc4s"]
+resource_local_to_scene = true
+bg_color = Color(0.117647, 0.117647, 0.117647, 0.827451)
+border_width_left = 3
+border_blend = true
+shadow_color = Color(1, 1, 1, 0.6)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dr5yv"]
+resource_local_to_scene = true
+bg_color = Color(0.117647, 0.117647, 0.117647, 0.827451)
+border_width_left = 3
+border_blend = true
+shadow_color = Color(1, 1, 1, 0.6)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ng5ll"]
+resource_local_to_scene = true
+bg_color = Color(0.117647, 0.117647, 0.117647, 0.827451)
+border_width_left = 3
+border_blend = true
+shadow_color = Color(1, 1, 1, 0.6)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xbnwi"]
+resource_local_to_scene = true
+bg_color = Color(0.117647, 0.117647, 0.117647, 0.827451)
+border_width_left = 3
+border_blend = true
+shadow_color = Color(1, 1, 1, 0.6)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8djne"]
+resource_local_to_scene = true
+bg_color = Color(0.117647, 0.117647, 0.117647, 0.827451)
+border_width_left = 3
+border_blend = true
+shadow_color = Color(1, 1, 1, 0.6)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jjy0n"]
+resource_local_to_scene = true
+bg_color = Color(0.117647, 0.117647, 0.117647, 0.827451)
+border_width_left = 3
+border_blend = true
+shadow_color = Color(1, 1, 1, 0.6)
+
+[node name="Keyboard" type="Control"]
+editor_description = "KeyButtons will automatically Fill the all the Keys. 
+Check \"populate.gd\""
+layout_mode = 3
+anchors_preset = 0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+script = ExtResource("1_ceo6d")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+offset_right = 408.0
+offset_bottom = 332.0
+alignment = 1
+
+[node name="1234567890" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+alignment = 1
+script = ExtResource("1_xnj8i")
+
+[node name="tide" parent="VBoxContainer/1234567890" instance=ExtResource("1_ik4w2")]
+layout_mode = 2
+shift_char = "~"
+char = "`"
+
+[node name="1_plus_populate" type="Control" parent="VBoxContainer/1234567890"]
+layout_mode = 2
+
+[node name="BackSpace" parent="VBoxContainer/1234567890" instance=ExtResource("1_ik4w2")]
+custom_minimum_size = Vector2(160, 80)
+layout_mode = 2
+size_flags_horizontal = 3
+char = "BackSpace"
+
+[node name="Panel" parent="VBoxContainer/1234567890/BackSpace" index="0"]
+custom_minimum_size = Vector2(160, 80)
+theme_override_styles/panel = SubResource("StyleBoxFlat_scc4s")
+
+[node name="qwerty" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+script = ExtResource("1_xnj8i")
+char = "ဆတနမအပကငသစဟဩ၏"
+shift_char = "ဈဝဣ၎ဤ၌ဥ၍ဿဏဧဪ\\"
+replacing_node_name = "qwerty"
+
+[node name="tab" parent="VBoxContainer/qwerty" instance=ExtResource("1_ik4w2")]
+custom_minimum_size = Vector2(120, 80)
+layout_mode = 2
+char = "Tab"
+
+[node name="Panel" parent="VBoxContainer/qwerty/tab" index="0"]
+custom_minimum_size = Vector2(120, 80)
+theme_override_styles/panel = SubResource("StyleBoxFlat_dr5yv")
+
+[node name="qwerty" type="Control" parent="VBoxContainer/qwerty"]
+layout_mode = 2
+
+[node name="asdfgh" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+script = ExtResource("1_xnj8i")
+char = "ေျိ်ါ့ြုူး'"
+shift_char = "ဗှီ္ွံဲဒဓဂ\""
+replacing_node_name = "asdfgh"
+
+[node name="CapsLock" parent="VBoxContainer/asdfgh" instance=ExtResource("1_ik4w2")]
+custom_minimum_size = Vector2(160, 80)
+layout_mode = 2
+char = "Caps Lock"
+
+[node name="Panel" parent="VBoxContainer/asdfgh/CapsLock" index="0"]
+custom_minimum_size = Vector2(160, 80)
+theme_override_styles/panel = SubResource("StyleBoxFlat_ng5ll")
+
+[node name="asdfgh" type="Control" parent="VBoxContainer/asdfgh"]
+layout_mode = 2
+
+[node name="Enter" parent="VBoxContainer/asdfgh" instance=ExtResource("1_ik4w2")]
+custom_minimum_size = Vector2(160, 80)
+layout_mode = 2
+char = "Enter"
+
+[node name="Panel" parent="VBoxContainer/asdfgh/Enter" index="0"]
+custom_minimum_size = Vector2(160, 80)
+theme_override_styles/panel = SubResource("StyleBoxFlat_xbnwi")
+
+[node name="zxcvb" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+script = ExtResource("1_xnj8i")
+char = "ဖထခလဘညာ,./"
+shift_char = "ဇဌဃဠယဉဦ၊။?"
+replacing_node_name = "zxcvb"
+
+[node name="LShift" parent="VBoxContainer/zxcvb" instance=ExtResource("1_ik4w2")]
+custom_minimum_size = Vector2(200, 80)
+layout_mode = 2
+char = "Shift"
+
+[node name="Panel" parent="VBoxContainer/zxcvb/LShift" index="0"]
+custom_minimum_size = Vector2(200, 80)
+theme_override_styles/panel = SubResource("StyleBoxFlat_8djne")
+
+[node name="zxcvb" type="Control" parent="VBoxContainer/zxcvb"]
+layout_mode = 2
+
+[node name="RShift" parent="VBoxContainer/zxcvb" instance=ExtResource("1_ik4w2")]
+custom_minimum_size = Vector2(200, 80)
+layout_mode = 2
+char = "Shift"
+
+[node name="Panel" parent="VBoxContainer/zxcvb/RShift" index="0"]
+custom_minimum_size = Vector2(200, 80)
+theme_override_styles/panel = SubResource("StyleBoxFlat_jjy0n")
+
+[connection signal="new_key_node_added" from="VBoxContainer/1234567890" to="." method="_on_new_key_node_added"]
+[connection signal="new_key_node_added" from="VBoxContainer/qwerty" to="." method="_on_new_key_node_added"]
+[connection signal="new_key_node_added" from="VBoxContainer/asdfgh" to="." method="_on_new_key_node_added"]
+[connection signal="new_key_node_added" from="VBoxContainer/zxcvb" to="." method="_on_new_key_node_added"]
+
+[editable path="VBoxContainer/1234567890/BackSpace"]
+[editable path="VBoxContainer/qwerty/tab"]
+[editable path="VBoxContainer/asdfgh/CapsLock"]
+[editable path="VBoxContainer/asdfgh/Enter"]
+[editable path="VBoxContainer/zxcvb/LShift"]
+[editable path="VBoxContainer/zxcvb/RShift"]

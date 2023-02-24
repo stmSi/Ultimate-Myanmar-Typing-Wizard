@@ -1,0 +1,29 @@
+extends Node
+
+func convert_char(eng_char: String, use_shift = false) -> Array: # [Success, String]
+	var use_mm_chars = GlobalHardCoded.mm_chars
+	if use_shift:
+		use_mm_chars = GlobalHardCoded.mm_shift_chars
+	
+	var idx = GlobalHardCoded.eng_shift_chars.find(eng_char)
+	if idx ==  -1:
+		return [false, eng_char]
+	return [true, use_mm_chars[idx]]
+
+
+func convert_str(eng_str: String) -> String:
+	var new_str = ''
+	for eng_char in eng_str:
+		
+		var idx = GlobalHardCoded.eng_chars.find(eng_char)
+		if idx != -1:
+			new_str += GlobalHardCoded.mm_chars[idx]
+			continue
+		
+		idx = GlobalHardCoded.eng_shift_chars.find(eng_char)
+		if idx != -1:
+			new_str += GlobalHardCoded.mm_shift_chars[idx]
+			continue
+		
+		new_str += eng_char
+	return new_str

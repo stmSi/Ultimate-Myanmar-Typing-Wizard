@@ -1,0 +1,88 @@
+[gd_scene load_steps=6 format=3 uid="uid://v5hum6qh2phh"]
+
+[ext_resource type="Script" path="res://src/main.gd" id="1_oh0j3"]
+[ext_resource type="FontFile" uid="uid://chygow7my3v5g" path="res://Assets/Fonts/NotoSansMyanmar-Regular.ttf" id="2_5ma1s"]
+[ext_resource type="Script" path="res://src/FollowUpText.gd" id="3_4b5n0"]
+[ext_resource type="PackedScene" uid="uid://bu35jrqg64j60" path="res://src/Keyboard/keyboard.tscn" id="4_7ds4t"]
+
+[sub_resource type="GDScript" id="GDScript_l4wjf"]
+script/source = "extends LineEdit
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	grab_focus()
+	EventBus.finished_section.connect(self._finished_section)
+	pass # Replace with function body.
+
+
+func _finished_section() -> void:
+	clear()
+"
+
+[node name="Main" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_oh0j3")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="FollowUpRichText" type="RichTextLabel" parent="VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(120, 120)
+layout_mode = 2
+theme_override_fonts/normal_font = ExtResource("2_5ma1s")
+bbcode_enabled = true
+text = "Hello World မကလာတေ"
+shortcut_keys_enabled = false
+script = ExtResource("3_4b5n0")
+
+[node name="LineEdit" type="LineEdit" parent="VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 80)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_5ma1s")
+context_menu_enabled = false
+virtual_keyboard_enabled = false
+shortcut_keys_enabled = false
+middle_mouse_paste_enabled = false
+selecting_enabled = false
+deselect_on_focus_loss_enabled = false
+script = SubResource("GDScript_l4wjf")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 0
+
+[node name="StatusLabel" type="Label" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "Status: "
+
+[node name="Status" type="Label" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "Ok"
+
+[node name="TEsting" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_5ma1s")
+
+[node name="Keyboard" parent="VBoxContainer" instance=ExtResource("4_7ds4t")]
+layout_mode = 2
+
+[node name="RestartDialog" type="AcceptDialog" parent="."]
+title = "Congratulations!"
+size = Vector2i(282, 100)
+dialog_text = "All Exerciese are done. Restarting.."
+
+[connection signal="text_changed" from="VBoxContainer/LineEdit" to="." method="_on_text_edit_text_changed"]
+[connection signal="confirmed" from="RestartDialog" to="." method="_on_accept_dialog_confirmed"]
