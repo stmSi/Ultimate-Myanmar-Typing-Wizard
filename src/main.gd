@@ -43,7 +43,6 @@ func _on_text_edit_text_changed(_t: String) -> void:
 		line_edit.text = EngToMmConverter.convert_str(_t)
 		line_edit.caret_column = len(line_edit.text)
 		
-	
 	_eng_to_mm_converted = false
 	
 	##### Status Update #####
@@ -56,6 +55,8 @@ func _on_text_edit_text_changed(_t: String) -> void:
 	var l = len(line_edit.text)
 	if l < len(current_text):
 		EventBus.current_char_changed.emit(current_text[l])
+	
+	EventBus.written_string_changed.emit(line_edit.text)
 	
 	###### Determine Finish Section #########
 	if current_text != '' and current_text == line_edit.text:

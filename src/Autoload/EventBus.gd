@@ -1,6 +1,7 @@
 extends Node
 
 signal current_char_changed(char: String)
+signal written_string_changed(str: String)
 
 signal select_lesson(lesson: String) # should be lesson file path
 signal select_next_lesson()

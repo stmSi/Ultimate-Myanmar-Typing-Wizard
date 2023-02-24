@@ -1,15 +1,83 @@
 extends RichTextLabel
 
 var raw_text = 'Hello World မကလာတေ'
+var written_text = ''
 
 @export var correct_color: Color = Color.GREEN
 @export var error_color: Color = Color.RED
 
-# Called when the node enters the scene tree for the first time.
+@export var current_char_color: Color = Color.LIGHT_SKY_BLUE
+@export var current_char_bgcolor: Color = Color.DARK_SLATE_BLUE
+
+
 func _ready():
 	EventBus.assign_text.connect(self._set_raw_text)
-	pass # Replace with function body.
+	EventBus.written_string_changed.connect(self._on_written_string_changed)
+
 
 func _set_raw_text(t: String) -> void:
+	self.text = ""
+	push_color(Color.DARK_GOLDENROD)
 	raw_text = t
-	self.text = t
+	add_text(t)
+	pop()
+
+func _on_written_string_changed(str: String):
+	written_text = str
+	self.text = ""
+	clear()
+	
+	var i: int = 0
+	var correct: bool = false
+	var wrong: bool = false
+	while(i < len(written_text)):
+		
+		if written_text[i] == raw_text[i]:
+			
+			# didn't corrent before... start applying 'green' color
+			if not correct: 
+				
+				# if previous char was wrong, stop applying 'red' color
+				if wrong: 
+					wrong = false
+					pop()
+				
+				correct = true
+				push_color(correct_color)
+		
+		# wrong character was written
+		# written_text[i] != raw_text[i]
+		else: 
+			if not wrong: # didn't wrong before.. start apply 'red' color
+				
+				# if previous char was correct, stop applying 'green'
+				if correct:
+					correct = false
+					pop()
+				
+				wrong = true
+				push_color(error_color)
+		
+		# Advanced
+		add_text(raw_text[i])
+		i += 1
+	pop()
+	
+	## show the rest
+	if(i < len(raw_text)):
+		push_color(current_char_color)
+		push_bgcolor(current_char_bgcolor)
+		push_underline()
+		add_text(raw_text[i])
+		pop()
+		pop()
+		pop()
+		i += 1
+		
+	
+	while(i < len(raw_text)):
+		add_text(raw_text[i])
+		i += 1
+	
+	print(text)
+	## End of while loop

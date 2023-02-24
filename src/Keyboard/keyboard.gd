@@ -35,11 +35,10 @@ func _input(event: InputEvent) -> void:
 		
 
 		if len(converted_char) > 1: # Shift/Alt/Ctrl
-			
 			### Allow 'Backkspace' and 'Delete'
 			if converted_char != "Backspace" and converted_char != "Delete":
 				return
-				
+		
 		if current_char == converted_char:
 			pending_node.correct_animation()
 			

@@ -45,6 +45,7 @@ theme_override_fonts/normal_font = ExtResource("2_5ma1s")
 bbcode_enabled = true
 text = "Hello World မကလာတေ"
 shortcut_keys_enabled = false
+language = "my_MM"
 script = ExtResource("3_4b5n0")
 
 [node name="LineEdit" type="LineEdit" parent="VBoxContainer"]
