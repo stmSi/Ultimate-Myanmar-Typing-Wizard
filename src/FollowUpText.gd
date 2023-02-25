@@ -59,7 +59,9 @@ func _on_written_string_changed(str: String):
 		# Advanced
 		add_text(raw_text[i])
 		i += 1
-	pop()
+
+	if wrong or correct:
+		pop()
 	
 	# color the current character where cursor will locate
 	if(i < len(raw_text)):
@@ -84,4 +86,3 @@ func _color_cursor_character(i: int = 0):
 	pop()
 	pop()
 	pop()
-	
