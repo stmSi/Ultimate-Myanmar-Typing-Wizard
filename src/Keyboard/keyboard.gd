@@ -9,10 +9,14 @@ var pending_shift_node: KeyButton = null
 @onready var l_shift: KeyButton = $VBoxContainer/zxcvb/LShift
 @onready var r_shift: KeyButton = $VBoxContainer/zxcvb/RShift
 
+var ignored_keycodes = [
+	'Backspace',
+	'Delete',
+	'Simicolon',
+]
 
 func _ready() -> void:
 	EventBus.current_char_changed.connect(self._on_current_char_changed)
-
 
 func _on_new_key_node_added(key_name, node) -> void:
 	key_node_mapping[key_name] = node
@@ -30,11 +34,12 @@ func _input(event: InputEvent) -> void:
 			keycode_str, 
 			event.shift_pressed
 		)[1] ### [Success, Char]
+		print('converted: ' + converted_char)
 			
 
 		if len(converted_char) > 1: # Shift/Alt/Ctrl
-			### Allow 'Backkspace' and 'Delete'
-			if converted_char != "Backspace" and converted_char != "Delete" and converted_char != "Simicolon":
+			### Allow 'Backkspace', 'Delete', etc..
+			if ignored_keycodes.find(converted_char) == -1:
 				return
 		
 		if current_char == converted_char:
@@ -95,3 +100,15 @@ func _reset_shifts():
 	pending_shift_node = null
 	pass
 
+
+
+func _on_1234567890_new_key_node_added(key_name, node) -> void:
+	pass # Replace with function body.
+
+
+func _on_asdfgh_new_key_node_added(key_name, node) -> void:
+	pass # Replace with function body.
+
+
+func _on_zxcvb_new_key_node_added(key_name, node) -> void:
+	pass # Replace with function body.
