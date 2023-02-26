@@ -11,6 +11,7 @@ func _ready() -> void:
 
 
 func load_dir_contents(path) -> PackedStringArray:
+	text_files = []
 	var dir = DirAccess.open(path)
 	if dir:
 		dir.list_dir_begin()
@@ -22,7 +23,13 @@ func load_dir_contents(path) -> PackedStringArray:
 	else:
 		print("An error occurred when trying to access the path.")
 	return text_files
+
+func get_sections() -> Array:
+	var sections: Array = []
 	
+	return sections
+	pass
+
 func load_section() -> String:
 	var text: String = ''
 	if loaded_file == null:
@@ -33,6 +40,9 @@ func load_section() -> String:
 		var new_line = loaded_file.get_line()
 		if new_line == '{{next}}':
 			break
+		
+		if new_line == '{{message}}':
+			_read_message(loaded_file)
 
 		text += new_line + ' '
 
@@ -40,6 +50,11 @@ func load_section() -> String:
 	return text
 
 func load_file(file_path: String) -> bool:
+	
+	# open a file at a time?
+	if loaded_file and loaded_file.is_open():
+		loaded_file.close()
+
 	if not FileAccess.file_exists(file_path):
 		print('File \'' + file_path + '\' does not exists.')
 		return false;
@@ -50,3 +65,14 @@ func load_file(file_path: String) -> bool:
 		return false
 	loaded_file = file
 	return true
+
+func _read_message(file: FileAccess) -> String:
+	var msg = ''
+	while not loaded_file.eof_reached():
+		var new_line = loaded_file.get_line()
+		if new_line == '{{message_end}}':
+			break
+		msg += new_line + "\n"
+
+	EventBus.message_popup.emit(msg)
+	return msg

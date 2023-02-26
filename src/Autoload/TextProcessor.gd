@@ -16,3 +16,4 @@ func need_shift(char: String) -> String:
 		return 'r_shift'
 	else:
 		return 'l_shift'
+

@@ -22,6 +22,8 @@ TextLoader="*res://src/Autoload/TextLoader.gd"
 TextProcessor="*res://src/Autoload/TextProcessor.gd"
 GlobalHardCoded="*res://src/Autoload/GlobalHardCoded.gd"
 EngToMmConverter="*res://src/Autoload/EngToMMConverter.gd"
+SceneChanger="*res://src/Autoload/SceneChanger.gd"
+LessonAccess="*res://src/Autoload/LessonAccess.gd"
 
 [display]
 

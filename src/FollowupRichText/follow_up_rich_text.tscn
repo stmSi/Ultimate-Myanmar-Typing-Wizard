@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=3 uid="uid://bwo74j7il1uu0"]
+
+[ext_resource type="FontFile" uid="uid://chygow7my3v5g" path="res://Assets/Fonts/NotoSansMyanmar-Regular.ttf" id="1_oq2sn"]
+[ext_resource type="FontFile" uid="uid://bkjly6r2w700w" path="res://Assets/Fonts/NotoSerifMyanmar-Bold.ttf" id="2_0vdm5"]
+[ext_resource type="Script" path="res://src/FollowUpText.gd" id="3_2dmba"]
+
+[node name="FollowUpRichText" type="RichTextLabel"]
+custom_minimum_size = Vector2(120, 30)
+offset_right = 544.0
+offset_bottom = 60.0
+size_flags_vertical = 0
+theme_override_fonts/normal_font = ExtResource("1_oq2sn")
+theme_override_fonts/bold_font = ExtResource("2_0vdm5")
+theme_override_font_sizes/normal_font_size = 30
+theme_override_font_sizes/bold_font_size = 30
+bbcode_enabled = true
+text = "Hello World မကလာတေ"
+shortcut_keys_enabled = false
+threaded = true
+progress_bar_delay = -1
+language = "my_MM"
+script = ExtResource("3_2dmba")
+current_char_color = Color(0.717647, 0.882353, 0.992157, 1)
+current_char_bgcolor = Color(0.184314, 0.301961, 0.376471, 1)

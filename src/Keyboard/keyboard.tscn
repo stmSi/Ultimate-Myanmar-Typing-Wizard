@@ -50,7 +50,11 @@ shadow_color = Color(1, 1, 1, 0.6)
 editor_description = "KeyButtons will automatically Fill the all the Keys. 
 Check \"populate.gd\""
 layout_mode = 3
-anchors_preset = 0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
 script = ExtResource("1_ceo6d")

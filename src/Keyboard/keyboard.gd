@@ -69,6 +69,7 @@ func _on_current_char_changed(char: String):
 func _run_pending():
 	if key_node_mapping.has(current_char):
 		pending_node = key_node_mapping[current_char]
+		EventBus.followup_popup_pos_changed.emit(pending_node.global_position)
 		pending_node.run_pending()
 	pass
 
