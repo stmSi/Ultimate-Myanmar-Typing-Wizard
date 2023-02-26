@@ -50,7 +50,9 @@ func _load_exercise():
 
 
 func _finished_all_sections():
-	$RestartDialog.show()
+#	$RestartDialog.show()
+	EventBus.message_popup.emit("All Lessons learned. Restarting...")
+	_start_exercise()
 
 
 func _on_text_edit_text_changed(_t: String) -> void:
@@ -77,6 +79,3 @@ func _on_text_edit_text_changed(_t: String) -> void:
 	###### Determine Finish Section #########
 	if current_text != '' and current_text == line_edit.text:
 		EventBus.finished_section.emit()	
-
-func _on_accept_dialog_confirmed() -> void:
-	_start_exercise()

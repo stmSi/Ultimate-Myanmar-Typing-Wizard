@@ -44,11 +44,6 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_tmfyy")
 
-[node name="RestartDialog" type="AcceptDialog" parent="."]
-title = "Congratulations!"
-size = Vector2i(282, 100)
-dialog_text = "All Exerciese are done. Restarting.."
-
 [node name="FollowUpTextPopup" parent="." instance=ExtResource("6_vw22j")]
 visible = false
 layout_mode = 1
@@ -74,9 +69,8 @@ layout_mode = 2
 
 [node name="FollowUpRichText" type="RichTextLabel" parent="MarginContainer/VBoxContainer"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(800, 120)
+custom_minimum_size = Vector2(0, 80)
 layout_mode = 2
-size_flags_horizontal = 4
 size_flags_vertical = 4
 theme_override_fonts/normal_font = ExtResource("2_dg17q")
 theme_override_fonts/bold_font = ExtResource("3_e4sqq")
@@ -130,19 +124,7 @@ text = "Exercise Editor"
 script = SubResource("GDScript_r5ri8")
 
 [node name="MessagePopup" parent="." instance=ExtResource("7_gemiv")]
-layout_mode = 0
-anchors_preset = 0
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-offset_left = 0.0
-offset_top = 0.0
-offset_right = 500.0
-offset_bottom = 300.0
-grow_horizontal = 1
-grow_vertical = 1
+layout_mode = 1
 
-[connection signal="confirmed" from="RestartDialog" to="." method="_on_accept_dialog_confirmed"]
 [connection signal="text_changed" from="MarginContainer/VBoxContainer/LineEdit" to="." method="_on_text_edit_text_changed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/ExerciseEditorBtn" to="MarginContainer/VBoxContainer/ExerciseEditorBtn" method="_on_pressed"]
