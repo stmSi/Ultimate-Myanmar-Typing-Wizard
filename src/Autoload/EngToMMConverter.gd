@@ -13,11 +13,26 @@ func convert_char(eng_char: String, use_shift = false) -> Array: # [Success, Str
 	
 	elif eng_char.begins_with('BracketL'):
 		eng_char = "["
+
 	elif eng_char.begins_with('BracketR'):
 		eng_char = "]"
-#		if use_shift:
-#			return [true, "း"]
+
+	elif eng_char.begins_with('Spa'):
+		return [true, " "]
+
+	elif eng_char.begins_with('Peri'):
+		if use_shift:
+			return [true, "။"]
+		else:
+			return [true, "."]
+			eng_char = "."
 	
+	elif eng_char.begins_with('Com'):
+		if use_shift:	
+			return [true, "၊"]
+		else:
+			return [true, ","]
+
 	var use_mm_chars = GlobalHardCoded.mm_chars
 	if use_shift:
 		use_mm_chars = GlobalHardCoded.mm_shift_chars
