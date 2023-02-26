@@ -146,7 +146,7 @@ func _on_remove_line_btn_pressed() -> void:
 
 func _on_reset_btn_pressed() -> void:
 	# Reset
-	line_edit.text = ''
+	_on_lines_list_empty_clicked(Vector2.ZERO, -1)
 	pass # Replace with function body.
 
 

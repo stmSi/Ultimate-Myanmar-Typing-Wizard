@@ -1,6 +1,6 @@
 extends RichTextLabel
 
-var raw_text = 'Hello World မကလာတေ'
+var raw_text = '<Text Are not loaded yet.>'
 var written_text = ''
 
 @export var correct_color: Color = Color.GREEN
