@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://6ji1y6g83r7r"]
+[gd_scene load_steps=11 format=3 uid="uid://6ji1y6g83r7r"]
 
 [ext_resource type="Script" path="res://src/Keyboard/key_button.gd" id="1_ig80u"]
 [ext_resource type="FontFile" uid="uid://chygow7my3v5g" path="res://Assets/Fonts/NotoSansMyanmar-Regular.ttf" id="2_ojxqh"]
@@ -9,6 +9,9 @@ bg_color = Color(0.117647, 0.117647, 0.117647, 0.827451)
 border_width_left = 3
 border_blend = true
 shadow_color = Color(1, 1, 1, 0.6)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_os870"]
+bg_color = Color(1, 1, 1, 0.164706)
 
 [sub_resource type="Animation" id="Animation_n8113"]
 length = 0.001
@@ -462,6 +465,22 @@ offset_right = 80.0
 offset_bottom = 80.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_h4jkf")
 
+[node name="FingerHightlight" type="Panel" parent="Panel"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 5.0
+offset_top = -20.0
+offset_right = -2.0
+offset_bottom = -2.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_os870")
+
 [node name="ShiftChar" type="Label" parent="Panel"]
 unique_name_in_owner = true
 modulate = Color(1, 1, 1, 0.705882)
@@ -472,7 +491,6 @@ offset_right = 26.0
 offset_bottom = 54.0
 theme_override_fonts/font = ExtResource("2_ojxqh")
 theme_override_font_sizes/font_size = 25
-text = "s_t"
 
 [node name="Char" type="Label" parent="Panel"]
 unique_name_in_owner = true
