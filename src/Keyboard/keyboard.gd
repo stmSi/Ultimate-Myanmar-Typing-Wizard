@@ -8,14 +8,17 @@ var pending_shift_node: KeyButton = null
 
 @onready var l_shift: KeyButton = $VBoxContainer/zxcvb/LShift
 @onready var r_shift: KeyButton = $VBoxContainer/zxcvb/RShift
+@onready var space: KeyButton = %space
 
 var ignored_keycodes = [
 	'Backspace',
 	'Delete',
-	'Simicolon',
+	'Semicolon',
+	'Space'
 ]
 
 func _ready() -> void:
+	key_node_mapping[' '] = space
 	EventBus.current_char_changed.connect(self._on_current_char_changed)
 
 func _on_new_key_node_added(key_name, node) -> void:
@@ -28,7 +31,7 @@ func _input(event: InputEvent) -> void:
 	
 	if pending_node and event is InputEventKey and event.is_pressed():
 		var keycode_str = OS.get_keycode_string(event.keycode)
-		
+		print(keycode_str)
 		## eng -> mm
 		var converted_char = EngToMmConverter.convert_char(
 			keycode_str, 
@@ -38,7 +41,7 @@ func _input(event: InputEvent) -> void:
 			
 
 		if len(converted_char) > 1: # Shift/Alt/Ctrl
-			### Allow 'Backkspace', 'Delete', etc..
+			### Allow 'Backspace', 'Delete', etc..
 			if ignored_keycodes.find(converted_char) == -1:
 				return
 		

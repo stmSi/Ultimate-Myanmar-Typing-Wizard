@@ -1,8 +1,9 @@
-[gd_scene load_steps=10 format=3 uid="uid://bu35jrqg64j60"]
+[gd_scene load_steps=16 format=3 uid="uid://bu35jrqg64j60"]
 
 [ext_resource type="Script" path="res://src/Keyboard/keyboard.gd" id="1_ceo6d"]
 [ext_resource type="PackedScene" uid="uid://6ji1y6g83r7r" path="res://src/Keyboard/key_button.tscn" id="1_ik4w2"]
 [ext_resource type="Script" path="res://src/Keyboard/populator.gd" id="1_xnj8i"]
+[ext_resource type="Texture2D" uid="uid://d1rii5dyogoxu" path="res://Assets/Icons/windows-xp.svg" id="4_fck4r"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_scc4s"]
 resource_local_to_scene = true
@@ -45,6 +46,36 @@ bg_color = Color(0.117647, 0.117647, 0.117647, 0.827451)
 border_width_left = 3
 border_blend = true
 shadow_color = Color(1, 1, 1, 0.6)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bbdjs"]
+resource_local_to_scene = true
+bg_color = Color(0.117647, 0.117647, 0.117647, 0.827451)
+border_width_left = 3
+border_blend = true
+shadow_color = Color(1, 1, 1, 0.6)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_apsic"]
+resource_local_to_scene = true
+bg_color = Color(0.117647, 0.117647, 0.117647, 0.827451)
+border_width_left = 3
+border_blend = true
+shadow_color = Color(1, 1, 1, 0.6)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_aoubn"]
+resource_local_to_scene = true
+bg_color = Color(0.117647, 0.117647, 0.117647, 0.827451)
+border_width_left = 3
+border_blend = true
+shadow_color = Color(1, 1, 1, 0.6)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_axx0v"]
+resource_local_to_scene = true
+bg_color = Color(0.117647, 0.117647, 0.117647, 0.827451)
+border_width_left = 3
+border_blend = true
+shadow_color = Color(1, 1, 1, 0.6)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6fusu"]
 
 [node name="Keyboard" type="Control"]
 editor_description = "KeyButtons will automatically Fill the all the Keys. 
@@ -163,6 +194,141 @@ char = "Shift"
 custom_minimum_size = Vector2(200, 80)
 theme_override_styles/panel = SubResource("StyleBoxFlat_jjy0n")
 
+[node name="ctrl_win_alt_space_alt_win_menu_ctrl" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="ctrl" parent="VBoxContainer/ctrl_win_alt_space_alt_win_menu_ctrl" instance=ExtResource("1_ik4w2")]
+custom_minimum_size = Vector2(120, 80)
+layout_mode = 2
+char = "Ctrl"
+
+[node name="Panel" parent="VBoxContainer/ctrl_win_alt_space_alt_win_menu_ctrl/ctrl" index="0"]
+custom_minimum_size = Vector2(120, 80)
+theme_override_styles/panel = SubResource("StyleBoxFlat_bbdjs")
+
+[node name="win" parent="VBoxContainer/ctrl_win_alt_space_alt_win_menu_ctrl" instance=ExtResource("1_ik4w2")]
+custom_minimum_size = Vector2(120, 80)
+layout_mode = 2
+char = "Win"
+
+[node name="Panel" parent="VBoxContainer/ctrl_win_alt_space_alt_win_menu_ctrl/win" index="0"]
+custom_minimum_size = Vector2(120, 80)
+theme_override_styles/panel = SubResource("StyleBoxFlat_apsic")
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer/ctrl_win_alt_space_alt_win_menu_ctrl/win"]
+modulate = Color(1, 1, 1, 0.705882)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -73.0
+offset_top = -42.0
+offset_right = 27.0
+offset_bottom = 58.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.5, 0.5)
+pivot_offset = Vector2(50, 45)
+texture = ExtResource("4_fck4r")
+
+[node name="alt" parent="VBoxContainer/ctrl_win_alt_space_alt_win_menu_ctrl" instance=ExtResource("1_ik4w2")]
+custom_minimum_size = Vector2(120, 80)
+layout_mode = 2
+char = "Alt"
+
+[node name="Panel" parent="VBoxContainer/ctrl_win_alt_space_alt_win_menu_ctrl/alt" index="0"]
+custom_minimum_size = Vector2(120, 80)
+theme_override_styles/panel = SubResource("StyleBoxFlat_aoubn")
+
+[node name="space" parent="VBoxContainer/ctrl_win_alt_space_alt_win_menu_ctrl" instance=ExtResource("1_ik4w2")]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(440, 80)
+layout_mode = 2
+shift_char = "Space"
+char = " "
+
+[node name="Panel" parent="VBoxContainer/ctrl_win_alt_space_alt_win_menu_ctrl/space" index="0"]
+custom_minimum_size = Vector2(440, 80)
+theme_override_styles/panel = SubResource("StyleBoxFlat_axx0v")
+
+[node name="ShiftChar" parent="VBoxContainer/ctrl_win_alt_space_alt_win_menu_ctrl/space/Panel" index="1"]
+modulate = Color(1, 1, 1, 0.705882)
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -63.0
+offset_top = -45.0
+offset_right = -11.0
+offset_bottom = 11.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="line" type="Panel" parent="VBoxContainer/ctrl_win_alt_space_alt_win_menu_ctrl/space"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(280, 3)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -150.0
+offset_top = 16.5
+offset_right = 130.0
+offset_bottom = 19.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_6fusu")
+
+[node name="alt2" parent="VBoxContainer/ctrl_win_alt_space_alt_win_menu_ctrl" instance=ExtResource("1_ik4w2")]
+custom_minimum_size = Vector2(120, 80)
+layout_mode = 2
+char = "Alt"
+
+[node name="Panel" parent="VBoxContainer/ctrl_win_alt_space_alt_win_menu_ctrl/alt2" index="0"]
+custom_minimum_size = Vector2(120, 80)
+theme_override_styles/panel = SubResource("StyleBoxFlat_aoubn")
+
+[node name="win2" parent="VBoxContainer/ctrl_win_alt_space_alt_win_menu_ctrl" instance=ExtResource("1_ik4w2")]
+custom_minimum_size = Vector2(120, 80)
+layout_mode = 2
+char = "Win"
+
+[node name="Panel" parent="VBoxContainer/ctrl_win_alt_space_alt_win_menu_ctrl/win2" index="0"]
+custom_minimum_size = Vector2(120, 80)
+theme_override_styles/panel = SubResource("StyleBoxFlat_apsic")
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer/ctrl_win_alt_space_alt_win_menu_ctrl/win2"]
+modulate = Color(1, 1, 1, 0.705882)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -73.0
+offset_top = -42.0
+offset_right = 27.0
+offset_bottom = 58.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.5, 0.5)
+pivot_offset = Vector2(50, 45)
+texture = ExtResource("4_fck4r")
+
+[node name="ctrl2" parent="VBoxContainer/ctrl_win_alt_space_alt_win_menu_ctrl" instance=ExtResource("1_ik4w2")]
+custom_minimum_size = Vector2(120, 80)
+layout_mode = 2
+char = "Ctrl"
+
+[node name="Panel" parent="VBoxContainer/ctrl_win_alt_space_alt_win_menu_ctrl/ctrl2" index="0"]
+custom_minimum_size = Vector2(120, 80)
+theme_override_styles/panel = SubResource("StyleBoxFlat_bbdjs")
+
 [connection signal="new_key_node_added" from="VBoxContainer/1234567890" to="." method="_on_new_key_node_added"]
 [connection signal="new_key_node_added" from="VBoxContainer/qwerty" to="." method="_on_new_key_node_added"]
 [connection signal="new_key_node_added" from="VBoxContainer/asdfgh" to="." method="_on_new_key_node_added"]
@@ -174,3 +340,10 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_jjy0n")
 [editable path="VBoxContainer/asdfgh/Enter"]
 [editable path="VBoxContainer/zxcvb/LShift"]
 [editable path="VBoxContainer/zxcvb/RShift"]
+[editable path="VBoxContainer/ctrl_win_alt_space_alt_win_menu_ctrl/ctrl"]
+[editable path="VBoxContainer/ctrl_win_alt_space_alt_win_menu_ctrl/win"]
+[editable path="VBoxContainer/ctrl_win_alt_space_alt_win_menu_ctrl/alt"]
+[editable path="VBoxContainer/ctrl_win_alt_space_alt_win_menu_ctrl/space"]
+[editable path="VBoxContainer/ctrl_win_alt_space_alt_win_menu_ctrl/alt2"]
+[editable path="VBoxContainer/ctrl_win_alt_space_alt_win_menu_ctrl/win2"]
+[editable path="VBoxContainer/ctrl_win_alt_space_alt_win_menu_ctrl/ctrl2"]

@@ -3,17 +3,26 @@ class_name KeyButton
 
 @onready var shift_char_lbl: Label = $Panel/ShiftChar
 @onready var char_lbl: Label = $Panel/Char
+@onready var finger_hightlight: Panel = %FingerHightlight
 
 @export var shift_char: String:
 	get:
 		return shift_char
 	set(value):
 		%ShiftChar.text = value
+		shift_char = value
+
+var chars_to_highlight_for_fingers = "ေျိ်ြုူး" # asdf jkl;
+var highlighted: bool = false
 
 @export var char: String:
 	get:
 		return char
 	set(value):
+		char = value
+		if chars_to_highlight_for_fingers.contains(value):
+			%FingerHightlight.visible = true
+			highlighted = true
 		%Char.text = value
 
 
@@ -46,6 +55,10 @@ func run_pending(use_shift: bool = false):
 	else:
 		char_lbl.modulate = highlight_modulate_color
 	
+	if char == ' ': # special condition for "Space" key
+		shift_char_lbl.modulate = highlight_modulate_color
+		get_node('line').modulate = highlight_modulate_color # only "Space" key has line
+
 func reset_animation():
 	$AnimationPlayer.play("RESET")
 	_reset_modulate_color()
@@ -63,3 +76,6 @@ func incorrect_animation():
 func _reset_modulate_color():
 	char_lbl.modulate = ori_modulate_char_color
 	shift_char_lbl.modulate = ori_modulate_shift_char_color
+	
+	if char == ' ': # special condition for "Space" key
+		get_node('line').modulate = ori_modulate_shift_char_color # only "Space" key has line
