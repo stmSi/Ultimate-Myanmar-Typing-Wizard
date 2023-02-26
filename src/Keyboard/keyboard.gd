@@ -62,15 +62,15 @@ func _on_current_char_changed(char: String):
 	elif shift == "r_shift":
 		_run_pending_r_shift()
 		
+	
+	_run_pending(len(shift) != 0)
 
-	_run_pending()
 
-
-func _run_pending():
+func _run_pending(use_shift: bool):
 	if key_node_mapping.has(current_char):
 		pending_node = key_node_mapping[current_char]
 		EventBus.followup_popup_pos_changed.emit(pending_node.global_position)
-		pending_node.run_pending()
+		pending_node.run_pending(use_shift)
 	pass
 
 

@@ -24,7 +24,6 @@ func create_new_lesson_file(lesson_number: int, difficulty: String) -> bool:
 	return true
 
 func create_update_new_exercise(lesson_number: int, difficulty: String, texts: PackedStringArray) -> bool:
-	print(lesson_number, difficulty, texts)
 	var filepath = _get_lesson_filepath(lesson_number, difficulty)
 	
 	var config: ConfigFile = ConfigFile.new()

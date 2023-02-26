@@ -464,6 +464,7 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_h4jkf")
 
 [node name="ShiftChar" type="Label" parent="Panel"]
 unique_name_in_owner = true
+modulate = Color(1, 1, 1, 0.705882)
 layout_mode = 1
 offset_left = 10.0
 offset_top = -5.0
@@ -471,9 +472,11 @@ offset_right = 26.0
 offset_bottom = 54.0
 theme_override_fonts/font = ExtResource("2_ojxqh")
 theme_override_font_sizes/font_size = 25
+text = "s_t"
 
 [node name="Char" type="Label" parent="Panel"]
 unique_name_in_owner = true
+modulate = Color(1, 1, 1, 0.705882)
 layout_mode = 1
 anchors_preset = 3
 anchor_left = 1.0

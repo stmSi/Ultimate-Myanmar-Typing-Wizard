@@ -11,7 +11,7 @@ func need_shift(char: String) -> String:
 	var idx = GlobalHardCoded.mm_shift_chars.find(char)
 	
 	if idx == -1:
-		return 'no'
+		return ''
 	elif use_r_shift_ids.find(idx) != -1:
 		return 'r_shift'
 	else:

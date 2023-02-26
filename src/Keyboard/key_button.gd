@@ -30,16 +30,36 @@ class_name KeyButton
 #	set(value):"theme_override_styles/panel"
 #		(%ShiftChar as Label).position = Vector2(10, 10)
 
-func run_pending():
+@export var highlight_modulate_color: Color = Color.GREEN
+var ori_modulate_char_color: Color
+var ori_modulate_shift_char_color: Color
+
+func _ready() -> void:
+	ori_modulate_char_color = char_lbl.modulate
+	ori_modulate_shift_char_color = shift_char_lbl.modulate
+
+
+func run_pending(use_shift: bool = false):
 	$AnimationPlayer.play('pending')
+	if use_shift:
+		shift_char_lbl.modulate = highlight_modulate_color
+	else:
+		char_lbl.modulate = highlight_modulate_color
 	
 func reset_animation():
-	pass
 	$AnimationPlayer.play("RESET")
+	_reset_modulate_color()
 
 func correct_animation():
 	$AnimationPlayer.play('correct')
+	_reset_modulate_color()
 
 
 func incorrect_animation():
 	$AnimationPlayer.play('incorrect')
+	_reset_modulate_color()
+
+
+func _reset_modulate_color():
+	char_lbl.modulate = ori_modulate_char_color
+	shift_char_lbl.modulate = ori_modulate_shift_char_color

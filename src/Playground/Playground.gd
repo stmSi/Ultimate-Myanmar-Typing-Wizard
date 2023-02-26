@@ -32,7 +32,6 @@ func _start_exercise():
 func _load_exercise():
 	if exercises.size() == 0:
 		if lesson_ids.size() == 0:
-			print('finished_all_sections: ', lesson_ids)
 			EventBus.finished_all_sections.emit()
 			return
 		else:
