@@ -11,7 +11,7 @@ var written_text = ''
 
 
 func _ready():
-	EventBus.assign_text.connect(self._set_raw_text)
+	EventBus.exercise_loaded.connect(self._set_raw_text)
 	EventBus.written_string_changed.connect(self._on_written_string_changed)
 
 
@@ -81,7 +81,9 @@ func _color_cursor_character(i: int = 0):
 	push_bgcolor(current_char_bgcolor)
 	push_underline()
 	push_bold()
+	push_customfx(RichTextPulse.new(), {freq=15.0, height=6.0})
 	add_text(raw_text[i])
+	pop()
 	pop()
 	pop()
 	pop()
