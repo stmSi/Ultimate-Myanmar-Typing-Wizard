@@ -9,5 +9,6 @@ func _ready() -> void:
 	pass # Replace with function body.
 
 func _on_followup_popup_pos_changed(pos: Vector2):
-	global_position = pos
+	if visible:
+		global_position = pos
 	pass

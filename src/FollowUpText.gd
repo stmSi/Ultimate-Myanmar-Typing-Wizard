@@ -29,7 +29,6 @@ func _on_written_string_changed(str: String):
 	var correct: bool = false
 	var wrong: bool = false
 	while(i < len(written_text) and i < len(raw_text)):
-		
 		if written_text[i] == raw_text[i]:
 			
 			# didn't corrent before... start applying 'green' color
@@ -46,6 +45,15 @@ func _on_written_string_changed(str: String):
 		# wrong character was written
 		# written_text[i] != raw_text[i]
 		else: 
+			
+			if raw_text[i] == ' ': # special case for 'Space' characters
+				push_color(error_color)
+				add_text('_')
+				pop()
+				i += 1
+				continue
+				
+			
 			if not wrong: # didn't wrong before.. start apply 'red' color
 				
 				# if previous char was correct, stop applying 'green'
@@ -82,7 +90,11 @@ func _color_cursor_character(i: int = 0):
 	push_underline()
 	push_bold()
 	push_customfx(RichTextPulse.new(), {freq=15.0, height=6.0})
-	add_text(raw_text[i])
+	
+	if raw_text[i] == ' ': # special case for 'Space' characters
+		add_text('_')
+	else:
+		add_text(raw_text[i])
 	pop()
 	pop()
 	pop()
