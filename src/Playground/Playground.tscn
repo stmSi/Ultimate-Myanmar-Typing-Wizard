@@ -46,6 +46,7 @@ script = ExtResource("1_tmfyy")
 
 [node name="FollowUpTextPopup" parent="." instance=ExtResource("6_vw22j")]
 visible = false
+z_index = 1
 layout_mode = 1
 offset_left = 1061.0
 offset_top = -1.0
@@ -116,15 +117,40 @@ layout_mode = 2
 size_flags_horizontal = 1
 size_flags_vertical = 3
 
-[node name="ExerciseEditorBtn" type="Button" parent="MarginContainer/VBoxContainer"]
+[node name="HBoxContainer2" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="ExerciseEditorBtn" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer2"]
 custom_minimum_size = Vector2(200, 60)
 layout_mode = 2
 size_flags_horizontal = 0
 text = "Exercise Editor"
 script = SubResource("GDScript_r5ri8")
 
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 10
+
+[node name="BasicBtn" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer2/HBoxContainer"]
+custom_minimum_size = Vector2(160, 0)
+layout_mode = 2
+text = "Basic"
+
+[node name="IntermediateBtn" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer2/HBoxContainer"]
+custom_minimum_size = Vector2(160, 0)
+layout_mode = 2
+text = "Intermediate"
+
+[node name="AdvancedBtn" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer2/HBoxContainer"]
+custom_minimum_size = Vector2(160, 0)
+layout_mode = 2
+text = "Advanced"
+
 [node name="MessagePopup" parent="." instance=ExtResource("7_gemiv")]
 layout_mode = 1
 
 [connection signal="text_changed" from="MarginContainer/VBoxContainer/LineEdit" to="." method="_on_text_edit_text_changed"]
-[connection signal="pressed" from="MarginContainer/VBoxContainer/ExerciseEditorBtn" to="MarginContainer/VBoxContainer/ExerciseEditorBtn" method="_on_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer2/ExerciseEditorBtn" to="MarginContainer/VBoxContainer/HBoxContainer2/ExerciseEditorBtn" method="_on_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer2/HBoxContainer/BasicBtn" to="." method="_on_basic_btn_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer2/HBoxContainer/IntermediateBtn" to="." method="_on_intermediate_btn_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer2/HBoxContainer/AdvancedBtn" to="." method="_on_advanced_btn_pressed"]
