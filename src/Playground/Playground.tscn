@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://blkq4rtc0qvgs"]
+[gd_scene load_steps=19 format=3 uid="uid://blkq4rtc0qvgs"]
 
 [ext_resource type="Script" path="res://src/Playground/Playground.gd" id="1_tmfyy"]
 [ext_resource type="FontFile" uid="uid://chygow7my3v5g" path="res://Assets/Fonts/NotoSansMyanmar-Regular.ttf" id="2_dg17q"]
@@ -75,33 +75,6 @@ func _on_pressed() -> void:
 	mute = not mute # toggle
 
 "
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bbgn2"]
-bg_color = Color(0, 0.231373, 0.0666667, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yuvlk"]
-bg_color = Color(0.0588235, 0.345098, 0.0431373, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lcide"]
-bg_color = Color(0.0509804, 0.105882, 0.0509804, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1bqxu"]
-bg_color = Color(0.172549, 0, 0.211765, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_arsqb"]
-bg_color = Color(0.462745, 0, 0.498039, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_a7740"]
-bg_color = Color(0.0705882, 0.137255, 0.0705882, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7suty"]
-bg_color = Color(0.32549, 0, 0.027451, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wyqg3"]
-bg_color = Color(0.537255, 0, 0.0705882, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2qyqt"]
-bg_color = Color(0.192157, 0, 0.0117647, 1)
 
 [sub_resource type="GDScript" id="GDScript_7njul"]
 script/source = "extends AudioStreamPlayer
@@ -212,10 +185,14 @@ unique_name_in_owner = true
 layout_mode = 2
 text = "Ok"
 
-[node name="Keyboard" parent="MarginContainer/VBoxContainer" instance=ExtResource("5_3d5ha")]
+[node name="HBoxContainer3" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
-size_flags_horizontal = 1
 size_flags_vertical = 3
+
+[node name="Keyboard" parent="MarginContainer/VBoxContainer/HBoxContainer3" instance=ExtResource("5_3d5ha")]
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 1
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
@@ -245,25 +222,16 @@ size_flags_horizontal = 10
 [node name="BasicBtn" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer2/HBoxContainer"]
 custom_minimum_size = Vector2(160, 0)
 layout_mode = 2
-theme_override_styles/normal = SubResource("StyleBoxFlat_bbgn2")
-theme_override_styles/hover = SubResource("StyleBoxFlat_yuvlk")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_lcide")
 text = "Basic"
 
 [node name="IntermediateBtn" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer2/HBoxContainer"]
 custom_minimum_size = Vector2(160, 0)
 layout_mode = 2
-theme_override_styles/normal = SubResource("StyleBoxFlat_1bqxu")
-theme_override_styles/hover = SubResource("StyleBoxFlat_arsqb")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_a7740")
 text = "Intermediate"
 
 [node name="AdvancedBtn" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer2/HBoxContainer"]
 custom_minimum_size = Vector2(160, 0)
 layout_mode = 2
-theme_override_styles/normal = SubResource("StyleBoxFlat_7suty")
-theme_override_styles/hover = SubResource("StyleBoxFlat_wyqg3")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_2qyqt")
 text = "Advance"
 
 [node name="MessagePopup" parent="." instance=ExtResource("7_gemiv")]

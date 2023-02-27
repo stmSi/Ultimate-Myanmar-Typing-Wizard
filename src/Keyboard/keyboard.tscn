@@ -81,19 +81,19 @@ shadow_color = Color(1, 1, 1, 0.6)
 editor_description = "KeyButtons will automatically Fill the all the Keys. 
 Check \"populate.gd\""
 layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+anchors_preset = 0
+pivot_offset = Vector2(0, -3)
 size_flags_horizontal = 0
 size_flags_vertical = 0
 script = ExtResource("1_ceo6d")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 1
-offset_right = 408.0
-offset_bottom = 332.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 alignment = 1
 
 [node name="1234567890" type="HBoxContainer" parent="VBoxContainer"]
@@ -254,7 +254,6 @@ custom_minimum_size = Vector2(440, 80)
 theme_override_styles/panel = SubResource("StyleBoxFlat_axx0v")
 
 [node name="ShiftChar" parent="VBoxContainer/ctrl_win_alt_space_alt_win_menu_ctrl/space/Panel" index="1"]
-modulate = Color(1, 1, 1, 0.705882)
 anchors_preset = 3
 anchor_left = 1.0
 anchor_top = 1.0
