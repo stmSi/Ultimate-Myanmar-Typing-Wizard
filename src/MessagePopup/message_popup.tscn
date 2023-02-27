@@ -112,15 +112,23 @@ _data = {
 }
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_b88uv"]
-bg_color = Color(0, 0.254902, 0.270588, 1)
+bg_color = Color(0, 0.254902, 0.270588, 0.454902)
 border_width_left = 3
 border_width_top = 3
 border_width_right = 3
 border_width_bottom = 3
-border_color = Color(0.996078, 0.996078, 0.996078, 0.596078)
+border_color = Color(1, 1, 1, 0.596078)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+shadow_color = Color(0, 0.137255, 0.117647, 0.756863)
+shadow_size = 3
+shadow_offset = Vector2(5, 5)
 
 [node name="MessagePopup" type="VBoxContainer"]
-custom_minimum_size = Vector2(500, 300)
+z_index = 2
+custom_minimum_size = Vector2(500, 150)
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -129,7 +137,6 @@ anchor_bottom = 0.5
 offset_left = -250.0
 offset_top = -150.0
 offset_right = 250.0
-offset_bottom = 150.0
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(1e-05, 1e-05)
