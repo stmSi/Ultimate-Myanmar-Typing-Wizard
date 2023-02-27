@@ -1,4 +1,4 @@
-### Burmese Typing Trainer (WIP)
+### Burmese Typing Trainer (WIP) [![MIT License](https://img.shields.io/badge/License-MIT-25B3A0?style=flat-square)](https://github.com/stmSi/myanmar-unicode-typing-trainer/blob/master/LICENSE.md)
 
 Created in [Godot Engine 4.0 rc5](https://godotengine.org/article/release-candidate-godot-4-0-rc-5#downloads) (Godot 3.x is not supported.)
 
@@ -6,11 +6,7 @@ Created in [Godot Engine 4.0 rc5](https://godotengine.org/article/release-candid
 
 #### **Showcase Video**
 
-
-
 https://user-images.githubusercontent.com/32661049/221483203-988d3664-ff08-438f-bfa3-9f8892a0d101.mp4
-
-
 
 ---
 
@@ -27,7 +23,6 @@ https://user-images.githubusercontent.com/32661049/221483203-988d3664-ff08-438f-
 ---
 
 ### **Requirements**
-
 
 * OpenGL (GLES3) compatable device
 * ***No Need To Install*** Myanmar Unicode Keyboard (will auto convert eng -> mm)
