@@ -139,7 +139,15 @@ func _on_add_updte_line_btn_pressed() -> void:
 func _on_remove_line_btn_pressed() -> void:
 	if lines_list.get_selected_items().size() == 0:
 		return
-	lines_list.remove_item(lines_list.get_selected_items()[0])
+	var idx := lines_list.get_selected_items()[0]
+	lines_list.remove_item(idx)
+
+	# Reset shit
+	_on_lines_list_empty_clicked(Vector2.ZERO, -1)
+	
+	if lines_list.item_count > 0:
+		var next_selected_idx = min(lines_list.item_count - 1, idx )
+		lines_list.select(next_selected_idx)
 	_save_lesson_from_list()
 
 
@@ -169,3 +177,7 @@ func _save_lesson_from_list():
 	)
 	
 
+
+func _on_lines_list_delete_item_from_delete_key(idx) -> void:
+	_on_remove_line_btn_pressed()
+	pass # Replace with function body.

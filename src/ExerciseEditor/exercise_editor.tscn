@@ -195,6 +195,7 @@ text = "Remove Line"
 [connection signal="item_selected" from="MarginContainer2/VBoxContainer/HBoxContainer/VBoxContainer/LessonIds" to="." method="_on_lesson_ids_item_selected"]
 [connection signal="pressed" from="MarginContainer2/VBoxContainer/HBoxContainer/VBoxContainer/AddNewLessonsFileBtn" to="." method="_on_add_lessons_file_btn_pressed"]
 [connection signal="pressed" from="MarginContainer2/VBoxContainer/HBoxContainer/VBoxContainer/PlaygroundBtn" to="MarginContainer2/VBoxContainer/HBoxContainer/VBoxContainer/PlaygroundBtn" method="_on_pressed"]
+[connection signal="delete_item_from_delete_key" from="MarginContainer2/VBoxContainer/HBoxContainer/VBoxContainer2/LinesList" to="." method="_on_lines_list_delete_item_from_delete_key"]
 [connection signal="empty_clicked" from="MarginContainer2/VBoxContainer/HBoxContainer/VBoxContainer2/LinesList" to="." method="_on_lines_list_empty_clicked"]
 [connection signal="item_moved" from="MarginContainer2/VBoxContainer/HBoxContainer/VBoxContainer2/LinesList" to="." method="_on_lines_list_item_moved"]
 [connection signal="item_selected" from="MarginContainer2/VBoxContainer/HBoxContainer/VBoxContainer2/LinesList" to="." method="_on_lines_list_item_selected"]
