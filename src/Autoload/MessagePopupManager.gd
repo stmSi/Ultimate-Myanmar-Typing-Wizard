@@ -25,13 +25,13 @@ func _on_message_popup(msg: String):
 	pass
 
 func _get_popups_group() -> Control:
-
-	if get_tree().root.has_node('/root/PopupsGroup'):
-		return get_tree().root.get_node('/root/PopupsGroup')
+	var loaded_scene = get_tree().root.get_child(get_tree().root.get_child_count() - 1)
+	if loaded_scene.has_node('PopupsGroup'):
+		return loaded_scene.get_node('PopupsGroup')
 	
 	var popup_groups = Control.new()
 	popup_groups.name = "PopupsGroup"
 	
 	popup_groups.global_position = get_viewport().get_visible_rect().size / 2 
-	get_tree().root.get_child(get_tree().root.get_child_count() - 1).add_child(popup_groups)
+	loaded_scene.add_child(popup_groups)
 	return popup_groups

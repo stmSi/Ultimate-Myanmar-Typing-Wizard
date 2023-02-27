@@ -39,7 +39,7 @@ func _input(event: InputEvent) -> void:
 			keycode_str, 
 			event.shift_pressed
 		)[1] ### [Success, Char]
-		print('converted: ' + converted_char)
+#		print('converted: ' + converted_char)
 			
 
 		if len(converted_char) > 1: # Shift/Alt/Ctrl
@@ -57,6 +57,7 @@ func _input(event: InputEvent) -> void:
 			EventBus.wrong_char_typed.emit(converted_char)
 			_run_incorrect(converted_char)
 			pending_node.reset_animation()
+			_reset_shifts()
 		
 
 func _on_current_char_changed(char: String):

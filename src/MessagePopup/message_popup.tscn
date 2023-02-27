@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://d3rkoaljyut67"]
+[gd_scene load_steps=12 format=3 uid="uid://d3rkoaljyut67"]
 
 [ext_resource type="Script" path="res://src/MessagePopup/message_popup.gd" id="1_a15ho"]
 [ext_resource type="FontFile" uid="uid://bkjly6r2w700w" path="res://Assets/Fonts/NotoSerifMyanmar-Bold.ttf" id="2_6yr53"]
@@ -26,6 +26,18 @@ tracks/1/keys = {
 "handle_modes": PackedInt32Array(0),
 "points": PackedFloat32Array(1e-05, -0.25, 0, 0.25, 0),
 "times": PackedFloat32Array(0)
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("MarginContainer/Panel:theme_override_styles/panel:border_color")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0.596078)]
 }
 
 [sub_resource type="Animation" id="Animation_8cr60"]
@@ -104,11 +116,29 @@ tracks/2/keys = {
 "times": PackedFloat32Array(0, 0.4)
 }
 
+[sub_resource type="Animation" id="Animation_xiw6t"]
+resource_name = "running"
+length = 0.5
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MarginContainer/Panel:theme_override_styles/panel:border_color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(0, 0.698039, 0.698039, 0.596078)]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_qv8rx"]
 _data = {
 "RESET": SubResource("Animation_5xlrx"),
 "close": SubResource("Animation_8cr60"),
-"open": SubResource("Animation_ita0k")
+"open": SubResource("Animation_ita0k"),
+"running": SubResource("Animation_xiw6t")
 }
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_b88uv"]
@@ -122,11 +152,25 @@ corner_radius_top_left = 5
 corner_radius_top_right = 5
 corner_radius_bottom_right = 5
 corner_radius_bottom_left = 5
-shadow_color = Color(0, 0.137255, 0.117647, 0.756863)
+corner_detail = 20
+shadow_color = Color(0.219608, 0.231373, 0.247059, 0.756863)
 shadow_size = 3
 shadow_offset = Vector2(5, 5)
 
+[sub_resource type="InputEventKey" id="InputEventKey_2n7k0"]
+device = -1
+keycode = 4194309
+
+[sub_resource type="InputEventKey" id="InputEventKey_etbkn"]
+device = -1
+keycode = 32
+unicode = 32
+
+[sub_resource type="Shortcut" id="Shortcut_jba6w"]
+events = [SubResource("InputEventKey_2n7k0"), SubResource("InputEventKey_etbkn")]
+
 [node name="MessagePopup" type="VBoxContainer"]
+process_mode = 3
 z_index = 2
 custom_minimum_size = Vector2(500, 150)
 anchors_preset = 8
@@ -179,9 +223,11 @@ autowrap_mode = 3
 
 [node name="OkBtn" type="Button" parent="MarginContainer/MarginContainer/VBoxContainer"]
 unique_name_in_owner = true
+custom_minimum_size = Vector2(160, 0)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 10
+shortcut = SubResource("Shortcut_jba6w")
 text = "Ok"
 
 [connection signal="pressed" from="MarginContainer/MarginContainer/VBoxContainer/OkBtn" to="." method="_on_ok_btn_pressed"]
