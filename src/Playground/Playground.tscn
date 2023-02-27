@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://blkq4rtc0qvgs"]
+[gd_scene load_steps=18 format=3 uid="uid://blkq4rtc0qvgs"]
 
 [ext_resource type="Script" path="res://src/Playground/Playground.gd" id="1_tmfyy"]
 [ext_resource type="FontFile" uid="uid://chygow7my3v5g" path="res://Assets/Fonts/NotoSansMyanmar-Regular.ttf" id="2_dg17q"]
@@ -7,7 +7,6 @@
 [ext_resource type="PackedScene" uid="uid://bu35jrqg64j60" path="res://src/Keyboard/keyboard.tscn" id="5_3d5ha"]
 [ext_resource type="PackedScene" uid="uid://bulscf8jamb2b" path="res://src/FollowupRichText/follow_up_text_popup.tscn" id="6_vw22j"]
 [ext_resource type="Texture2D" uid="uid://5n4mh44uc3c4" path="res://Assets/Icons/audio.png" id="7_4yl2m"]
-[ext_resource type="PackedScene" uid="uid://d3rkoaljyut67" path="res://src/MessagePopup/message_popup.tscn" id="7_gemiv"]
 [ext_resource type="AudioStream" uid="uid://cdqui2diupr13" path="res://Assets/Sounds/error-sound.mp3" id="8_ylc3d"]
 [ext_resource type="AudioStream" uid="uid://bjeu8c6senasm" path="res://Assets/Sounds/correct-sound.mp3" id="9_otsg4"]
 
@@ -234,10 +233,8 @@ custom_minimum_size = Vector2(160, 0)
 layout_mode = 2
 text = "Advance"
 
-[node name="MessagePopup" parent="." instance=ExtResource("7_gemiv")]
-layout_mode = 1
-
 [node name="ErrorAudioPlayer" type="AudioStreamPlayer" parent="."]
+process_mode = 3
 stream = ExtResource("8_ylc3d")
 volume_db = -25.0
 pitch_scale = 1.2
@@ -245,6 +242,7 @@ max_polyphony = 3
 script = SubResource("GDScript_7njul")
 
 [node name="CorrectAudioPlayer" type="AudioStreamPlayer" parent="."]
+process_mode = 3
 stream = ExtResource("9_otsg4")
 volume_db = -20.0
 max_polyphony = 3
