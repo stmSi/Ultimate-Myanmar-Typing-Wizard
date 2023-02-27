@@ -3,8 +3,6 @@ extends Node
 var lesson_name_width = 8
 
 func _ready() -> void:
-#	var texts = ['hello', 'world']
-#	create_update_new_exercise(99, 'basic', texts)
 	pass
 	
 func create_new_lesson_file(lesson_number: int, difficulty: String) -> bool:
@@ -41,7 +39,13 @@ func get_lesson_files(difficulty: String) -> PackedStringArray:
 		return []
 	
 	var text_files = []
-	var dir = DirAccess.open(difficulty_lesson_path)
+
+	var dir = DirAccess.open('./')
+	if not dir.dir_exists(difficulty_lesson_path):
+		dir.make_dir_recursive(difficulty_lesson_path)
+	
+	dir = DirAccess.open(difficulty_lesson_path)
+		
 	if dir:
 		dir.list_dir_begin()
 		var file_name = dir.get_next()
