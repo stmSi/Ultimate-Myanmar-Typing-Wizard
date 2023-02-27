@@ -13,7 +13,8 @@ config_version=5
 config/name="typing_practice"
 run/main_scene="res://src/main.tscn"
 config/features=PackedStringArray("4.0", "Mobile")
-config/icon="res://src/icon.svg"
+boot_splash/bg_color=Color(0, 0, 0.172549, 1)
+config/icon="res://Assets/Icons/Logo.png"
 
 [autoload]
 
@@ -30,7 +31,9 @@ SoundSettings="*res://src/Autoload/SoundSettings.gd"
 
 window/size/viewport_width=1280
 window/size/viewport_height=720
+window/per_pixel_transparency/allowed=true
 
 [rendering]
 
 renderer/rendering_method="gl_compatibility"
+environment/defaults/default_clear_color=Color(0.0431373, 0.0431373, 0.0431373, 1)
