@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://botcunvp4smm1"]
+[gd_scene load_steps=28 format=3 uid="uid://blkq4rtc0qvgs"]
 
 [ext_resource type="Script" path="res://src/Playground/Playground.gd" id="1_tmfyy"]
 [ext_resource type="FontFile" uid="uid://chygow7my3v5g" path="res://Assets/Fonts/NotoSansMyanmar-Regular.ttf" id="2_dg17q"]
@@ -6,7 +6,10 @@
 [ext_resource type="Script" path="res://src/FollowUpText.gd" id="4_86oy8"]
 [ext_resource type="PackedScene" uid="uid://bu35jrqg64j60" path="res://src/Keyboard/keyboard.tscn" id="5_3d5ha"]
 [ext_resource type="PackedScene" uid="uid://bulscf8jamb2b" path="res://src/FollowupRichText/follow_up_text_popup.tscn" id="6_vw22j"]
+[ext_resource type="Texture2D" uid="uid://5n4mh44uc3c4" path="res://Assets/Icons/audio.png" id="7_4yl2m"]
 [ext_resource type="PackedScene" uid="uid://d3rkoaljyut67" path="res://src/MessagePopup/message_popup.tscn" id="7_gemiv"]
+[ext_resource type="AudioStream" uid="uid://cdqui2diupr13" path="res://Assets/Sounds/error-sound.mp3" id="8_ylc3d"]
+[ext_resource type="AudioStream" uid="uid://bjeu8c6senasm" path="res://Assets/Sounds/correct-sound.mp3" id="9_otsg4"]
 
 [sub_resource type="GDScript" id="GDScript_l4wjf"]
 script/source = "extends LineEdit
@@ -18,6 +21,10 @@ func _ready():
 	EventBus.finished_section.connect(self._finished_section)
 	EventBus.message_popup_closed.connect(self._on_message_popup_closed)
 	EventBus.lesson_id_loaded.connect(self._on_new_lesson_id_loaded)
+
+	SoundSettings.mute.connect(func(): grab_focus())
+	SoundSettings.unmute.connect(func(): grab_focus())
+
 	pass # Replace with function body.
 
 
@@ -31,12 +38,101 @@ func _on_new_lesson_id_loaded(_lesson_id: int) -> void:
 	clear()
 "
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_x1x83"]
+bg_color = Color(0.258824, 0.207843, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_c1j48"]
+bg_color = Color(0.431373, 0.352941, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_se5ld"]
+bg_color = Color(0.145098, 0.113725, 0, 1)
+
 [sub_resource type="GDScript" id="GDScript_r5ri8"]
 script/source = "extends Button
 
 func _on_pressed() -> void:
 	SceneChanger.change_to_exercise_editor_scene()
 	pass # Replace with function body.
+"
+
+[sub_resource type="GDScript" id="GDScript_fg15e"]
+script/source = "extends TextureButton
+var mute : bool = false
+@onready var audio = preload(\"res://Assets/Icons/audio.png\")
+@onready var audio_mute = preload(\"res://Assets/Icons/audio-mute.png\")
+
+func _ready() -> void:
+	SoundSettings.mute.connect(func(): texture_normal = audio_mute)
+	SoundSettings.unmute.connect(func(): texture_normal = audio)
+
+
+func _on_pressed() -> void:
+	if mute:
+		SoundSettings.unmute.emit()
+	else:
+		SoundSettings.mute.emit()
+	
+	mute = not mute # toggle
+
+"
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bbgn2"]
+bg_color = Color(0, 0.231373, 0.0666667, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yuvlk"]
+bg_color = Color(0.0588235, 0.345098, 0.0431373, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lcide"]
+bg_color = Color(0.0509804, 0.105882, 0.0509804, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1bqxu"]
+bg_color = Color(0.172549, 0, 0.211765, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_arsqb"]
+bg_color = Color(0.462745, 0, 0.498039, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_a7740"]
+bg_color = Color(0.0705882, 0.137255, 0.0705882, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7suty"]
+bg_color = Color(0.32549, 0, 0.027451, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wyqg3"]
+bg_color = Color(0.537255, 0, 0.0705882, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2qyqt"]
+bg_color = Color(0.192157, 0, 0.0117647, 1)
+
+[sub_resource type="GDScript" id="GDScript_7njul"]
+script/source = "extends AudioStreamPlayer
+
+var mute : bool = false
+
+func _ready() -> void:
+	EventBus.wrong_char_typed.connect(self._on_wrong_char_typed)
+	SoundSettings.mute.connect(func(): mute = true)
+	SoundSettings.unmute.connect(func(): mute = false)
+	
+
+func _on_wrong_char_typed(_c: String):
+	if not mute:
+		play()
+"
+
+[sub_resource type="GDScript" id="GDScript_fjrcb"]
+script/source = "extends AudioStreamPlayer
+
+var mute: bool = false
+
+func _ready() -> void:
+	EventBus.correct_char_typed.connect(self._on_correct_char_typed)
+	SoundSettings.mute.connect(func(): mute = true)
+	SoundSettings.unmute.connect(func(): mute = false)
+	pass
+
+func _on_correct_char_typed(_c: String):
+	if not mute:
+		play()
 "
 
 [node name="Playground" type="Control"]
@@ -128,8 +224,19 @@ layout_mode = 2
 custom_minimum_size = Vector2(200, 60)
 layout_mode = 2
 size_flags_horizontal = 0
+theme_override_styles/normal = SubResource("StyleBoxFlat_x1x83")
+theme_override_styles/hover = SubResource("StyleBoxFlat_c1j48")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_se5ld")
 text = "Exercise Editor"
 script = SubResource("GDScript_r5ri8")
+
+[node name="AudioBtn" type="TextureButton" parent="MarginContainer/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 4
+texture_normal = ExtResource("7_4yl2m")
+stretch_mode = 3
+script = SubResource("GDScript_fg15e")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer2"]
 layout_mode = 2
@@ -138,23 +245,46 @@ size_flags_horizontal = 10
 [node name="BasicBtn" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer2/HBoxContainer"]
 custom_minimum_size = Vector2(160, 0)
 layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_bbgn2")
+theme_override_styles/hover = SubResource("StyleBoxFlat_yuvlk")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_lcide")
 text = "Basic"
 
 [node name="IntermediateBtn" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer2/HBoxContainer"]
 custom_minimum_size = Vector2(160, 0)
 layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_1bqxu")
+theme_override_styles/hover = SubResource("StyleBoxFlat_arsqb")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_a7740")
 text = "Intermediate"
 
 [node name="AdvancedBtn" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer2/HBoxContainer"]
 custom_minimum_size = Vector2(160, 0)
 layout_mode = 2
-text = "Advanced"
+theme_override_styles/normal = SubResource("StyleBoxFlat_7suty")
+theme_override_styles/hover = SubResource("StyleBoxFlat_wyqg3")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_2qyqt")
+text = "Advance"
 
 [node name="MessagePopup" parent="." instance=ExtResource("7_gemiv")]
 layout_mode = 1
 
+[node name="ErrorAudioPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("8_ylc3d")
+volume_db = -25.0
+pitch_scale = 1.2
+max_polyphony = 3
+script = SubResource("GDScript_7njul")
+
+[node name="CorrectAudioPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("9_otsg4")
+volume_db = -20.0
+max_polyphony = 3
+script = SubResource("GDScript_fjrcb")
+
 [connection signal="text_changed" from="MarginContainer/VBoxContainer/LineEdit" to="." method="_on_text_edit_text_changed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer2/ExerciseEditorBtn" to="MarginContainer/VBoxContainer/HBoxContainer2/ExerciseEditorBtn" method="_on_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer2/AudioBtn" to="MarginContainer/VBoxContainer/HBoxContainer2/AudioBtn" method="_on_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer2/HBoxContainer/BasicBtn" to="." method="_on_basic_btn_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer2/HBoxContainer/IntermediateBtn" to="." method="_on_intermediate_btn_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer2/HBoxContainer/AdvancedBtn" to="." method="_on_advanced_btn_pressed"]

@@ -24,6 +24,7 @@ EngToMmConverter="*res://src/Autoload/EngToMMConverter.gd"
 SceneChanger="*res://src/Autoload/SceneChanger.gd"
 LessonAccess="*res://src/Autoload/LessonAccess.gd"
 MessagePopupManager="*res://src/Autoload/MessagePopupManager.gd"
+SoundSettings="*res://src/Autoload/SoundSettings.gd"
 
 [display]
 
