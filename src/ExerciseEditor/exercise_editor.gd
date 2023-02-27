@@ -108,7 +108,7 @@ func _on_lines_list_item_selected(index: int) -> void:
 	pass # Replace with function body.
 
 
-func _on_lines_list_empty_clicked(at_position: Vector2, mouse_button_index: int) -> void:
+func _on_lines_list_empty_clicked(_at_position: Vector2, _mouse_button_index: int) -> void:
 	# Reset lines_list, line_edit, button
 	line_edit.text = ''
 	selected_line_idx = -1
@@ -117,7 +117,7 @@ func _on_lines_list_empty_clicked(at_position: Vector2, mouse_button_index: int)
 	pass # Replace with function body.
 
 
-func _on_line_edit_text_submitted(new_text: String) -> void:
+func _on_line_edit_text_submitted(_new_text: String) -> void:
 	_on_add_updte_line_btn_pressed()
 	pass # Replace with function body.
 

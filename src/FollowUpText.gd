@@ -20,8 +20,8 @@ func _set_raw_text(t: String) -> void:
 	_on_written_string_changed('')
 
 
-func _on_written_string_changed(str: String):
-	written_text = str
+func _on_written_string_changed(s: String):
+	written_text = s
 	self.text = ""
 	clear()
 	

@@ -25,7 +25,6 @@ func convert_char(eng_char: String, use_shift = false) -> Array: # [Success, Str
 			return [true, "။"]
 		else:
 			return [true, "."]
-			eng_char = "."
 	
 	elif eng_char.begins_with('Com'):
 		if use_shift:	
