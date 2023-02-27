@@ -20,11 +20,11 @@ func _ready() -> void:
 			populating_node = child
 			break
 
-	populate(char, shift_char, place_order_idx)
+	populate(place_order_idx)
 	if populating_node:
 		populating_node.queue_free()
 
-func populate(char, shift_char, place_order_idx):
+func populate(place_order_idx: int):
 	for i in len(char):
 		var key_button = key_button_resource.instantiate()
 
@@ -42,10 +42,3 @@ func populate(char, shift_char, place_order_idx):
 		move_child(key_button, place_order_idx)
 		place_order_idx += 1
 	
-#	add_child(a.instantiate())
-	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass

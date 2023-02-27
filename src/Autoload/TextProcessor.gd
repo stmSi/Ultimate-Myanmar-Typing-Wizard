@@ -7,8 +7,8 @@ var use_r_shift_ids = [
 	37,38,39,40,41,
 	]
 
-func need_shift(char: String) -> String:
-	var idx = GlobalHardCoded.mm_shift_chars.find(char)
+func need_shift(c: String) -> String:
+	var idx = GlobalHardCoded.mm_shift_chars.find(c)
 	
 	if idx == -1:
 		return ''

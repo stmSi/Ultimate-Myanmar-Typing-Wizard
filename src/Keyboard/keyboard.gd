@@ -1,5 +1,6 @@
+@icon("res://Assets/Icons/keyboard-icon.png")
 extends Control
-
+class_name  Keyboard 
 var key_node_mapping: Dictionary = {}
 var current_char: String = ''
 
@@ -20,6 +21,7 @@ var ignored_keycodes = [
 func _ready() -> void:
 	key_node_mapping[' '] = space
 	EventBus.current_char_changed.connect(self._on_current_char_changed)
+	EventBus.lesson_id_loaded.connect(self._on_new_lesson_id_loaded)
 
 func _on_new_key_node_added(key_name, node) -> void:
 	key_node_mapping[key_name] = node
@@ -31,7 +33,7 @@ func _input(event: InputEvent) -> void:
 	
 	if pending_node and event is InputEventKey and event.is_pressed():
 		var keycode_str = OS.get_keycode_string(event.keycode)
-		print(keycode_str)
+
 		## eng -> mm
 		var converted_char = EngToMmConverter.convert_char(
 			keycode_str, 
@@ -99,20 +101,15 @@ func _run_pending_r_shift():
 
 
 func _reset_shifts():
-	l_shift.reset_animation()
-	r_shift.reset_animation()
+	if l_shift:
+		l_shift.reset_animation()
+	if r_shift:
+		r_shift.reset_animation()
 	pending_shift_node = null
 	pass
 
-
-
-func _on_1234567890_new_key_node_added(key_name, node) -> void:
-	pass # Replace with function body.
-
-
-func _on_asdfgh_new_key_node_added(key_name, node) -> void:
-	pass # Replace with function body.
-
-
-func _on_zxcvb_new_key_node_added(key_name, node) -> void:
-	pass # Replace with function body.
+func _on_new_lesson_id_loaded(_lesson_number: int) -> void:
+	# Reset all
+	if pending_node:
+		pending_node.reset_animation()
+	_reset_shifts()
