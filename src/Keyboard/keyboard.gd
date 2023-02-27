@@ -48,12 +48,13 @@ func _input(event: InputEvent) -> void:
 				return
 		
 		if current_char == converted_char:
+			EventBus.correct_char_typed.emit(converted_char)
 			pending_node.correct_animation()
 			
 			if pending_shift_node:
 				pending_shift_node.correct_animation()
-				
 		else:
+			EventBus.wrong_char_typed.emit(converted_char)
 			_run_incorrect(converted_char)
 			pending_node.reset_animation()
 		
