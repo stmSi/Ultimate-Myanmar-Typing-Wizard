@@ -17,6 +17,7 @@ func _ready():
 	grab_focus()
 	EventBus.finished_section.connect(self._finished_section)
 	EventBus.message_popup_closed.connect(self._on_message_popup_closed)
+	EventBus.lesson_id_loaded.connect(self._on_new_lesson_id_loaded)
 	pass # Replace with function body.
 
 
@@ -25,6 +26,9 @@ func _finished_section() -> void:
 
 func _on_message_popup_closed() -> void:
 	grab_focus()
+
+func _on_new_lesson_id_loaded(_lesson_id: int) -> void:
+	clear()
 "
 
 [sub_resource type="GDScript" id="GDScript_r5ri8"]

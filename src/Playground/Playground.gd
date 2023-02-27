@@ -51,18 +51,21 @@ func _load_exercise():
 			return
 		else:
 			exercises = LessonAccess.get_exercise_lines(int(lesson_ids[lesson_idx]), difficulty)
-			EventBus.message_popup.emit("Lesson ID: " + lesson_ids[lesson_idx] + " is loaded.")
+			exercise_idx = 0
 			lesson_idx += 1
-
-			EventBus.lesson_id_loaded.emit(int(lesson_ids[lesson_idx]))
-			
 			
 			if exercises.size() == exercise_idx:
 				# keep loading lessons one by one until there is exercise 
 				# otherwise restart with `EventBus.finished_all_sections.emit()`
 				_load_exercise() 
 				return
-	
+
+			EventBus.lesson_id_loaded.emit(int(lesson_ids[lesson_idx - 1]))
+			EventBus.message_popup.emit(
+				"Difficulty: " + difficulty.capitalize() + "\r\n" +\
+				"Lesson ID: " + lesson_ids[lesson_idx - 1] + " is loaded."
+			)
+
 	
 	current_exercise_text = exercises[exercise_idx]
 	exercise_idx += 1
@@ -107,7 +110,6 @@ func _on_basic_btn_pressed() -> void:
 	difficulty = 'basic'
 	_start_lesson()
 	pass # Replace with function body.
-
 
 func _on_intermediate_btn_pressed() -> void:
 	difficulty = 'intermediate'
