@@ -47,7 +47,12 @@ func _input(event: InputEvent) -> void:
 			if ignored_keycodes.find(converted_char) == -1:
 				return
 		
-		if current_char == converted_char:
+		if converted_char.begins_with("Backsp"): #ignore Backspace
+			pending_node.reset_animation()
+			_reset_shifts()
+			return
+		
+		elif current_char == converted_char:
 			EventBus.correct_char_typed.emit(converted_char)
 			pending_node.correct_animation()
 			
