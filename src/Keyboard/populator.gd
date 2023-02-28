@@ -15,7 +15,6 @@ func _ready() -> void:
 	var populating_node = null
 	for child in get_children():
 		if child.name == replacing_node_name:
-#			print('found ', replacing_node_name', ', child, ' at ', place_order_idx)
 			place_order_idx = child.get_index()
 			populating_node = child
 			break

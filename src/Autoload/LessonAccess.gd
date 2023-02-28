@@ -16,7 +16,7 @@ func create_new_lesson_file(lesson_number: int, difficulty: String) -> bool:
 	
 	var error = config.save(filepath)
 	if error != OK:
-		print('Error occurred while saving/creating lesson file: ', filepath)
+		EventBus.message_popup.emit('Error occurred while saving/creating lesson file: ' + filepath)
 		return false
 
 	return true
@@ -29,7 +29,7 @@ func create_update_new_exercise(lesson_number: int, difficulty: String, texts: P
 
 	var error = config.save(filepath)
 	if error != OK:
-		print('Error occurred while saving/creating exercise: ', filepath)
+		EventBus.message_popup.emit('Error occurred while saving/creating exercise: ' + filepath)
 		return false
 	return true
 
@@ -54,7 +54,7 @@ func get_lesson_files(difficulty: String) -> PackedStringArray:
 				text_files.append(dir.get_current_dir().path_join(file_name))
 			file_name = dir.get_next()
 	else:
-		print("An error occurred when trying to access the lessons path: ", difficulty_lesson_path)
+		EventBus.message_popup.emit("An error occurred when trying to access the lessons path: ", difficulty_lesson_path)
 	return text_files
 
 
@@ -63,11 +63,11 @@ func get_exercise_lines(lesson_number: int, difficulty: String) -> PackedStringA
 	var config: ConfigFile = ConfigFile.new()
 	var error = config.load(filepath)
 	if error != OK:
-		print('Error occurred while loading config: ', filepath)
+		EventBus.message_popup.emit('Error occurred while loading config: ', filepath)
 		return []
 	
 	if not config.has_section('Exercise'):
-		print('Can\'t find \'Exercise\' Section: ', filepath)
+		EventBus.message_popup.emit('Can\'t find \'Exercise\' Section: ', filepath)
 		return []
 	
 	return config.get_value('Exercise', 'texts') # ['က', 'ခ', 'ဂ']
