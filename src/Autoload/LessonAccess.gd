@@ -21,11 +21,14 @@ func create_new_lesson_file(lesson_number: int, difficulty: String) -> bool:
 
 	return true
 
-func create_update_new_exercise(lesson_number: int, difficulty: String, texts: PackedStringArray) -> bool:
+func create_update_new_exercise(lesson_number: int, difficulty: String, lesson_data: Dictionary) -> bool:
 	var filepath = _get_lesson_filepath(lesson_number, difficulty)
 	
 	var config: ConfigFile = ConfigFile.new()
-	config.set_value("Exercise", "texts", texts)
+	config.set_value("Exercise", "texts", lesson_data['texts'])
+	config.set_value("Exercise", "repeats", lesson_data['repeats'])
+	config.set_value("Exercise", "allow_mistakes", lesson_data['allow_mistakes'])
+	config.set_value("Exercise", "randomize", lesson_data['randomize'])
 
 	var error = config.save(filepath)
 	if error != OK:
@@ -58,19 +61,25 @@ func get_lesson_files(difficulty: String) -> PackedStringArray:
 	return text_files
 
 
-func get_exercise_lines(lesson_number: int, difficulty: String) -> PackedStringArray:
+func get_lesson_data(lesson_number: int, difficulty: String) -> Dictionary:
 	var filepath = _get_lesson_filepath(lesson_number, difficulty)
 	var config: ConfigFile = ConfigFile.new()
 	var error = config.load(filepath)
 	if error != OK:
 		EventBus.message_popup.emit('Error occurred while loading config: ' + filepath)
-		return []
+		return {}
 	
 	if not config.has_section('Exercise'):
 		EventBus.message_popup.emit('Can\'t find \'Exercise\' Section: ' + filepath)
-		return []
+		return {}
 	
-	return config.get_value('Exercise', 'texts') # ['က', 'ခ', 'ဂ']
+	var lesson_data: Dictionary = {}
+	lesson_data["texts"] = config.get_value("Exercise", "texts")
+	lesson_data["repeats"] = config.get_value("Exercise", "repeats", 0)
+	lesson_data["allow_mistakes"] = config.get_value("Exercise", "allow_mistakes", 80)
+	lesson_data["randomize"] = config.get_value("Exercise", "randomize", false)
+
+	return lesson_data
 
 
 func _get_lesson_filepath(lesson_number: int, difficulty: String) -> String:
