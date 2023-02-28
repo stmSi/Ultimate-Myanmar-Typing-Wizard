@@ -8,8 +8,6 @@ var key_button_resource = preload("res://src/Keyboard/key_button.tscn")
 
 signal new_key_node_added(key_name, node)
 
-# Called when the node enters the scene tree for the first time.
-
 func _ready() -> void:
 	var place_order_idx = 0
 	var populating_node = null

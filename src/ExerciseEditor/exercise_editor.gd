@@ -61,7 +61,7 @@ func _populate_files_list() -> void:
 		lesson_ids.deselect_all()
 	
 	# Reset lines_list, line_edit, button
-	_on_lines_list_empty_clicked(Vector2.ZERO, -1)
+	_on_lines_list_empty_clicked()
 	lines_list.clear()
 
 
@@ -97,7 +97,7 @@ func _on_lesson_ids_item_selected(index: int) -> void:
 		lines_list.deselect_all()
 	
 	# Reset lines_list, line_edit, button
-	_on_lines_list_empty_clicked(Vector2.ZERO, -1)
+	_on_lines_list_empty_clicked()
 
 
 func _on_lines_list_item_selected(index: int) -> void:
@@ -108,7 +108,7 @@ func _on_lines_list_item_selected(index: int) -> void:
 	pass # Replace with function body.
 
 
-func _on_lines_list_empty_clicked(_at_position: Vector2, _mouse_button_index: int) -> void:
+func _on_lines_list_empty_clicked(_at_position: Vector2 = Vector2.ZERO, _mouse_button_index: int = -1) -> void:
 	# Reset lines_list, line_edit, button
 	line_edit.text = ''
 	selected_line_idx = -1
@@ -123,6 +123,13 @@ func _on_line_edit_text_submitted(_new_text: String) -> void:
 
 
 func _on_add_updte_line_btn_pressed() -> void:
+	if selected_difficulty == '':
+		EventBus.message_popup.emit("Please Choose Difficulty")
+		return
+	if selected_lesson_number == 0: 
+		EventBus.message_popup.emit("Please Choose Lesson Number")
+		return
+
 	if selected_line_idx != -1:
 		# Update
 		lines_list.set_item_text(lines_list.get_selected_items()[0], line_edit.text)
@@ -132,7 +139,7 @@ func _on_add_updte_line_btn_pressed() -> void:
 	_save_lesson_from_list()
 	
 	# Reset shit
-	_on_lines_list_empty_clicked(Vector2.ZERO, -1)
+	_on_lines_list_empty_clicked()
 
 
 
@@ -143,7 +150,7 @@ func _on_remove_line_btn_pressed() -> void:
 	lines_list.remove_item(idx)
 
 	# Reset shit
-	_on_lines_list_empty_clicked(Vector2.ZERO, -1)
+	_on_lines_list_empty_clicked()
 	
 	if lines_list.item_count > 0:
 		var next_selected_idx = min(lines_list.item_count - 1, idx )
@@ -154,7 +161,7 @@ func _on_remove_line_btn_pressed() -> void:
 
 func _on_reset_btn_pressed() -> void:
 	# Reset
-	_on_lines_list_empty_clicked(Vector2.ZERO, -1)
+	_on_lines_list_empty_clicked()
 	pass # Replace with function body.
 
 
@@ -163,6 +170,9 @@ func _on_lines_list_item_moved() -> void:
 	pass # Replace with function body.
 
 func _save_lesson_from_list():
+	if selected_lesson_number == 0:
+		EventBus.message_popup.emit("Please Choose Lesson Number")
+
 	var texts: PackedStringArray = []
 	
 	var i = 0
@@ -181,3 +191,5 @@ func _save_lesson_from_list():
 func _on_lines_list_delete_item_from_delete_key(idx) -> void:
 	_on_remove_line_btn_pressed()
 	pass # Replace with function body.
+
+
