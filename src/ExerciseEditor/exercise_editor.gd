@@ -11,6 +11,10 @@ extends Control
 
 @onready var line_edit: LineEdit = %LineEdit
 
+@onready var repeats_box: SpinBox = %RepeatsBox
+@onready var allow_mistakes_box: SpinBox = %AllowMistakesBox
+@onready var randomize_check: CheckButton = %RandomizeCheck
+
 @onready var add_updte_line_btn: Button = %AddUpdteLineBtn
 @onready var remove_line_btn: Button = %RemoveLineBtn
 
@@ -85,11 +89,23 @@ func _on_add_lessons_file_btn_pressed() -> void:
 func _on_lesson_ids_item_selected(index: int) -> void:
 	selected_lesson_number = int(lesson_ids.get_item_text(index))
 	
-	var lines: PackedStringArray = LessonAccess.get_exercise_lines(selected_lesson_number, selected_difficulty)
+	var lesson_data: Dictionary = LessonAccess.get_lesson_data(selected_lesson_number, selected_difficulty)
+	
+	# populate lines_list
+	var lines = lesson_data['texts']
 	lines_list.clear()
 	for l in lines:
 		lines_list.add_item(l)
-#	
+
+	# populate lesson settings
+	# Danger: 
+	#	Do not put above "lines_list" population
+	#	becuz value_changed will emit 
+	#	and save the empty lines_list
+	repeats_box.value = int(lesson_data['repeats'])
+	allow_mistakes_box.value = int(lesson_data['allow_mistakes'])
+	randomize_check.button_pressed = int(lesson_data['randomize'])
+
 	# Scroll to bottom
 	if len(lines) > 0:
 		lines_list.select(len(lines) - 1)
@@ -179,17 +195,30 @@ func _save_lesson_from_list():
 	while i < lines_list.item_count:
 		texts.push_back(lines_list.get_item_text(i))
 		i += 1
-
 	LessonAccess.create_update_new_exercise(
 		selected_lesson_number,
 		selected_difficulty,
-		texts
+		{
+			"texts": texts,
+			"repeats": repeats_box.value,
+			"allow_mistakes": allow_mistakes_box.value,
+			"randomize": randomize_check.button_pressed
+		}
 	)
-	
 
 
 func _on_lines_list_delete_item_from_delete_key(idx) -> void:
 	_on_remove_line_btn_pressed()
-	pass # Replace with function body.
 
+
+func _on_repeats_box_value_changed(value: float) -> void:
+	_save_lesson_from_list()
+
+
+func _on_allow_mistakes_box_value_changed(value: float) -> void:
+	_save_lesson_from_list()
+
+
+func _on_randomize_check_toggled(button_pressed: bool) -> void:
+	_save_lesson_from_list()
 

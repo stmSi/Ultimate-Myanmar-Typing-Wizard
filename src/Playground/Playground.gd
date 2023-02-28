@@ -12,6 +12,8 @@ var _eng_to_mm_converted = false
 var lesson_ids = []
 var lesson_idx = 0
 
+var lesson_data: Dictionary = {}
+var repeats = 0
 var exercises = []
 var exercise_idx = 0
 
@@ -46,11 +48,18 @@ func _start_lesson():
 
 func _load_exercise():
 	if exercises.size() == exercise_idx:
-		if lesson_ids.size() == lesson_idx:
+		if exercises.size() > 0 and repeats > 0:
+			exercise_idx = 0
+			repeats -= 1
+
+		elif lesson_ids.size() == lesson_idx:
 			EventBus.finished_all_sections.emit()
 			return
 		else:
-			exercises = LessonAccess.get_exercise_lines(int(lesson_ids[lesson_idx]), difficulty)
+			# No More Exercise
+			lesson_data = LessonAccess.get_lesson_data(int(lesson_ids[lesson_idx]), difficulty)
+			exercises = lesson_data['texts']
+			repeats = lesson_data['repeats']
 			exercise_idx = 0
 			lesson_idx += 1
 			
@@ -59,6 +68,15 @@ func _load_exercise():
 				# otherwise restart with `EventBus.finished_all_sections.emit()`
 				_load_exercise() 
 				return
+
+			if lesson_data['randomize']:
+				# PackedStringArray doesn't support shuffle()
+				# convert to array, shuffle, and reassign
+				var tmp = []
+				for e in exercises:
+					tmp.append(e)
+				tmp.shuffle()
+				exercises = PackedStringArray(tmp)
 
 			EventBus.lesson_id_loaded.emit(int(lesson_ids[lesson_idx - 1]))
 			EventBus.message_popup.emit(
@@ -103,7 +121,7 @@ func _on_text_edit_text_changed(_t: String) -> void:
 	
 	###### Determine Finish Section #########
 	if current_exercise_text != '' and current_exercise_text == line_edit.text:
-		EventBus.finished_section.emit()	
+		EventBus.finished_section.emit()
 
 
 func _on_basic_btn_pressed() -> void:
