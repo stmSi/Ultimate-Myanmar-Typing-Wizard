@@ -54,7 +54,7 @@ func get_lesson_files(difficulty: String) -> PackedStringArray:
 				text_files.append(dir.get_current_dir().path_join(file_name))
 			file_name = dir.get_next()
 	else:
-		EventBus.message_popup.emit("An error occurred when trying to access the lessons path: ", difficulty_lesson_path)
+		EventBus.message_popup.emit("An error occurred when trying to access the lessons path: " + difficulty_lesson_path)
 	return text_files
 
 
@@ -63,11 +63,11 @@ func get_exercise_lines(lesson_number: int, difficulty: String) -> PackedStringA
 	var config: ConfigFile = ConfigFile.new()
 	var error = config.load(filepath)
 	if error != OK:
-		EventBus.message_popup.emit('Error occurred while loading config: ', filepath)
+		EventBus.message_popup.emit('Error occurred while loading config: ' + filepath)
 		return []
 	
 	if not config.has_section('Exercise'):
-		EventBus.message_popup.emit('Can\'t find \'Exercise\' Section: ', filepath)
+		EventBus.message_popup.emit('Can\'t find \'Exercise\' Section: ' + filepath)
 		return []
 	
 	return config.get_value('Exercise', 'texts') # ['က', 'ခ', 'ဂ']
@@ -75,7 +75,6 @@ func get_exercise_lines(lesson_number: int, difficulty: String) -> PackedStringA
 
 func _get_lesson_filepath(lesson_number: int, difficulty: String) -> String:
 	# return -> ./Texts/Lessons/Basic/00000113.cfg
-
 	var difficulty_lesson_path = _determine_difficulty_lessons_path(difficulty)
 	if difficulty_lesson_path == '':
 		return ''
@@ -93,7 +92,7 @@ func _determine_difficulty_lessons_path(difficulty: String) -> String:
 	elif difficulty == "advanced":
 		return GlobalHardCoded.advanced_lessons_location
 	else:
-		print("Difficulty not found")
+		EventBus.message_popup.emit('Please Choose Difficulity')
 		return ''
 
 

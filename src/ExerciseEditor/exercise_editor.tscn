@@ -22,8 +22,6 @@ bg_color = Color(0.431373, 0.352941, 0, 1)
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_s5x36"]
 bg_color = Color(0.145098, 0.113725, 0, 1)
 
-[sub_resource type="ButtonGroup" id="ButtonGroup_2mpdt"]
-
 [sub_resource type="InputEventKey" id="InputEventKey_ebxkm"]
 device = -1
 ctrl_pressed = true
@@ -40,6 +38,22 @@ script/source = "extends Button
 
 func _on_pressed() -> void:
 	SceneChanger.change_to_playground_scene()
+	pass # Replace with function body.
+"
+
+[sub_resource type="GDScript" id="GDScript_lc0i3"]
+script/source = "extends LineEdit
+
+var _eng_to_mm_converted = false
+
+func _on_text_changed(new_text: String) -> void:
+	if not _eng_to_mm_converted:
+		_eng_to_mm_converted = true
+		self.text = EngToMmConverter.convert_str(new_text)
+		self.caret_column = len(self.text)
+		
+	_eng_to_mm_converted = false
+	
 	pass # Replace with function body.
 "
 
@@ -147,7 +161,6 @@ layout_mode = 2
 theme_override_styles/normal = SubResource("StyleBoxFlat_ybjo2")
 theme_override_styles/hover = SubResource("StyleBoxFlat_15h77")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_s5x36")
-button_group = SubResource("ButtonGroup_2mpdt")
 shortcut = SubResource("Shortcut_8v06n")
 text = "Go to Playground
 (Ctrl+P)"
@@ -158,9 +171,33 @@ layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/separation = 10
 
-[node name="Label2" type="Label" parent="MarginContainer2/VBoxContainer/HBoxContainer/VBoxContainer2"]
+[node name="LessonSettingsContainer" type="HBoxContainer" parent="MarginContainer2/VBoxContainer/HBoxContainer/VBoxContainer2"]
 layout_mode = 2
-text = "Lines:"
+theme_override_constants/separation = 30
+
+[node name="RepeatContainer" type="HBoxContainer" parent="MarginContainer2/VBoxContainer/HBoxContainer/VBoxContainer2/LessonSettingsContainer"]
+layout_mode = 2
+
+[node name="RepeatLbl" type="Label" parent="MarginContainer2/VBoxContainer/HBoxContainer/VBoxContainer2/LessonSettingsContainer/RepeatContainer"]
+layout_mode = 2
+text = "Repeat:"
+
+[node name="RepeatBox" type="SpinBox" parent="MarginContainer2/VBoxContainer/HBoxContainer/VBoxContainer2/LessonSettingsContainer/RepeatContainer"]
+layout_mode = 2
+
+[node name="AllowableContainer" type="HBoxContainer" parent="MarginContainer2/VBoxContainer/HBoxContainer/VBoxContainer2/LessonSettingsContainer"]
+layout_mode = 2
+tooltip_text = "Will repeat the lesson if mistakes you made exceed this % number."
+
+[node name="AllowableLbel" type="Label" parent="MarginContainer2/VBoxContainer/HBoxContainer/VBoxContainer2/LessonSettingsContainer/AllowableContainer"]
+layout_mode = 2
+text = "Allow Mistakes"
+
+[node name="AllowMistakesBox" type="SpinBox" parent="MarginContainer2/VBoxContainer/HBoxContainer/VBoxContainer2/LessonSettingsContainer/AllowableContainer"]
+layout_mode = 2
+value = 50.0
+alignment = 3
+suffix = "%"
 
 [node name="HBoxContainer3" type="HBoxContainer" parent="MarginContainer2/VBoxContainer/HBoxContainer/VBoxContainer2"]
 layout_mode = 2
@@ -194,6 +231,7 @@ theme_override_fonts/font = ExtResource("2_tt6nc")
 theme_override_font_sizes/font_size = 20
 virtual_keyboard_enabled = false
 language = "my_MM"
+script = SubResource("GDScript_lc0i3")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer2/VBoxContainer/HBoxContainer/VBoxContainer2"]
 layout_mode = 2
@@ -226,9 +264,11 @@ text = "Remove Line
 [connection signal="pressed" from="MarginContainer2/VBoxContainer/HBoxContainer/VBoxContainer/AddNewLessonsFileBtn" to="." method="_on_add_lessons_file_btn_pressed"]
 [connection signal="pressed" from="MarginContainer2/VBoxContainer/HBoxContainer/VBoxContainer/PlaygroundBtn" to="MarginContainer2/VBoxContainer/HBoxContainer/VBoxContainer/PlaygroundBtn" method="_on_pressed"]
 [connection signal="delete_item_from_delete_key" from="MarginContainer2/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer3/LinesList" to="." method="_on_lines_list_delete_item_from_delete_key"]
+[connection signal="deselect" from="MarginContainer2/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer3/LinesList" to="." method="_on_lines_list_empty_clicked"]
 [connection signal="empty_clicked" from="MarginContainer2/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer3/LinesList" to="." method="_on_lines_list_empty_clicked"]
 [connection signal="item_moved" from="MarginContainer2/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer3/LinesList" to="." method="_on_lines_list_item_moved"]
 [connection signal="item_selected" from="MarginContainer2/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer3/LinesList" to="." method="_on_lines_list_item_selected"]
+[connection signal="text_changed" from="MarginContainer2/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer2/LineEdit" to="MarginContainer2/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer2/LineEdit" method="_on_text_changed"]
 [connection signal="text_submitted" from="MarginContainer2/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer2/LineEdit" to="." method="_on_line_edit_text_submitted"]
 [connection signal="pressed" from="MarginContainer2/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer/AddUpdteLineBtn" to="." method="_on_add_updte_line_btn_pressed"]
 [connection signal="pressed" from="MarginContainer2/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer/ResetBtn" to="." method="_on_reset_btn_pressed"]

@@ -2,6 +2,7 @@ extends ItemList
 
 signal item_moved
 signal delete_item_from_delete_key(idx: int)
+signal deselect
 
 func _input(event: InputEvent) -> void:
 	if get_selected_items().size() == 0:
@@ -14,6 +15,8 @@ func _input(event: InputEvent) -> void:
 			_move_down_selected_item()
 		elif event.as_text_physical_keycode() == 'Delete' and has_focus():
 			self.delete_item_from_delete_key.emit(get_selected_items()[0])
+		elif  event.as_text_physical_keycode() == 'Escape' and has_focus():
+			self.deselect.emit()
 
 func _move_up_selected_item():
 	var idx = get_selected_items()[0]

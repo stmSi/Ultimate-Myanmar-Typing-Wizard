@@ -451,6 +451,7 @@ _data = {
 }
 
 [node name="KeyButton" type="Control"]
+process_mode = 3
 custom_minimum_size = Vector2(80, 80)
 layout_mode = 3
 anchors_preset = 0
