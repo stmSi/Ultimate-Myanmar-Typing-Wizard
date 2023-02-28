@@ -34,8 +34,9 @@ https://user-images.githubusercontent.com/32661049/221483203-988d3664-ff08-438f-
 1. Better UI Stuff (Proper Menus and stuffs)
 2. Optimize the engine build (Remove unnecessary modules... e.g. 3D, Navigation etc. )
 3. Mini Games
-4. User Profile to track progress, stats, frequent mistakes, etc.
-5. Lessons and Exercies
+4. Network Competition
+5. User Profile to track progress, stats, frequent mistakes, etc.
+6. Lessons and Exercies
    1. Basic
    2. Intermediate
    3. Advance

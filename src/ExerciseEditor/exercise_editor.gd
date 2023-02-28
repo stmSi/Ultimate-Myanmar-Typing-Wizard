@@ -67,7 +67,7 @@ func _populate_files_list() -> void:
 
 func _on_add_lessons_file_btn_pressed() -> void:
 	if selected_difficulty == '':
-		print('Please Choose Difficulty')
+		EventBus.message_popup.emit('Please Choose Difficulty')
 		return
 
 	var lesson_number: int = 1 # Default Start number

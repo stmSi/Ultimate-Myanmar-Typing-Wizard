@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://blkq4rtc0qvgs"]
+[gd_scene load_steps=26 format=3 uid="uid://blkq4rtc0qvgs"]
 
 [ext_resource type="Script" path="res://src/Playground/Playground.gd" id="1_tmfyy"]
 [ext_resource type="FontFile" uid="uid://chygow7my3v5g" path="res://Assets/Fonts/NotoSansMyanmar-Regular.ttf" id="2_dg17q"]
@@ -46,6 +46,15 @@ bg_color = Color(0.431373, 0.352941, 0, 1)
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_se5ld"]
 bg_color = Color(0.145098, 0.113725, 0, 1)
 
+[sub_resource type="InputEventKey" id="InputEventKey_6kkqb"]
+device = -1
+ctrl_pressed = true
+keycode = 69
+unicode = 101
+
+[sub_resource type="Shortcut" id="Shortcut_jpkyy"]
+events = [SubResource("InputEventKey_6kkqb")]
+
 [sub_resource type="GDScript" id="GDScript_r5ri8"]
 script/source = "extends Button
 
@@ -74,6 +83,33 @@ func _on_pressed() -> void:
 	mute = not mute # toggle
 
 "
+
+[sub_resource type="InputEventKey" id="InputEventKey_qgvdj"]
+device = -1
+ctrl_pressed = true
+keycode = 66
+unicode = 98
+
+[sub_resource type="Shortcut" id="Shortcut_dnbgc"]
+events = [SubResource("InputEventKey_qgvdj")]
+
+[sub_resource type="InputEventKey" id="InputEventKey_pxx42"]
+device = -1
+ctrl_pressed = true
+keycode = 73
+unicode = 105
+
+[sub_resource type="Shortcut" id="Shortcut_u0ndp"]
+events = [SubResource("InputEventKey_pxx42")]
+
+[sub_resource type="InputEventKey" id="InputEventKey_c761y"]
+device = -1
+ctrl_pressed = true
+keycode = 65
+unicode = 97
+
+[sub_resource type="Shortcut" id="Shortcut_jf74y"]
+events = [SubResource("InputEventKey_c761y")]
 
 [sub_resource type="GDScript" id="GDScript_7njul"]
 script/source = "extends AudioStreamPlayer
@@ -203,7 +239,9 @@ size_flags_horizontal = 0
 theme_override_styles/normal = SubResource("StyleBoxFlat_x1x83")
 theme_override_styles/hover = SubResource("StyleBoxFlat_c1j48")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_se5ld")
-text = "Exercise Editor"
+shortcut = SubResource("Shortcut_jpkyy")
+text = "Exercise Editor
+(Ctrl+E)"
 script = SubResource("GDScript_r5ri8")
 
 [node name="AudioBtn" type="TextureButton" parent="MarginContainer/VBoxContainer/HBoxContainer2"]
@@ -221,17 +259,23 @@ size_flags_horizontal = 10
 [node name="BasicBtn" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer2/HBoxContainer"]
 custom_minimum_size = Vector2(160, 0)
 layout_mode = 2
-text = "Basic"
+shortcut = SubResource("Shortcut_dnbgc")
+text = "Basic 
+(Ctrl+B)"
 
 [node name="IntermediateBtn" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer2/HBoxContainer"]
 custom_minimum_size = Vector2(160, 0)
 layout_mode = 2
-text = "Intermediate"
+shortcut = SubResource("Shortcut_u0ndp")
+text = "Intermediate 
+(Ctrl+I)"
 
 [node name="AdvancedBtn" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer2/HBoxContainer"]
 custom_minimum_size = Vector2(160, 0)
 layout_mode = 2
-text = "Advance"
+shortcut = SubResource("Shortcut_jf74y")
+text = "Advanced 
+(Ctrl+A)"
 
 [node name="ErrorAudioPlayer" type="AudioStreamPlayer" parent="."]
 process_mode = 3

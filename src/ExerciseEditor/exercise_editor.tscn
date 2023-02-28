@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://c5qc87hij2hep"]
+[gd_scene load_steps=16 format=3 uid="uid://c5qc87hij2hep"]
 
 [ext_resource type="Script" path="res://src/ExerciseEditor/exercise_editor.gd" id="1_sslhb"]
 [ext_resource type="FontFile" uid="uid://chygow7my3v5g" path="res://Assets/Fonts/NotoSansMyanmar-Regular.ttf" id="2_tt6nc"]
@@ -21,6 +21,17 @@ bg_color = Color(0.431373, 0.352941, 0, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_s5x36"]
 bg_color = Color(0.145098, 0.113725, 0, 1)
+
+[sub_resource type="ButtonGroup" id="ButtonGroup_2mpdt"]
+
+[sub_resource type="InputEventKey" id="InputEventKey_ebxkm"]
+device = -1
+ctrl_pressed = true
+keycode = 80
+unicode = 112
+
+[sub_resource type="Shortcut" id="Shortcut_8v06n"]
+events = [SubResource("InputEventKey_ebxkm")]
 
 [sub_resource type="GDScript" id="GDScript_5es36"]
 script/source = "extends Button
@@ -127,7 +138,8 @@ size_flags_vertical = 3
 [node name="AddNewLessonsFileBtn" type="Button" parent="MarginContainer2/VBoxContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 shortcut = SubResource("Shortcut_jhxwp")
-text = "Add New (Ctrl+N)"
+text = "Add New 
+(Ctrl+N)"
 
 [node name="PlaygroundBtn" type="Button" parent="MarginContainer2/VBoxContainer/HBoxContainer/VBoxContainer"]
 custom_minimum_size = Vector2(200, 60)
@@ -135,7 +147,10 @@ layout_mode = 2
 theme_override_styles/normal = SubResource("StyleBoxFlat_ybjo2")
 theme_override_styles/hover = SubResource("StyleBoxFlat_15h77")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_s5x36")
-text = "Go to Playground"
+button_group = SubResource("ButtonGroup_2mpdt")
+shortcut = SubResource("Shortcut_8v06n")
+text = "Go to Playground
+(Ctrl+P)"
 script = SubResource("GDScript_5es36")
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="MarginContainer2/VBoxContainer/HBoxContainer"]
@@ -147,14 +162,26 @@ theme_override_constants/separation = 10
 layout_mode = 2
 text = "Lines:"
 
-[node name="LinesList" type="ItemList" parent="MarginContainer2/VBoxContainer/HBoxContainer/VBoxContainer2"]
+[node name="HBoxContainer3" type="HBoxContainer" parent="MarginContainer2/VBoxContainer/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="LinesList" type="ItemList" parent="MarginContainer2/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer3"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(400, 0)
 layout_mode = 2
+size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_fonts/font = ExtResource("2_tt6nc")
 theme_override_font_sizes/font_size = 20
 script = ExtResource("3_5mn8u")
+
+[node name="UpDownLbl" type="Label" parent="MarginContainer2/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer3"]
+layout_mode = 2
+size_flags_vertical = 0
+text = "Alt+↑
+
+Alt+↓"
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="MarginContainer2/VBoxContainer/HBoxContainer/VBoxContainer2"]
 layout_mode = 2
@@ -176,17 +203,20 @@ unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
 size_flags_horizontal = 3
-text = "Add Line"
+text = "Add Line 
+(Enter)"
 
 [node name="ResetBtn" type="Button" parent="MarginContainer2/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer"]
 layout_mode = 2
 shortcut = SubResource("Shortcut_gols1")
-text = "Reset (Shift+Del/Backspace)"
+text = "Reset 
+(Shift+Del/Backspace)"
 
 [node name="RemoveLineBtn" type="Button" parent="MarginContainer2/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
-text = "Remove Line"
+text = "Remove Line
+(Del)"
 
 [connection signal="pressed" from="MarginContainer2/VBoxContainer/HBoxContainer/VBoxContainer/DifficulitiesButtons/BasicBtn" to="." method="_on_basic_btn_pressed"]
 [connection signal="pressed" from="MarginContainer2/VBoxContainer/HBoxContainer/VBoxContainer/DifficulitiesButtons/IntermediateBtn" to="." method="_on_intermediate_btn_pressed"]
@@ -195,10 +225,10 @@ text = "Remove Line"
 [connection signal="item_selected" from="MarginContainer2/VBoxContainer/HBoxContainer/VBoxContainer/LessonIds" to="." method="_on_lesson_ids_item_selected"]
 [connection signal="pressed" from="MarginContainer2/VBoxContainer/HBoxContainer/VBoxContainer/AddNewLessonsFileBtn" to="." method="_on_add_lessons_file_btn_pressed"]
 [connection signal="pressed" from="MarginContainer2/VBoxContainer/HBoxContainer/VBoxContainer/PlaygroundBtn" to="MarginContainer2/VBoxContainer/HBoxContainer/VBoxContainer/PlaygroundBtn" method="_on_pressed"]
-[connection signal="delete_item_from_delete_key" from="MarginContainer2/VBoxContainer/HBoxContainer/VBoxContainer2/LinesList" to="." method="_on_lines_list_delete_item_from_delete_key"]
-[connection signal="empty_clicked" from="MarginContainer2/VBoxContainer/HBoxContainer/VBoxContainer2/LinesList" to="." method="_on_lines_list_empty_clicked"]
-[connection signal="item_moved" from="MarginContainer2/VBoxContainer/HBoxContainer/VBoxContainer2/LinesList" to="." method="_on_lines_list_item_moved"]
-[connection signal="item_selected" from="MarginContainer2/VBoxContainer/HBoxContainer/VBoxContainer2/LinesList" to="." method="_on_lines_list_item_selected"]
+[connection signal="delete_item_from_delete_key" from="MarginContainer2/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer3/LinesList" to="." method="_on_lines_list_delete_item_from_delete_key"]
+[connection signal="empty_clicked" from="MarginContainer2/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer3/LinesList" to="." method="_on_lines_list_empty_clicked"]
+[connection signal="item_moved" from="MarginContainer2/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer3/LinesList" to="." method="_on_lines_list_item_moved"]
+[connection signal="item_selected" from="MarginContainer2/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer3/LinesList" to="." method="_on_lines_list_item_selected"]
 [connection signal="text_submitted" from="MarginContainer2/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer2/LineEdit" to="." method="_on_line_edit_text_submitted"]
 [connection signal="pressed" from="MarginContainer2/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer/AddUpdteLineBtn" to="." method="_on_add_updte_line_btn_pressed"]
 [connection signal="pressed" from="MarginContainer2/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer/ResetBtn" to="." method="_on_reset_btn_pressed"]
