@@ -1,6 +1,8 @@
-[gd_scene load_steps=11 format=3 uid="uid://d3rkoaljyut67"]
+[gd_scene load_steps=13 format=3 uid="uid://d3rkoaljyut67"]
 
 [ext_resource type="Script" path="res://src/MessagePopup/message_popup.gd" id="1_a15ho"]
+[ext_resource type="FontFile" uid="uid://chygow7my3v5g" path="res://Assets/Fonts/NotoSansMyanmar-Regular.ttf" id="2_kx8ah"]
+[ext_resource type="FontFile" uid="uid://bkjly6r2w700w" path="res://Assets/Fonts/NotoSerifMyanmar-Bold.ttf" id="3_cm63e"]
 
 [sub_resource type="Animation" id="Animation_5xlrx"]
 length = 0.001
@@ -251,8 +253,11 @@ layout_mode = 2
 
 [node name="MessageLbl" type="RichTextLabel" parent="MarginContainer/MarginContainer/VBoxContainer"]
 unique_name_in_owner = true
+custom_minimum_size = Vector2(600, 300)
 layout_mode = 2
 size_flags_vertical = 3
+theme_override_fonts/normal_font = ExtResource("2_kx8ah")
+theme_override_fonts/bold_font = ExtResource("3_cm63e")
 bbcode_enabled = true
 text = "Message"
 

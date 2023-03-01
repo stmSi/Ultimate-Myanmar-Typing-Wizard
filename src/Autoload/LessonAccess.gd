@@ -25,10 +25,12 @@ func create_update_new_exercise(lesson_number: int, difficulty: String, lesson_d
 	var filepath = _get_lesson_filepath(lesson_number, difficulty)
 	
 	var config: ConfigFile = ConfigFile.new()
+	
 	config.set_value("Exercise", "texts", lesson_data['texts'])
 	config.set_value("Exercise", "repeats", lesson_data['repeats'])
 	config.set_value("Exercise", "allow_mistakes", lesson_data['allow_mistakes'])
 	config.set_value("Exercise", "randomize", lesson_data['randomize'])
+	config.set_value("Exercise", "message", lesson_data['message'])
 
 	var error = config.save(filepath)
 	if error != OK:
@@ -78,6 +80,7 @@ func get_lesson_data(lesson_number: int, difficulty: String) -> Dictionary:
 	lesson_data["repeats"] = config.get_value("Exercise", "repeats", 0)
 	lesson_data["allow_mistakes"] = config.get_value("Exercise", "allow_mistakes", 80)
 	lesson_data["randomize"] = config.get_value("Exercise", "randomize", false)
+	lesson_data["message"] = config.get_value("Exercise", "message", '')
 
 	return lesson_data
 

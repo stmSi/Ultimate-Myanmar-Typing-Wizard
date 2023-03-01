@@ -18,6 +18,9 @@ extends Control
 @onready var add_updte_line_btn: Button = %AddUpdteLineBtn
 @onready var remove_line_btn: Button = %RemoveLineBtn
 
+@onready var add_lesson_message: PanelContainer = $AddLessonMessage
+@onready var add_lesson_message_text_edit: TextEdit = $AddLessonMessage/VBoxContainer/AddLessonMessageTextEdit
+
 var selected_difficulty: String = '';
 var selected_lesson_number: int = 0;
 var selected_line_idx: int = -1
@@ -105,7 +108,8 @@ func _on_lesson_ids_item_selected(index: int) -> void:
 	repeats_box.value = int(lesson_data['repeats'])
 	allow_mistakes_box.value = int(lesson_data['allow_mistakes'])
 	randomize_check.button_pressed = int(lesson_data['randomize'])
-
+	add_lesson_message_text_edit.text = lesson_data['message']
+	
 	# Scroll to bottom
 	if len(lines) > 0:
 		lines_list.select(len(lines) - 1)
@@ -202,7 +206,8 @@ func _save_lesson_from_list():
 			"texts": texts,
 			"repeats": repeats_box.value,
 			"allow_mistakes": allow_mistakes_box.value,
-			"randomize": randomize_check.button_pressed
+			"randomize": randomize_check.button_pressed,
+			"message": add_lesson_message_text_edit.text,
 		}
 	)
 
@@ -222,3 +227,21 @@ func _on_allow_mistakes_box_value_changed(value: float) -> void:
 func _on_randomize_check_toggled(button_pressed: bool) -> void:
 	_save_lesson_from_list()
 
+
+func _on_messsage_btn_pressed() -> void:
+	var tween = get_tree().create_tween()
+	add_lesson_message.modulate.a = 0
+	add_lesson_message.visible = true
+	tween.tween_property(add_lesson_message, "modulate", Color.WHITE, 0.2)
+	add_lesson_message_text_edit.grab_focus()
+	pass # Replace with function body.
+
+
+func _on_save_lesson_msg_btn_pressed() -> void:
+	var tween = get_tree().create_tween()
+	tween.tween_property(add_lesson_message, "modulate", Color(1, 1, 1, 0), 0.2)
+	await tween.finished
+	add_lesson_message.visible = false
+	_save_lesson_from_list()
+
+	pass # Replace with function body.
