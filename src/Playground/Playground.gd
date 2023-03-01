@@ -49,6 +49,7 @@ func _start_lesson():
 	_load_exercise()
 
 func _on_exercise_line_finished():
+	
 	_load_exercise()
 
 func _load_lesson():
@@ -66,6 +67,9 @@ func _load_lesson():
 	lesson_idx += 1
 	if lesson_data['randomize']:
 		_randomize_exercise()
+	
+	if lesson_data['message']:
+		EventBus.message_popup.emit(lesson_data['message'])
 	
 	if exercises.size() == exercise_idx:
 		# keep loading lessons one by one until there is exercise 
