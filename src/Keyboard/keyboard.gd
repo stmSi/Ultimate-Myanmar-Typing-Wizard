@@ -22,6 +22,11 @@ func _ready() -> void:
 	key_node_mapping[' '] = space
 	EventBus.current_char_changed.connect(self._on_current_char_changed)
 	EventBus.lesson_id_loaded.connect(self._on_new_lesson_id_loaded)
+	
+	EventBus.finished_all_difficulty_lessons.connect(func():
+		pending_node.reset_animation()
+		_reset_shifts()
+	)
 
 func _on_new_key_node_added(key_name, node) -> void:
 	key_node_mapping[key_name] = node
