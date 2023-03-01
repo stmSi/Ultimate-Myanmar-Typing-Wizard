@@ -15,6 +15,7 @@ var lesson_idx = 0
 
 var lesson_data: Dictionary = {}
 var repeats = 0
+var allow_mistakes_percent = 80 # percentage
 var exercises = []
 var exercise_idx = 0
 
@@ -27,6 +28,7 @@ func _ready():
 	_start_lesson()
 
 func _start_lesson():
+	line_edit.grab_focus()
 	lesson_ids = []
 	exercises = []
 	lesson_idx = 0
@@ -58,6 +60,8 @@ func _load_lesson():
 	lesson_data = LessonAccess.get_lesson_data(int(lesson_ids[lesson_idx]), difficulty)
 	exercises = lesson_data['texts']
 	repeats = lesson_data['repeats']
+	allow_mistakes_percent = lesson_data['allow_mistakes']
+	
 	exercise_idx = 0
 	lesson_idx += 1
 	if lesson_data['randomize']:
@@ -93,11 +97,17 @@ func _load_exercise():
 
 func _finished_all_difficulty_lessons():
 #	$RestartDialog.show()
-	EventBus.message_popup.emit(
-		"Accuracy: [color=" + 
-		accuracy.get_accuracy_color_hex()
-		+ "][b]" + ("%.2f" % accuracy.percentage) + ' %[/b][/color]'
-	)
+	var accuracy_txt = "Accuracy: " + \
+		"[color=" + accuracy.get_accuracy_color_hex() + "][b]" + \
+		("%.2f" % accuracy.percentage) + ' %[/b][/color]'
+	
+	var msg = accuracy_txt
+	
+	if accuracy.percentage < allow_mistakes_percent:
+		msg += "\r\n" + \
+				"Made Too many mistakes."
+
+	EventBus.message_popup.emit(msg)
 	_start_lesson()
 
 

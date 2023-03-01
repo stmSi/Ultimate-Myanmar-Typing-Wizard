@@ -24,6 +24,7 @@ func goto_scene(path: String):
 
 func _deferred_goto_scene(path: String):
 	# It is now safe to remove the current scene
+	var now = Time.get_ticks_usec()
 	current_scene.free()
 	
 	# Load the new scene.
@@ -37,7 +38,9 @@ func _deferred_goto_scene(path: String):
 
 	# Optionally, to make it compatible with the SceneTree.change_scene_to_file() API.
 	get_tree().current_scene = current_scene
+	_animate_appear()
 	
+	print("Time take: ", Time.get_ticks_usec() - now)
 	pass
 
 func change_to_playground_scene():
@@ -46,3 +49,43 @@ func change_to_playground_scene():
 func change_to_exercise_editor_scene():
 	goto_scene(exercise_editor_scene)
 
+
+func _animate_appear():
+	# Animate Panel first using "scene_change_bg" group
+	# then Elements "scene_change_element"
+
+	var scene_change_bg_modulate_colors = [] # save original color
+	var scene_change_bg = get_tree().get_nodes_in_group('scene_change_bg')
+	for n in scene_change_bg:
+#		scene_change_bg_modulate_colors.push_back(n.modulate)
+#		scene_change_bg.push_back(n)
+		n.modulate.a = 0
+#		n.scale = Vector2(0, 0)
+		
+	var scene_change_elements_modulate_colors = [] # save original color
+	var scene_change_elements = get_tree().get_nodes_in_group('scene_change_element')
+	for n in scene_change_elements:
+#		scene_change_elements_modulate_colors.push_back(n.modulate)
+#		scene_change_elements.push_back(n)
+		n.modulate.a = 0
+
+	var bg_tween = get_tree().create_tween()
+	bg_tween.set_parallel(true)
+	
+	for n in scene_change_bg:
+		bg_tween.tween_property(n, "modulate", Color.WHITE, .1)
+		bg_tween.tween_property(n, "scale", Vector2(1,1), .1)
+	await bg_tween.finished
+	
+	for n in scene_change_elements:
+		bg_tween = get_tree().create_tween()
+		bg_tween.tween_property(n, "modulate", Color.WHITE, .1)
+		await get_tree().create_timer(0.05).timeout
+
+	await bg_tween.finished
+
+
+func _animate_disappear():
+	# Animate Panel first using "scene_change_panel" group
+	# then Elements "scene_change_element"
+	pass

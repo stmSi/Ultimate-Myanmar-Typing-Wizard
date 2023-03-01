@@ -196,7 +196,7 @@ offset_top = -1.0
 offset_right = 1061.0
 offset_bottom = -1.0
 
-[node name="MarginContainer" type="MarginContainer" parent="."]
+[node name="MarginContainer" type="MarginContainer" parent="." groups=["scene_change_bg"]]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -211,7 +211,7 @@ theme_override_constants/margin_bottom = 20
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
 layout_mode = 2
 
-[node name="FollowUpRichText" type="RichTextLabel" parent="MarginContainer/VBoxContainer"]
+[node name="FollowUpRichText" type="RichTextLabel" parent="MarginContainer/VBoxContainer" groups=["scene_change_element"]]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 80)
 layout_mode = 2
@@ -228,7 +228,7 @@ script = ExtResource("4_86oy8")
 current_char_color = Color(0.717647, 0.882353, 0.992157, 1)
 current_char_bgcolor = Color(0.184314, 0.301961, 0.376471, 0)
 
-[node name="LineEdit" type="LineEdit" parent="MarginContainer/VBoxContainer"]
+[node name="LineEdit" type="LineEdit" parent="MarginContainer/VBoxContainer" groups=["scene_change_element"]]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 80)
 layout_mode = 2
@@ -247,7 +247,7 @@ layout_mode = 2
 size_flags_vertical = 0
 theme_override_constants/separation = 60
 
-[node name="StatusLabelContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/StatsContainer"]
+[node name="StatusLabelContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/StatsContainer" groups=["scene_change_element"]]
 layout_mode = 2
 
 [node name="StatusLabel" type="Label" parent="MarginContainer/VBoxContainer/StatsContainer/StatusLabelContainer"]
@@ -259,7 +259,7 @@ unique_name_in_owner = true
 layout_mode = 2
 text = "Ok"
 
-[node name="AccuracyContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/StatsContainer"]
+[node name="AccuracyContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/StatsContainer" groups=["scene_change_element"]]
 layout_mode = 2
 
 [node name="AccuracyLabel" type="Label" parent="MarginContainer/VBoxContainer/StatsContainer/AccuracyContainer"]
@@ -273,7 +273,7 @@ text = "100 %"
 label_settings = SubResource("LabelSettings_fide1")
 script = ExtResource("6_240wa")
 
-[node name="CharacterPerMinContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/StatsContainer"]
+[node name="CharacterPerMinContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/StatsContainer" groups=["scene_change_element"]]
 layout_mode = 2
 
 [node name="CharPerMinLabel" type="Label" parent="MarginContainer/VBoxContainer/StatsContainer/CharacterPerMinContainer"]
@@ -298,7 +298,7 @@ size_flags_vertical = 1
 [node name="BottomButtonsContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
 
-[node name="ExerciseEditorBtn" type="Button" parent="MarginContainer/VBoxContainer/BottomButtonsContainer"]
+[node name="ExerciseEditorBtn" type="Button" parent="MarginContainer/VBoxContainer/BottomButtonsContainer" groups=["scene_change_element"]]
 custom_minimum_size = Vector2(200, 60)
 layout_mode = 2
 size_flags_horizontal = 0
@@ -310,7 +310,7 @@ text = "Exercise Editor
 (Ctrl+E)"
 script = SubResource("GDScript_r5ri8")
 
-[node name="AudioBtn" type="TextureButton" parent="MarginContainer/VBoxContainer/BottomButtonsContainer"]
+[node name="AudioBtn" type="TextureButton" parent="MarginContainer/VBoxContainer/BottomButtonsContainer" groups=["scene_change_element"]]
 layout_mode = 2
 size_flags_horizontal = 6
 size_flags_vertical = 4
@@ -322,21 +322,21 @@ script = SubResource("GDScript_fg15e")
 layout_mode = 2
 size_flags_horizontal = 10
 
-[node name="BasicBtn" type="Button" parent="MarginContainer/VBoxContainer/BottomButtonsContainer/DifficulityContainer"]
+[node name="BasicBtn" type="Button" parent="MarginContainer/VBoxContainer/BottomButtonsContainer/DifficulityContainer" groups=["scene_change_element"]]
 custom_minimum_size = Vector2(160, 0)
 layout_mode = 2
 shortcut = SubResource("Shortcut_dnbgc")
 text = "Basic 
 (Ctrl+B)"
 
-[node name="IntermediateBtn" type="Button" parent="MarginContainer/VBoxContainer/BottomButtonsContainer/DifficulityContainer"]
+[node name="IntermediateBtn" type="Button" parent="MarginContainer/VBoxContainer/BottomButtonsContainer/DifficulityContainer" groups=["scene_change_element"]]
 custom_minimum_size = Vector2(160, 0)
 layout_mode = 2
 shortcut = SubResource("Shortcut_u0ndp")
 text = "Intermediate 
 (Ctrl+I)"
 
-[node name="AdvancedBtn" type="Button" parent="MarginContainer/VBoxContainer/BottomButtonsContainer/DifficulityContainer"]
+[node name="AdvancedBtn" type="Button" parent="MarginContainer/VBoxContainer/BottomButtonsContainer/DifficulityContainer" groups=["scene_change_element"]]
 custom_minimum_size = Vector2(160, 0)
 layout_mode = 2
 shortcut = SubResource("Shortcut_jf74y")

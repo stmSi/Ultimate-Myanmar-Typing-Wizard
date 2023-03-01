@@ -79,7 +79,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_sslhb")
 
-[node name="MarginContainer2" type="MarginContainer" parent="."]
+[node name="MarginContainer2" type="MarginContainer" parent="." groups=["scene_change_bg"]]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -103,11 +103,11 @@ theme_override_constants/separation = 20
 layout_mode = 2
 size_flags_horizontal = 0
 
-[node name="Label" type="Label" parent="MarginContainer2/VBoxContainer/HBoxContainer/VBoxContainer"]
+[node name="Label" type="Label" parent="MarginContainer2/VBoxContainer/HBoxContainer/VBoxContainer" groups=["scene_change_element"]]
 layout_mode = 2
 text = "Choose Difficulty:"
 
-[node name="DifficulitiesButtons" type="VBoxContainer" parent="MarginContainer2/VBoxContainer/HBoxContainer/VBoxContainer"]
+[node name="DifficulitiesButtons" type="VBoxContainer" parent="MarginContainer2/VBoxContainer/HBoxContainer/VBoxContainer" groups=["scene_change_element"]]
 layout_mode = 2
 
 [node name="BasicBtn" type="Button" parent="MarginContainer2/VBoxContainer/HBoxContainer/VBoxContainer/DifficulitiesButtons"]
@@ -137,25 +137,25 @@ text = "Cancel"
 layout_mode = 2
 theme_override_constants/margin_top = 5
 
-[node name="LessonIdsLbl" type="Label" parent="MarginContainer2/VBoxContainer/HBoxContainer/VBoxContainer"]
+[node name="LessonIdsLbl" type="Label" parent="MarginContainer2/VBoxContainer/HBoxContainer/VBoxContainer" groups=["scene_change_element"]]
 unique_name_in_owner = true
 layout_mode = 2
 text = "No Difficulty Selected
 "
 
-[node name="LessonIds" type="ItemList" parent="MarginContainer2/VBoxContainer/HBoxContainer/VBoxContainer"]
+[node name="LessonIds" type="ItemList" parent="MarginContainer2/VBoxContainer/HBoxContainer/VBoxContainer" groups=["scene_change_element"]]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="AddNewLessonsFileBtn" type="Button" parent="MarginContainer2/VBoxContainer/HBoxContainer/VBoxContainer"]
+[node name="AddNewLessonsFileBtn" type="Button" parent="MarginContainer2/VBoxContainer/HBoxContainer/VBoxContainer" groups=["scene_change_element"]]
 layout_mode = 2
 shortcut = SubResource("Shortcut_jhxwp")
 text = "Add New 
 (Ctrl+N)"
 
-[node name="PlaygroundBtn" type="Button" parent="MarginContainer2/VBoxContainer/HBoxContainer/VBoxContainer"]
+[node name="PlaygroundBtn" type="Button" parent="MarginContainer2/VBoxContainer/HBoxContainer/VBoxContainer" groups=["scene_change_element"]]
 custom_minimum_size = Vector2(200, 60)
 layout_mode = 2
 theme_override_styles/normal = SubResource("StyleBoxFlat_ybjo2")
@@ -171,7 +171,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/separation = 10
 
-[node name="LessonSettingsContainer" type="HBoxContainer" parent="MarginContainer2/VBoxContainer/HBoxContainer/VBoxContainer2"]
+[node name="LessonSettingsContainer" type="HBoxContainer" parent="MarginContainer2/VBoxContainer/HBoxContainer/VBoxContainer2" groups=["scene_change_element"]]
 layout_mode = 2
 theme_override_constants/separation = 30
 
@@ -217,7 +217,7 @@ text = "Randomize Lines"
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="LinesList" type="ItemList" parent="MarginContainer2/VBoxContainer/HBoxContainer/VBoxContainer2/LineListContainer"]
+[node name="LinesList" type="ItemList" parent="MarginContainer2/VBoxContainer/HBoxContainer/VBoxContainer2/LineListContainer" groups=["scene_change_element"]]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(400, 0)
 layout_mode = 2
@@ -227,14 +227,14 @@ theme_override_fonts/font = ExtResource("2_tt6nc")
 theme_override_font_sizes/font_size = 20
 script = ExtResource("3_5mn8u")
 
-[node name="UpDownLbl" type="Label" parent="MarginContainer2/VBoxContainer/HBoxContainer/VBoxContainer2/LineListContainer"]
+[node name="UpDownLbl" type="Label" parent="MarginContainer2/VBoxContainer/HBoxContainer/VBoxContainer2/LineListContainer" groups=["scene_change_element"]]
 layout_mode = 2
 size_flags_vertical = 0
 text = "Alt+↑
 
 Alt+↓"
 
-[node name="LineEditContainer" type="HBoxContainer" parent="MarginContainer2/VBoxContainer/HBoxContainer/VBoxContainer2"]
+[node name="LineEditContainer" type="HBoxContainer" parent="MarginContainer2/VBoxContainer/HBoxContainer/VBoxContainer2" groups=["scene_change_element"]]
 layout_mode = 2
 
 [node name="LineEdit" type="LineEdit" parent="MarginContainer2/VBoxContainer/HBoxContainer/VBoxContainer2/LineEditContainer"]
@@ -250,7 +250,7 @@ script = SubResource("GDScript_lc0i3")
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer2/VBoxContainer/HBoxContainer/VBoxContainer2"]
 layout_mode = 2
 
-[node name="AddUpdteLineBtn" type="Button" parent="MarginContainer2/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer"]
+[node name="AddUpdteLineBtn" type="Button" parent="MarginContainer2/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer" groups=["scene_change_element"]]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
@@ -258,13 +258,13 @@ size_flags_horizontal = 3
 text = "Add Line 
 (Enter)"
 
-[node name="ResetBtn" type="Button" parent="MarginContainer2/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer"]
+[node name="ResetBtn" type="Button" parent="MarginContainer2/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer" groups=["scene_change_element"]]
 layout_mode = 2
 shortcut = SubResource("Shortcut_gols1")
 text = "Reset 
 (Shift+Del/Backspace)"
 
-[node name="RemoveLineBtn" type="Button" parent="MarginContainer2/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer"]
+[node name="RemoveLineBtn" type="Button" parent="MarginContainer2/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer" groups=["scene_change_element"]]
 unique_name_in_owner = true
 layout_mode = 2
 text = "Remove Line
