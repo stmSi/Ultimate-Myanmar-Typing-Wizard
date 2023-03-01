@@ -17,7 +17,7 @@ script/source = "extends LineEdit
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	grab_focus()
-	EventBus.finished_section.connect(self._finished_section)
+	EventBus.exercise_line_finished.connect(self._exercise_line_finished)
 	EventBus.message_popup_closed.connect(self._on_message_popup_closed)
 	EventBus.lesson_id_loaded.connect(self._on_new_lesson_id_loaded)
 
@@ -27,7 +27,7 @@ func _ready():
 	pass # Replace with function body.
 
 
-func _finished_section() -> void:
+func _exercise_line_finished() -> void:
 	clear()
 
 func _on_message_popup_closed() -> void:
@@ -220,7 +220,6 @@ grow_vertical = 2
 script = ExtResource("1_tmfyy")
 
 [node name="FollowUpTextPopup" parent="." instance=ExtResource("6_vw22j")]
-visible = false
 z_index = 1
 layout_mode = 1
 offset_left = 1061.0
@@ -278,7 +277,6 @@ script = SubResource("GDScript_l4wjf")
 layout_mode = 2
 size_flags_vertical = 0
 theme_override_constants/separation = 60
-alignment = 1
 
 [node name="StatusLabelContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/StatsContainer"]
 layout_mode = 2

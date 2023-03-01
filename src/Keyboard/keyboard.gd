@@ -81,7 +81,14 @@ func _on_current_char_changed(char: String):
 func _run_pending(use_shift: bool):
 	if key_node_mapping.has(current_char):
 		pending_node = key_node_mapping[current_char]
-		EventBus.followup_popup_pos_changed.emit(pending_node.global_position)
+
+		# calculate Center of key_button
+		var pos = Vector2(
+			pending_node.global_position.x + (pending_node.size.x / 2), 
+			pending_node.global_position.y
+		)
+		EventBus.followup_popup_pos_changed.emit(pos)
+		
 		pending_node.run_pending(use_shift)
 	pass
 
