@@ -2,6 +2,8 @@
 
 Created in [Godot Engine 4.0 rc5](https://godotengine.org/article/release-candidate-godot-4-0-rc-5#downloads) (Godot 3.x is not supported.)
 
+[Download Windows/Linux Builds](https://github.com/stmSi/Ultimate-Myanmar-Typing-Wizard/releases/tag/pre-build)
+
 ---
 
 #### **Showcase Video**
