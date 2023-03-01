@@ -1,10 +1,11 @@
-[gd_scene load_steps=28 format=3 uid="uid://blkq4rtc0qvgs"]
+[gd_scene load_steps=29 format=3 uid="uid://blkq4rtc0qvgs"]
 
 [ext_resource type="Script" path="res://src/Playground/Playground.gd" id="1_tmfyy"]
 [ext_resource type="FontFile" uid="uid://chygow7my3v5g" path="res://Assets/Fonts/NotoSansMyanmar-Regular.ttf" id="2_dg17q"]
 [ext_resource type="FontFile" uid="uid://bkjly6r2w700w" path="res://Assets/Fonts/NotoSerifMyanmar-Bold.ttf" id="3_e4sqq"]
 [ext_resource type="Script" path="res://src/FollowUpText.gd" id="4_86oy8"]
 [ext_resource type="PackedScene" uid="uid://bu35jrqg64j60" path="res://src/Keyboard/keyboard.tscn" id="5_3d5ha"]
+[ext_resource type="Script" path="res://src/Playground/AccuracyLabel.gd" id="6_240wa"]
 [ext_resource type="PackedScene" uid="uid://bulscf8jamb2b" path="res://src/FollowupRichText/follow_up_text_popup.tscn" id="6_vw22j"]
 [ext_resource type="Texture2D" uid="uid://5n4mh44uc3c4" path="res://Assets/Icons/audio.png" id="7_4yl2m"]
 [ext_resource type="AudioStream" uid="uid://cdqui2diupr13" path="res://Assets/Sounds/error-sound.mp3" id="8_ylc3d"]
@@ -37,40 +38,8 @@ func _on_new_lesson_id_loaded(_lesson_id: int) -> void:
 	clear()
 "
 
-[sub_resource type="GDScript" id="GDScript_hj3ra"]
-script/source = "extends Label
-
-var num_corrects := 0.0
-var num_wrongs := 0.0
-
-
-func _ready() -> void:
-	EventBus.wrong_char_typed.connect(
-		func(c: String): 
-			num_wrongs += 1
-			
-			var total = num_corrects + num_wrongs
-			if total == 0:
-				self.text = \"100 %\" # Division by 0 error
-				return
-			self.text = \"%.2f\" % ((num_corrects / total) * 100)
-			self.text += \"% \"
-#			self.text = \"%.2f %\".format((num_corrects / total) * 100 )
-	)
-	
-	EventBus.correct_char_typed.connect(
-		func(_c: String):
-			num_corrects += 1
-			var total = num_corrects + num_wrongs
-			if total == 0:
-				self.text = \"100 %\" # Division by 0 error
-				return
-				
-			self.text = \"%.2f\" % ((num_corrects / total) * 100)
-			self.text += \"% \"
-#			self.text = \"%3.2f %\".format((num_corrects / total) * 100 )
-	)
-"
+[sub_resource type="LabelSettings" id="LabelSettings_fide1"]
+shadow_size = 4
 
 [sub_resource type="GDScript" id="GDScript_3afo8"]
 script/source = "extends Label
@@ -301,7 +270,8 @@ text = "Accuracy:"
 unique_name_in_owner = true
 layout_mode = 2
 text = "100 %"
-script = SubResource("GDScript_hj3ra")
+label_settings = SubResource("LabelSettings_fide1")
+script = ExtResource("6_240wa")
 
 [node name="CharacterPerMinContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/StatsContainer"]
 layout_mode = 2
