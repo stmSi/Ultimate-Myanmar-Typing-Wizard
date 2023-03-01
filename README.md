@@ -1,4 +1,4 @@
-### Burmese Typing Trainer (WIP) [![MIT License](https://img.shields.io/badge/License-MIT-25B3A0?style=flat-square)](https://github.com/stmSi/myanmar-unicode-typing-trainer/blob/master/LICENSE.md)
+### Ultimate Myanmar Typing Wizard (WIP) [![MIT License](https://img.shields.io/badge/License-MIT-25B3A0?style=flat-square)](https://github.com/stmSi/myanmar-unicode-typing-trainer/blob/master/LICENSE.md)
 
 Created in [Godot Engine 4.0 rc5](https://godotengine.org/article/release-candidate-godot-4-0-rc-5#downloads) (Godot 3.x is not supported.)
 
