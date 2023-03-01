@@ -4,6 +4,7 @@ extends Control
 
 @onready var line_edit: LineEdit = %LineEdit
 @onready var status: Label = %Status
+@onready var accuracy: Label = %Accuracy
 
 var current_exercise_text = ''
 
@@ -21,8 +22,8 @@ var exercise_idx = 0
 var difficulty = 'basic'
 
 func _ready():
-	EventBus.finished_section.connect(self._load_exercise)
-	EventBus.finished_all_sections.connect(self._finished_all_sections)
+	EventBus.exercise_line_finished.connect(self._on_exercise_line_finished)
+	EventBus.finished_all_difficulty_lessons.connect(self._finished_all_difficulty_lessons)
 
 	_start_lesson()
 
@@ -46,43 +47,42 @@ func _start_lesson():
 		lesson_ids.push_back(f.get_basename().get_file())
 	_load_exercise()
 
-func _load_exercise():
+func _on_exercise_line_finished():
+	_load_exercise()
+
+func _load_lesson():
+	if lesson_ids.size() == lesson_idx:
+		# No more lesson available
+		EventBus.finished_all_difficulty_lessons.emit()
+		return
+
+	lesson_data = LessonAccess.get_lesson_data(int(lesson_ids[lesson_idx]), difficulty)
+	exercises = lesson_data['texts']
+	repeats = lesson_data['repeats']
+	exercise_idx = 0
+	lesson_idx += 1
+	if lesson_data['randomize']:
+		_randomize_exercise()
+	
 	if exercises.size() == exercise_idx:
+		# keep loading lessons one by one until there is exercise 
+		_load_lesson()
+	else:
+		EventBus.lesson_id_loaded.emit(int(lesson_ids[lesson_idx - 1]))
+		EventBus.message_popup.emit(
+			"Difficulty: " + difficulty.capitalize() + "\r\n" +\
+			"Lesson ID: " + lesson_ids[lesson_idx - 1] + " is loaded."
+		)
+
+func _load_exercise():
+	# No More Exercise
+	if exercises.size() == exercise_idx:
+		# Repeat Lesson?
 		if exercises.size() > 0 and repeats > 0:
 			exercise_idx = 0
 			repeats -= 1
-
-		elif lesson_ids.size() == lesson_idx:
-			EventBus.finished_all_sections.emit()
-			return
-		else:
-			# No More Exercise
-			lesson_data = LessonAccess.get_lesson_data(int(lesson_ids[lesson_idx]), difficulty)
-			exercises = lesson_data['texts']
-			repeats = lesson_data['repeats']
-			exercise_idx = 0
-			lesson_idx += 1
-			
-			if exercises.size() == exercise_idx:
-				# keep loading lessons one by one until there is exercise 
-				# otherwise restart with `EventBus.finished_all_sections.emit()`
-				_load_exercise() 
-				return
-
-			if lesson_data['randomize']:
-				# PackedStringArray doesn't support shuffle()
-				# convert to array, shuffle, and reassign
-				var tmp = []
-				for e in exercises:
-					tmp.append(e)
-				tmp.shuffle()
-				exercises = PackedStringArray(tmp)
-
-			EventBus.lesson_id_loaded.emit(int(lesson_ids[lesson_idx - 1]))
-			EventBus.message_popup.emit(
-				"Difficulty: " + difficulty.capitalize() + "\r\n" +\
-				"Lesson ID: " + lesson_ids[lesson_idx - 1] + " is loaded."
-			)
+		else: # Fetch Next Lesson
+			_load_lesson()
 
 	
 	current_exercise_text = exercises[exercise_idx]
@@ -92,7 +92,7 @@ func _load_exercise():
 	EventBus.current_char_changed.emit(current_exercise_text[0])
 
 
-func _finished_all_sections():
+func _finished_all_difficulty_lessons():
 #	$RestartDialog.show()
 	EventBus.message_popup.emit("All Lessons learned. Restarting...")
 	_start_lesson()
@@ -121,7 +121,7 @@ func _on_text_edit_text_changed(_t: String) -> void:
 	
 	###### Determine Finish Section #########
 	if current_exercise_text != '' and current_exercise_text == line_edit.text:
-		EventBus.finished_section.emit()
+		EventBus.exercise_line_finished.emit()
 
 
 func _on_basic_btn_pressed() -> void:
@@ -139,3 +139,12 @@ func _on_advanced_btn_pressed() -> void:
 	difficulty = 'advanced'
 	_start_lesson()
 	pass # Replace with function body.
+
+func _randomize_exercise():
+	# PackedStringArray doesn't support shuffle()
+	# convert to array, shuffle, and reassign
+	var tmp = []
+	for e in exercises:
+		tmp.append(e)
+	tmp.shuffle()
+	exercises = PackedStringArray(tmp)
