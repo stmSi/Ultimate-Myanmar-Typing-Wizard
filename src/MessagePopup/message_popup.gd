@@ -1,6 +1,6 @@
 extends VBoxContainer
 
-@onready var message_lbl: Label = %MessageLbl
+@onready var message_lbl: RichTextLabel = %MessageLbl
 @onready var margin_container: MarginContainer = $MarginContainer
 @onready var ok_btn: Button = %OkBtn
 

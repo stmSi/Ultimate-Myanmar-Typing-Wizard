@@ -4,7 +4,7 @@ extends Control
 
 @onready var line_edit: LineEdit = %LineEdit
 @onready var status: Label = %Status
-@onready var accuracy: Label = %Accuracy
+@onready var accuracy: AccuracyLabel = %Accuracy
 
 var current_exercise_text = ''
 
@@ -24,7 +24,6 @@ var difficulty = 'basic'
 func _ready():
 	EventBus.exercise_line_finished.connect(self._on_exercise_line_finished)
 	EventBus.finished_all_difficulty_lessons.connect(self._finished_all_difficulty_lessons)
-
 	_start_lesson()
 
 func _start_lesson():
@@ -69,10 +68,10 @@ func _load_lesson():
 		_load_lesson()
 	else:
 		EventBus.lesson_id_loaded.emit(int(lesson_ids[lesson_idx - 1]))
-		EventBus.message_popup.emit(
-			"Difficulty: " + difficulty.capitalize() + "\r\n" +\
-			"Lesson ID: " + lesson_ids[lesson_idx - 1] + " is loaded."
-		)
+#		EventBus.message_popup.emit(
+#			"Difficulty: " + difficulty.capitalize() + "\r\n" +\
+#			"Lesson ID: " + lesson_ids[lesson_idx - 1] + " is loaded."
+#		)
 
 func _load_exercise():
 	# No More Exercise
@@ -94,7 +93,11 @@ func _load_exercise():
 
 func _finished_all_difficulty_lessons():
 #	$RestartDialog.show()
-	EventBus.message_popup.emit("All Lessons learned. Restarting...")
+	EventBus.message_popup.emit(
+		"Accuracy: [color=" + 
+		accuracy.get_accuracy_color_hex()
+		+ "][b]" + ("%.2f" % accuracy.percentage) + ' %[/b][/color]'
+	)
 	_start_lesson()
 
 
