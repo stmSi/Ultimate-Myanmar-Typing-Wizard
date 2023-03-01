@@ -39,7 +39,7 @@ func _on_new_lesson_id_loaded(_lesson_id: int) -> void:
 "
 
 [sub_resource type="LabelSettings" id="LabelSettings_fide1"]
-shadow_size = 4
+shadow_size = 2
 
 [sub_resource type="GDScript" id="GDScript_3afo8"]
 script/source = "extends Label
