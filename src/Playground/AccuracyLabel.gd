@@ -40,7 +40,6 @@ func _calculate_show():
 	accuracy_color = get_accuracy_color()
 	label_settings.shadow_color = accuracy_color
 	label_settings.outline_color = accuracy_color
-	print(get_accuracy_color_hex())
 	self.text = "%.2f" % percentage
 	self.text += "% "
 
@@ -55,12 +54,6 @@ func get_accuracy_color() -> Color:
 	return color
 
 func get_accuracy_color_hex() -> String:
-#	print([
-#		accuracy_color.r8, 
-#		accuracy_color.g8, 
-#		accuracy_color.b8, 
-#		accuracy_color.a8
-#	])
 	return "#%02x%02x%02x%02x" % [
 		accuracy_color.r8, 
 		accuracy_color.g8, 
