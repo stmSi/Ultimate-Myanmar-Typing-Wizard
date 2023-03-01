@@ -87,7 +87,7 @@ func _run_pending(use_shift: bool):
 			pending_node.global_position.x + (pending_node.size.x / 2), 
 			pending_node.global_position.y
 		)
-		EventBus.followup_popup_pos_changed.emit(pos)
+		EventBus.followup_popup_pos_changed.emit(pos, pending_node)
 		
 		pending_node.run_pending(use_shift)
 	pass

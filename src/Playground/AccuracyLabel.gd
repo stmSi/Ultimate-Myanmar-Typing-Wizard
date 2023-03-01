@@ -6,7 +6,8 @@ var num_wrongs := 0.0
 var percentage = 100
 var accuracy_color: Color
 
-@export var color_100: Color = Color.GREEN
+@export var color_100: Color = Color.GOLD
+@export var color_99: Color = Color.GREEN
 @export var color_0: Color = Color.RED
 
 func _ready() -> void:
@@ -39,14 +40,16 @@ func _calculate_show():
 #	label_settings.font_color = color
 	accuracy_color = get_accuracy_color()
 	label_settings.shadow_color = accuracy_color
-	label_settings.outline_color = accuracy_color
+#	label_settings.outline_color = accuracy_color
 	self.text = "%.2f" % percentage
 	self.text += "% "
 
 
 func get_accuracy_color() -> Color:
-	var color: Color = lerp(color_0, color_100, percentage/100.0)
-	if percentage < 90:
+	var color: Color = lerp(color_0, color_99, percentage/100.0)
+	if percentage == 100:
+		return color_100
+	elif percentage < 90:
 		# more red below 90
 		color.r += 0.3
 		color.g -= 0.2

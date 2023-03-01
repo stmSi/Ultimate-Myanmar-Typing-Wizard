@@ -15,7 +15,7 @@ signal exercise_line_finished()
 signal lesson_finished()
 signal finished_all_difficulty_lessons()
 
-signal followup_popup_pos_changed(pos: Vector2)
+signal followup_popup_pos_changed(pos: Vector2, pending_node: KeyButton)
 
 signal message_popup(msg: String)
 signal message_popup_closed()
