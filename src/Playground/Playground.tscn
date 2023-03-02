@@ -291,12 +291,14 @@ layout_mode = 2
 size_flags_vertical = 3
 
 [node name="Keyboard" parent="MarginContainer/VBoxContainer/KeyboardContainer" instance=ExtResource("5_3d5ha")]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 6
 size_flags_vertical = 1
 
 [node name="BottomButtonsContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
+size_flags_vertical = 8
 
 [node name="ExerciseEditorBtn" type="Button" parent="MarginContainer/VBoxContainer/BottomButtonsContainer" groups=["scene_change_element"]]
 custom_minimum_size = Vector2(200, 60)
