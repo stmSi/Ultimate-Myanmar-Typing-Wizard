@@ -23,7 +23,7 @@ Created in [Godot Engine 4.0 Stable](https://godotengine.org/download) (Godot 3.
 
 ---
 
-#### **Playground Screenshots **
+### **Playground Screenshots**
 
 
 ![](screenshots/Playground.png)
@@ -32,14 +32,14 @@ Created in [Godot Engine 4.0 Stable](https://godotengine.org/download) (Godot 3.
 
 ---
 
-#### **Playground Showcase Video**
+#### **Exercise Editor Showcase Video**
 
 
 https://user-images.githubusercontent.com/32661049/222511307-2d69d482-4424-4706-9908-92767fee9d7d.mp4
 
 ---
 
-#### **Exercise Editor Showcase Video**
+#### **Playground Showcase Video**
 
 https://user-images.githubusercontent.com/32661049/222511322-08bec3fa-689e-416e-8c0f-1baf2d4a756f.mp4
 
