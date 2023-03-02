@@ -25,7 +25,7 @@ func create_update_new_exercise(lesson_number: int, difficulty: String, lesson_d
 	var filepath = _get_lesson_filepath(lesson_number, difficulty)
 	
 	var config: ConfigFile = ConfigFile.new()
-	if FileAccess.file_exists(filepath):
+	if FileAccess.file_exists(filepath): # update file?
 		config.load(filepath)
 	
 	
