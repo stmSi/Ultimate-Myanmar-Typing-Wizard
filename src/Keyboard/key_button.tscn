@@ -6,12 +6,19 @@
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_h4jkf"]
 resource_local_to_scene = true
 bg_color = Color(0.117647, 0.117647, 0.117647, 0.827451)
-border_width_left = 3
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
 border_blend = true
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
 shadow_color = Color(1, 1, 1, 0.6)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_os870"]
-bg_color = Color(1, 1, 1, 0.164706)
+bg_color = Color(1, 1, 0.721569, 0.235294)
 
 [sub_resource type="Animation" id="Animation_n8113"]
 length = 0.001
@@ -37,7 +44,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [3]
+"values": [1]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -49,7 +56,7 @@ tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [0]
+"values": [1]
 }
 tracks/3/type = "value"
 tracks/3/imported = false
@@ -61,7 +68,7 @@ tracks/3/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [0]
+"values": [1]
 }
 tracks/4/type = "value"
 tracks/4/imported = false
@@ -73,7 +80,7 @@ tracks/4/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [0]
+"values": [1]
 }
 tracks/5/type = "value"
 tracks/5/imported = false
@@ -122,10 +129,10 @@ tracks/0/path = NodePath("Panel:theme_override_styles/panel:border_color")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
-"values": [Color(0, 0.843137, 0.364706, 1)]
+"values": [Color(0, 0.843137, 0.364706, 1), Color(0, 0.843137, 0.364706, 1), Color(1, 1, 1, 1)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -137,7 +144,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0, 0.2, 0.4),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
-"values": [0, 6, 0]
+"values": [0, 6, 1]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -149,7 +156,7 @@ tracks/2/keys = {
 "times": PackedFloat32Array(0, 0.2, 0.4),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
-"values": [0, 6, 0]
+"values": [0, 6, 1]
 }
 tracks/3/type = "value"
 tracks/3/imported = false
@@ -161,7 +168,7 @@ tracks/3/keys = {
 "times": PackedFloat32Array(0, 0.2, 0.4),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
-"values": [0, 6, 0]
+"values": [0, 6, 1]
 }
 tracks/4/type = "value"
 tracks/4/imported = false
@@ -173,7 +180,7 @@ tracks/4/keys = {
 "times": PackedFloat32Array(0, 0.2, 0.4),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
-"values": [0, 6, 0]
+"values": [0, 6, 1]
 }
 tracks/5/type = "value"
 tracks/5/imported = false
@@ -274,10 +281,10 @@ tracks/0/path = NodePath("Panel:theme_override_styles/panel:border_color")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0, 0.95, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
-"values": [Color(1, 0, 0, 1)]
+"values": [Color(1, 0, 0, 1), Color(1, 0, 0, 1), Color(1, 1, 1, 1)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -289,7 +296,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0, 0.05, 0.55, 1),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 0,
-"values": [0, 6, 6, 0]
+"values": [0, 6, 6, 1]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -301,7 +308,7 @@ tracks/2/keys = {
 "times": PackedFloat32Array(0, 0.05, 0.55, 1),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 0,
-"values": [0, 6, 6, 0]
+"values": [0, 6, 6, 1]
 }
 tracks/3/type = "value"
 tracks/3/imported = false
@@ -313,7 +320,7 @@ tracks/3/keys = {
 "times": PackedFloat32Array(0, 0.05, 0.55, 1),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 0,
-"values": [0, 6, 6, 0]
+"values": [0, 6, 6, 1]
 }
 tracks/4/type = "value"
 tracks/4/imported = false
@@ -325,7 +332,7 @@ tracks/4/keys = {
 "times": PackedFloat32Array(0, 0.05, 0.55, 1),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 0,
-"values": [0, 6, 6, 0]
+"values": [0, 6, 6, 1]
 }
 tracks/5/type = "value"
 tracks/5/imported = false
@@ -378,7 +385,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0, 0.1, 0.6),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
-"values": [0, 6, 0]
+"values": [0, 6, 1]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -390,7 +397,7 @@ tracks/2/keys = {
 "times": PackedFloat32Array(0, 0.1, 0.6),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
-"values": [0, 6, 0]
+"values": [0, 6, 1]
 }
 tracks/3/type = "value"
 tracks/3/imported = false
@@ -402,7 +409,7 @@ tracks/3/keys = {
 "times": PackedFloat32Array(0, 0.1, 0.6),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
-"values": [0, 6, 0]
+"values": [0, 6, 1]
 }
 tracks/4/type = "value"
 tracks/4/imported = false
@@ -414,7 +421,7 @@ tracks/4/keys = {
 "times": PackedFloat32Array(0, 0.1, 0.6),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
-"values": [0, 6, 0]
+"values": [0, 6, 1]
 }
 tracks/5/type = "value"
 tracks/5/imported = false
@@ -474,28 +481,28 @@ anchors_preset = 12
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 5.0
-offset_top = -20.0
-offset_right = -2.0
-offset_bottom = -2.0
+offset_left = 6.0
+offset_top = -14.0
+offset_right = -5.0
+offset_bottom = -3.0
 grow_horizontal = 2
 grow_vertical = 0
 theme_override_styles/panel = SubResource("StyleBoxFlat_os870")
 
 [node name="ShiftChar" type="Label" parent="Panel"]
 unique_name_in_owner = true
-modulate = Color(1, 1, 1, 0.705882)
+modulate = Color(1, 1, 1, 0.509804)
 layout_mode = 1
 offset_left = 10.0
-offset_top = -5.0
+offset_top = -1.0
 offset_right = 26.0
-offset_bottom = 54.0
+offset_bottom = 58.0
 theme_override_fonts/font = ExtResource("2_ojxqh")
 theme_override_font_sizes/font_size = 25
 
 [node name="Char" type="Label" parent="Panel"]
 unique_name_in_owner = true
-modulate = Color(1, 1, 1, 0.705882)
+modulate = Color(1, 1, 1, 0.509804)
 layout_mode = 1
 anchors_preset = 3
 anchor_left = 1.0
