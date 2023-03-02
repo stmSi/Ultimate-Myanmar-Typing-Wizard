@@ -1,10 +1,12 @@
 extends Control
 
 @onready var follow_up_rich_text: RichTextLabel = %FollowUpRichText
+@onready var follow_up_text_popup: Control = $FollowUpTextPopup
 
 @onready var line_edit: LineEdit = %LineEdit
 @onready var status: Label = %Status
 @onready var accuracy: AccuracyLabel = %Accuracy
+@onready var keyboard: Control = %Keyboard
 
 var current_exercise_text = ''
 
@@ -70,6 +72,9 @@ func _load_lesson():
 	
 	if lesson_data['message']:
 		EventBus.message_popup.emit(lesson_data['message'])
+	
+	keyboard.visible = not lesson_data['hide_keyboard']
+	follow_up_text_popup.visible = not lesson_data['hide_keyboard']
 	
 	if exercises.size() == exercise_idx:
 		# keep loading lessons one by one until there is exercise 

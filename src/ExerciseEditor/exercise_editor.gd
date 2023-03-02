@@ -14,6 +14,7 @@ extends Control
 @onready var repeats_box: SpinBox = %RepeatsBox
 @onready var allow_mistakes_box: SpinBox = %AllowMistakesBox
 @onready var randomize_check: CheckButton = %RandomizeCheck
+@onready var hide_keyboard_check: CheckButton = %HideKeyboardCheck
 
 @onready var add_updte_line_btn: Button = %AddUpdteLineBtn
 @onready var remove_line_btn: Button = %RemoveLineBtn
@@ -109,6 +110,7 @@ func _on_lesson_ids_item_selected(index: int) -> void:
 	repeats_box.value = int(lesson_data['repeats'])
 	allow_mistakes_box.value = int(lesson_data['allow_mistakes'])
 	randomize_check.button_pressed = int(lesson_data['randomize'])
+	hide_keyboard_check.button_pressed = int(lesson_data['hide_keyboard'])
 	add_lesson_message_text_edit.text = lesson_data['message']
 	
 	# Scroll to bottom
@@ -206,6 +208,7 @@ func _save_lesson_from_list():
 			"repeats": repeats_box.value,
 			"allow_mistakes": allow_mistakes_box.value,
 			"randomize": randomize_check.button_pressed,
+			"hide_keyboard": hide_keyboard_check.button_pressed,
 #			"message": add_lesson_message_text_edit.text,
 		}
 	)
@@ -287,6 +290,8 @@ func _on_lesson_ids_delete_lesson_from_delete_key(idx) -> void:
 #	confirm_dialog.cancelled.connect(func(): confirm_dialog.queue_free())
 	add_child(confirm_dialog)
 	confirm_dialog.show()
-	pass # Replace with function body.
 
 
+
+func _on_hide_keyboard_check_toggled(button_pressed: bool) -> void:
+	_save_lesson_from_list()

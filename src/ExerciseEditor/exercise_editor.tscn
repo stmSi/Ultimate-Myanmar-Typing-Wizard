@@ -238,6 +238,16 @@ layout_mode = 2
 tooltip_text = "Randomize the exercise lines for trainee"
 text = "Randomize Lines"
 
+[node name="HideKeyboardContainer" type="HBoxContainer" parent="MarginContainer2/VBoxContainer/HBoxContainer/VBoxContainer2/LessonSettingsContainer"]
+layout_mode = 2
+tooltip_text = "Will repeat the lesson if mistakes you made exceed this % number."
+
+[node name="HideKeyboardCheck" type="CheckButton" parent="MarginContainer2/VBoxContainer/HBoxContainer/VBoxContainer2/LessonSettingsContainer/HideKeyboardContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+tooltip_text = "Randomize the exercise lines for trainee"
+text = "Hide Keyboard"
+
 [node name="MessageContainer" type="HBoxContainer" parent="MarginContainer2/VBoxContainer/HBoxContainer/VBoxContainer2/LessonSettingsContainer"]
 layout_mode = 2
 tooltip_text = "Will repeat the lesson if mistakes you made exceed this % number."
@@ -365,6 +375,7 @@ layout_mode = 1
 [connection signal="value_changed" from="MarginContainer2/VBoxContainer/HBoxContainer/VBoxContainer2/LessonSettingsContainer/RepeatContainer/RepeatsBox" to="." method="_on_repeats_box_value_changed"]
 [connection signal="value_changed" from="MarginContainer2/VBoxContainer/HBoxContainer/VBoxContainer2/LessonSettingsContainer/AllowableContainer/AllowMistakesBox" to="." method="_on_allow_mistakes_box_value_changed"]
 [connection signal="toggled" from="MarginContainer2/VBoxContainer/HBoxContainer/VBoxContainer2/LessonSettingsContainer/RandomizeContainer/RandomizeCheck" to="." method="_on_randomize_check_toggled"]
+[connection signal="toggled" from="MarginContainer2/VBoxContainer/HBoxContainer/VBoxContainer2/LessonSettingsContainer/HideKeyboardContainer/HideKeyboardCheck" to="." method="_on_hide_keyboard_check_toggled"]
 [connection signal="pressed" from="MarginContainer2/VBoxContainer/HBoxContainer/VBoxContainer2/LessonSettingsContainer/MessageContainer/MesssageBtn" to="." method="_on_messsage_btn_pressed"]
 [connection signal="delete_item_from_delete_key" from="MarginContainer2/VBoxContainer/HBoxContainer/VBoxContainer2/LineListContainer/LinesList" to="." method="_on_lines_list_delete_item_from_delete_key"]
 [connection signal="deselect" from="MarginContainer2/VBoxContainer/HBoxContainer/VBoxContainer2/LineListContainer/LinesList" to="." method="_on_lines_list_empty_clicked"]
