@@ -17,7 +17,6 @@ func set_msg(msg: String) -> void:
 	$AnimationPlayer.play('running')
 
 func _on_ok_btn_pressed() -> void:
-
 	if len(get_tree().get_nodes_in_group('msg_popups')) == 1:
 		get_tree().paused = false
 	

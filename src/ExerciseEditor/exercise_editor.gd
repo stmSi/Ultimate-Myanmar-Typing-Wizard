@@ -207,7 +207,7 @@ func _save_lesson_from_list():
 			"repeats": repeats_box.value,
 			"allow_mistakes": allow_mistakes_box.value,
 			"randomize": randomize_check.button_pressed,
-			"message": add_lesson_message_text_edit.text,
+#			"message": add_lesson_message_text_edit.text,
 		}
 	)
 
@@ -234,7 +234,6 @@ func _on_messsage_btn_pressed() -> void:
 	add_lesson_message.visible = true
 	tween.tween_property(add_lesson_message, "modulate", Color.WHITE, 0.2)
 	add_lesson_message_text_edit.grab_focus()
-	pass # Replace with function body.
 
 
 func _on_save_lesson_msg_btn_pressed() -> void:
@@ -242,6 +241,47 @@ func _on_save_lesson_msg_btn_pressed() -> void:
 	tween.tween_property(add_lesson_message, "modulate", Color(1, 1, 1, 0), 0.2)
 	await tween.finished
 	add_lesson_message.visible = false
-	_save_lesson_from_list()
+	LessonAccess.save_message(
+		selected_lesson_number, 
+		selected_difficulty, 
+		add_lesson_message_text_edit.text
+	)
 
+func _on_cancel_lesson_msg_btn_pressed() -> void:
+	var tween = get_tree().create_tween()
+	tween.tween_property(add_lesson_message, "modulate", Color(1, 1, 1, 0), 0.2)
+	await tween.finished
+	add_lesson_message.visible = false
+
+
+func _on_lesson_ids_swap_lesson(lesson1: int, lesson2: int) -> void:
+	LessonAccess.swap_lesson_contents(lesson1, lesson2, selected_difficulty)
+	_populate_files_list()
+	lesson_ids.select(lesson2)
+	_on_lesson_ids_item_selected(lesson2)
+	lesson_ids.grab_focus()
 	pass # Replace with function body.
+
+
+func _on_lesson_ids_delete_lesson_from_delete_key(idx) -> void:
+
+	var confirm_dialog := NativeConfirmationDialog.new()
+	
+	confirm_dialog.title = "Delete Lessson: " + lesson_ids.get_item_text(idx)
+	confirm_dialog.dialog_text = "Are you sure you want to delete Lesson File: %s" % lesson_ids.get_item_text(idx)
+	confirm_dialog.buttons_texts = NativeConfirmationDialog.BUTTONS_TEXTS_YES_NO
+	
+	confirm_dialog.confirmed.connect(func(): 
+		LessonAccess.delete_lesson_file(
+			selected_lesson_number,
+			selected_difficulty,
+		)
+		_populate_files_list()
+	)
+	
+#	confirm_dialog.cancelled.connect(func(): confirm_dialog.queue_free())
+	add_child(confirm_dialog)
+	confirm_dialog.show()
+	pass # Replace with function body.
+
+

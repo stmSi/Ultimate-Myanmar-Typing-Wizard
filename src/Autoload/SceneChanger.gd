@@ -24,7 +24,6 @@ func goto_scene(path: String):
 
 func _deferred_goto_scene(path: String):
 	# It is now safe to remove the current scene
-	var now = Time.get_ticks_usec()
 	current_scene.free()
 	
 	# Load the new scene.
@@ -40,7 +39,6 @@ func _deferred_goto_scene(path: String):
 	get_tree().current_scene = current_scene
 	_animate_appear()
 	
-	print("Time take: ", Time.get_ticks_usec() - now)
 	pass
 
 func change_to_playground_scene():
