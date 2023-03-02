@@ -313,7 +313,9 @@ func _on_lesson_ids_delete_lesson_from_delete_key(idx) -> void:
 			selected_difficulty,
 		)
 		_populate_files_list()
+		confirm_dialog.queue_free()
 	)
+	confirm_dialog.cancelled.connect(func(): confirm_dialog.queue_free())
 	
 #	confirm_dialog.cancelled.connect(func(): confirm_dialog.queue_free())
 	add_child(confirm_dialog)
