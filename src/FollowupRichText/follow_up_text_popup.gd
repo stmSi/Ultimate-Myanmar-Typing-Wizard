@@ -28,8 +28,18 @@ func _on_followup_popup_pos_changed(pos: Vector2, node: KeyButton):
 
 # Hack for first time position not working
 func _animate_position():
+	var pos := pending_node.global_position
+	
+	# left boundry
+	if pending_node.global_position.x - (panel.size.x / 2) < 5: # 5 is for some padding
+		pos.x =  panel.size.x / 2
+		
+	# right
+	if pending_node.global_position.x + (panel.size.x / 2) > get_viewport_rect().size.x: # 5 is for some padding
+		pos.x = get_viewport_rect().size.x - (panel.size.x / 2)
+		
 	var tween = get_tree().create_tween()
-	tween.tween_property(self, "global_position", pending_node.global_position, .2).set_trans(Tween.TRANS_CUBIC)
+	tween.tween_property(self, "global_position", pos, .2).set_trans(Tween.TRANS_CUBIC)
 	
 
 func _on_written_string_changed(s: String):
