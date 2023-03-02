@@ -15,6 +15,7 @@ extends Control
 @onready var allow_mistakes_box: SpinBox = %AllowMistakesBox
 @onready var randomize_check: CheckButton = %RandomizeCheck
 @onready var hide_keyboard_check: CheckButton = %HideKeyboardCheck
+@onready var add_messsage_btn: Button = %AddMesssageBtn
 
 @onready var add_updte_line_btn: Button = %AddUpdteLineBtn
 @onready var remove_line_btn: Button = %RemoveLineBtn
@@ -31,20 +32,36 @@ func _ready() -> void:
 	pass
 
 func _on_basic_btn_pressed() -> void:
-	lesson_ids_lbl.text = '"Basic" Files:'
+	lesson_ids_lbl.text = 'Basic Files:'
 	selected_difficulty = 'basic'
+	basic_btn.release_focus()
+	
+	basic_btn.add_theme_color_override("font_color", Color.GOLD)
+	intermediate_btn.remove_theme_color_override("font_color")
+	advance_btn.remove_theme_color_override("font_color")
+	
 	_populate_files_list()
 
 
 func _on_intermediate_btn_pressed() -> void:
-	lesson_ids_lbl.text = '"Intermediate" Files:'
+	lesson_ids_lbl.text = 'Intermediate Files:'
 	selected_difficulty = 'intermediate'
+	intermediate_btn.release_focus()
+	
+	basic_btn.remove_theme_color_override("font_color")
+	intermediate_btn.add_theme_color_override("font_color", Color.GOLD)
+	advance_btn.remove_theme_color_override("font_color")
 	_populate_files_list()
 
 
 func _on_advance_btn_pressed() -> void:
-	lesson_ids_lbl.text = '"Advanced" Files:'
+	lesson_ids_lbl.text = 'Advanced Files:'
 	selected_difficulty = 'advanced'
+	advance_btn.release_focus()
+	
+	basic_btn.remove_theme_color_override("font_color")
+	intermediate_btn.remove_theme_color_override("font_color")
+	advance_btn.add_theme_color_override("font_color", Color.GOLD)
 	_populate_files_list()
 
 
@@ -52,6 +69,14 @@ func _on_cancel_btn_pressed() -> void:
 	lesson_ids_lbl.text = 'No Difficulty Selected'
 	selected_difficulty = ''
 	lesson_ids.clear()
+	
+	basic_btn.release_focus()
+	intermediate_btn.release_focus()
+	advance_btn.release_focus()
+	
+	basic_btn.remove_theme_color_override("font_color")
+	intermediate_btn.remove_theme_color_override("font_color")
+	advance_btn.remove_theme_color_override("font_color")
 
 
 func _populate_files_list() -> void:
@@ -112,7 +137,11 @@ func _on_lesson_ids_item_selected(index: int) -> void:
 	randomize_check.button_pressed = int(lesson_data['randomize'])
 	hide_keyboard_check.button_pressed = int(lesson_data['hide_keyboard'])
 	add_lesson_message_text_edit.text = lesson_data['message']
-	
+	if lesson_data['message']:
+		add_messsage_btn.add_theme_color_override("font_color", Color.GOLD)
+	else:
+		add_messsage_btn.remove_theme_color_override("font_color")
+		
 	# Scroll to bottom
 	if len(lines) > 0:
 		lines_list.select(len(lines) - 1)
@@ -159,7 +188,7 @@ func _on_add_updte_line_btn_pressed() -> void:
 	else:
 		# Add
 		lines_list.add_item(line_edit.text)
-	_save_lesson_from_list()
+	_save_lesson()
 	
 	# Reset shit
 	_on_lines_list_empty_clicked()
@@ -178,7 +207,7 @@ func _on_remove_line_btn_pressed() -> void:
 	if lines_list.item_count > 0:
 		var next_selected_idx = min(lines_list.item_count - 1, idx )
 		lines_list.select(next_selected_idx)
-	_save_lesson_from_list()
+	_save_lesson()
 
 
 
@@ -189,11 +218,10 @@ func _on_reset_btn_pressed() -> void:
 
 
 func _on_lines_list_item_moved() -> void:
-	_save_lesson_from_list()
+	_save_lesson()
 	pass # Replace with function body.
 
-func _save_lesson_from_list():
-	
+func _save_lesson():
 	var texts: PackedStringArray = []
 	
 	var i = 0
@@ -219,18 +247,18 @@ func _on_lines_list_delete_item_from_delete_key(idx) -> void:
 
 
 func _on_repeats_box_value_changed(value: float) -> void:
-	_save_lesson_from_list()
+	_save_lesson()
 
 
 func _on_allow_mistakes_box_value_changed(value: float) -> void:
-	_save_lesson_from_list()
+	_save_lesson()
 
 
 func _on_randomize_check_toggled(button_pressed: bool) -> void:
-	_save_lesson_from_list()
+	_save_lesson()
 
 
-func _on_messsage_btn_pressed() -> void:
+func _on_add_messsage_btn_pressed() -> void:
 	var tween = get_tree().create_tween()
 	add_lesson_message.modulate.a = 0
 	add_lesson_message.visible = true
@@ -243,7 +271,7 @@ func _on_save_lesson_msg_btn_pressed() -> void:
 	tween.tween_property(add_lesson_message, "modulate", Color(1, 1, 1, 0), 0.2)
 	await tween.finished
 	add_lesson_message.visible = false
-#	_save_lesson_from_list()
+#	_save_lesson()
 	LessonAccess.save_message(
 		selected_lesson_number,
 		selected_difficulty,
@@ -294,4 +322,4 @@ func _on_lesson_ids_delete_lesson_from_delete_key(idx) -> void:
 
 
 func _on_hide_keyboard_check_toggled(button_pressed: bool) -> void:
-	_save_lesson_from_list()
+	_save_lesson()
