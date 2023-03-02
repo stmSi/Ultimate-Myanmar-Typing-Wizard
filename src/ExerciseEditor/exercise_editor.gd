@@ -207,7 +207,7 @@ func _save_lesson_from_list():
 			"repeats": repeats_box.value,
 			"allow_mistakes": allow_mistakes_box.value,
 			"randomize": randomize_check.button_pressed,
-#			"message": add_lesson_message_text_edit.text,
+			"message": add_lesson_message_text_edit.text,
 		}
 	)
 
@@ -254,11 +254,16 @@ func _on_cancel_lesson_msg_btn_pressed() -> void:
 	add_lesson_message.visible = false
 
 
-func _on_lesson_ids_swap_lesson(lesson1: int, lesson2: int) -> void:
+func _on_lesson_ids_swap_lesson(lesson1: int, lesson2: int, direction: String) -> void:
 	LessonAccess.swap_lesson_contents(lesson1, lesson2, selected_difficulty)
 	_populate_files_list()
-	lesson_ids.select(lesson2)
-	_on_lesson_ids_item_selected(lesson2)
+	
+	var reselect_lesson = lesson1
+	if direction == 'up':
+			reselect_lesson = lesson2 - 1
+	
+	lesson_ids.select(clamp(reselect_lesson, 0, lesson_ids.item_count - 1))
+	_on_lesson_ids_item_selected(clamp(reselect_lesson, 0, lesson_ids.item_count - 1))
 	lesson_ids.grab_focus()
 	pass # Replace with function body.
 
