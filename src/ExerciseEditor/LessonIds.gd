@@ -1,6 +1,6 @@
 extends ItemList
 
-signal swap_lesson(lesson1: int, lesson2: int)
+signal swap_lesson(lesson1: int, lesson2: int, direction: String)
 signal delete_lesson_from_delete_key(idx: int)
 
 func _input(event: InputEvent) -> void:
@@ -16,16 +16,16 @@ func _input(event: InputEvent) -> void:
 			self.delete_lesson_from_delete_key.emit(get_selected_items()[0])
 
 func _move_up_selected_item():
-	var idx = get_selected_items()[0]
-	if idx == 0: # index => 0 => at top.... ignore
+	var lesson_id = int(get_item_text(get_selected_items()[0]))
+	if lesson_id == 1: # 1 => at top.... ignore
 		return
 
-	self.swap_lesson.emit(idx, idx - 1)
+	self.swap_lesson.emit(lesson_id, lesson_id - 1, 'up')
 
 func _move_down_selected_item():
-	var idx = get_selected_items()[0]
-	if idx == item_count - 1: # index =>  => at bottom.... ignore
+	var lesson_id = int(get_item_text(get_selected_items()[0]))
+	if lesson_id == item_count: # last_item => at bottom.... ignore
 		return
 
-	self.swap_lesson.emit(idx, idx + 1)
+	self.swap_lesson.emit(lesson_id, lesson_id + 1, 'down')
 
