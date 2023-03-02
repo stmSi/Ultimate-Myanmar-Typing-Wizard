@@ -1,6 +1,6 @@
 ### Ultimate Myanmar Typing Wizard (WIP) [![MIT License](https://img.shields.io/badge/License-MIT-25B3A0?style=flat-square)](https://github.com/stmSi/myanmar-unicode-typing-trainer/blob/master/LICENSE.md)
 
-Created in [Godot Engine 4.0 rc5](https://godotengine.org/article/release-candidate-godot-4-0-rc-5#downloads) (Godot 3.x is not supported.)
+Created in [Godot Engine 4.0 Stable](https://godotengine.org/download) (Godot 3.x is not supported.)
 
 [Download Windows/Linux Builds](https://github.com/stmSi/Ultimate-Myanmar-Typing-Wizard/releases/tag/pre-build)
 
@@ -26,7 +26,7 @@ https://user-images.githubusercontent.com/32661049/221483203-988d3664-ff08-438f-
 
 ### **Requirements**
 
-* OpenGL (GLES3) compatable device
+* OpenGL 3.3 / OpenGL ES 3.0 compatible hardware
 * ***No Need To Install*** Myanmar Unicode Keyboard (will auto convert eng -> mm)
 
 ---
