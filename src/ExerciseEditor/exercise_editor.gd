@@ -69,6 +69,7 @@ func _populate_files_list() -> void:
 	
 	# Reset lines_list, line_edit, button
 	_on_lines_list_empty_clicked()
+	add_lesson_message_text_edit.text = ''
 	lines_list.clear()
 
 
@@ -190,9 +191,7 @@ func _on_lines_list_item_moved() -> void:
 	pass # Replace with function body.
 
 func _save_lesson_from_list():
-	if selected_lesson_number == 0:
-		EventBus.message_popup.emit("Please Choose Lesson Number")
-
+	
 	var texts: PackedStringArray = []
 	
 	var i = 0
@@ -207,7 +206,7 @@ func _save_lesson_from_list():
 			"repeats": repeats_box.value,
 			"allow_mistakes": allow_mistakes_box.value,
 			"randomize": randomize_check.button_pressed,
-			"message": add_lesson_message_text_edit.text,
+#			"message": add_lesson_message_text_edit.text,
 		}
 	)
 
@@ -241,9 +240,10 @@ func _on_save_lesson_msg_btn_pressed() -> void:
 	tween.tween_property(add_lesson_message, "modulate", Color(1, 1, 1, 0), 0.2)
 	await tween.finished
 	add_lesson_message.visible = false
+#	_save_lesson_from_list()
 	LessonAccess.save_message(
-		selected_lesson_number, 
-		selected_difficulty, 
+		selected_lesson_number,
+		selected_difficulty,
 		add_lesson_message_text_edit.text
 	)
 

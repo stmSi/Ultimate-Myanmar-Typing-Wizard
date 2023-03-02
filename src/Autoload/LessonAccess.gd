@@ -33,7 +33,7 @@ func create_update_new_exercise(lesson_number: int, difficulty: String, lesson_d
 	config.set_value("Exercise", "repeats", lesson_data['repeats'])
 	config.set_value("Exercise", "allow_mistakes", lesson_data['allow_mistakes'])
 	config.set_value("Exercise", "randomize", lesson_data['randomize'])
-	config.set_value("Exercise", "message", lesson_data['message'])
+#	config.set_value("Exercise", "message", lesson_data['message'])
 
 	var error = config.save(filepath)
 	if error != OK:
@@ -105,9 +105,10 @@ func get_lesson_data(lesson_number: int, difficulty: String) -> Dictionary:
 	return lesson_data
 
 func swap_lesson_contents(lesson_number1: int, lesson_number2: int, difficulty: String):
-	print('swapping: ', lesson_number1, ' and ', lesson_number2)
 	var lesson1_data = get_lesson_data(lesson_number1, difficulty)
 	var lesson2_data = get_lesson_data(lesson_number2, difficulty)
+	save_message(lesson_number2, difficulty, lesson1_data['message'])
+	save_message(lesson_number1, difficulty, lesson2_data['message'])
 	create_update_new_exercise(lesson_number2, difficulty, lesson1_data)
 	create_update_new_exercise(lesson_number1, difficulty, lesson2_data)
 

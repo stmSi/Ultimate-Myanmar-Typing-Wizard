@@ -2,6 +2,7 @@ extends Node
 
 var playground_scene = "res://src/Playground/Playground.tscn"
 var exercise_editor_scene = "res://src/ExerciseEditor/exercise_editor.tscn"
+var main_scene = "res://src/main.tscn"
 
 var current_scene = null
 
@@ -47,6 +48,8 @@ func change_to_playground_scene():
 func change_to_exercise_editor_scene():
 	goto_scene(exercise_editor_scene)
 
+func change_to_main_scene():
+	goto_scene(main_scene)
 
 func _animate_appear():
 	# Animate Panel first using "scene_change_bg" group

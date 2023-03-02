@@ -1,9 +1,10 @@
-[gd_scene load_steps=20 format=3 uid="uid://c5qc87hij2hep"]
+[gd_scene load_steps=21 format=3 uid="uid://c5qc87hij2hep"]
 
 [ext_resource type="Script" path="res://src/ExerciseEditor/exercise_editor.gd" id="1_sslhb"]
 [ext_resource type="Script" path="res://src/ExerciseEditor/LessonIds.gd" id="2_ockha"]
 [ext_resource type="FontFile" uid="uid://chygow7my3v5g" path="res://Assets/Fonts/NotoSansMyanmar-Regular.ttf" id="2_tt6nc"]
 [ext_resource type="Script" path="res://src/ExerciseEditor/LinesList.gd" id="3_5mn8u"]
+[ext_resource type="PackedScene" uid="uid://b7i3rua60ewr4" path="res://src/EscMenu/esc_menu.tscn" id="5_mef87"]
 
 [sub_resource type="InputEventKey" id="InputEventKey_iny2v"]
 device = -1
@@ -171,7 +172,7 @@ layout_mode = 2
 [node name="UpDownLbl2" type="Label" parent="MarginContainer2/VBoxContainer/HBoxContainer/VBoxContainer/SwapLessonContainer" groups=["scene_change_element"]]
 layout_mode = 2
 size_flags_vertical = 0
-text = "  Alt+↑         Swap          Alt+↓"
+text = "  Alt+↑         Swap Lessons        Alt+↓"
 
 [node name="AddNewLessonsFileBtn" type="Button" parent="MarginContainer2/VBoxContainer/HBoxContainer/VBoxContainer" groups=["scene_change_element"]]
 layout_mode = 2
@@ -265,6 +266,9 @@ layout_mode = 2
 size_flags_vertical = 0
 text = "Alt+↑
 
+Swap
+Lines
+
 Alt+↓"
 
 [node name="LineEditContainer" type="HBoxContainer" parent="MarginContainer2/VBoxContainer/HBoxContainer/VBoxContainer2" groups=["scene_change_element"]]
@@ -344,6 +348,10 @@ layout_mode = 2
 size_flags_horizontal = 6
 size_flags_vertical = 8
 text = "Save Lesson Message"
+
+[node name="EscMenu" parent="." instance=ExtResource("5_mef87")]
+visible = false
+layout_mode = 1
 
 [connection signal="pressed" from="MarginContainer2/VBoxContainer/HBoxContainer/VBoxContainer/DifficulitiesButtons/BasicBtn" to="." method="_on_basic_btn_pressed"]
 [connection signal="pressed" from="MarginContainer2/VBoxContainer/HBoxContainer/VBoxContainer/DifficulitiesButtons/IntermediateBtn" to="." method="_on_intermediate_btn_pressed"]
