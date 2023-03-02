@@ -1,6 +1,7 @@
-[gd_scene load_steps=17 format=3 uid="uid://c5qc87hij2hep"]
+[gd_scene load_steps=20 format=3 uid="uid://c5qc87hij2hep"]
 
 [ext_resource type="Script" path="res://src/ExerciseEditor/exercise_editor.gd" id="1_sslhb"]
+[ext_resource type="Script" path="res://src/ExerciseEditor/LessonIds.gd" id="2_ockha"]
 [ext_resource type="FontFile" uid="uid://chygow7my3v5g" path="res://Assets/Fonts/NotoSansMyanmar-Regular.ttf" id="2_tt6nc"]
 [ext_resource type="Script" path="res://src/ExerciseEditor/LinesList.gd" id="3_5mn8u"]
 
@@ -76,6 +77,13 @@ border_width_left = 5
 border_width_top = 5
 border_width_right = 5
 border_width_bottom = 5
+
+[sub_resource type="InputEventKey" id="InputEventKey_js1in"]
+device = -1
+keycode = 4194305
+
+[sub_resource type="Shortcut" id="Shortcut_f83qm"]
+events = [SubResource("InputEventKey_js1in")]
 
 [node name="ExerciseEditor" type="Control"]
 layout_mode = 3
@@ -155,6 +163,15 @@ unique_name_in_owner = true
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 size_flags_vertical = 3
+script = ExtResource("2_ockha")
+
+[node name="SwapLessonContainer" type="HBoxContainer" parent="MarginContainer2/VBoxContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="UpDownLbl2" type="Label" parent="MarginContainer2/VBoxContainer/HBoxContainer/VBoxContainer/SwapLessonContainer" groups=["scene_change_element"]]
+layout_mode = 2
+size_flags_vertical = 0
+text = "  Alt+↑         Swap          Alt+↓"
 
 [node name="AddNewLessonsFileBtn" type="Button" parent="MarginContainer2/VBoxContainer/HBoxContainer/VBoxContainer" groups=["scene_change_element"]]
 layout_mode = 2
@@ -310,9 +327,21 @@ custom_minimum_size = Vector2(600, 300)
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_tt6nc")
 
-[node name="SaveLessonMsgBtn" type="Button" parent="AddLessonMessage/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="AddLessonMessage/VBoxContainer"]
 layout_mode = 2
-size_flags_horizontal = 4
+size_flags_vertical = 3
+alignment = 1
+
+[node name="CancelLessonMsgBtn" type="Button" parent="AddLessonMessage/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 8
+shortcut = SubResource("Shortcut_f83qm")
+text = "Cancel (ESC)"
+
+[node name="SaveLessonMsgBtn" type="Button" parent="AddLessonMessage/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 6
 size_flags_vertical = 8
 text = "Save Lesson Message"
 
@@ -320,7 +349,9 @@ text = "Save Lesson Message"
 [connection signal="pressed" from="MarginContainer2/VBoxContainer/HBoxContainer/VBoxContainer/DifficulitiesButtons/IntermediateBtn" to="." method="_on_intermediate_btn_pressed"]
 [connection signal="pressed" from="MarginContainer2/VBoxContainer/HBoxContainer/VBoxContainer/DifficulitiesButtons/AdvancedBtn" to="." method="_on_advance_btn_pressed"]
 [connection signal="pressed" from="MarginContainer2/VBoxContainer/HBoxContainer/VBoxContainer/DifficulitiesButtons/CancelBtn" to="." method="_on_cancel_btn_pressed"]
+[connection signal="delete_lesson_from_delete_key" from="MarginContainer2/VBoxContainer/HBoxContainer/VBoxContainer/LessonIds" to="." method="_on_lesson_ids_delete_lesson_from_delete_key"]
 [connection signal="item_selected" from="MarginContainer2/VBoxContainer/HBoxContainer/VBoxContainer/LessonIds" to="." method="_on_lesson_ids_item_selected"]
+[connection signal="swap_lesson" from="MarginContainer2/VBoxContainer/HBoxContainer/VBoxContainer/LessonIds" to="." method="_on_lesson_ids_swap_lesson"]
 [connection signal="pressed" from="MarginContainer2/VBoxContainer/HBoxContainer/VBoxContainer/AddNewLessonsFileBtn" to="." method="_on_add_lessons_file_btn_pressed"]
 [connection signal="pressed" from="MarginContainer2/VBoxContainer/HBoxContainer/VBoxContainer/PlaygroundBtn" to="MarginContainer2/VBoxContainer/HBoxContainer/VBoxContainer/PlaygroundBtn" method="_on_pressed"]
 [connection signal="value_changed" from="MarginContainer2/VBoxContainer/HBoxContainer/VBoxContainer2/LessonSettingsContainer/RepeatContainer/RepeatsBox" to="." method="_on_repeats_box_value_changed"]
@@ -337,4 +368,5 @@ text = "Save Lesson Message"
 [connection signal="pressed" from="MarginContainer2/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer/AddUpdteLineBtn" to="." method="_on_add_updte_line_btn_pressed"]
 [connection signal="pressed" from="MarginContainer2/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer/ResetBtn" to="." method="_on_reset_btn_pressed"]
 [connection signal="pressed" from="MarginContainer2/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer/RemoveLineBtn" to="." method="_on_remove_line_btn_pressed"]
-[connection signal="pressed" from="AddLessonMessage/VBoxContainer/SaveLessonMsgBtn" to="." method="_on_save_lesson_msg_btn_pressed"]
+[connection signal="pressed" from="AddLessonMessage/VBoxContainer/HBoxContainer/CancelLessonMsgBtn" to="." method="_on_cancel_lesson_msg_btn_pressed"]
+[connection signal="pressed" from="AddLessonMessage/VBoxContainer/HBoxContainer/SaveLessonMsgBtn" to="." method="_on_save_lesson_msg_btn_pressed"]

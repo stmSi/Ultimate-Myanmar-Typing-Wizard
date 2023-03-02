@@ -25,18 +25,35 @@ func create_update_new_exercise(lesson_number: int, difficulty: String, lesson_d
 	var filepath = _get_lesson_filepath(lesson_number, difficulty)
 	
 	var config: ConfigFile = ConfigFile.new()
+	config.load(filepath)
 	
 	config.set_value("Exercise", "texts", lesson_data['texts'])
 	config.set_value("Exercise", "repeats", lesson_data['repeats'])
 	config.set_value("Exercise", "allow_mistakes", lesson_data['allow_mistakes'])
 	config.set_value("Exercise", "randomize", lesson_data['randomize'])
-	config.set_value("Exercise", "message", lesson_data['message'])
+#	config.set_value("Exercise", "message", lesson_data['message'])
 
 	var error = config.save(filepath)
 	if error != OK:
 		EventBus.message_popup.emit('Error occurred while saving/creating exercise: ' + filepath)
 		return false
 	return true
+
+
+func save_message(lesson_number: int, difficulty: String, msg: String) -> bool:
+	var filepath = _get_lesson_filepath(lesson_number, difficulty)
+	
+	var config: ConfigFile = ConfigFile.new()
+	config.load(filepath)
+	
+	config.set_value("Exercise", "message", msg)
+
+	var error = config.save(filepath)
+	if error != OK:
+		EventBus.message_popup.emit('Error occurred while saving/creating exercise: ' + filepath)
+		return false
+	return true
+
 
 func get_lesson_files(difficulty: String) -> PackedStringArray:
 	var difficulty_lesson_path = _determine_difficulty_lessons_path(difficulty)
@@ -63,6 +80,7 @@ func get_lesson_files(difficulty: String) -> PackedStringArray:
 	return text_files
 
 
+
 func get_lesson_data(lesson_number: int, difficulty: String) -> Dictionary:
 	var filepath = _get_lesson_filepath(lesson_number, difficulty)
 	var config: ConfigFile = ConfigFile.new()
@@ -76,7 +94,7 @@ func get_lesson_data(lesson_number: int, difficulty: String) -> Dictionary:
 		return {}
 	
 	var lesson_data: Dictionary = {}
-	lesson_data["texts"] = config.get_value("Exercise", "texts")
+	lesson_data["texts"] = config.get_value("Exercise", "texts", PackedStringArray([]))
 	lesson_data["repeats"] = config.get_value("Exercise", "repeats", 0)
 	lesson_data["allow_mistakes"] = config.get_value("Exercise", "allow_mistakes", 80)
 	lesson_data["randomize"] = config.get_value("Exercise", "randomize", false)
@@ -84,6 +102,21 @@ func get_lesson_data(lesson_number: int, difficulty: String) -> Dictionary:
 
 	return lesson_data
 
+func swap_lesson_contents(lesson_number1: int, lesson_number2: int, difficulty: String):
+	var lesson1_data = get_lesson_data(lesson_number1, difficulty)
+	var lesson2_data = get_lesson_data(lesson_number2, difficulty)
+	create_update_new_exercise(lesson_number2, difficulty, lesson1_data)
+	create_update_new_exercise(lesson_number1, difficulty, lesson2_data)
+
+func delete_lesson_file(lesson_number: int, difficulty: String) -> bool:
+	
+	var filepath = _get_lesson_filepath(lesson_number, difficulty)
+	var dir = DirAccess.open(filepath.get_base_dir())
+	if dir:
+		if dir.remove(filepath.get_file()) == OK:
+			print("Deleted: " + filepath)
+			return true
+	return false
 
 func _get_lesson_filepath(lesson_number: int, difficulty: String) -> String:
 	# return -> ./Texts/Lessons/Basic/00000113.cfg
@@ -122,3 +155,4 @@ func _craft_lesson_filename(lesson_number: int) -> String:
 	filename += str(lesson_number) + ".cfg"
 	
 	return filename
+
