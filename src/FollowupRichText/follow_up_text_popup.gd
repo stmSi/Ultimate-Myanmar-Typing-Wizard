@@ -1,4 +1,5 @@
 extends Control
+class_name FollowUpTextPopup
 
 @onready var panel: Panel = $Panel
 @onready var margin_container: MarginContainer = $Panel/MarginContainer

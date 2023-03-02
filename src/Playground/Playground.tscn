@@ -213,9 +213,10 @@ layout_mode = 2
 
 [node name="FollowUpRichText" type="RichTextLabel" parent="MarginContainer/VBoxContainer" groups=["scene_change_element"]]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(0, 80)
+custom_minimum_size = Vector2(800, 80)
 layout_mode = 2
-size_flags_vertical = 4
+size_flags_horizontal = 4
+size_flags_vertical = 8
 theme_override_fonts/normal_font = ExtResource("2_dg17q")
 theme_override_fonts/bold_font = ExtResource("3_e4sqq")
 theme_override_font_sizes/normal_font_size = 30
@@ -230,8 +231,10 @@ current_char_bgcolor = Color(0.184314, 0.301961, 0.376471, 0)
 
 [node name="LineEdit" type="LineEdit" parent="MarginContainer/VBoxContainer" groups=["scene_change_element"]]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(0, 80)
+custom_minimum_size = Vector2(800, 80)
 layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
 theme_override_fonts/font = ExtResource("2_dg17q")
 theme_override_font_sizes/font_size = 30
 context_menu_enabled = false
@@ -244,7 +247,8 @@ script = SubResource("GDScript_l4wjf")
 
 [node name="StatsContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
-size_flags_vertical = 0
+size_flags_horizontal = 4
+size_flags_vertical = 8
 theme_override_constants/separation = 60
 
 [node name="StatusLabelContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/StatsContainer" groups=["scene_change_element"]]
@@ -288,7 +292,7 @@ script = SubResource("GDScript_3afo8")
 
 [node name="KeyboardContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
-size_flags_vertical = 3
+size_flags_vertical = 6
 
 [node name="Keyboard" parent="MarginContainer/VBoxContainer/KeyboardContainer" instance=ExtResource("5_3d5ha")]
 unique_name_in_owner = true

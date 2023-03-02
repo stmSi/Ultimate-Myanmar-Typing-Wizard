@@ -12,15 +12,17 @@ https://user-images.githubusercontent.com/32661049/221483203-988d3664-ff08-438f-
 
 ---
 
-#### **Playground**
-
-![](screenshots/Playground.png)
-
----
-
 ### **Exercise Editor**
 
 ![](screenshots/ExerciseEditor.png)
+![](screenshots/ExerciseEditor_02.png)
+
+---
+
+#### **Playground**
+
+![](screenshots/Playground.png)
+![](screenshots/Playground_02.png)
 
 ---
 

@@ -165,6 +165,7 @@ func _on_advanced_btn_pressed() -> void:
 func _randomize_exercise():
 	# PackedStringArray doesn't support shuffle()
 	# convert to array, shuffle, and reassign
+	randomize()
 	var tmp = []
 	for e in exercises:
 		tmp.append(e)
