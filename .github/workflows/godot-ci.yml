@@ -3,7 +3,7 @@ on: push
 
 env:
   GODOT_VERSION: "4.0"
-  EXPORT_NAME: Ultimate-Myanmar-Typing-Wizard
+  EXPORT_NAME: ultimate-myanmar-typing-wizard
   PROJECT_PATH: ./
   
 jobs:
@@ -30,7 +30,7 @@ jobs:
       - name: Upload Artifact
         uses: actions/upload-artifact@v1
         with:
-          name: windows
+          name: ${EXPORT_NAME}_windows_debug_x64_64.zip
           path: build/windows
 
   export-linux:
@@ -56,7 +56,7 @@ jobs:
       - name: Upload Artifact
         uses: actions/upload-artifact@v1
         with:
-          name: linux
+          name: ${EXPORT_NAME}_linux_debug_x86_x64.zip
           path: build/linux
 
   # export-web:
