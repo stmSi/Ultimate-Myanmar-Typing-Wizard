@@ -30,7 +30,7 @@ jobs:
       - name: Upload Artifact
         uses: actions/upload-artifact@v1
         with:
-          name: ${EXPORT_NAME}_windows_debug_x64_64.zip
+          name: $EXPORT_NAME_windows_debug_x64_64.zip
           path: build/windows
 
   export-linux:
@@ -56,7 +56,7 @@ jobs:
       - name: Upload Artifact
         uses: actions/upload-artifact@v1
         with:
-          name: ${EXPORT_NAME}_linux_debug_x86_x64.zip
+          name: $EXPORT_NAME_linux_debug_x86_x64.zip
           path: build/linux
 
   # export-web:
