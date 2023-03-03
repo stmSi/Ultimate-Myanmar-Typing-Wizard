@@ -42,6 +42,8 @@ RUN bash /opt/butler/getbutler.sh
 RUN /opt/butler/bin/butler -V
 
 ENV PATH="/opt/butler/bin:${PATH}"
+RUN mv ~/.local/share/godot/templates/${GODOT_VERSION}.${RELEASE_NAME} templates/
+RUN chmod 777 -R templates/*
 
 # # Download and setup android-sdk
 # ENV ANDROID_HOME="/usr/lib/android-sdk"
