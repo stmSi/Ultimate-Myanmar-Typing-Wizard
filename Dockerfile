@@ -7,23 +7,23 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     ca-certificates \
     git \
     git-lfs \
-    python \
-    python-openssl \
+    # python \
+    # python-openssl \
     unzip \
     wget \
     zip \
-    adb \
-    openjdk-11-jdk-headless \
+    # adb \
+    # openjdk-11-jdk-headless \
     rsync \
     && rm -rf /var/lib/apt/lists/*
 
 ENV JAVA_HOME=/usr/lib/jvm/java-11-openjdk-amd64
 
-ARG GODOT_VERSION="3.4.2"
+ARG GODOT_VERSION="4.0"
 ARG RELEASE_NAME="stable"
 ARG SUBDIR=""
 ARG GODOT_TEST_ARGS=""
-ARG GODOT_PLATFORM="linux_headless.64"
+ARG GODOT_PLATFORM="linux.x86_64"
 
 RUN wget https://downloads.tuxfamily.org/godotengine/${GODOT_VERSION}${SUBDIR}/Godot_v${GODOT_VERSION}-${RELEASE_NAME}_${GODOT_PLATFORM}.zip \
     && wget https://downloads.tuxfamily.org/godotengine/${GODOT_VERSION}${SUBDIR}/Godot_v${GODOT_VERSION}-${RELEASE_NAME}_export_templates.tpz \
@@ -59,7 +59,6 @@ ENV PATH="/opt/butler/bin:${PATH}"
 # RUN keytool -keyalg RSA -genkeypair -alias androiddebugkey -keypass android -keystore debug.keystore -storepass android -dname "CN=Android Debug,O=Android,C=US" -validity 9999 \
 #     && mv debug.keystore /root/debug.keystore
 
-RUN godot -e -q ${GODOT_TEST_ARGS}
 # RUN echo 'export/android/android_sdk_path = "/usr/lib/android-sdk"' >> ~/.config/godot/editor_settings-3.tres
 # RUN echo 'export/android/debug_keystore = "/root/debug.keystore"' >> ~/.config/godot/editor_settings-3.tres
 # RUN echo 'export/android/debug_keystore_user = "androiddebugkey"' >> ~/.config/godot/editor_settings-3.tres
