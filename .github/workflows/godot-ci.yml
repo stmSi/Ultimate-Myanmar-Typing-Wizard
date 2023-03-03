@@ -13,6 +13,15 @@ jobs:
     # container:
     #   image: barichello/godot-ci:3.3.4
     steps:
+      - name: Build and push Docker image
+        uses: docker/build-push-action@v2
+        with:
+          context: .
+          file: ./Dockerfile
+          push: true
+          tags: |
+            stmSi/Ultimate-Myanmar-Typing-Wizard:latest
+
       - name: Checkout
         uses: actions/checkout@v2
         with:
@@ -38,6 +47,15 @@ jobs:
     # container:
     #   image: barichello/godot-ci:3.3.4
     steps:
+      - name: Build and push Docker image
+        uses: docker/build-push-action@v2
+        with:
+          context: .
+          file: ./Dockerfile
+          push: true
+          tags: |
+            stmSi/Ultimate-Myanmar-Typing-Wizard:latest
+
       - name: Checkout
         uses: actions/checkout@v2
         with:
