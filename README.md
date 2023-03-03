@@ -2,38 +2,44 @@
 
 Created in [Godot Engine 4.0 Stable](https://godotengine.org/download) (Godot 3.x is not supported.)
 
+
 [Download Windows/Linux Builds](https://github.com/stmSi/Ultimate-Myanmar-Typing-Wizard/releases/tag/pre-build)
+
+
+
+If you want to download `latest` commit build (may not be stable and produce error),
+
+1. Go to [Github `Actions` Tab](https://github.com/stmSi/Ultimate-Myanmar-Typing-Wizard/actions)
+2. Select the lastest `master` workflow
+3. Scroll down to the bottom `Artifacts` area
+4. Download zip file according to your platform.
 
 ### **Requirements**
 
 * OpenGL 3.3 / OpenGL ES 3.0 compatible hardware
 * ***No Need To Install*** Myanmar Unicode Keyboard or Font (Auto Convert English-To-Myanmar )
 
-
 ---
-
-
 
 ### **Exercise Editor Screenshots**
 
-
 ![](screenshots/ExerciseEditor.png)
--
+-----------------------------------
+
 ![](screenshots/ExerciseEditor_02.png)
 
 ---
 
 ### **Playground Screenshots**
 
-
 ![](screenshots/Playground.png)
--
+-------------------------------
+
 ![](screenshots/Playground_02.png)
 
 ---
 
 #### **Exercise Editor Showcase Video**
-
 
 https://user-images.githubusercontent.com/32661049/222511307-2d69d482-4424-4706-9908-92767fee9d7d.mp4
 
@@ -43,9 +49,7 @@ https://user-images.githubusercontent.com/32661049/222511307-2d69d482-4424-4706-
 
 https://user-images.githubusercontent.com/32661049/222511322-08bec3fa-689e-416e-8c0f-1baf2d4a756f.mp4
 
-
 ---
-
 
 ### **Todo**:
 

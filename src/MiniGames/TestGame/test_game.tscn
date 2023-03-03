@@ -1,0 +1,78 @@
+[gd_scene load_steps=7 format=3 uid="uid://bllqf3ag5cr38"]
+
+[ext_resource type="Script" path="res://src/MiniGames/TestGame/test_game.gd" id="1_iypay"]
+[ext_resource type="PackedScene" uid="uid://bulscf8jamb2b" path="res://src/FollowupRichText/follow_up_text_popup.tscn" id="3_raquw"]
+[ext_resource type="PackedScene" uid="uid://c1j3315qqetyc" path="res://src/MiniGames/TestGame/npc.tscn" id="4_vf1i6"]
+[ext_resource type="Script" path="res://src/MiniGames/TestGame/game_text_popup.gd" id="5_7iwhk"]
+[ext_resource type="PackedScene" uid="uid://b7i3rua60ewr4" path="res://src/EscMenu/esc_menu.tscn" id="5_7ufpc"]
+
+[sub_resource type="GDScript" id="GDScript_3jnh1"]
+script/source = "extends LineEdit
+
+var _eng_to_mm_converted = false
+var current_exercise_text = \"\"
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	grab_focus()
+	EventBus.lesson_id_loaded.connect(self._on_new_lesson_id_loaded)
+	EventBus.exercise_loaded.connect(self._exercise_loaded)
+	EventBus.exercise_line_finished.connect(self._exercise_line_finished)
+
+func _exercise_loaded(exercise_text: String) -> void:
+	self.current_exercise_text = exercise_text
+	clear()
+	grab_focus()
+
+func _exercise_line_finished() -> void:
+	clear()
+
+func _on_new_lesson_id_loaded(_lesson_id: int) -> void:
+	clear()
+
+
+func _on_text_changed(new_text: String) -> void:
+	if not _eng_to_mm_converted:
+		_eng_to_mm_converted = true
+		self.text = EngToMmConverter.convert_str(new_text)
+		self.caret_column = len(self.text)
+	_eng_to_mm_converted = false
+	
+	EventBus.written_string_changed.emit(self.text)
+	if current_exercise_text != '' and current_exercise_text == self.text:
+		EventBus.exercise_line_finished.emit()
+"
+
+[node name="TestGame" type="Node2D"]
+script = ExtResource("1_iypay")
+
+[node name="SpawnPoint" type="Node2D" parent="."]
+position = Vector2(1252, 606)
+
+[node name="GameFollowUpTextPopup" parent="." instance=ExtResource("3_raquw")]
+offset_left = 708.0
+offset_top = 324.0
+offset_right = 708.0
+offset_bottom = 324.0
+script = ExtResource("5_7iwhk")
+
+[node name="npc_help" parent="." instance=ExtResource("4_vf1i6")]
+position = Vector2(94, 582)
+
+[node name="LineEdit" type="LineEdit" parent="."]
+offset_left = -99.0
+offset_top = -54.0
+offset_right = -31.9375
+offset_bottom = -23.0
+script = SubResource("GDScript_3jnh1")
+
+[node name="EscMenu" parent="." instance=ExtResource("5_7ufpc")]
+offset_left = 690.0
+offset_top = 301.0
+offset_right = 690.0
+offset_bottom = 301.0
+
+[connection signal="text_changed" from="LineEdit" to="LineEdit" method="_on_text_changed"]
+
+[editable path="GameFollowUpTextPopup"]
+[editable path="GameFollowUpTextPopup/Panel/MarginContainer/FollowUpRichText"]

@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://c1j3315qqetyc"]
+
+[ext_resource type="Script" path="res://src/MiniGames/TestGame/npc.gd" id="1_gd1hd"]
+[ext_resource type="Texture2D" uid="uid://7ywk3rxxgpwe" path="res://Assets/TestGame/help.svg" id="1_lguy1"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6g67m"]
+size = Vector2(88, 96)
+
+[node name="NPC" type="Area2D"]
+collision_layer = 4
+collision_mask = 0
+monitoring = false
+script = ExtResource("1_gd1hd")
+metadata/_edit_group_ = true
+
+[node name="Sprite" type="Sprite2D" parent="."]
+texture = ExtResource("1_lguy1")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-32, 58)
+shape = SubResource("RectangleShape2D_6g67m")

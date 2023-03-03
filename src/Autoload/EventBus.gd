@@ -21,3 +21,9 @@ signal message_popup(msg: String)
 signal message_popup_closed()
 
 signal lesson_id_loaded(lesson_id: int)
+
+# Game Specific Events
+signal game_focus_enemy(enemy: Node2D)
+signal game_enemy_pos_changed(pos: Vector2, enemy: Node2D)
+signal game_enemy_dead(enemy: Node2D)
+signal game_enemy_hit_npc(npc: Node2D)

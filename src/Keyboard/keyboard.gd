@@ -1,6 +1,7 @@
 @icon("res://Assets/Icons/keyboard-icon.png")
 extends Control
 class_name  Keyboard 
+
 var key_node_mapping: Dictionary = {}
 var current_char: String = ''
 
