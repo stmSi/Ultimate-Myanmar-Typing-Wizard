@@ -3,7 +3,7 @@
 Created in [Godot Engine 4.0 Stable](https://godotengine.org/download) (Godot 3.x is not supported.)
 
 
-[Download Windows/Linux Builds](https://github.com/stmSi/Ultimate-Myanmar-Typing-Wizard/releases/tag/pre-build)
+[Download Windows/Linux Builds](https://github.com/stmSi/Ultimate-Myanmar-Typing-Wizard/releases/)
 
 
 
