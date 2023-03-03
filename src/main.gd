@@ -1,4 +1,5 @@
 extends Control
 
-func _ready():
-	pass
+
+func _on_test_game_btn_pressed() -> void:
+	SceneChanger

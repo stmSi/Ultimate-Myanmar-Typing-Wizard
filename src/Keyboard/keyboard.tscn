@@ -8,70 +8,100 @@
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_scc4s"]
 resource_local_to_scene = true
 bg_color = Color(0.117647, 0.117647, 0.117647, 0.827451)
-border_width_left = 3
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
 border_blend = true
 shadow_color = Color(1, 1, 1, 0.6)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dr5yv"]
 resource_local_to_scene = true
 bg_color = Color(0.117647, 0.117647, 0.117647, 0.827451)
-border_width_left = 3
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
 border_blend = true
 shadow_color = Color(1, 1, 1, 0.6)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ng5ll"]
 resource_local_to_scene = true
 bg_color = Color(0.117647, 0.117647, 0.117647, 0.827451)
-border_width_left = 3
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
 border_blend = true
 shadow_color = Color(1, 1, 1, 0.6)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xbnwi"]
 resource_local_to_scene = true
 bg_color = Color(0.117647, 0.117647, 0.117647, 0.827451)
-border_width_left = 3
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
 border_blend = true
 shadow_color = Color(1, 1, 1, 0.6)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8djne"]
 resource_local_to_scene = true
 bg_color = Color(0.117647, 0.117647, 0.117647, 0.827451)
-border_width_left = 3
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
 border_blend = true
 shadow_color = Color(1, 1, 1, 0.6)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jjy0n"]
 resource_local_to_scene = true
 bg_color = Color(0.117647, 0.117647, 0.117647, 0.827451)
-border_width_left = 3
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
 border_blend = true
 shadow_color = Color(1, 1, 1, 0.6)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bbdjs"]
 resource_local_to_scene = true
 bg_color = Color(0.117647, 0.117647, 0.117647, 0.827451)
-border_width_left = 3
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
 border_blend = true
 shadow_color = Color(1, 1, 1, 0.6)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_apsic"]
 resource_local_to_scene = true
 bg_color = Color(0.117647, 0.117647, 0.117647, 0.827451)
-border_width_left = 3
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
 border_blend = true
 shadow_color = Color(1, 1, 1, 0.6)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_aoubn"]
 resource_local_to_scene = true
 bg_color = Color(0.117647, 0.117647, 0.117647, 0.827451)
-border_width_left = 3
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
 border_blend = true
 shadow_color = Color(1, 1, 1, 0.6)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_axx0v"]
 resource_local_to_scene = true
 bg_color = Color(0.117647, 0.117647, 0.117647, 0.827451)
-border_width_left = 3
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
 border_blend = true
 shadow_color = Color(1, 1, 1, 0.6)
 

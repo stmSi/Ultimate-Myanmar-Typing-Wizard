@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://6lfwla4eyxsm"]
+
+[ext_resource type="Texture2D" uid="uid://bwl4vqyiwh8la" path="res://src/icon.svg" id="1_poxmv"]
+[ext_resource type="Script" path="res://src/MiniGames/TestGame/Enemy.gd" id="2_pj5ci"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mgowg"]
+size = Vector2(117.5, 125.5)
+
+[node name="Enemy" type="Area2D"]
+modulate = Color(1, 0.509804, 0.443137, 1)
+collision_layer = 2
+collision_mask = 4
+script = ExtResource("2_pj5ci")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-2.75, -1.25)
+shape = SubResource("RectangleShape2D_mgowg")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+texture = ExtResource("1_poxmv")
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]

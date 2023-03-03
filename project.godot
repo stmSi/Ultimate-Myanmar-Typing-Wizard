@@ -43,6 +43,11 @@ version_control/autoload_on_startup=true
 
 enabled=PackedStringArray("res://addons/native_dialogs/plugin.cfg")
 
+[layer_names]
+
+2d_physics/layer_2="Eater"
+2d_physics/layer_3="To be Eaten"
+
 [rendering]
 
 renderer/rendering_method="gl_compatibility"
