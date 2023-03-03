@@ -10,8 +10,8 @@ jobs:
   export-windows:
     name: Windows Export
     runs-on: ubuntu-20.04
-    container:
-      image: barichello/godot-ci:master
+    # container:
+    #   image: barichello/godot-ci:3.3.4
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -35,8 +35,8 @@ jobs:
   export-linux:
     name: Linux Export
     runs-on: ubuntu-20.04
-    container:
-      image: barichello/godot-ci:master
+    # container:
+    #   image: barichello/godot-ci:3.3.4
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -61,7 +61,7 @@ jobs:
   #   name: Web Export
   #   runs-on: ubuntu-20.04
   #   container:
-  #     image: barichello/godot-ci:master
+  #     image: barichello/godot-ci:3.3.4
   #   steps:
   #     - name: Checkout
   #       uses: actions/checkout@v2
@@ -94,7 +94,7 @@ jobs:
   #   name: Mac Export
   #   runs-on: ubuntu-20.04
   #   container:
-  #     image: barichello/godot-ci:master
+  #     image: barichello/godot-ci:3.3.4
   #   steps:
   #     - name: Checkout
   #       uses: actions/checkout@v2
