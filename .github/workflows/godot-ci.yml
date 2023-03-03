@@ -21,6 +21,9 @@ jobs:
         run: |
           mkdir -v -p ~/.local/share/godot/templates/${GODOT_VERSION}.stable
           mv /root/.local/share/godot/templates/${GODOT_VERSION}.stable ~/.local/share/godot/templates/${GODOT_VERSION}.stable
+          pwd
+          ls /root/.local/share/godot/templates/${GODOT_VERSION}.stable/
+          ls ~/.local/share/godot/templates/${GODOT_VERSION}.stable
       - name: Windows Build
         run: |
           mkdir -v -p build/windows
@@ -47,6 +50,9 @@ jobs:
         run: |
           mkdir -v -p ~/.local/share/godot/templates/${GODOT_VERSION}.stable
           mv /root/.local/share/godot/templates/${GODOT_VERSION}.stable ~/.local/share/godot/templates/${GODOT_VERSION}.stable
+          pwd
+          ls /root/.local/share/godot/templates/${GODOT_VERSION}.stable/
+          ls ~/.local/share/godot/templates/${GODOT_VERSION}.stable
       - name: Linux Build
         run: |
           mkdir -v -p build/linux
