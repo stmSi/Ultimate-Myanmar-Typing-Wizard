@@ -20,7 +20,7 @@ jobs:
           file: ./Dockerfile
           push: true
           tags: |
-            stmSi/ultimate-myanmar-typing-wizard:latest
+            stmsi/ultimate-myanmar-typing-wizard:latest
 
       - name: Checkout
         uses: actions/checkout@v2
@@ -54,7 +54,7 @@ jobs:
           file: ./Dockerfile
           push: true
           tags: |
-            stmSi/ultimate-myanmar-typing-wizard:latest
+            stmsi/ultimate-myanmar-typing-wizard:latest
 
       - name: Checkout
         uses: actions/checkout@v2
