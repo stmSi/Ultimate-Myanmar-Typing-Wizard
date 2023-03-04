@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://bulscf8jamb2b"]
+[gd_scene load_steps=5 format=3 uid="uid://bulscf8jamb2b"]
 
 [ext_resource type="Script" path="res://src/FollowupRichText/follow_up_text_popup.gd" id="1_8212s"]
 [ext_resource type="PackedScene" uid="uid://bwo74j7il1uu0" path="res://src/FollowupRichText/follow_up_rich_text.tscn" id="1_ovndo"]
+[ext_resource type="FontFile" uid="uid://chygow7my3v5g" path="res://Assets/Fonts/NotoSansMyanmar-Regular.ttf" id="3_cd8lu"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5p4r3"]
 bg_color = Color(0, 0.219608, 0.223529, 0.705882)
@@ -51,6 +52,7 @@ custom_minimum_size = Vector2(300, 30)
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 1
+theme_override_fonts/bold_font = ExtResource("3_cd8lu")
 theme_override_font_sizes/normal_font_size = 21
 theme_override_font_sizes/bold_font_size = 21
 scroll_active = false
