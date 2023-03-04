@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://src/Playground/Playground.gd" id="1_tmfyy"]
 [ext_resource type="FontFile" uid="uid://chygow7my3v5g" path="res://Assets/Fonts/NotoSansMyanmar-Regular.ttf" id="2_dg17q"]
-[ext_resource type="FontFile" uid="uid://bkjly6r2w700w" path="res://Assets/Fonts/NotoSerifMyanmar-Bold.ttf" id="3_e4sqq"]
+[ext_resource type="PackedScene" uid="uid://bs3kuoiihonuk" path="res://src/Title/title.tscn" id="3_711yg"]
 [ext_resource type="Script" path="res://src/FollowUpText.gd" id="4_86oy8"]
 [ext_resource type="PackedScene" uid="uid://bu35jrqg64j60" path="res://src/Keyboard/keyboard.tscn" id="5_3d5ha"]
 [ext_resource type="Script" path="res://src/Playground/AccuracyLabel.gd" id="6_240wa"]
@@ -211,6 +211,9 @@ theme_override_constants/margin_bottom = 20
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
 layout_mode = 2
 
+[node name="Title" parent="MarginContainer/VBoxContainer" instance=ExtResource("3_711yg")]
+layout_mode = 2
+
 [node name="FollowUpRichText" type="RichTextLabel" parent="MarginContainer/VBoxContainer" groups=["scene_change_element"]]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(800, 80)
@@ -218,7 +221,7 @@ layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 8
 theme_override_fonts/normal_font = ExtResource("2_dg17q")
-theme_override_fonts/bold_font = ExtResource("3_e4sqq")
+theme_override_fonts/bold_font = ExtResource("2_dg17q")
 theme_override_font_sizes/normal_font_size = 30
 theme_override_font_sizes/bold_font_size = 30
 bbcode_enabled = true
