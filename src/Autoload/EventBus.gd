@@ -2,7 +2,7 @@ extends Node
 
 signal current_char_changed(char: String)
 signal written_string_changed(str: String)
-signal wrong_char_typed(c: String)
+signal wrong_char_typed(written_char: String, correct_char: String)
 signal correct_char_typed(c: String)
 
 signal select_lesson(lesson: String) # should be lesson file path

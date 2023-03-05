@@ -27,6 +27,7 @@ SceneChanger="*res://src/Autoload/SceneChanger.gd"
 LessonAccess="*res://src/Autoload/LessonAccess.gd"
 MessagePopupManager="*res://src/Autoload/MessagePopupManager.gd"
 SoundSettings="*res://src/Autoload/SoundSettings.gd"
+UserProfileManager="*res://src/Autoload/UserProfileManager.gd"
 
 [display]
 
@@ -36,6 +37,7 @@ window/per_pixel_transparency/allowed=true
 
 [editor]
 
+script/search_in_file_extensions=PackedStringArray("gd", "gdshader", "tscn")
 version_control/plugin_name="GitPlugin"
 version_control/autoload_on_startup=true
 
