@@ -47,8 +47,10 @@ jobs:
         run: |
           mkdir -v -p ~/.local/share/godot/export_templates/${GODOT_VERSION}.stable
           cp -rvf /templates/${GODOT_VERSION}.stable/* ~/.local/share/godot/export_templates/${GODOT_VERSION}.stable/
+          git clone https://github.com/stmSi/Ultimate-Myanmar-Typing-Wizard.git
       - name: Linux Build
         run: |
+          cd Ultimate-Myanmar-Typing-Wizard
           mkdir -v -p build/linux
           cp -rvf Texts build/linux/
           godot --headless --export-debug "Linux/X11"
