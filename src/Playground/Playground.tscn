@@ -317,6 +317,7 @@ text = "Exercise Editor
 script = SubResource("GDScript_r5ri8")
 
 [node name="AudioBtn" type="TextureButton" parent="MarginContainer/VBoxContainer/BottomButtonsContainer" groups=["scene_change_element"]]
+visible = false
 layout_mode = 2
 size_flags_horizontal = 6
 size_flags_vertical = 4

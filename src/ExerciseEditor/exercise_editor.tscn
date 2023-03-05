@@ -288,7 +288,7 @@ script = SubResource("GDScript_lc0i3")
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer2/VBoxContainer/HBoxContainer/VBoxContainer2"]
 layout_mode = 2
 
-[node name="AddUpdteLineBtn" type="Button" parent="MarginContainer2/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer" groups=["scene_change_element"]]
+[node name="AddUpdateLineBtn" type="Button" parent="MarginContainer2/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer" groups=["scene_change_element"]]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
@@ -376,7 +376,7 @@ layout_mode = 1
 [connection signal="item_selected" from="MarginContainer2/VBoxContainer/HBoxContainer/VBoxContainer2/LineListContainer/LinesList" to="." method="_on_lines_list_item_selected"]
 [connection signal="text_changed" from="MarginContainer2/VBoxContainer/HBoxContainer/VBoxContainer2/LineEditContainer/LineEdit" to="MarginContainer2/VBoxContainer/HBoxContainer/VBoxContainer2/LineEditContainer/LineEdit" method="_on_text_changed"]
 [connection signal="text_submitted" from="MarginContainer2/VBoxContainer/HBoxContainer/VBoxContainer2/LineEditContainer/LineEdit" to="." method="_on_line_edit_text_submitted"]
-[connection signal="pressed" from="MarginContainer2/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer/AddUpdteLineBtn" to="." method="_on_add_updte_line_btn_pressed"]
+[connection signal="pressed" from="MarginContainer2/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer/AddUpdateLineBtn" to="." method="_on_add_update_line_btn_pressed"]
 [connection signal="pressed" from="MarginContainer2/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer/ResetBtn" to="." method="_on_reset_btn_pressed"]
 [connection signal="pressed" from="MarginContainer2/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer/RemoveLineBtn" to="." method="_on_remove_line_btn_pressed"]
 [connection signal="pressed" from="AddLessonMessage/VBoxContainer/HBoxContainer/CancelLessonMsgBtn" to="." method="_on_cancel_lesson_msg_btn_pressed"]

@@ -6,7 +6,7 @@ extends VBoxContainer
 
 func _ready() -> void:
 	add_to_group('msg_popups')
-	get_tree().paused = true
+#	get_tree().paused = true
 
 
 func set_msg(msg: String) -> void:
@@ -17,8 +17,8 @@ func set_msg(msg: String) -> void:
 	$AnimationPlayer.play('running')
 
 func _on_ok_btn_pressed() -> void:
-	if len(get_tree().get_nodes_in_group('msg_popups')) == 1:
-		get_tree().paused = false
+#	if len(get_tree().get_nodes_in_group('msg_popups')) == 1:
+#		get_tree().paused = false
 	
 	EventBus.message_popup_closed.emit()
 	$AnimationPlayer.play('close') 

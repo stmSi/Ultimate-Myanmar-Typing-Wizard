@@ -14,6 +14,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     zip \
     # adb \
     # openjdk-11-jdk-headless \
+    libfontconfig \
     rsync \
     && rm -rf /var/lib/apt/lists/*
 
