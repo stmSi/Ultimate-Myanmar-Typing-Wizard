@@ -9,8 +9,8 @@ content_scale_aspect = 1
 content_scale_factor = 1.5
 
 [node name="ColorPicker" type="ColorPicker" parent="."]
-offset_left = 37.0
-offset_top = 21.0
-offset_right = 311.0
-offset_bottom = 518.0
+offset_left = 101.0
+offset_top = 53.0
+offset_right = 343.0
+offset_bottom = 550.0
 deferred_mode = true
