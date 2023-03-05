@@ -166,6 +166,7 @@ size_flags_vertical = 0
 text = "  Alt+↑         Swap Lessons        Alt+↓"
 
 [node name="AddNewLessonsFileBtn" type="Button" parent="MarginContainer2/VBoxContainer/HBoxContainer/VBoxContainer" groups=["scene_change_element"]]
+unique_name_in_owner = true
 layout_mode = 2
 shortcut = SubResource("Shortcut_jhxwp")
 text = "Add New 
@@ -296,6 +297,7 @@ text = "Add Line
 (Enter)"
 
 [node name="ResetBtn" type="Button" parent="MarginContainer2/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer" groups=["scene_change_element"]]
+unique_name_in_owner = true
 layout_mode = 2
 shortcut = SubResource("Shortcut_gols1")
 text = "Reset 
