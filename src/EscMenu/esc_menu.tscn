@@ -11,6 +11,7 @@ border_width_bottom = 3
 
 [node name="EscMenu" type="Control"]
 process_mode = 3
+z_index = 2
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
