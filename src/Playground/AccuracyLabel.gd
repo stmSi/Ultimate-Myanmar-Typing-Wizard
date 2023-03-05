@@ -3,7 +3,7 @@ class_name AccuracyLabel
 
 var num_corrects := 0.0
 var num_wrongs := 0.0
-var percentage = 100
+var percentage := 100.0
 var accuracy_color: Color
 
 @export var color_100: Color = Color.GOLD
@@ -28,6 +28,13 @@ func _ready() -> void:
 			num_corrects = 0.0
 			num_wrongs = 0.0
 			_calculate_show()
+	)
+	
+	EventBus.lesson_finished.connect(
+		func(_l: int, _d : String):
+			num_corrects = 0.0
+			num_wrongs = 0.0
+			percentage = 100
 	)
 
 func _calculate_show():

@@ -12,8 +12,8 @@ signal exercise_loaded(text: String)
 signal correct_text(char_pos: int)
 
 signal exercise_line_finished()
-signal lesson_finished()
-signal finished_all_difficulty_lessons()
+signal lesson_finished(lesson_number: int, difficulty: String)
+signal finished_all_difficulty_lessons(difficulty: String)
 
 signal followup_popup_pos_changed(pos: Vector2, pending_node: KeyButton)
 

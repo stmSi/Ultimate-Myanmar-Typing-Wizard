@@ -83,7 +83,6 @@ func get_lesson_files(difficulty: String) -> PackedStringArray:
 	return text_files
 
 
-
 func get_lesson_data(lesson_number: int, difficulty: String) -> Dictionary:
 	var filepath = _get_lesson_filepath(lesson_number, difficulty)
 	var config: ConfigFile = ConfigFile.new()
@@ -106,6 +105,7 @@ func get_lesson_data(lesson_number: int, difficulty: String) -> Dictionary:
 
 	return lesson_data
 
+
 func swap_lesson_contents(lesson_number1: int, lesson_number2: int, difficulty: String):
 	var lesson1_data = get_lesson_data(lesson_number1, difficulty)
 	var lesson2_data = get_lesson_data(lesson_number2, difficulty)
@@ -113,6 +113,7 @@ func swap_lesson_contents(lesson_number1: int, lesson_number2: int, difficulty: 
 	save_message(lesson_number1, difficulty, lesson2_data['message'])
 	create_update_new_exercise(lesson_number2, difficulty, lesson1_data)
 	create_update_new_exercise(lesson_number1, difficulty, lesson2_data)
+
 
 func delete_lesson_file(lesson_number: int, difficulty: String) -> bool:
 	
@@ -123,6 +124,24 @@ func delete_lesson_file(lesson_number: int, difficulty: String) -> bool:
 			print("Deleted: " + filepath)
 			return true
 	return false
+
+func get_next_lesson(current_lesson_number: int, difficulty: String) -> Array:
+	if get_lesson_files(difficulty).size() <= current_lesson_number:
+		if difficulty == "basic":
+			current_lesson_number = 0
+			difficulty = "intermediate"
+			
+		elif difficulty == "intermediate":
+			current_lesson_number = 0
+			difficulty = "advanced"
+			
+		elif difficulty == "advanced":
+			return []
+	
+	if get_lesson_files(difficulty).size() > current_lesson_number:
+		return [current_lesson_number + 1, difficulty]
+
+	return []
 
 func _get_lesson_filepath(lesson_number: int, difficulty: String) -> String:
 	# return -> ./Texts/Lessons/Basic/00000113.cfg

@@ -35,16 +35,31 @@ func _start_lesson():
 	exercises = []
 	lesson_idx = 0
 	exercise_idx = 0
+	
+	var lesson_progress := UserProfileManager.load_lesson_progress()
+	difficulty = lesson_progress['difficulty']
+	
+	if lesson_progress['is_finished']:
+		var next_lesson = LessonAccess.get_next_lesson(
+			lesson_progress['lesson_number'],
+			lesson_progress['difficulty']
+		)
+		if next_lesson == []:
+#			EventBus.message_popup.emit('No More lesson available')
+			EventBus.message_popup.emit(
+				"Error: difficulty '" \
+				+ difficulty.capitalize() \
+				+ "' is has no lessons. \r\n" + \
+				"Use Exercise Editor to create Lessons and Exercises."
+			)
+			return
+		lesson_idx = next_lesson[0] - 1 # index are off by one
+		difficulty = next_lesson[1]
+
+	else:
+		lesson_idx = lesson_progress['lesson_number'] - 1 # index are off by one
 
 	var files: PackedStringArray = LessonAccess.get_lesson_files(difficulty)
-	if files.size() == 0:
-		EventBus.message_popup.emit(
-			"Error: difficulty '" \
-			+ difficulty.capitalize() \
-			+ "' is has no lessons. \r\n" + \
-			"Use Exercise Editor to create Lessons and Exercises."
-		)
-		return
 	files.sort()
 	for f in files:
 		lesson_ids.push_back(f.get_basename().get_file())
@@ -94,6 +109,7 @@ func _load_exercise():
 			exercise_idx = 0
 			repeats -= 1
 		else: # Fetch Next Lesson
+			EventBus.lesson_finished.emit(int(lesson_ids[lesson_idx - 1]), difficulty)
 			_load_lesson()
 
 	
