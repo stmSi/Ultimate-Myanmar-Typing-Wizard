@@ -12,7 +12,7 @@ var accuracy_color: Color
 
 func _ready() -> void:
 	EventBus.wrong_char_typed.connect(
-		func(c: String): 
+		func(_wrong_char: String, _correct_char: String): 
 			num_wrongs += 1
 			_calculate_show()
 	)

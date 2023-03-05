@@ -65,7 +65,7 @@ func _input(event: InputEvent) -> void:
 			if pending_shift_node:
 				pending_shift_node.correct_animation()
 		else:
-			EventBus.wrong_char_typed.emit(converted_char)
+			EventBus.wrong_char_typed.emit(converted_char, current_char)
 			_run_incorrect(converted_char)
 			pending_node.reset_animation()
 			_reset_shifts()
