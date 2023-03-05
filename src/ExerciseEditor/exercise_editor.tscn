@@ -1,5 +1,6 @@
-[gd_scene load_steps=21 format=3 uid="uid://c5qc87hij2hep"]
+[gd_scene load_steps=19 format=3 uid="uid://c5qc87hij2hep"]
 
+[ext_resource type="Theme" uid="uid://b5qsicpdjgyu7" path="res://src/main.theme" id="1_edhsg"]
 [ext_resource type="Script" path="res://src/ExerciseEditor/exercise_editor.gd" id="1_sslhb"]
 [ext_resource type="Script" path="res://src/ExerciseEditor/LessonIds.gd" id="2_ockha"]
 [ext_resource type="FontFile" uid="uid://chygow7my3v5g" path="res://Assets/Fonts/NotoSansMyanmar-Regular.ttf" id="2_tt6nc"]
@@ -14,15 +15,6 @@ unicode = 110
 
 [sub_resource type="Shortcut" id="Shortcut_jhxwp"]
 events = [SubResource("InputEventKey_iny2v")]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ybjo2"]
-bg_color = Color(0.258824, 0.207843, 0, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_15h77"]
-bg_color = Color(0.431373, 0.352941, 0, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_s5x36"]
-bg_color = Color(0.145098, 0.113725, 0, 1)
 
 [sub_resource type="InputEventKey" id="InputEventKey_ebxkm"]
 device = -1
@@ -93,6 +85,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("1_edhsg")
 script = ExtResource("1_sslhb")
 
 [node name="MarginContainer2" type="MarginContainer" parent="." groups=["scene_change_bg"]]
@@ -181,9 +174,6 @@ text = "Add New
 [node name="PlaygroundBtn" type="Button" parent="MarginContainer2/VBoxContainer/HBoxContainer/VBoxContainer" groups=["scene_change_element"]]
 custom_minimum_size = Vector2(200, 60)
 layout_mode = 2
-theme_override_styles/normal = SubResource("StyleBoxFlat_ybjo2")
-theme_override_styles/hover = SubResource("StyleBoxFlat_15h77")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_s5x36")
 shortcut = SubResource("Shortcut_8v06n")
 text = "Go to Playground
 (Ctrl+P)"
@@ -196,6 +186,7 @@ theme_override_constants/separation = 10
 
 [node name="LessonSettingsContainer" type="HBoxContainer" parent="MarginContainer2/VBoxContainer/HBoxContainer/VBoxContainer2" groups=["scene_change_element"]]
 layout_mode = 2
+size_flags_vertical = 4
 theme_override_constants/separation = 30
 
 [node name="RepeatContainer" type="HBoxContainer" parent="MarginContainer2/VBoxContainer/HBoxContainer/VBoxContainer2/LessonSettingsContainer"]
