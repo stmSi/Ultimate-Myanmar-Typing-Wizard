@@ -19,7 +19,7 @@ extends Control
 @onready var hide_keyboard_check: CheckButton = %HideKeyboardCheck
 @onready var add_messsage_btn: Button = %AddMesssageBtn
 
-@onready var add_update_line_btn: Button = %AddUpdteLineBtn
+@onready var add_update_line_btn: Button = %AddUpdateLineBtn
 @onready var reset_btn: Button = %ResetBtn
 @onready var remove_line_btn: Button = %RemoveLineBtn
 

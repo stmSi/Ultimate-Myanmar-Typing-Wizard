@@ -24,9 +24,8 @@ If you want to download `latest` commit build (may not be stable and produce err
 ### **Exercise Editor Screenshots**
 
 ![](screenshots/ExerciseEditor.png)
------------------------------------
 
-![](screenshots/ExerciseEditor_02.png)
+<!-- ![](screenshots/ExerciseEditor_02.png) -->
 
 ---
 
