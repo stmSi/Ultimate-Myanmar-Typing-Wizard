@@ -7,6 +7,8 @@ extends Control
 @onready var lesson_ids_lbl: Label = %LessonIdsLbl
 @onready var lesson_ids: ItemList = %LessonIds
 
+@onready var add_new_lessons_file_btn: Button = %AddNewLessonsFileBtn
+
 @onready var lines_list: ItemList = %LinesList
 
 @onready var line_edit: LineEdit = %LineEdit
@@ -17,8 +19,10 @@ extends Control
 @onready var hide_keyboard_check: CheckButton = %HideKeyboardCheck
 @onready var add_messsage_btn: Button = %AddMesssageBtn
 
-@onready var add_updte_line_btn: Button = %AddUpdteLineBtn
+@onready var add_update_line_btn: Button = %AddUpdteLineBtn
+@onready var reset_btn: Button = %ResetBtn
 @onready var remove_line_btn: Button = %RemoveLineBtn
+
 
 @onready var add_lesson_message: PanelContainer = $AddLessonMessage
 @onready var add_lesson_message_text_edit: TextEdit = $AddLessonMessage/VBoxContainer/AddLessonMessageTextEdit
@@ -29,6 +33,8 @@ var selected_line_idx: int = -1
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	add_new_lessons_file_btn.disabled = true
+	_toggle_disable_line_buttons(true)
 	pass
 
 func _on_basic_btn_pressed() -> void:
@@ -77,10 +83,13 @@ func _on_cancel_btn_pressed() -> void:
 	basic_btn.remove_theme_color_override("font_color")
 	intermediate_btn.remove_theme_color_override("font_color")
 	advance_btn.remove_theme_color_override("font_color")
+	_toggle_disable_line_buttons(true)
 
 
 func _populate_files_list() -> void:
 	lesson_ids.clear()
+	add_new_lessons_file_btn.disabled = false
+	_toggle_disable_line_buttons(true) # disable buttons
 	var files = LessonAccess.get_lesson_files(selected_difficulty)
 	files.sort()
 	for f in files:
@@ -117,6 +126,7 @@ func _on_add_lessons_file_btn_pressed() -> void:
 
 
 func _on_lesson_ids_item_selected(index: int) -> void:
+	_toggle_disable_line_buttons(false) # enable 
 	selected_lesson_number = int(lesson_ids.get_item_text(index))
 	
 	var lesson_data: Dictionary = LessonAccess.get_lesson_data(selected_lesson_number, selected_difficulty)
@@ -156,7 +166,7 @@ func _on_lines_list_item_selected(index: int) -> void:
 	line_edit.text = lines_list.get_item_text(index)
 	
 	selected_line_idx = index
-	add_updte_line_btn.text = "Update Line"
+	add_update_line_btn.text = "Update Line"
 	pass # Replace with function body.
 
 
@@ -164,17 +174,17 @@ func _on_lines_list_empty_clicked(_at_position: Vector2 = Vector2.ZERO, _mouse_b
 	# Reset lines_list, line_edit, button
 	line_edit.text = ''
 	selected_line_idx = -1
-	add_updte_line_btn.text = "Add Line"
+	add_update_line_btn.text = "Add Line"
 	lines_list.deselect_all()
 	pass # Replace with function body.
 
 
 func _on_line_edit_text_submitted(_new_text: String) -> void:
-	_on_add_updte_line_btn_pressed()
+	_on_add_update_line_btn_pressed()
 	pass # Replace with function body.
 
 
-func _on_add_updte_line_btn_pressed() -> void:
+func _on_add_update_line_btn_pressed() -> void:
 	if selected_difficulty == '':
 		EventBus.message_popup.emit("Please Choose Difficulty")
 		return
@@ -325,3 +335,12 @@ func _on_lesson_ids_delete_lesson_from_delete_key(idx) -> void:
 
 func _on_hide_keyboard_check_toggled(button_pressed: bool) -> void:
 	_save_lesson()
+
+func _toggle_disable_line_buttons(disabled: bool) -> void:
+	randomize_check.disabled = disabled
+	hide_keyboard_check.disabled = disabled
+	add_update_line_btn.disabled = disabled
+	reset_btn.disabled = disabled
+	remove_line_btn.disabled = disabled
+	add_messsage_btn.disabled = disabled
+	pass
