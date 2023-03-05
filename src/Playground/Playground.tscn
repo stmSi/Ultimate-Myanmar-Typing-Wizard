@@ -51,11 +51,17 @@ var cpm = 0
 
 
 func _ready() -> void:
-	EventBus.wrong_char_typed.connect(self._calculate_time_taken)
+	EventBus.wrong_char_typed.connect(
+		func(_wrong_c: String, _correct_c: String):
+			self._calculate_time_taken()
+	)
 	
-	EventBus.correct_char_typed.connect(self._calculate_time_taken)
+	EventBus.correct_char_typed.connect(
+		func(_correct_c: String):
+			self._calculate_time_taken()
+	)
 
-func _calculate_time_taken(_wrong_c: String, _correct_c: String):
+func _calculate_time_taken():
 	var now_in_minute = (Time.get_ticks_msec() / 1000.0) / 60
 
 	if last_time_char_typed != 0:
@@ -174,7 +180,7 @@ func _ready() -> void:
 	SoundSettings.unmute.connect(func(): mute = false)
 	pass
 
-func _on_correct_char_typed(_wrong_ch: String, _correct_ch: String):
+func _on_correct_char_typed(_correct_ch: String):
 	if not mute:
 		play()
 "

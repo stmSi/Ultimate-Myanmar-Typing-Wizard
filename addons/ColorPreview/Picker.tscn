@@ -2,17 +2,15 @@
 
 [node name="Popup" type="Popup"]
 size = Vector2i(465, 775)
+visible = true
 min_size = Vector2i(465, 775)
 content_scale_mode = 1
 content_scale_aspect = 1
 content_scale_factor = 1.5
 
 [node name="ColorPicker" type="ColorPicker" parent="."]
-offset_left = 5.0
-offset_top = 5.0
-offset_right = 295.0
-offset_bottom = 502.0
+offset_left = 37.0
+offset_top = 21.0
+offset_right = 311.0
+offset_bottom = 518.0
 deferred_mode = true
-__meta__ = {
-"_edit_use_custom_anchors": false
-}

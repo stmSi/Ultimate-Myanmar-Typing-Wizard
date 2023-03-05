@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://bs3kuoiihonuk"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kcy6e"]
+draw_center = false
+
+[sub_resource type="LabelSettings" id="LabelSettings_jgqy0"]
+font_size = 30
+shadow_size = 2
+shadow_color = Color(0, 0.596078, 0.592157, 1)
+shadow_offset = Vector2(3, 3)
+
+[node name="Title" type="Label"]
+theme_override_styles/normal = SubResource("StyleBoxFlat_kcy6e")
+text = "PLAYGROUND"
+label_settings = SubResource("LabelSettings_jgqy0")
