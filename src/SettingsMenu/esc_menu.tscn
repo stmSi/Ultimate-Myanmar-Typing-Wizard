@@ -1,6 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://b7i3rua60ewr4"]
+[gd_scene load_steps=4 format=3 uid="uid://c835kyhsstvug"]
 
-[ext_resource type="Script" path="res://src/EscMenu/esc_menu.gd" id="1_ct76s"]
+[ext_resource type="Script" path="res://src/SettingsMenu/esc_menu.gd" id="1_rlkux"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vu2je"]
 bg_color = Color(0.172549, 0.27451, 0.298039, 0.784314)
@@ -8,6 +8,44 @@ border_width_left = 3
 border_width_top = 3
 border_width_right = 3
 border_width_bottom = 3
+
+[sub_resource type="GDScript" id="GDScript_o5mfk"]
+script/source = "extends OptionButton
+
+var resolutions_169 = {
+	\"3840 x 2160\": [3840, 2160]
+}
+
+func _ready() -> void:
+	var screen_size = DisplayServer.screen_get_size()
+	var aspect_ratio = screen_size.x / float(screen_size.y)
+	
+	aspect_ratio = 1920.0 / 1080.0
+	
+	aspect_ratio = 1280.0 / 800.0
+#
+#	aspect_ratio = 640.0 / 480
+#
+	if aspect_ratio > 1.7: # 16:9
+		add_item(\"3840 x 2160\")
+		add_item(\"2560 x 1440\")
+		add_item(\"1920 x 1080\")
+		add_item(\"1600 x 900\")
+		add_item(\"1366 x 768\")
+		add_item(\"1280 x 720\")
+	
+	if aspect_ratio == 1.6:
+		add_item(\"3840 x 2160\")
+		add_item(\"2560 x 1440\")
+		add_item(\"1920 x 1080\")
+		add_item(\"1600 x 900\")
+		add_item(\"1366 x 768\")
+		add_item(\"1280 x 720\")
+	
+	
+	print(get_viewport_rect().size)
+	
+"
 
 [node name="EscMenu" type="Control"]
 process_mode = 3
@@ -19,7 +57,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 pivot_offset = Vector2(640, 620)
-script = ExtResource("1_ct76s")
+script = ExtResource("1_rlkux")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 1
@@ -55,5 +93,9 @@ layout_mode = 2
 custom_minimum_size = Vector2(140, 40)
 layout_mode = 2
 text = "Quit To Menu"
+
+[node name="ResolutionOptions" type="OptionButton" parent="MarginContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+script = SubResource("GDScript_o5mfk")
 
 [connection signal="pressed" from="MarginContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/QuitToMenu" to="." method="_on_quit_to_menu_pressed"]

@@ -222,7 +222,7 @@ layout_mode = 2
 char = "Shift"
 
 [node name="Panel" parent="VBoxContainer/zxcvb/RShift" index="0"]
-custom_minimum_size = Vector2(200, 80)
+custom_minimum_size = Vector2(204, 80)
 theme_override_styles/panel = SubResource("StyleBoxFlat_jjy0n")
 
 [node name="ctrl_win_alt_space_alt_win_menu_ctrl" type="HBoxContainer" parent="VBoxContainer" groups=["scene_change_element"]]
@@ -356,7 +356,7 @@ layout_mode = 2
 char = "Ctrl"
 
 [node name="Panel" parent="VBoxContainer/ctrl_win_alt_space_alt_win_menu_ctrl/ctrl2" index="0"]
-custom_minimum_size = Vector2(120, 80)
+custom_minimum_size = Vector2(185, 80)
 theme_override_styles/panel = SubResource("StyleBoxFlat_bbdjs")
 
 [connection signal="new_key_node_added" from="VBoxContainer/1234567890" to="." method="_on_new_key_node_added"]

@@ -162,22 +162,6 @@ func _on_text_edit_text_changed(_t: String) -> void:
 		EventBus.exercise_line_finished.emit()
 
 
-func _on_basic_btn_pressed() -> void:
-	difficulty = 'basic'
-	_start_lesson()
-	pass # Replace with function body.
-
-func _on_intermediate_btn_pressed() -> void:
-	difficulty = 'intermediate'
-	_start_lesson()	
-	pass # Replace with function body.
-
-
-func _on_advanced_btn_pressed() -> void:
-	difficulty = 'advanced'
-	_start_lesson()
-	pass # Replace with function body.
-
 func _randomize_exercise():
 	# PackedStringArray doesn't support shuffle()
 	# convert to array, shuffle, and reassign
