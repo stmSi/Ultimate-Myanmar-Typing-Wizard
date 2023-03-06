@@ -16,6 +16,7 @@ func _ready() -> void:
 	EventBus.exercise_loaded.connect(self._set_raw_text)
 	EventBus.followup_popup_pos_changed.connect(self._on_followup_popup_pos_changed)
 	EventBus.written_string_changed.connect(self._on_written_string_changed)
+#	get_tree().root.get_viewport().size_changed.connect(self._on_followup_popup_pos_changed)
 	pass # Replace with function body.
 
 func _set_raw_text(t: String) -> void:

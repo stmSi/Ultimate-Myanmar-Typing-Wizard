@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://jlkyjmkbpshr"]
+
+[ext_resource type="Texture2D" uid="uid://ciil7l5kvbtaa" path="res://Assets/Background/Background_02.jpg" id="1_bkrpd"]
+[ext_resource type="Texture2D" uid="uid://cqt5fkx3t58of" path="res://Assets/Background/Background_01.jpg" id="1_tvrt4"]
+[ext_resource type="Script" path="res://src/Background/background.gd" id="2_xvhrv"]
+
+[node name="Background" type="TextureRect"]
+modulate = Color(0.729412, 0.729412, 0.729412, 1)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_bkrpd")
+expand_mode = 2
+script = ExtResource("2_xvhrv")
+background_images = Array[Texture2D]([ExtResource("1_tvrt4"), ExtResource("1_bkrpd")])

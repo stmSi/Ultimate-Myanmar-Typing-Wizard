@@ -20,5 +20,5 @@ threaded = true
 progress_bar_delay = -1
 language = "my_MM"
 script = ExtResource("3_2dmba")
-current_char_color = Color(0.717647, 0.882353, 0.992157, 1)
+current_char_color = Color(0.984314, 0.823529, 0, 1)
 current_char_bgcolor = Color(0.184314, 0.301961, 0.376471, 1)

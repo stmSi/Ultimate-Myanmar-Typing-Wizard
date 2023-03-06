@@ -1,7 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://v5hum6qh2phh"]
+[gd_scene load_steps=11 format=3 uid="uid://v5hum6qh2phh"]
 
 [ext_resource type="Theme" uid="uid://b5qsicpdjgyu7" path="res://src/main.theme" id="1_uh4ao"]
 [ext_resource type="Script" path="res://src/main.gd" id="1_xgqc1"]
+[ext_resource type="PackedScene" uid="uid://jlkyjmkbpshr" path="res://src/Background/background.tscn" id="3_j3ysy"]
+[ext_resource type="PackedScene" uid="uid://b7i3rua60ewr4" path="res://src/EscMenu/esc_menu.tscn" id="4_i4r04"]
 
 [sub_resource type="Environment" id="Environment_3bxs1"]
 background_color = Color(0.423529, 0.423529, 0.423529, 1)
@@ -25,6 +27,24 @@ func _on_pressed() -> void:
 	pass # Replace with function body.
 "
 
+[sub_resource type="GDScript" id="GDScript_d0c1b"]
+script/source = "extends Button
+
+
+func _on_pressed() -> void:
+	EventBus.open_settings_menu.emit()
+	pass # Replace with function body.
+"
+
+[sub_resource type="GDScript" id="GDScript_l5vsv"]
+script/source = "extends Button
+
+
+
+func _on_pressed() -> void:
+	get_tree().quit(0)
+"
+
 [sub_resource type="GDScript" id="GDScript_08pft"]
 script/source = "extends Button
 
@@ -41,6 +61,9 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("1_uh4ao")
 script = ExtResource("1_xgqc1")
+
+[node name="Background" parent="." instance=ExtResource("3_j3ysy")]
+layout_mode = 1
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_3bxs1")
@@ -80,6 +103,24 @@ theme_override_font_sizes/font_size = 30
 text = "Exercise Editor"
 script = SubResource("GDScript_hpd8f")
 
+[node name="SettingsBtn" type="Button" parent="MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(300, 80)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+theme_override_font_sizes/font_size = 30
+text = "Settings"
+script = SubResource("GDScript_d0c1b")
+
+[node name="ExitBtn" type="Button" parent="MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(300, 80)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+theme_override_font_sizes/font_size = 30
+text = "Exit"
+script = SubResource("GDScript_l5vsv")
+
 [node name="HBoxContainer2" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
 alignment = 2
@@ -94,5 +135,11 @@ theme_override_font_sizes/font_size = 30
 text = "Test Game"
 script = SubResource("GDScript_08pft")
 
+[node name="EscMenu" parent="." instance=ExtResource("4_i4r04")]
+visible = false
+layout_mode = 1
+
 [connection signal="pressed" from="MarginContainer/VBoxContainer/PlayGroundBtn" to="MarginContainer/VBoxContainer/PlayGroundBtn" method="_on_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/LessonEditorBtn" to="MarginContainer/VBoxContainer/LessonEditorBtn" method="_on_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/SettingsBtn" to="MarginContainer/VBoxContainer/SettingsBtn" method="_on_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/ExitBtn" to="MarginContainer/VBoxContainer/ExitBtn" method="_on_pressed"]
