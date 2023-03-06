@@ -180,6 +180,8 @@ func _on_lines_list_empty_clicked(_at_position: Vector2 = Vector2.ZERO, _mouse_b
 
 
 func _on_line_edit_text_submitted(_new_text: String) -> void:
+	if _new_text.is_empty():
+		return
 	_on_add_update_line_btn_pressed()
 	pass # Replace with function body.
 

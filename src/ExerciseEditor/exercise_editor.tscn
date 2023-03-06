@@ -6,7 +6,7 @@
 [ext_resource type="FontFile" uid="uid://chygow7my3v5g" path="res://Assets/Fonts/NotoSansMyanmar-Regular.ttf" id="2_tt6nc"]
 [ext_resource type="Script" path="res://src/ExerciseEditor/LinesList.gd" id="3_5mn8u"]
 [ext_resource type="PackedScene" uid="uid://jlkyjmkbpshr" path="res://src/Background/background.tscn" id="3_b0jon"]
-[ext_resource type="PackedScene" uid="uid://b7i3rua60ewr4" path="res://src/EscMenu/esc_menu.tscn" id="5_mef87"]
+[ext_resource type="PackedScene" uid="uid://bdwpvsp2xyw50" path="res://src/SettingsMenu/SettingsMenu.tscn" id="7_sqtqw"]
 
 [sub_resource type="InputEventKey" id="InputEventKey_iny2v"]
 device = -1
@@ -291,6 +291,7 @@ theme_override_fonts/font = ExtResource("2_tt6nc")
 theme_override_font_sizes/font_size = 20
 placeholder_text = "Add Exercise Line Here..."
 virtual_keyboard_enabled = false
+clear_button_enabled = true
 language = "my_MM"
 script = SubResource("GDScript_lc0i3")
 
@@ -307,6 +308,7 @@ text = "Add Line
 
 [node name="ResetBtn" type="Button" parent="MarginContainer2/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer" groups=["scene_change_element"]]
 unique_name_in_owner = true
+custom_minimum_size = Vector2(220, 0)
 layout_mode = 2
 shortcut = SubResource("Shortcut_gols1")
 text = "Reset 
@@ -314,6 +316,7 @@ text = "Reset
 
 [node name="RemoveLineBtn" type="Button" parent="MarginContainer2/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer" groups=["scene_change_element"]]
 unique_name_in_owner = true
+custom_minimum_size = Vector2(220, 0)
 layout_mode = 2
 text = "Remove Line
 (Del)"
@@ -360,7 +363,7 @@ size_flags_horizontal = 6
 size_flags_vertical = 8
 text = "Save Lesson Message"
 
-[node name="EscMenu" parent="." instance=ExtResource("5_mef87")]
+[node name="SettingsMenu" parent="." instance=ExtResource("7_sqtqw")]
 visible = false
 layout_mode = 1
 

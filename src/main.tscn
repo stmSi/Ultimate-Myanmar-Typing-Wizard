@@ -3,7 +3,7 @@
 [ext_resource type="Theme" uid="uid://b5qsicpdjgyu7" path="res://src/main.theme" id="1_uh4ao"]
 [ext_resource type="Script" path="res://src/main.gd" id="1_xgqc1"]
 [ext_resource type="PackedScene" uid="uid://jlkyjmkbpshr" path="res://src/Background/background.tscn" id="3_j3ysy"]
-[ext_resource type="PackedScene" uid="uid://b7i3rua60ewr4" path="res://src/EscMenu/esc_menu.tscn" id="4_i4r04"]
+[ext_resource type="PackedScene" uid="uid://bdwpvsp2xyw50" path="res://src/SettingsMenu/SettingsMenu.tscn" id="4_ij5vr"]
 
 [sub_resource type="Environment" id="Environment_3bxs1"]
 background_color = Color(0.423529, 0.423529, 0.423529, 1)
@@ -135,7 +135,7 @@ theme_override_font_sizes/font_size = 30
 text = "Test Game"
 script = SubResource("GDScript_08pft")
 
-[node name="EscMenu" parent="." instance=ExtResource("4_i4r04")]
+[node name="SettingsMenu" parent="." instance=ExtResource("4_ij5vr")]
 visible = false
 layout_mode = 1
 

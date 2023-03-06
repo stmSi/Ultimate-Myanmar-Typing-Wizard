@@ -26,6 +26,7 @@ LessonAccess="*res://src/Autoload/LessonAccess.gd"
 MessagePopupManager="*res://src/Autoload/MessagePopupManager.gd"
 SoundSettings="*res://src/Autoload/SoundSettings.gd"
 UserProfileManager="*res://src/Autoload/UserProfileManager.gd"
+DisplaySettings="*res://src/Autoload/DisplaySettings.gd"
 
 [display]
 
