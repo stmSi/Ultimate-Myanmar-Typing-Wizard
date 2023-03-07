@@ -30,6 +30,12 @@ var aspect_ratio: float
 
 var resolutions = []
 
+var settings_data = {
+	
+}
+
+var display_settings_file = "user://display_settings.cfg"
+
 func _ready() -> void:
 	screen_size = DisplayServer.screen_get_size()
 	aspect_ratio = screen_size.x / float(screen_size.y)
@@ -40,5 +46,9 @@ func _ready() -> void:
 		resolutions = resolutions_1610
 	else:
 		resolutions = resolutions_43
+
 	
+func change_max_fps(max_fps: float) -> void:
+	Engine.max_fps = max_fps
+	var config = ConfigFile.new()
 	

@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=3 uid="uid://cc5rb1nafw717"]
+
+[ext_resource type="Script" path="res://src/FPSCounter/fps_counter.gd" id="1_34sis"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_k30fd"]
+shadow_size = 2
+shadow_color = Color(0, 0, 0, 1)
+
+[node name="FPSCounter" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+size_flags_horizontal = 0
+script = ExtResource("1_34sis")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = -71.0
+offset_right = -31.0
+offset_bottom = 26.0
+text = "FPS: "
+label_settings = SubResource("LabelSettings_k30fd")

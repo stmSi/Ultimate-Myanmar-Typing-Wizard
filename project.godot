@@ -13,6 +13,8 @@ config_version=5
 config/name="Ultimate Myanmar Typing Wizard"
 run/main_scene="res://src/main.tscn"
 config/features=PackedStringArray("4.0", "Mobile")
+run/max_fps=60
+run/low_processor_mode=true
 boot_splash/bg_color=Color(0, 0, 0, 1)
 
 [autoload]

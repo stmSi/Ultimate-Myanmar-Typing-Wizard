@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://bdwpvsp2xyw50"]
+[gd_scene load_steps=5 format=3 uid="uid://bdwpvsp2xyw50"]
 
 [ext_resource type="Script" path="res://src/SettingsMenu/SettingsMenu.gd" id="1_lnpdd"]
+[ext_resource type="Script" path="res://src/SettingsMenu/FPSOptions.gd" id="2_o2ea0"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vu2je"]
 bg_color = Color(0.172549, 0.27451, 0.298039, 0.784314)
@@ -13,6 +14,7 @@ border_width_bottom = 3
 script/source = "extends OptionButton
 
 func _ready() -> void:
+	clear() # reset items
 	for reso in DisplaySettings.resolutions:
 		add_item(reso)
 		var scr_size = reso.split(\" x \")
@@ -34,9 +36,15 @@ script = ExtResource("1_lnpdd")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -183.0
+offset_top = -145.0
+offset_right = 183.0
+offset_bottom = 145.0
 grow_horizontal = 2
 grow_vertical = 2
 pivot_offset = Vector2(640, 620)
@@ -51,10 +59,10 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_vu2je")
 
 [node name="MarginContainer" type="MarginContainer" parent="MarginContainer/PanelContainer"]
 layout_mode = 2
-theme_override_constants/margin_left = 10
-theme_override_constants/margin_top = 10
-theme_override_constants/margin_right = 10
-theme_override_constants/margin_bottom = 10
+theme_override_constants/margin_left = 100
+theme_override_constants/margin_top = 100
+theme_override_constants/margin_right = 100
+theme_override_constants/margin_bottom = 100
 
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/PanelContainer/MarginContainer"]
 layout_mode = 2
@@ -62,13 +70,47 @@ layout_mode = 2
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/PanelContainer/MarginContainer/HBoxContainer"]
 layout_mode = 2
 
+[node name="HBoxContainer2" type="HBoxContainer" parent="MarginContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="Label" type="Label" parent="MarginContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+text = "Resolutions: "
+
+[node name="ResolutionOptions" type="OptionButton" parent="MarginContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer2"]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+item_count = 1
+selected = 0
+popup/item_0/text = "1920 x 1080"
+popup/item_0/id = 0
+script = SubResource("GDScript_o5mfk")
+
+[node name="FPSOptionsContainer" type="HBoxContainer" parent="MarginContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="Label" type="Label" parent="MarginContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/FPSOptionsContainer"]
+layout_mode = 2
+text = "Max FPS:"
+
+[node name="FPSOptions" type="OptionButton" parent="MarginContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/FPSOptionsContainer"]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+size_flags_horizontal = 10
+item_count = 2
+selected = 0
+popup/item_0/text = "60"
+popup/item_0/id = 0
+popup/item_1/text = "30"
+popup/item_1/id = 1
+script = ExtResource("2_o2ea0")
+
 [node name="QuitToMenu" type="Button" parent="MarginContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer"]
 custom_minimum_size = Vector2(140, 40)
 layout_mode = 2
 text = "Quit To Menu"
 
-[node name="ResolutionOptions" type="OptionButton" parent="MarginContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer"]
-layout_mode = 2
-script = SubResource("GDScript_o5mfk")
-
+[connection signal="item_selected" from="MarginContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/FPSOptionsContainer/FPSOptions" to="MarginContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/FPSOptionsContainer/FPSOptions" method="_on_item_selected"]
 [connection signal="pressed" from="MarginContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/QuitToMenu" to="." method="_on_quit_to_menu_pressed"]
