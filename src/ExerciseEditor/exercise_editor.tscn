@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://c5qc87hij2hep"]
+[gd_scene load_steps=21 format=3 uid="uid://dusuxw5u4uhul"]
 
 [ext_resource type="Theme" uid="uid://b5qsicpdjgyu7" path="res://src/main.theme" id="1_edhsg"]
 [ext_resource type="Script" path="res://src/ExerciseEditor/exercise_editor.gd" id="1_sslhb"]
@@ -7,6 +7,7 @@
 [ext_resource type="Script" path="res://src/ExerciseEditor/LinesList.gd" id="3_5mn8u"]
 [ext_resource type="PackedScene" uid="uid://jlkyjmkbpshr" path="res://src/Background/background.tscn" id="3_b0jon"]
 [ext_resource type="PackedScene" uid="uid://bdwpvsp2xyw50" path="res://src/SettingsMenu/SettingsMenu.tscn" id="7_sqtqw"]
+[ext_resource type="PackedScene" uid="uid://cc5rb1nafw717" path="res://src/FPSCounter/fps_counter.tscn" id="8_vtx0r"]
 
 [sub_resource type="InputEventKey" id="InputEventKey_iny2v"]
 device = -1
@@ -122,6 +123,7 @@ text = "Choose Difficulty:"
 
 [node name="DifficulitiesButtons" type="VBoxContainer" parent="MarginContainer2/VBoxContainer/HBoxContainer/VBoxContainer" groups=["scene_change_element"]]
 layout_mode = 2
+theme_override_constants/separation = 8
 
 [node name="BasicBtn" type="Button" parent="MarginContainer2/VBoxContainer/HBoxContainer/VBoxContainer/DifficulitiesButtons"]
 unique_name_in_owner = true
@@ -141,6 +143,20 @@ unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
 text = "Advanced"
+
+[node name="PanelContainer" type="PanelContainer" parent="MarginContainer2/VBoxContainer/HBoxContainer/VBoxContainer/DifficulitiesButtons"]
+custom_minimum_size = Vector2(0, 2)
+layout_mode = 2
+
+[node name="ExtraExerciseBtn" type="Button" parent="MarginContainer2/VBoxContainer/HBoxContainer/VBoxContainer/DifficulitiesButtons"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+text = "Custom Exercises"
+
+[node name="PanelContainer2" type="PanelContainer" parent="MarginContainer2/VBoxContainer/HBoxContainer/VBoxContainer/DifficulitiesButtons"]
+custom_minimum_size = Vector2(0, 2)
+layout_mode = 2
 
 [node name="CancelBtn" type="Button" parent="MarginContainer2/VBoxContainer/HBoxContainer/VBoxContainer/DifficulitiesButtons"]
 unique_name_in_owner = true
@@ -367,9 +383,17 @@ text = "Save Lesson Message"
 visible = false
 layout_mode = 1
 
+[node name="FPSCounter" parent="." instance=ExtResource("8_vtx0r")]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+grow_horizontal = 0
+
 [connection signal="pressed" from="MarginContainer2/VBoxContainer/HBoxContainer/VBoxContainer/DifficulitiesButtons/BasicBtn" to="." method="_on_basic_btn_pressed"]
 [connection signal="pressed" from="MarginContainer2/VBoxContainer/HBoxContainer/VBoxContainer/DifficulitiesButtons/IntermediateBtn" to="." method="_on_intermediate_btn_pressed"]
 [connection signal="pressed" from="MarginContainer2/VBoxContainer/HBoxContainer/VBoxContainer/DifficulitiesButtons/AdvancedBtn" to="." method="_on_advance_btn_pressed"]
+[connection signal="pressed" from="MarginContainer2/VBoxContainer/HBoxContainer/VBoxContainer/DifficulitiesButtons/ExtraExerciseBtn" to="." method="_on_extra_exercise_btn_pressed"]
 [connection signal="pressed" from="MarginContainer2/VBoxContainer/HBoxContainer/VBoxContainer/DifficulitiesButtons/CancelBtn" to="." method="_on_cancel_btn_pressed"]
 [connection signal="delete_lesson_from_delete_key" from="MarginContainer2/VBoxContainer/HBoxContainer/VBoxContainer/LessonIds" to="." method="_on_lesson_ids_delete_lesson_from_delete_key"]
 [connection signal="item_selected" from="MarginContainer2/VBoxContainer/HBoxContainer/VBoxContainer/LessonIds" to="." method="_on_lesson_ids_item_selected"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://blkq4rtc0qvgs"]
+[gd_scene load_steps=24 format=3 uid="uid://d2kbd35uuv0p7"]
 
 [ext_resource type="Theme" uid="uid://b5qsicpdjgyu7" path="res://src/main.theme" id="1_r5sss"]
 [ext_resource type="Script" path="res://src/Playground/Playground.gd" id="1_tmfyy"]
@@ -13,6 +13,7 @@
 [ext_resource type="AudioStream" uid="uid://cdqui2diupr13" path="res://Assets/Sounds/error-sound.mp3" id="8_ylc3d"]
 [ext_resource type="AudioStream" uid="uid://bjeu8c6senasm" path="res://Assets/Sounds/correct-sound.mp3" id="9_otsg4"]
 [ext_resource type="PackedScene" uid="uid://bdwpvsp2xyw50" path="res://src/SettingsMenu/SettingsMenu.tscn" id="13_cmjcr"]
+[ext_resource type="PackedScene" uid="uid://cc5rb1nafw717" path="res://src/FPSCounter/fps_counter.tscn" id="14_ui4gi"]
 
 [sub_resource type="GDScript" id="GDScript_l4wjf"]
 script/source = "extends LineEdit
@@ -320,6 +321,13 @@ script = SubResource("GDScript_fjrcb")
 [node name="SettingsMenu" parent="." instance=ExtResource("13_cmjcr")]
 visible = false
 layout_mode = 1
+
+[node name="FPSCounter" parent="." instance=ExtResource("14_ui4gi")]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+grow_horizontal = 0
 
 [connection signal="text_changed" from="MarginContainer/VBoxContainer/LineEdit" to="." method="_on_text_edit_text_changed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/BottomButtonsContainer/ExerciseEditorBtn" to="MarginContainer/VBoxContainer/BottomButtonsContainer/ExerciseEditorBtn" method="_on_pressed"]

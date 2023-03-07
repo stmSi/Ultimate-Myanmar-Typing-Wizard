@@ -3,6 +3,7 @@ extends Control
 @onready var basic_btn: Button = %BasicBtn
 @onready var intermediate_btn: Button = %IntermediateBtn
 @onready var advance_btn: Button = %AdvancedBtn
+@onready var extra_exercise_btn: Button = %ExtraExerciseBtn
 
 @onready var lesson_ids_lbl: Label = %LessonIdsLbl
 @onready var lesson_ids: ItemList = %LessonIds
@@ -40,34 +41,40 @@ func _ready() -> void:
 func _on_basic_btn_pressed() -> void:
 	lesson_ids_lbl.text = 'Basic Files:'
 	selected_difficulty = 'basic'
-	basic_btn.release_focus()
 	
+	_reset_difficulty_theme_color_override()
 	basic_btn.add_theme_color_override("font_color", Color.GOLD)
-	intermediate_btn.remove_theme_color_override("font_color")
-	advance_btn.remove_theme_color_override("font_color")
-	
+
 	_populate_files_list()
 
 
 func _on_intermediate_btn_pressed() -> void:
 	lesson_ids_lbl.text = 'Intermediate Files:'
 	selected_difficulty = 'intermediate'
-	intermediate_btn.release_focus()
 	
-	basic_btn.remove_theme_color_override("font_color")
+	_reset_difficulty_theme_color_override()
 	intermediate_btn.add_theme_color_override("font_color", Color.GOLD)
-	advance_btn.remove_theme_color_override("font_color")
+	
 	_populate_files_list()
 
 
 func _on_advance_btn_pressed() -> void:
 	lesson_ids_lbl.text = 'Advanced Files:'
 	selected_difficulty = 'advanced'
-	advance_btn.release_focus()
-	
-	basic_btn.remove_theme_color_override("font_color")
-	intermediate_btn.remove_theme_color_override("font_color")
+
+	_reset_difficulty_theme_color_override()
 	advance_btn.add_theme_color_override("font_color", Color.GOLD)
+
+	_populate_files_list()
+
+
+func _on_extra_exercise_btn_pressed() -> void:
+	lesson_ids_lbl.text = 'Extra Exercise Files:'
+	selected_difficulty = 'extra'
+
+	_reset_difficulty_theme_color_override()
+	extra_exercise_btn.add_theme_color_override("font_color", Color.GOLD)
+	
 	_populate_files_list()
 
 
@@ -76,14 +83,20 @@ func _on_cancel_btn_pressed() -> void:
 	selected_difficulty = ''
 	lesson_ids.clear()
 	
+	_reset_difficulty_theme_color_override()
+	_toggle_disable_line_buttons(true)
+
+
+func _reset_difficulty_theme_color_override() -> void:
 	basic_btn.release_focus()
 	intermediate_btn.release_focus()
 	advance_btn.release_focus()
+	extra_exercise_btn.release_focus()
 	
 	basic_btn.remove_theme_color_override("font_color")
 	intermediate_btn.remove_theme_color_override("font_color")
 	advance_btn.remove_theme_color_override("font_color")
-	_toggle_disable_line_buttons(true)
+	extra_exercise_btn.remove_theme_color_override("font_color")
 
 
 func _populate_files_list() -> void:
@@ -180,13 +193,14 @@ func _on_lines_list_empty_clicked(_at_position: Vector2 = Vector2.ZERO, _mouse_b
 
 
 func _on_line_edit_text_submitted(_new_text: String) -> void:
-	if _new_text.is_empty():
-		return
 	_on_add_update_line_btn_pressed()
 	pass # Replace with function body.
 
 
 func _on_add_update_line_btn_pressed() -> void:
+	if line_edit.text.is_empty():
+		return
+	
 	if selected_difficulty == '':
 		EventBus.message_popup.emit("Please Choose Difficulty")
 		return
@@ -338,6 +352,7 @@ func _on_lesson_ids_delete_lesson_from_delete_key(idx) -> void:
 func _on_hide_keyboard_check_toggled(button_pressed: bool) -> void:
 	_save_lesson()
 
+
 func _toggle_disable_line_buttons(disabled: bool) -> void:
 	randomize_check.disabled = disabled
 	hide_keyboard_check.disabled = disabled
@@ -346,3 +361,4 @@ func _toggle_disable_line_buttons(disabled: bool) -> void:
 	remove_line_btn.disabled = disabled
 	add_messsage_btn.disabled = disabled
 	pass
+

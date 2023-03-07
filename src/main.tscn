@@ -1,9 +1,10 @@
-[gd_scene load_steps=11 format=3 uid="uid://v5hum6qh2phh"]
+[gd_scene load_steps=12 format=3 uid="uid://cnx3k4cy1imd"]
 
 [ext_resource type="Theme" uid="uid://b5qsicpdjgyu7" path="res://src/main.theme" id="1_uh4ao"]
 [ext_resource type="Script" path="res://src/main.gd" id="1_xgqc1"]
 [ext_resource type="PackedScene" uid="uid://jlkyjmkbpshr" path="res://src/Background/background.tscn" id="3_j3ysy"]
 [ext_resource type="PackedScene" uid="uid://bdwpvsp2xyw50" path="res://src/SettingsMenu/SettingsMenu.tscn" id="4_ij5vr"]
+[ext_resource type="PackedScene" uid="uid://cc5rb1nafw717" path="res://src/FPSCounter/fps_counter.tscn" id="5_a5ebc"]
 
 [sub_resource type="Environment" id="Environment_3bxs1"]
 background_color = Color(0.423529, 0.423529, 0.423529, 1)
@@ -138,6 +139,13 @@ script = SubResource("GDScript_08pft")
 [node name="SettingsMenu" parent="." instance=ExtResource("4_ij5vr")]
 visible = false
 layout_mode = 1
+
+[node name="FPSCounter" parent="." instance=ExtResource("5_a5ebc")]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+grow_horizontal = 0
 
 [connection signal="pressed" from="MarginContainer/VBoxContainer/PlayGroundBtn" to="MarginContainer/VBoxContainer/PlayGroundBtn" method="_on_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/LessonEditorBtn" to="MarginContainer/VBoxContainer/LessonEditorBtn" method="_on_pressed"]

@@ -161,8 +161,10 @@ func _determine_difficulty_lessons_path(difficulty: String) -> String:
 		return GlobalHardCoded.intermediate_lessons_location
 	elif difficulty == "advanced":
 		return GlobalHardCoded.advanced_lessons_location
+	elif difficulty == "extra":
+		return GlobalHardCoded.extra_lessons_location
 	else:
-		EventBus.message_popup.emit('Please Choose Difficulity')
+		EventBus.message_popup.emit('Please Choose Difficulty')
 		return ''
 
 
