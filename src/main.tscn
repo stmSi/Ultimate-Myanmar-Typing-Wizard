@@ -1,8 +1,9 @@
-[gd_scene load_steps=12 format=3 uid="uid://cnx3k4cy1imd"]
+[gd_scene load_steps=13 format=3 uid="uid://cnx3k4cy1imd"]
 
 [ext_resource type="Theme" uid="uid://dppj17ign8l2n" path="res://src/Themes/main.tres" id="1_wgeyo"]
 [ext_resource type="Script" path="res://src/main.gd" id="1_xgqc1"]
 [ext_resource type="PackedScene" uid="uid://jlkyjmkbpshr" path="res://src/Background/background.tscn" id="3_j3ysy"]
+[ext_resource type="PackedScene" uid="uid://ht8awqgvfuqm" path="res://src/Stats/stats.tscn" id="4_he4w6"]
 [ext_resource type="PackedScene" uid="uid://bdwpvsp2xyw50" path="res://src/SettingsMenu/SettingsMenu.tscn" id="4_ij5vr"]
 [ext_resource type="PackedScene" uid="uid://cc5rb1nafw717" path="res://src/FPSCounter/fps_counter.tscn" id="5_a5ebc"]
 
@@ -81,12 +82,16 @@ theme_override_constants/margin_top = 20
 theme_override_constants/margin_right = 20
 theme_override_constants/margin_bottom = 20
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 50
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer"]
 layout_mode = 2
 theme_override_constants/separation = 20
 alignment = 1
 
-[node name="PlayGroundBtn" type="Button" parent="MarginContainer/VBoxContainer"]
+[node name="PlayGroundBtn" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer"]
 custom_minimum_size = Vector2(300, 80)
 layout_mode = 2
 size_flags_horizontal = 0
@@ -95,7 +100,7 @@ theme_override_font_sizes/font_size = 30
 text = "Take Lesson"
 script = SubResource("GDScript_6o4cl")
 
-[node name="LessonEditorBtn" type="Button" parent="MarginContainer/VBoxContainer"]
+[node name="LessonEditorBtn" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer"]
 custom_minimum_size = Vector2(300, 80)
 layout_mode = 2
 size_flags_horizontal = 0
@@ -104,7 +109,7 @@ theme_override_font_sizes/font_size = 30
 text = "Exercise Editor"
 script = SubResource("GDScript_hpd8f")
 
-[node name="SettingsBtn" type="Button" parent="MarginContainer/VBoxContainer"]
+[node name="SettingsBtn" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer"]
 custom_minimum_size = Vector2(300, 80)
 layout_mode = 2
 size_flags_horizontal = 0
@@ -113,7 +118,7 @@ theme_override_font_sizes/font_size = 30
 text = "Settings"
 script = SubResource("GDScript_d0c1b")
 
-[node name="ExitBtn" type="Button" parent="MarginContainer/VBoxContainer"]
+[node name="ExitBtn" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer"]
 custom_minimum_size = Vector2(300, 80)
 layout_mode = 2
 size_flags_horizontal = 0
@@ -122,11 +127,11 @@ theme_override_font_sizes/font_size = 30
 text = "Exit"
 script = SubResource("GDScript_l5vsv")
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+[node name="HBoxContainer2" type="HBoxContainer" parent="MarginContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 alignment = 2
 
-[node name="TestGameBtn" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer2"]
+[node name="TestGameBtn" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer2"]
 visible = false
 custom_minimum_size = Vector2(400, 120)
 layout_mode = 2
@@ -135,6 +140,14 @@ size_flags_vertical = 4
 theme_override_font_sizes/font_size = 30
 text = "Test Game"
 script = SubResource("GDScript_08pft")
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="MarginContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="Stats" parent="MarginContainer/HBoxContainer/VBoxContainer2" instance=ExtResource("4_he4w6")]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 6
 
 [node name="SettingsMenu" parent="." instance=ExtResource("4_ij5vr")]
 visible = false
@@ -147,7 +160,7 @@ anchor_left = 1.0
 anchor_right = 1.0
 grow_horizontal = 0
 
-[connection signal="pressed" from="MarginContainer/VBoxContainer/PlayGroundBtn" to="MarginContainer/VBoxContainer/PlayGroundBtn" method="_on_pressed"]
-[connection signal="pressed" from="MarginContainer/VBoxContainer/LessonEditorBtn" to="MarginContainer/VBoxContainer/LessonEditorBtn" method="_on_pressed"]
-[connection signal="pressed" from="MarginContainer/VBoxContainer/SettingsBtn" to="MarginContainer/VBoxContainer/SettingsBtn" method="_on_pressed"]
-[connection signal="pressed" from="MarginContainer/VBoxContainer/ExitBtn" to="MarginContainer/VBoxContainer/ExitBtn" method="_on_pressed"]
+[connection signal="pressed" from="MarginContainer/HBoxContainer/VBoxContainer/PlayGroundBtn" to="MarginContainer/HBoxContainer/VBoxContainer/PlayGroundBtn" method="_on_pressed"]
+[connection signal="pressed" from="MarginContainer/HBoxContainer/VBoxContainer/LessonEditorBtn" to="MarginContainer/HBoxContainer/VBoxContainer/LessonEditorBtn" method="_on_pressed"]
+[connection signal="pressed" from="MarginContainer/HBoxContainer/VBoxContainer/SettingsBtn" to="MarginContainer/HBoxContainer/VBoxContainer/SettingsBtn" method="_on_pressed"]
+[connection signal="pressed" from="MarginContainer/HBoxContainer/VBoxContainer/ExitBtn" to="MarginContainer/HBoxContainer/VBoxContainer/ExitBtn" method="_on_pressed"]

@@ -7,6 +7,7 @@ extends Control
 @onready var status: Label = %Status
 @onready var accuracy: AccuracyLabel = %Accuracy
 @onready var keyboard: Control = %Keyboard
+@onready var char_per_min: Label = %CharPerMin
 
 var current_exercise_text = ''
 
@@ -27,6 +28,14 @@ var difficulty = 'basic'
 func _ready():
 	EventBus.exercise_line_finished.connect(self._on_exercise_line_finished)
 	EventBus.finished_all_difficulty_lessons.connect(self._finished_all_difficulty_lessons)
+	EventBus.lesson_finished.connect(
+		func(lesson_number: int, difficulty: String):
+			UserProfileManager.save_stats(
+				accuracy.percentage, 
+				char_per_min.cpm,
+				lesson_number, difficulty
+			)
+	)
 	_start_lesson()
 
 func _start_lesson():

@@ -7,4 +7,5 @@ extends TextureRect
 func _ready() -> void:
 	randomize()
 	if is_random:
-		texture
+#		texture
+		pass

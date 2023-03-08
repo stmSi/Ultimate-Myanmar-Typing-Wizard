@@ -59,7 +59,7 @@ func _animate_appear():
 	# Animate Panel first using "scene_change_bg" group
 	# then Elements "scene_change_element"
 
-	var scene_change_bg_modulate_colors = [] # save original color
+#	var scene_change_bg_modulate_colors = [] # save original color
 	var scene_change_bg = get_tree().get_nodes_in_group('scene_change_bg')
 	for n in scene_change_bg:
 #		scene_change_bg_modulate_colors.push_back(n.modulate)
@@ -67,7 +67,7 @@ func _animate_appear():
 		n.modulate.a = 0
 #		n.scale = Vector2(0, 0)
 		
-	var scene_change_elements_modulate_colors = [] # save original color
+#	var scene_change_elements_modulate_colors = [] # save original color
 	var scene_change_elements = get_tree().get_nodes_in_group('scene_change_element')
 	for n in scene_change_elements:
 #		scene_change_elements_modulate_colors.push_back(n.modulate)
@@ -82,6 +82,8 @@ func _animate_appear():
 		bg_tween.tween_property(n, "scale", Vector2(1,1), .1)
 	await bg_tween.finished
 	
+	bg_tween = get_tree().create_tween()
+	bg_tween.set_parallel(true)
 	for n in scene_change_elements:
 		bg_tween = get_tree().create_tween()
 		bg_tween.tween_property(n, "modulate", Color.WHITE, .1)

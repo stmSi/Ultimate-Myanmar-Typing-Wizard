@@ -1,0 +1,33 @@
+[gd_scene load_steps=2 format=3 uid="uid://dt77txqgdnenu"]
+
+[ext_resource type="Script" path="res://src/Stats/lesson_progress.gd" id="1_cdrag"]
+
+[node name="LessonProgress" type="VBoxContainer"]
+offset_right = 405.0
+offset_bottom = 27.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("1_cdrag")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="RichTextLabel" type="RichTextLabel" parent="HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+bbcode_enabled = true
+text = "Hello:"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+
+[node name="ProgressBar" type="ProgressBar" parent="HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(400, 0)
+layout_mode = 2
+
+[node name="LessonsDone" type="Label" parent="HBoxContainer"]
+layout_mode = 2

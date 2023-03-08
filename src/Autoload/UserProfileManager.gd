@@ -164,7 +164,7 @@ func load_mistakes() -> Array:
 	# 		{another_w_char: how_many_times, "last_time": last_time_mistake}
 	#	]},
 	# ]
-	var mistakes = []
+	var _mistakes = []
 	if not save_file:
 		save_file = ConfigFile.new()
 
@@ -175,11 +175,11 @@ func load_mistakes() -> Array:
 	
 	var correct_chars = save_file.get_section_keys("Mistakes")
 	for c in correct_chars:
-		mistakes.append({
+		_mistakes.append({
 			c: save_file.get_value("Mistakes", c, []) 
 		})
 	
-	return mistakes
+	return _mistakes
 
 
 func save_stats(accuracy: float, char_per_min: int, lesson_number: int, difficulty: String) -> bool:
@@ -226,4 +226,3 @@ func load_stats() -> Array:
 		})
 	
 	return stats
-

@@ -1,0 +1,34 @@
+[gd_scene load_steps=4 format=3 uid="uid://cutg85e3pxlo4"]
+
+[ext_resource type="Script" path="res://src/Stats/AccuracyProgressRadical.gd" id="1_b7qi6"]
+[ext_resource type="Texture2D" uid="uid://wau8500dvno0" path="res://Assets/RadicalProgress/radical_under.png" id="2_e4d7n"]
+[ext_resource type="Texture2D" uid="uid://didesxh3b22rs" path="res://Assets/RadicalProgress/radical_progress_progress.png" id="3_br2iv"]
+
+[node name="AccuracyProgressRadical" type="VBoxContainer"]
+size_flags_horizontal = 4
+size_flags_vertical = 0
+script = ExtResource("1_b7qi6")
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="."]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 3
+value = 60.0
+fill_mode = 5
+texture_under = ExtResource("2_e4d7n")
+texture_progress = ExtResource("3_br2iv")
+
+[node name="PercentageLabel" type="Label" parent="TextureProgressBar"]
+layout_mode = 1
+offset_right = 100.0
+offset_bottom = 100.0
+text = "90.2 %"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Accuracy"
+horizontal_alignment = 1
+vertical_alignment = 1

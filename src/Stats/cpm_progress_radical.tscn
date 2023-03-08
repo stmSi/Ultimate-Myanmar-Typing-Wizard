@@ -1,0 +1,27 @@
+[gd_scene load_steps=2 format=3 uid="uid://c5xfv7x86npfh"]
+
+[ext_resource type="Script" path="res://src/Stats/cpm_progress_radical.gd" id="1_6nwq0"]
+
+[node name="CPMProgressRadical" type="VBoxContainer"]
+size_flags_horizontal = 4
+size_flags_vertical = 0
+script = ExtResource("1_6nwq0")
+professional_cpm_color = Color(1, 0.501961, 0.262745, 1)
+
+[node name="CPM" type="RichTextLabel" parent="."]
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+bbcode_enabled = true
+text = "Character Per Min: 120"
+fit_content = true
+autowrap_mode = 0
+
+[node name="NextTarget" type="RichTextLabel" parent="."]
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+bbcode_enabled = true
+text = "Next Target: "
+fit_content = true
+autowrap_mode = 0

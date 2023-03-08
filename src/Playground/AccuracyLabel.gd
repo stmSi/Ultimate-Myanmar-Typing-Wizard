@@ -29,13 +29,7 @@ func _ready() -> void:
 			num_wrongs = 0.0
 			_calculate_show()
 	)
-	
-	EventBus.lesson_finished.connect(
-		func(_l: int, _d : String):
-			num_corrects = 0.0
-			num_wrongs = 0.0
-			percentage = 100
-	)
+
 
 func _calculate_show():
 	var total = num_corrects + num_wrongs

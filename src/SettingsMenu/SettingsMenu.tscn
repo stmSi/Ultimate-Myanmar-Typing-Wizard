@@ -15,11 +15,29 @@ script/source = "extends OptionButton
 
 func _ready() -> void:
 	clear() # reset items
+	var current_resolution := DisplaySettings.get_screen_resolution()
+	
+	var recommended := false
 	for reso in DisplaySettings.resolutions:
-		add_item(reso)
-		var scr_size = reso.split(\" x \")
+		var scr_size_str = reso.split(\" x \")
+		var scr_size := Vector2i(int(scr_size_str[0]), int(scr_size_str[1]))
+		if not recommended and DisplaySettings.recommended_resolution >= scr_size:
+			add_item(reso + \" (Recommended)\")
+			recommended = true
+		else:
+			add_item(reso)
+	
+		if scr_size >= current_resolution:
+			select(item_count - 1)
+
+		set_item_metadata(item_count - 1, scr_size)
 		
-		
+
+
+
+func _on_item_selected(index: int) -> void:
+	DisplaySettings.change_screen_resolution(get_item_metadata(index))
+	pass # Replace with function body.
 "
 
 [node name="SettingsMenu" type="Control"]
@@ -112,5 +130,6 @@ custom_minimum_size = Vector2(140, 40)
 layout_mode = 2
 text = "Quit To Menu"
 
+[connection signal="item_selected" from="MarginContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer2/ResolutionOptions" to="MarginContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer2/ResolutionOptions" method="_on_item_selected"]
 [connection signal="item_selected" from="MarginContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/FPSOptionsContainer/FPSOptions" to="MarginContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/FPSOptionsContainer/FPSOptions" method="_on_item_selected"]
 [connection signal="pressed" from="MarginContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/QuitToMenu" to="." method="_on_quit_to_menu_pressed"]
