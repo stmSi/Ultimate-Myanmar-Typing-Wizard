@@ -1,6 +1,6 @@
 [gd_scene load_steps=24 format=3 uid="uid://d2kbd35uuv0p7"]
 
-[ext_resource type="Theme" uid="uid://b5qsicpdjgyu7" path="res://src/main.theme" id="1_r5sss"]
+[ext_resource type="Theme" uid="uid://dppj17ign8l2n" path="res://src/Themes/main.tres" id="1_7djnc"]
 [ext_resource type="Script" path="res://src/Playground/Playground.gd" id="1_tmfyy"]
 [ext_resource type="FontFile" uid="uid://chygow7my3v5g" path="res://Assets/Fonts/NotoSansMyanmar-Regular.ttf" id="2_dg17q"]
 [ext_resource type="PackedScene" uid="uid://bs3kuoiihonuk" path="res://src/Title/title.tscn" id="3_711yg"]
@@ -160,7 +160,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme = ExtResource("1_r5sss")
+theme = ExtResource("1_7djnc")
 script = ExtResource("1_tmfyy")
 
 [node name="Background" parent="." instance=ExtResource("3_rwjdf")]
