@@ -1,6 +1,6 @@
 [gd_scene load_steps=12 format=3 uid="uid://cnx3k4cy1imd"]
 
-[ext_resource type="Theme" uid="uid://b5qsicpdjgyu7" path="res://src/main.theme" id="1_uh4ao"]
+[ext_resource type="Theme" uid="uid://dppj17ign8l2n" path="res://src/Themes/main.tres" id="1_wgeyo"]
 [ext_resource type="Script" path="res://src/main.gd" id="1_xgqc1"]
 [ext_resource type="PackedScene" uid="uid://jlkyjmkbpshr" path="res://src/Background/background.tscn" id="3_j3ysy"]
 [ext_resource type="PackedScene" uid="uid://bdwpvsp2xyw50" path="res://src/SettingsMenu/SettingsMenu.tscn" id="4_ij5vr"]
@@ -60,7 +60,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme = ExtResource("1_uh4ao")
+theme = ExtResource("1_wgeyo")
 script = ExtResource("1_xgqc1")
 
 [node name="Background" parent="." instance=ExtResource("3_j3ysy")]
