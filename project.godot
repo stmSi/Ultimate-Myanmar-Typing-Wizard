@@ -32,16 +32,11 @@ DisplaySettings="*res://src/Autoload/DisplaySettings.gd"
 
 [display]
 
-window/size/viewport_width=1366
-window/size/viewport_height=768
-window/size/mode=2
 window/per_pixel_transparency/allowed=true
 
 [editor]
 
 script/search_in_file_extensions=PackedStringArray("gd", "gdshader", "tscn")
-version_control/plugin_name="GitPlugin"
-version_control/autoload_on_startup=true
 
 [editor_plugins]
 

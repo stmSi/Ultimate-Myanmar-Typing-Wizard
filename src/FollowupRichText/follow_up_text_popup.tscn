@@ -57,7 +57,6 @@ theme_override_font_sizes/normal_font_size = 21
 theme_override_font_sizes/bold_font_size = 21
 scroll_active = false
 autowrap_mode = 0
-current_char_color = Color(0.984314, 0.823529, 0, 1)
 current_char_bgcolor = Color(0, 0, 0, 0)
 
 [editable path="Panel/MarginContainer/FollowUpRichText"]

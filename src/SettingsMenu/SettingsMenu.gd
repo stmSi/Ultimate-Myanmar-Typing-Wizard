@@ -5,6 +5,7 @@ var main_tween : Tween
 
 func _ready() -> void:
 	EventBus.open_settings_menu.connect(self._open)
+
 	visible = false
 
 func _unhandled_input(event: InputEvent) -> void:

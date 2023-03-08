@@ -74,7 +74,8 @@ func _calculate_time_taken():
 		for t in times_taken:
 			total_in_sec += t
 		
-		self.text = str(roundf(times_taken.size() / (total_in_sec)))
+		cpm = str(roundf(times_taken.size() / (total_in_sec)))
+		self.text = cpm
 	
 	if times_taken.size() > max_chars_to_calculate:
 		times_taken.pop_front()
@@ -198,6 +199,7 @@ custom_minimum_size = Vector2(800, 80)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 8
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_fonts/normal_font = ExtResource("2_dg17q")
 theme_override_fonts/bold_font = ExtResource("2_dg17q")
 theme_override_font_sizes/normal_font_size = 30
