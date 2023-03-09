@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://dusuxw5u4uhul"]
+[gd_scene load_steps=19 format=3 uid="uid://dusuxw5u4uhul"]
 
 [ext_resource type="Theme" uid="uid://dppj17ign8l2n" path="res://src/Themes/main.tres" id="1_p01ag"]
 [ext_resource type="Script" path="res://src/ExerciseEditor/exercise_editor.gd" id="1_sslhb"]
@@ -18,22 +18,13 @@ unicode = 110
 [sub_resource type="Shortcut" id="Shortcut_jhxwp"]
 events = [SubResource("InputEventKey_iny2v")]
 
-[sub_resource type="InputEventKey" id="InputEventKey_ebxkm"]
-device = -1
-ctrl_pressed = true
-keycode = 80
-unicode = 112
-
-[sub_resource type="Shortcut" id="Shortcut_8v06n"]
-events = [SubResource("InputEventKey_ebxkm")]
-
 [sub_resource type="GDScript" id="GDScript_5es36"]
 script/source = "extends Button
 
 
 
 func _on_pressed() -> void:
-	SceneChanger.change_to_playground_scene()
+	SceneChanger.change_to_main_scene()
 	pass # Replace with function body.
 "
 
@@ -152,7 +143,7 @@ layout_mode = 2
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
-text = "Custom Exercises"
+text = "Extra Exercises"
 
 [node name="PanelContainer2" type="PanelContainer" parent="MarginContainer2/VBoxContainer/HBoxContainer/VBoxContainer/DifficulitiesButtons"]
 custom_minimum_size = Vector2(0, 2)
@@ -196,12 +187,10 @@ shortcut = SubResource("Shortcut_jhxwp")
 text = "Add New 
 (Ctrl+N)"
 
-[node name="PlaygroundBtn" type="Button" parent="MarginContainer2/VBoxContainer/HBoxContainer/VBoxContainer" groups=["scene_change_element"]]
+[node name="ExitToMenuBtn" type="Button" parent="MarginContainer2/VBoxContainer/HBoxContainer/VBoxContainer" groups=["scene_change_element"]]
 custom_minimum_size = Vector2(200, 60)
 layout_mode = 2
-shortcut = SubResource("Shortcut_8v06n")
-text = "Go to Playground
-(Ctrl+P)"
+text = "Exit To Menu"
 script = SubResource("GDScript_5es36")
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="MarginContainer2/VBoxContainer/HBoxContainer"]
@@ -399,7 +388,7 @@ grow_horizontal = 0
 [connection signal="item_selected" from="MarginContainer2/VBoxContainer/HBoxContainer/VBoxContainer/LessonIds" to="." method="_on_lesson_ids_item_selected"]
 [connection signal="swap_lesson" from="MarginContainer2/VBoxContainer/HBoxContainer/VBoxContainer/LessonIds" to="." method="_on_lesson_ids_swap_lesson"]
 [connection signal="pressed" from="MarginContainer2/VBoxContainer/HBoxContainer/VBoxContainer/AddNewLessonsFileBtn" to="." method="_on_add_lessons_file_btn_pressed"]
-[connection signal="pressed" from="MarginContainer2/VBoxContainer/HBoxContainer/VBoxContainer/PlaygroundBtn" to="MarginContainer2/VBoxContainer/HBoxContainer/VBoxContainer/PlaygroundBtn" method="_on_pressed"]
+[connection signal="pressed" from="MarginContainer2/VBoxContainer/HBoxContainer/VBoxContainer/ExitToMenuBtn" to="MarginContainer2/VBoxContainer/HBoxContainer/VBoxContainer/ExitToMenuBtn" method="_on_pressed"]
 [connection signal="value_changed" from="MarginContainer2/VBoxContainer/HBoxContainer/VBoxContainer2/LessonSettingsContainer/RepeatContainer/RepeatsBox" to="." method="_on_repeats_box_value_changed"]
 [connection signal="value_changed" from="MarginContainer2/VBoxContainer/HBoxContainer/VBoxContainer2/LessonSettingsContainer/AllowableContainer/AllowMistakesBox" to="." method="_on_allow_mistakes_box_value_changed"]
 [connection signal="toggled" from="MarginContainer2/VBoxContainer/HBoxContainer/VBoxContainer2/LessonSettingsContainer/RandomizeContainer/RandomizeCheck" to="." method="_on_randomize_check_toggled"]

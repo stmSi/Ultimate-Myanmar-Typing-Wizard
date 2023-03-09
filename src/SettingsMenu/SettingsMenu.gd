@@ -52,6 +52,5 @@ func _close():
 	visible = false
 
 
-func _on_quit_to_menu_pressed() -> void:
-	SceneChanger.change_to_main_scene()
-	pass # Replace with function body.
+func _on_close_pressed() -> void:
+	_close()

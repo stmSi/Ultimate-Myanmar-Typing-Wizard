@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://d2kbd35uuv0p7"]
+[gd_scene load_steps=22 format=3 uid="uid://d2kbd35uuv0p7"]
 
 [ext_resource type="Theme" uid="uid://dppj17ign8l2n" path="res://src/Themes/main.tres" id="1_7djnc"]
 [ext_resource type="Script" path="res://src/Playground/Playground.gd" id="1_tmfyy"]
@@ -84,20 +84,11 @@ func _calculate_time_taken():
 
 "
 
-[sub_resource type="InputEventKey" id="InputEventKey_6kkqb"]
-device = -1
-ctrl_pressed = true
-keycode = 69
-unicode = 101
-
-[sub_resource type="Shortcut" id="Shortcut_jpkyy"]
-events = [SubResource("InputEventKey_6kkqb")]
-
 [sub_resource type="GDScript" id="GDScript_r5ri8"]
 script/source = "extends Button
 
 func _on_pressed() -> void:
-	SceneChanger.change_to_exercise_editor_scene()
+	SceneChanger.change_to_main_scene()
 	pass # Replace with function body.
 "
 
@@ -287,13 +278,11 @@ size_flags_vertical = 1
 layout_mode = 2
 size_flags_vertical = 8
 
-[node name="ExerciseEditorBtn" type="Button" parent="MarginContainer/VBoxContainer/BottomButtonsContainer" groups=["scene_change_element"]]
+[node name="ExitToMenu" type="Button" parent="MarginContainer/VBoxContainer/BottomButtonsContainer" groups=["scene_change_element"]]
 custom_minimum_size = Vector2(200, 60)
 layout_mode = 2
 size_flags_horizontal = 0
-shortcut = SubResource("Shortcut_jpkyy")
-text = "Exercise Editor
-(Ctrl+E)"
+text = "Exit to Menu"
 script = SubResource("GDScript_r5ri8")
 
 [node name="AudioBtn" type="TextureButton" parent="MarginContainer/VBoxContainer/BottomButtonsContainer" groups=["scene_change_element"]]
@@ -332,5 +321,5 @@ anchor_right = 1.0
 grow_horizontal = 0
 
 [connection signal="text_changed" from="MarginContainer/VBoxContainer/LineEdit" to="." method="_on_text_edit_text_changed"]
-[connection signal="pressed" from="MarginContainer/VBoxContainer/BottomButtonsContainer/ExerciseEditorBtn" to="MarginContainer/VBoxContainer/BottomButtonsContainer/ExerciseEditorBtn" method="_on_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/BottomButtonsContainer/ExitToMenu" to="MarginContainer/VBoxContainer/BottomButtonsContainer/ExitToMenu" method="_on_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/BottomButtonsContainer/AudioBtn" to="MarginContainer/VBoxContainer/BottomButtonsContainer/AudioBtn" method="_on_pressed"]

@@ -32,7 +32,6 @@ func _ready() -> void:
 	for timestamp in stat:
 		cpm = stat[timestamp]['char_per_min']
 	
-	cpm = 190
 	cpm_lbl.clear()
 	next_target.clear()
 	cpm_lbl.add_text("Character Per Min (CPM): ")

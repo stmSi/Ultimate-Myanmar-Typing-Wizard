@@ -22,9 +22,8 @@ var allow_mistakes_percent = 80 # percentage
 var exercises = []
 var exercise_idx = 0
 
-
 var difficulty = 'basic'
-
+var is_progressing_lesson := true
 func _ready():
 	EventBus.exercise_line_finished.connect(self._on_exercise_line_finished)
 	EventBus.finished_all_difficulty_lessons.connect(self._finished_all_difficulty_lessons)
@@ -36,9 +35,38 @@ func _ready():
 				lesson_number, difficulty
 			)
 	)
-	_start_lesson()
+	
+	if is_progressing_lesson:
+		_start_lesson_progress()
+	else:
+		_start_extra_lesson()
 
-func _start_lesson():
+func _start_extra_lesson():
+	line_edit.grab_focus()
+	lesson_ids = []
+	exercises = []
+	lesson_idx = 0
+	exercise_idx = 0
+	
+	difficulty = "extra"
+	
+
+	lesson_idx = 1;
+	var next_lesson = LessonAccess.get_extra_exercise(lesson_idx, difficulty)
+	if next_lesson == {}:
+#			EventBus.message_popup.emit('No More lesson available')
+		EventBus.message_popup.emit("Error: No Extra Exercises.")
+		return
+
+
+	var files: PackedStringArray = LessonAccess.get_lesson_files(difficulty)
+	files.sort()
+	for f in files:
+		lesson_ids.push_back(f.get_basename().get_file())
+	_load_exercise()
+
+
+func _start_lesson_progress():
 	line_edit.grab_focus()
 	lesson_ids = []
 	exercises = []
@@ -75,8 +103,8 @@ func _start_lesson():
 	_load_exercise()
 
 func _on_exercise_line_finished():
-	
 	_load_exercise()
+
 
 func _load_lesson():
 	if lesson_ids.size() == lesson_idx:
@@ -118,7 +146,8 @@ func _load_exercise():
 			exercise_idx = 0
 			repeats -= 1
 		else: # Fetch Next Lesson
-			EventBus.lesson_finished.emit(int(lesson_ids[lesson_idx - 1]), difficulty)
+			if lesson_data != {}:
+				EventBus.lesson_finished.emit(int(lesson_ids[lesson_idx - 1]), difficulty)
 			_load_lesson()
 
 	
@@ -142,7 +171,7 @@ func _finished_all_difficulty_lessons():
 				"Made Too many mistakes."
 
 	EventBus.message_popup.emit(msg)
-	_start_lesson()
+	_start_lesson_progress()
 
 
 func _on_text_edit_text_changed(_t: String) -> void:
