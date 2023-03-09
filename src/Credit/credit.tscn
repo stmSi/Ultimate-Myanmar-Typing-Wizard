@@ -1,0 +1,24 @@
+[gd_scene load_steps=2 format=3 uid="uid://dv4nca1f6kjlv"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5v3y7"]
+bg_color = Color(0.0980392, 0.0980392, 0.0980392, 0.176471)
+
+[node name="Credit" type="PanelContainer"]
+theme_override_styles/panel = SubResource("StyleBoxFlat_5v3y7")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "Created by : Si Thu Myo 
+https://github.com/stmSi/Ultimate-Myanmar-Typing-Wizard"
+
+[node name="Label3" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "___________"
+
+[node name="Label2" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "Background Image created by: Matt Bango 
+https://stocksnap.io/photo/green-bokeh-47NFTZ4OCW"
