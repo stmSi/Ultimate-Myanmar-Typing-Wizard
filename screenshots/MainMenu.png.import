@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dqkawankpykjo"
-path="res://.godot/imported/ExerciseEditor_02.png-d0aa82bad853dca425eea0a1f62c5790.ctex"
+uid="uid://bxkjfnvf7ivyv"
+path="res://.godot/imported/MainMenu.png-c2cc35a1c7797fe1363db36d00c2ba2c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://screenshots/ExerciseEditor_02.png"
-dest_files=["res://.godot/imported/ExerciseEditor_02.png-d0aa82bad853dca425eea0a1f62c5790.ctex"]
+source_file="res://screenshots/MainMenu.png"
+dest_files=["res://.godot/imported/MainMenu.png-c2cc35a1c7797fe1363db36d00c2ba2c.ctex"]
 
 [params]
 

@@ -20,5 +20,4 @@ text = "___________"
 
 [node name="Label2" type="Label" parent="VBoxContainer"]
 layout_mode = 2
-text = "Background Image created by: Matt Bango 
-https://stocksnap.io/photo/green-bokeh-47NFTZ4OCW"
+text = "Background Image created by: Matt Bango "

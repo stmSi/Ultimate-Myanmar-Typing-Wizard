@@ -21,11 +21,15 @@ If you want to download `latest` commit build (may not be stable and produce err
 
 ---
 
-### **Exercise Editor Screenshots**
+### **Main Menu Screenshot**
+
+![](screenshots/MainMenu.png)
+
+---
+
+### **Exercise Editor Screenshot**
 
 ![](screenshots/ExerciseEditor.png)
-
-<!-- ![](screenshots/ExerciseEditor_02.png) -->
 
 ---
 
