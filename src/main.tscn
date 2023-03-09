@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://cnx3k4cy1imd"]
+[gd_scene load_steps=14 format=3 uid="uid://cnx3k4cy1imd"]
 
 [ext_resource type="Theme" uid="uid://dppj17ign8l2n" path="res://src/Themes/main.tres" id="1_wgeyo"]
 [ext_resource type="Script" path="res://src/main.gd" id="1_xgqc1"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://ht8awqgvfuqm" path="res://src/Stats/stats.tscn" id="4_he4w6"]
 [ext_resource type="PackedScene" uid="uid://bdwpvsp2xyw50" path="res://src/SettingsMenu/SettingsMenu.tscn" id="4_ij5vr"]
 [ext_resource type="PackedScene" uid="uid://cc5rb1nafw717" path="res://src/FPSCounter/fps_counter.tscn" id="5_a5ebc"]
+[ext_resource type="PackedScene" uid="uid://dv4nca1f6kjlv" path="res://src/Credit/credit.tscn" id="7_vkm67"]
 
 [sub_resource type="Environment" id="Environment_3bxs1"]
 background_color = Color(0.423529, 0.423529, 0.423529, 1)
@@ -159,6 +160,18 @@ anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
 grow_horizontal = 0
+
+[node name="Credit" parent="." instance=ExtResource("7_vkm67")]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -462.0
+offset_top = -108.0
+grow_horizontal = 0
+grow_vertical = 0
 
 [connection signal="pressed" from="MarginContainer/HBoxContainer/VBoxContainer/PlayGroundBtn" to="MarginContainer/HBoxContainer/VBoxContainer/PlayGroundBtn" method="_on_pressed"]
 [connection signal="pressed" from="MarginContainer/HBoxContainer/VBoxContainer/LessonEditorBtn" to="MarginContainer/HBoxContainer/VBoxContainer/LessonEditorBtn" method="_on_pressed"]
