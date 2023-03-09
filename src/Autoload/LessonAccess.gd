@@ -21,6 +21,7 @@ func create_new_lesson_file(lesson_number: int, difficulty: String) -> bool:
 
 	return true
 
+
 func create_update_new_exercise(lesson_number: int, difficulty: String, lesson_data: Dictionary) -> bool:
 	var filepath = _get_lesson_filepath(lesson_number, difficulty)
 	
@@ -125,6 +126,7 @@ func delete_lesson_file(lesson_number: int, difficulty: String) -> bool:
 			return true
 	return false
 
+
 func get_next_lesson(current_lesson_number: int, difficulty: String) -> Array:
 	if get_lesson_files(difficulty).size() <= current_lesson_number:
 		if difficulty == "basic":
@@ -142,6 +144,7 @@ func get_next_lesson(current_lesson_number: int, difficulty: String) -> Array:
 		return [current_lesson_number + 1, difficulty]
 
 	return []
+
 
 func _get_lesson_filepath(lesson_number: int, difficulty: String) -> String:
 	# return -> ./Texts/Lessons/Basic/00000113.cfg
