@@ -27,8 +27,10 @@ func _ready() -> void:
 	)
 	
 	EventBus.lesson_finished.connect(func(lesson_number: int, difficulty: String):
-		save_lesson_progress(lesson_number, difficulty, true)
 		save_mistakes(mistakes["correct_chars"], mistakes["wrong_chars"], mistakes["timestamps"])
+		if difficulty == "extra":
+			return # don't save lesson progress on extra practice
+		save_lesson_progress(lesson_number, difficulty, true)
 	)
 	
 	
