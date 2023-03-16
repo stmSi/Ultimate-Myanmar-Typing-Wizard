@@ -50,8 +50,8 @@ func _ready() -> void:
 	pass
 
 
-func _on_toggled(button_pressed: bool) -> void:
-	GeneralSettings.set_popup_helper_disabled(button_pressed)
+func _on_toggled(btn_pressed: bool) -> void:
+	GeneralSettings.set_popup_helper_disabled(btn_pressed)
 	pass # Replace with function body.
 "
 

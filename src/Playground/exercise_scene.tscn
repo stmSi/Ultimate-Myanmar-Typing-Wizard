@@ -12,3 +12,8 @@ grow_vertical = 2
 
 [node name="Playground" parent="." instance=ExtResource("1_6h3nd")]
 layout_mode = 1
+
+[node name="Title" parent="Playground/MarginContainer/VBoxContainer/HBoxContainer" index="0"]
+text = "Practice"
+
+[editable path="Playground"]

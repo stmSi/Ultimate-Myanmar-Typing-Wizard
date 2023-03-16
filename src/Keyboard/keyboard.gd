@@ -72,8 +72,8 @@ func _input(event: InputEvent) -> void:
 			_reset_shifts()
 		
 
-func _on_current_char_changed(char: String):
-	current_char = char
+func _on_current_char_changed(c: String):
+	current_char = c
 	pending_shift_node = null
 	var shift = TextProcessor.need_shift(current_char)
 	if shift == "l_shift":
@@ -100,12 +100,12 @@ func _run_pending(use_shift: bool):
 	pass
 
 
-func _run_incorrect(char: String):
-	if key_node_mapping.has(char):
-		var incorrect_node = key_node_mapping[char]
+func _run_incorrect(c: String):
+	if key_node_mapping.has(c):
+		var incorrect_node = key_node_mapping[c]
 		incorrect_node.incorrect_animation()
 		
-		var shift = TextProcessor.need_shift(char)
+		var shift = TextProcessor.need_shift(c)
 		if shift == "l_shift":
 			l_shift.incorrect_animation()
 		elif shift == "r_shift":

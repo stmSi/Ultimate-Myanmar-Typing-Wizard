@@ -39,7 +39,7 @@ func _ready() -> void:
 	var level = ""
 	if cpm >= professional_cpm:
 		cpm_lbl.push_color(professional_cpm_color)
-		level = "Profession"
+		level = "Professional"
 		next_target.visible = false
 		
 	elif cpm >= average_cpm:

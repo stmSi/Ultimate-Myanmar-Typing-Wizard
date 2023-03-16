@@ -30,11 +30,11 @@ func _ready():
 	EventBus.exercise_line_finished.connect(self._on_exercise_line_finished)
 	EventBus.finished_all_difficulty_lessons.connect(self._finished_all_difficulty_lessons)
 	EventBus.lesson_finished.connect(
-		func(lesson_number: int, difficulty: String):
+		func(lesson_number: int, diff: String):
 			UserProfileManager.save_stats(
 				accuracy.percentage, 
 				int(char_per_min.cpm),
-				lesson_number, difficulty
+				lesson_number, diff
 			)
 	)
 	EventBus.settings_menu_closed.connect(line_edit.grab_focus)
