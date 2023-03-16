@@ -1,9 +1,11 @@
 extends Node
 
-var playground_scene = "res://src/Playground/Playground.tscn"
 var exercise_editor_scene = "res://src/ExerciseEditor/exercise_editor.tscn"
 var main_scene = "res://src/main.tscn"
 var test_game_scene = "res://src/MiniGames/TestGame/test_game.tscn"
+var playground_scene = "res://src/Playground/Playground.tscn"
+var take_lesson_scene = "res://src/Playground/take_lesson_scene.tscn"
+var take_exercise_scene = "res://src/Playground/exercise_scene.tscn"
 
 var current_scene = null
 
@@ -45,6 +47,13 @@ func _deferred_goto_scene(path: String):
 
 func change_to_playground_scene():
 	goto_scene(playground_scene)
+
+func change_to_take_lesson_scene():
+	goto_scene(take_lesson_scene)
+	
+func change_to_take_exercise_scene():
+	goto_scene(take_exercise_scene)
+
 
 func change_to_exercise_editor_scene():
 	goto_scene(exercise_editor_scene)

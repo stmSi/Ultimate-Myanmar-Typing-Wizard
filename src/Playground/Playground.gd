@@ -23,7 +23,7 @@ var exercises = []
 var exercise_idx = 0
 
 var difficulty = 'basic'
-var is_progressing_lesson := true
+@export var is_progressing_lesson := false
 
 
 func _ready():
@@ -53,16 +53,9 @@ func _start_extra_lesson():
 	difficulty = "extra"
 	
 
-	lesson_idx = 1;
-	var next_lesson = LessonAccess.get_extra_exercise(lesson_idx, difficulty)
-	if next_lesson == {}:
-#			EventBus.message_popup.emit('No More lesson available')
-		EventBus.message_popup.emit("Error: No Extra Exercises.")
+	lesson_idx = 0;
 
-		return
-
-
-	var files: PackedStringArray = LessonAccess.get_lesson_files(difficulty)
+	var files: PackedStringArray = LessonAccess.get_lesson_files('extra')
 	files.sort()
 	for f in files:
 		lesson_ids.push_back(f.get_basename().get_file())
@@ -85,7 +78,10 @@ func _start_lesson_progress():
 			lesson_progress['difficulty']
 		)
 		if next_lesson == []:
-			EventBus.message_popup.emit('No More lesson available.')
+			EventBus.message_popup.emit(
+				'No More lesson available.', 
+				SceneChanger.change_to_main_scene # Call when OK button pressed
+			)
 #			SceneChanger.change_to_main_scene()
 			return
 		lesson_idx = next_lesson[0] - 1 # index are off by one

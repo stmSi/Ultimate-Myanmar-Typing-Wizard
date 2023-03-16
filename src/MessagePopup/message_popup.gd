@@ -4,14 +4,15 @@ extends VBoxContainer
 @onready var margin_container: MarginContainer = $MarginContainer
 @onready var ok_btn: Button = %OkBtn
 
+
 func _ready() -> void:
 	add_to_group('msg_popups')
 #	get_tree().paused = true
 
 
 func set_msg(msg: String) -> void:
-	message_lbl.text = msg
-	ok_btn.grab_focus()
+	%MessageLbl.text = msg
+	%OkBtn.grab_focus()
 	$AnimationPlayer.play('open')
 	await $AnimationPlayer.animation_finished
 	$AnimationPlayer.play('running')

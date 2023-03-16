@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://cnx3k4cy1imd"]
+[gd_scene load_steps=15 format=3 uid="uid://cnx3k4cy1imd"]
 
 [ext_resource type="Theme" uid="uid://dppj17ign8l2n" path="res://src/Themes/main.tres" id="1_wgeyo"]
 [ext_resource type="Script" path="res://src/main.gd" id="1_xgqc1"]
@@ -16,7 +16,15 @@ ambient_light_source = 2
 script/source = "extends CustomButton
 
 func _on_pressed() -> void:
-	SceneChanger.change_to_playground_scene()
+	SceneChanger.change_to_take_lesson_scene()
+	pass # R%TakeLessonBtneplace with function body.
+"
+
+[sub_resource type="GDScript" id="GDScript_dlcgn"]
+script/source = "extends CustomButton
+
+func _on_pressed() -> void:
+	SceneChanger.change_to_take_exercise_scene()
 	pass # R%TakeLessonBtneplace with function body.
 "
 
@@ -99,6 +107,16 @@ theme_override_font_sizes/font_size = 30
 text = "Take Lesson"
 script = SubResource("GDScript_6o4cl")
 
+[node name="ExerciseBtn" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(300, 80)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+theme_override_font_sizes/font_size = 30
+text = "Take Exercise"
+script = SubResource("GDScript_dlcgn")
+
 [node name="LessonEditorBtn" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer"]
 custom_minimum_size = Vector2(300, 80)
 layout_mode = 2
@@ -172,6 +190,7 @@ grow_horizontal = 0
 grow_vertical = 0
 
 [connection signal="pressed" from="MarginContainer/HBoxContainer/VBoxContainer/TakeLessonBtn" to="MarginContainer/HBoxContainer/VBoxContainer/TakeLessonBtn" method="_on_pressed"]
+[connection signal="pressed" from="MarginContainer/HBoxContainer/VBoxContainer/ExerciseBtn" to="MarginContainer/HBoxContainer/VBoxContainer/ExerciseBtn" method="_on_pressed"]
 [connection signal="pressed" from="MarginContainer/HBoxContainer/VBoxContainer/LessonEditorBtn" to="MarginContainer/HBoxContainer/VBoxContainer/LessonEditorBtn" method="_on_pressed"]
 [connection signal="pressed" from="MarginContainer/HBoxContainer/VBoxContainer/SettingsBtn" to="MarginContainer/HBoxContainer/VBoxContainer/SettingsBtn" method="_on_pressed"]
 [connection signal="pressed" from="MarginContainer/HBoxContainer/VBoxContainer/ExitBtn" to="MarginContainer/HBoxContainer/VBoxContainer/ExitBtn" method="_on_pressed"]
