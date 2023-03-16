@@ -25,7 +25,8 @@ func _ready() -> void:
 	EventBus.lesson_id_loaded.connect(self._on_new_lesson_id_loaded)
 	
 	EventBus.finished_all_difficulty_lessons.connect(func():
-		pending_node.reset_animation()
+		if pending_node:
+			pending_node.reset_animation()
 		_reset_shifts()
 	)
 
