@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://dusuxw5u4uhul"]
+[gd_scene load_steps=33 format=3 uid="uid://dusuxw5u4uhul"]
 
 [ext_resource type="Theme" uid="uid://dppj17ign8l2n" path="res://src/Themes/main.tres" id="1_p01ag"]
 [ext_resource type="Script" path="res://src/ExerciseEditor/exercise_editor.gd" id="1_sslhb"]
@@ -9,6 +9,26 @@
 [ext_resource type="PackedScene" uid="uid://bdwpvsp2xyw50" path="res://src/SettingsMenu/SettingsMenu.tscn" id="7_sqtqw"]
 [ext_resource type="PackedScene" uid="uid://cc5rb1nafw717" path="res://src/FPSCounter/fps_counter.tscn" id="8_vtx0r"]
 
+[sub_resource type="GDScript" id="GDScript_8ua3w"]
+script/source = "extends CustomButton
+"
+
+[sub_resource type="GDScript" id="GDScript_85bbl"]
+script/source = "extends CustomButton
+"
+
+[sub_resource type="GDScript" id="GDScript_ilpda"]
+script/source = "extends CustomButton
+"
+
+[sub_resource type="GDScript" id="GDScript_0sc1r"]
+script/source = "extends CustomButton
+"
+
+[sub_resource type="GDScript" id="GDScript_r4dsf"]
+script/source = "extends CustomButton
+"
+
 [sub_resource type="InputEventKey" id="InputEventKey_iny2v"]
 device = -1
 ctrl_pressed = true
@@ -18,14 +38,30 @@ unicode = 110
 [sub_resource type="Shortcut" id="Shortcut_jhxwp"]
 events = [SubResource("InputEventKey_iny2v")]
 
+[sub_resource type="GDScript" id="GDScript_y6yfr"]
+script/source = "extends CustomButton
+"
+
 [sub_resource type="GDScript" id="GDScript_5es36"]
-script/source = "extends Button
+script/source = "extends CustomButton
 
 
 
 func _on_pressed() -> void:
 	SceneChanger.change_to_main_scene()
 	pass # Replace with function body.
+"
+
+[sub_resource type="GDScript" id="GDScript_bibmp"]
+script/source = "extends CustomCheckButton
+"
+
+[sub_resource type="GDScript" id="GDScript_wmst2"]
+script/source = "extends CustomCheckButton
+"
+
+[sub_resource type="GDScript" id="GDScript_vipgk"]
+script/source = "extends CustomButton
 "
 
 [sub_resource type="GDScript" id="GDScript_lc0i3"]
@@ -44,6 +80,10 @@ func _on_text_changed(new_text: String) -> void:
 	pass # Replace with function body.
 "
 
+[sub_resource type="GDScript" id="GDScript_pfoee"]
+script/source = "extends CustomButton
+"
+
 [sub_resource type="InputEventKey" id="InputEventKey_ij67c"]
 device = -1
 shift_pressed = true
@@ -56,6 +96,14 @@ keycode = 4194308
 
 [sub_resource type="Shortcut" id="Shortcut_gols1"]
 events = [SubResource("InputEventKey_ij67c"), SubResource("InputEventKey_i8dfn")]
+
+[sub_resource type="GDScript" id="GDScript_44wu2"]
+script/source = "extends CustomButton
+"
+
+[sub_resource type="GDScript" id="GDScript_nn6nc"]
+script/source = "extends CustomButton
+"
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_t0445"]
 bg_color = Color(0.380392, 0.372549, 0.384314, 0.733333)
@@ -70,6 +118,14 @@ keycode = 4194305
 
 [sub_resource type="Shortcut" id="Shortcut_f83qm"]
 events = [SubResource("InputEventKey_js1in")]
+
+[sub_resource type="GDScript" id="GDScript_1gilc"]
+script/source = "extends CustomButton
+"
+
+[sub_resource type="GDScript" id="GDScript_88l7k"]
+script/source = "extends CustomButton
+"
 
 [node name="ExerciseEditor" type="Control"]
 layout_mode = 3
@@ -121,6 +177,7 @@ unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
 text = "Basic"
+script = SubResource("GDScript_8ua3w")
 
 [node name="IntermediateBtn" type="Button" parent="MarginContainer2/VBoxContainer/HBoxContainer/VBoxContainer/DifficulitiesButtons"]
 unique_name_in_owner = true
@@ -128,12 +185,14 @@ custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
 text = "Intermediate
 "
+script = SubResource("GDScript_85bbl")
 
 [node name="AdvancedBtn" type="Button" parent="MarginContainer2/VBoxContainer/HBoxContainer/VBoxContainer/DifficulitiesButtons"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
 text = "Advanced"
+script = SubResource("GDScript_ilpda")
 
 [node name="PanelContainer" type="PanelContainer" parent="MarginContainer2/VBoxContainer/HBoxContainer/VBoxContainer/DifficulitiesButtons"]
 custom_minimum_size = Vector2(0, 2)
@@ -144,6 +203,7 @@ unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
 text = "Extra Exercises"
+script = SubResource("GDScript_0sc1r")
 
 [node name="PanelContainer2" type="PanelContainer" parent="MarginContainer2/VBoxContainer/HBoxContainer/VBoxContainer/DifficulitiesButtons"]
 custom_minimum_size = Vector2(0, 2)
@@ -154,6 +214,7 @@ unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
 text = "Cancel"
+script = SubResource("GDScript_r4dsf")
 
 [node name="MarginContainer" type="MarginContainer" parent="MarginContainer2/VBoxContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
@@ -186,6 +247,7 @@ layout_mode = 2
 shortcut = SubResource("Shortcut_jhxwp")
 text = "Add New 
 (Ctrl+N)"
+script = SubResource("GDScript_y6yfr")
 
 [node name="ExitToMenuBtn" type="Button" parent="MarginContainer2/VBoxContainer/HBoxContainer/VBoxContainer" groups=["scene_change_element"]]
 custom_minimum_size = Vector2(200, 60)
@@ -240,6 +302,7 @@ unique_name_in_owner = true
 layout_mode = 2
 tooltip_text = "Randomize the exercise lines for trainee"
 text = "Randomize Lines"
+script = SubResource("GDScript_bibmp")
 
 [node name="HideKeyboardContainer" type="HBoxContainer" parent="MarginContainer2/VBoxContainer/HBoxContainer/VBoxContainer2/LessonSettingsContainer"]
 layout_mode = 2
@@ -250,6 +313,7 @@ unique_name_in_owner = true
 layout_mode = 2
 tooltip_text = "Randomize the exercise lines for trainee"
 text = "Hide Keyboard"
+script = SubResource("GDScript_wmst2")
 
 [node name="MessageContainer" type="HBoxContainer" parent="MarginContainer2/VBoxContainer/HBoxContainer/VBoxContainer2/LessonSettingsContainer"]
 layout_mode = 2
@@ -260,6 +324,7 @@ unique_name_in_owner = true
 custom_minimum_size = Vector2(200, 40)
 layout_mode = 2
 text = "Add Lesson Message"
+script = SubResource("GDScript_vipgk")
 
 [node name="LineListContainer" type="HBoxContainer" parent="MarginContainer2/VBoxContainer/HBoxContainer/VBoxContainer2"]
 layout_mode = 2
@@ -310,6 +375,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 text = "Add Line 
 (Enter)"
+script = SubResource("GDScript_pfoee")
 
 [node name="ResetBtn" type="Button" parent="MarginContainer2/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer" groups=["scene_change_element"]]
 unique_name_in_owner = true
@@ -318,6 +384,7 @@ layout_mode = 2
 shortcut = SubResource("Shortcut_gols1")
 text = "Reset 
 (Shift+Del/Backspace)"
+script = SubResource("GDScript_44wu2")
 
 [node name="RemoveLineBtn" type="Button" parent="MarginContainer2/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer" groups=["scene_change_element"]]
 unique_name_in_owner = true
@@ -325,6 +392,7 @@ custom_minimum_size = Vector2(220, 0)
 layout_mode = 2
 text = "Remove Line
 (Del)"
+script = SubResource("GDScript_nn6nc")
 
 [node name="AddLessonMessage" type="PanelContainer" parent="."]
 visible = false
@@ -361,12 +429,14 @@ size_flags_horizontal = 6
 size_flags_vertical = 8
 shortcut = SubResource("Shortcut_f83qm")
 text = "Cancel (ESC)"
+script = SubResource("GDScript_1gilc")
 
 [node name="SaveLessonMsgBtn" type="Button" parent="AddLessonMessage/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 6
 size_flags_vertical = 8
 text = "Save Lesson Message"
+script = SubResource("GDScript_88l7k")
 
 [node name="SettingsMenu" parent="." instance=ExtResource("7_sqtqw")]
 visible = false

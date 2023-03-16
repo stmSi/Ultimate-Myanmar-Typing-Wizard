@@ -85,7 +85,7 @@ func _calculate_time_taken():
 "
 
 [sub_resource type="GDScript" id="GDScript_r5ri8"]
-script/source = "extends Button
+script/source = "extends CustomButton
 
 func _on_pressed() -> void:
 	SceneChanger.change_to_main_scene()
@@ -196,7 +196,6 @@ theme_override_fonts/bold_font = ExtResource("2_dg17q")
 theme_override_font_sizes/normal_font_size = 30
 theme_override_font_sizes/bold_font_size = 30
 bbcode_enabled = true
-text = "Hello World မကလာတေ"
 shortcut_keys_enabled = false
 language = "my_MM"
 script = ExtResource("4_86oy8")
