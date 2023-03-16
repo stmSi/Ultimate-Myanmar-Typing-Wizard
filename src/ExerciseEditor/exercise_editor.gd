@@ -111,9 +111,7 @@ func _populate_files_list() -> void:
 	
 	# Scroll to bottom
 	if len(files) > 0:
-		lesson_ids.select(files.size() - 1)
-		lesson_ids.ensure_current_is_visible() 
-		lesson_ids.deselect_all()
+		_scroll_to_bottom(lesson_ids)
 	
 	# Reset lines_list, line_edit, button
 	_on_lines_list_empty_clicked()
@@ -167,9 +165,7 @@ func _on_lesson_ids_item_selected(index: int) -> void:
 		
 	# Scroll to bottom
 	if len(lines) > 0:
-		lines_list.select(len(lines) - 1)
-		lines_list.ensure_current_is_visible() 
-		lines_list.deselect_all()
+		_scroll_to_bottom(lines_list)
 	
 	# Reset lines_list, line_edit, button
 	_on_lines_list_empty_clicked()
@@ -266,21 +262,22 @@ func _save_lesson():
 #			"message": add_lesson_message_text_edit.text,
 		}
 	)
+	_scroll_to_bottom(lines_list)
 
 
-func _on_lines_list_delete_item_from_delete_key(idx) -> void:
+func _on_lines_list_delete_item_from_delete_key(_idx) -> void:
 	_on_remove_line_btn_pressed()
 
 
-func _on_repeats_box_value_changed(value: float) -> void:
+func _on_repeats_box_value_changed(_value: float) -> void:
 	_save_lesson()
 
 
-func _on_allow_mistakes_box_value_changed(value: float) -> void:
+func _on_allow_mistakes_box_value_changed(_value: float) -> void:
 	_save_lesson()
 
 
-func _on_randomize_check_toggled(button_pressed: bool) -> void:
+func _on_randomize_check_toggled(_button_pressed: bool) -> void:
 	_save_lesson()
 
 
@@ -349,7 +346,7 @@ func _on_lesson_ids_delete_lesson_from_delete_key(idx) -> void:
 
 
 
-func _on_hide_keyboard_check_toggled(button_pressed: bool) -> void:
+func _on_hide_keyboard_check_toggled(_button_pressed: bool) -> void:
 	_save_lesson()
 
 
@@ -362,3 +359,9 @@ func _toggle_disable_line_buttons(disabled: bool) -> void:
 	add_messsage_btn.disabled = disabled
 	pass
 
+func _scroll_to_bottom(list: ItemList):
+	var scrollbar: VScrollBar = list.get_v_scroll_bar()
+	scrollbar.allow_greater = true
+	scrollbar.value = scrollbar.max_value
+	scrollbar.allow_greater = false
+	
