@@ -23,6 +23,7 @@ signal message_popup_closed()
 signal lesson_id_loaded(lesson_id: int)
 
 signal open_settings_menu()
+signal settings_menu_closed()
 
 # Game Specific Events
 signal game_focus_enemy(enemy: Node2D)

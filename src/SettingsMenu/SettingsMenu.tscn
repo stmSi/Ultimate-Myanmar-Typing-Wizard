@@ -1,10 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://bdwpvsp2xyw50"]
+[gd_scene load_steps=7 format=3 uid="uid://bdwpvsp2xyw50"]
 
 [ext_resource type="Script" path="res://src/SettingsMenu/SettingsMenu.gd" id="1_lnpdd"]
 [ext_resource type="Script" path="res://src/SettingsMenu/FPSOptions.gd" id="2_o2ea0"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vu2je"]
-bg_color = Color(0.172549, 0.27451, 0.298039, 0.784314)
+bg_color = Color(0.172549, 0.372549, 0.396078, 0.952941)
 border_width_left = 3
 border_width_top = 3
 border_width_right = 3
@@ -37,6 +37,21 @@ func _ready() -> void:
 
 func _on_item_selected(index: int) -> void:
 	DisplaySettings.change_screen_resolution(get_item_metadata(index))
+	pass # Replace with function body.
+"
+
+[sub_resource type="Theme" id="Theme_80615"]
+
+[sub_resource type="GDScript" id="GDScript_fpfuc"]
+script/source = "extends CheckButton
+
+func _ready() -> void:
+	self.button_pressed = GeneralSettings.get_popup_helper_disabled()
+	pass
+
+
+func _on_toggled(button_pressed: bool) -> void:
+	GeneralSettings.set_popup_helper_disabled(button_pressed)
 	pass # Replace with function body.
 "
 
@@ -77,28 +92,32 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_vu2je")
 
 [node name="MarginContainer" type="MarginContainer" parent="MarginContainer/PanelContainer"]
 layout_mode = 2
-theme_override_constants/margin_left = 100
-theme_override_constants/margin_top = 100
-theme_override_constants/margin_right = 100
-theme_override_constants/margin_bottom = 100
+theme_override_constants/margin_left = 50
+theme_override_constants/margin_top = 50
+theme_override_constants/margin_right = 50
+theme_override_constants/margin_bottom = 50
 
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/PanelContainer/MarginContainer"]
 layout_mode = 2
+size_flags_horizontal = 4
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/PanelContainer/MarginContainer/HBoxContainer"]
 layout_mode = 2
+size_flags_vertical = 4
+theme_override_constants/separation = 20
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="MarginContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer"]
+[node name="ResolutioonContainer" type="HBoxContainer" parent="MarginContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_constants/separation = 20
 
-[node name="Label" type="Label" parent="MarginContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer2"]
+[node name="Label" type="Label" parent="MarginContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/ResolutioonContainer"]
 layout_mode = 2
 text = "Resolutions: "
 
-[node name="ResolutionOptions" type="OptionButton" parent="MarginContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer2"]
+[node name="ResolutionOptions" type="OptionButton" parent="MarginContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/ResolutioonContainer"]
 custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
+size_flags_horizontal = 10
 disabled = true
 item_count = 1
 selected = 0
@@ -127,11 +146,23 @@ popup/item_1/text = "30"
 popup/item_1/id = 1
 script = ExtResource("2_o2ea0")
 
+[node name="PopupHelperDisableContainer" type="HBoxContainer" parent="MarginContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="PopupHelperDisable" type="CheckButton" parent="MarginContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/PopupHelperDisableContainer"]
+layout_mode = 2
+theme = SubResource("Theme_80615")
+text = "Hide Typing Helper Popup"
+script = SubResource("GDScript_fpfuc")
+
 [node name="Close" type="Button" parent="MarginContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer"]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(140, 40)
 layout_mode = 2
 text = "Close"
 
-[connection signal="item_selected" from="MarginContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer2/ResolutionOptions" to="MarginContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer2/ResolutionOptions" method="_on_item_selected"]
+[connection signal="item_selected" from="MarginContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/ResolutioonContainer/ResolutionOptions" to="MarginContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/ResolutioonContainer/ResolutionOptions" method="_on_item_selected"]
 [connection signal="item_selected" from="MarginContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/FPSOptionsContainer/FPSOptions" to="MarginContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/FPSOptionsContainer/FPSOptions" method="_on_item_selected"]
+[connection signal="toggled" from="MarginContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/PopupHelperDisableContainer/PopupHelperDisable" to="MarginContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/PopupHelperDisableContainer/PopupHelperDisable" method="_on_toggled"]
 [connection signal="pressed" from="MarginContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/Close" to="." method="_on_close_pressed"]
