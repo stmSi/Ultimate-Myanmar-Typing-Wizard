@@ -210,6 +210,7 @@ func _on_add_update_line_btn_pressed() -> void:
 	else:
 		# Add
 		lines_list.add_item(line_edit.text)
+		_scroll_to_bottom(lines_list)
 	_save_lesson()
 	
 	# Reset shit
@@ -262,7 +263,6 @@ func _save_lesson():
 #			"message": add_lesson_message_text_edit.text,
 		}
 	)
-	_scroll_to_bottom(lines_list)
 
 
 func _on_lines_list_delete_item_from_delete_key(_idx) -> void:
