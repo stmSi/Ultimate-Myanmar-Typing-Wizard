@@ -1,6 +1,7 @@
-[gd_scene load_steps=13 format=3 uid="uid://d3rkoaljyut67"]
+[gd_scene load_steps=14 format=3 uid="uid://d3rkoaljyut67"]
 
 [ext_resource type="Script" path="res://src/MessagePopup/message_popup.gd" id="1_a15ho"]
+[ext_resource type="Theme" uid="uid://dppj17ign8l2n" path="res://src/Themes/main.tres" id="1_b0qp7"]
 [ext_resource type="FontFile" uid="uid://chygow7my3v5g" path="res://Assets/Fonts/NotoSansMyanmar-Regular.ttf" id="2_kx8ah"]
 [ext_resource type="FontFile" uid="uid://bkjly6r2w700w" path="res://Assets/Fonts/NotoSerifMyanmar-Bold.ttf" id="3_cm63e"]
 
@@ -225,6 +226,7 @@ scale = Vector2(1e-05, 1e-05)
 pivot_offset = Vector2(250, 510)
 size_flags_horizontal = 6
 size_flags_vertical = 6
+theme = ExtResource("1_b0qp7")
 alignment = 1
 script = ExtResource("1_a15ho")
 
