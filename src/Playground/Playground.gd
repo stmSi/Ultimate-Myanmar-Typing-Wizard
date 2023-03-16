@@ -24,6 +24,8 @@ var exercise_idx = 0
 
 var difficulty = 'basic'
 var is_progressing_lesson := true
+
+
 func _ready():
 	EventBus.exercise_line_finished.connect(self._on_exercise_line_finished)
 	EventBus.finished_all_difficulty_lessons.connect(self._finished_all_difficulty_lessons)
@@ -31,7 +33,7 @@ func _ready():
 		func(lesson_number: int, difficulty: String):
 			UserProfileManager.save_stats(
 				accuracy.percentage, 
-				char_per_min.cpm,
+				int(char_per_min.cpm),
 				lesson_number, difficulty
 			)
 	)
@@ -56,6 +58,7 @@ func _start_extra_lesson():
 	if next_lesson == {}:
 #			EventBus.message_popup.emit('No More lesson available')
 		EventBus.message_popup.emit("Error: No Extra Exercises.")
+
 		return
 
 
@@ -82,13 +85,8 @@ func _start_lesson_progress():
 			lesson_progress['difficulty']
 		)
 		if next_lesson == []:
-#			EventBus.message_popup.emit('No More lesson available')
-			EventBus.message_popup.emit(
-				"Error: difficulty '" \
-				+ difficulty.capitalize() \
-				+ "' is has no lessons. \r\n" + \
-				"Use Exercise Editor to create Lessons and Exercises."
-			)
+			EventBus.message_popup.emit('No More lesson available.')
+#			SceneChanger.change_to_main_scene()
 			return
 		lesson_idx = next_lesson[0] - 1 # index are off by one
 		difficulty = next_lesson[1]
@@ -150,7 +148,8 @@ func _load_exercise():
 				EventBus.lesson_finished.emit(int(lesson_ids[lesson_idx - 1]), difficulty)
 			_load_lesson()
 
-	
+	if exercises.size() <= exercise_idx:
+		return
 	current_exercise_text = exercises[exercise_idx]
 	exercise_idx += 1
 	
