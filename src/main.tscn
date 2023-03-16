@@ -107,14 +107,14 @@ theme_override_font_sizes/font_size = 30
 text = "Take Lesson"
 script = SubResource("GDScript_6o4cl")
 
-[node name="ExerciseBtn" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer"]
+[node name="PracticeBtn" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(300, 80)
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 4
 theme_override_font_sizes/font_size = 30
-text = "Take Exercise"
+text = "Practice"
 script = SubResource("GDScript_dlcgn")
 
 [node name="LessonEditorBtn" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer"]
@@ -190,7 +190,7 @@ grow_horizontal = 0
 grow_vertical = 0
 
 [connection signal="pressed" from="MarginContainer/HBoxContainer/VBoxContainer/TakeLessonBtn" to="MarginContainer/HBoxContainer/VBoxContainer/TakeLessonBtn" method="_on_pressed"]
-[connection signal="pressed" from="MarginContainer/HBoxContainer/VBoxContainer/ExerciseBtn" to="MarginContainer/HBoxContainer/VBoxContainer/ExerciseBtn" method="_on_pressed"]
+[connection signal="pressed" from="MarginContainer/HBoxContainer/VBoxContainer/PracticeBtn" to="MarginContainer/HBoxContainer/VBoxContainer/PracticeBtn" method="_on_pressed"]
 [connection signal="pressed" from="MarginContainer/HBoxContainer/VBoxContainer/LessonEditorBtn" to="MarginContainer/HBoxContainer/VBoxContainer/LessonEditorBtn" method="_on_pressed"]
 [connection signal="pressed" from="MarginContainer/HBoxContainer/VBoxContainer/SettingsBtn" to="MarginContainer/HBoxContainer/VBoxContainer/SettingsBtn" method="_on_pressed"]
 [connection signal="pressed" from="MarginContainer/HBoxContainer/VBoxContainer/ExitBtn" to="MarginContainer/HBoxContainer/VBoxContainer/ExitBtn" method="_on_pressed"]

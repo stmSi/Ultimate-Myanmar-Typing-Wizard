@@ -13,3 +13,8 @@ grow_vertical = 2
 [node name="Playground" parent="." instance=ExtResource("1_pfip3")]
 layout_mode = 1
 is_progressing_lesson = true
+
+[node name="Title" parent="Playground/MarginContainer/VBoxContainer/HBoxContainer" index="0"]
+text = "Lessons"
+
+[editable path="Playground"]
