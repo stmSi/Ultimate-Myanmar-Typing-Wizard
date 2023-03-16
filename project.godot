@@ -26,9 +26,10 @@ EngToMmConverter="*res://src/Autoload/EngToMMConverter.gd"
 SceneChanger="*res://src/Autoload/SceneChanger.gd"
 LessonAccess="*res://src/Autoload/LessonAccess.gd"
 MessagePopupManager="*res://src/Autoload/MessagePopupManager.gd"
-SoundSettings="*res://src/Autoload/SoundSettings.gd"
 UserProfileManager="*res://src/Autoload/UserProfileManager.gd"
+SoundSettings="*res://src/Autoload/SoundSettings.gd"
 DisplaySettings="*res://src/Autoload/DisplaySettings.gd"
+GeneralSettings="*res://src/Autoload/GeneralSettings.gd"
 
 [display]
 

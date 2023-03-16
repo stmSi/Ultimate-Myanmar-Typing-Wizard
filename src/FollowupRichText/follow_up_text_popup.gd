@@ -16,16 +16,19 @@ func _ready() -> void:
 	EventBus.exercise_loaded.connect(self._set_raw_text)
 	EventBus.followup_popup_pos_changed.connect(self._on_followup_popup_pos_changed)
 	EventBus.written_string_changed.connect(self._on_written_string_changed)
-#	get_tree().root.get_viewport().size_changed.connect(self._on_followup_popup_pos_changed)
-	pass # Replace with function body.
+
+	GeneralSettings.popup_helper_disabled_changed.connect(
+		func(disabled: bool):
+			visible = not disabled
+	)
+	visible = not GeneralSettings.get_popup_helper_disabled()
 
 func _set_raw_text(t: String) -> void:
 	raw_text = t
 
 func _on_followup_popup_pos_changed(pos: Vector2, node: KeyButton):
 	self.pending_node = node
-	if visible:
-		call_deferred("_animate_position") # Hack for first time position not working
+	call_deferred("_animate_position") # Hack for first time position not working
 
 
 # Hack for first time position not working

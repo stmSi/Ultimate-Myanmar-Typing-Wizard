@@ -37,6 +37,7 @@ func _ready():
 				lesson_number, difficulty
 			)
 	)
+	EventBus.settings_menu_closed.connect(line_edit.grab_focus)
 	
 	if is_progressing_lesson:
 		_start_lesson_progress()
@@ -119,8 +120,10 @@ func _load_lesson():
 	if lesson_data['message']:
 		EventBus.message_popup.emit(lesson_data['message'])
 	
+	
 	keyboard.visible = not lesson_data['hide_keyboard']
-	follow_up_text_popup.visible = not lesson_data['hide_keyboard']
+	if not keyboard.visible:
+		follow_up_text_popup.visible = false
 	
 	if exercises.size() == exercise_idx:
 		# keep loading lessons one by one until there is exercise 

@@ -50,7 +50,8 @@ func _close():
 	main_tween.tween_property(node, "scale", Vector2.ZERO, .3)
 	await main_tween.finished
 	visible = false
-
+	EventBus.settings_menu_closed.emit()
 
 func _on_close_pressed() -> void:
 	_close()
+
