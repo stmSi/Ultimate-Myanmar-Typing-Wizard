@@ -24,11 +24,7 @@ func _ready() -> void:
 	EventBus.current_char_changed.connect(self._on_current_char_changed)
 	EventBus.lesson_id_loaded.connect(self._on_new_lesson_id_loaded)
 	
-	EventBus.finished_all_difficulty_lessons.connect(func():
-		if pending_node:
-			pending_node.reset_animation()
-		_reset_shifts()
-	)
+	EventBus.finished_all_difficulty_lessons.connect(self.reset_all_keys)
 
 func _on_new_key_node_added(key_name, node) -> void:
 	key_node_mapping[key_name] = node
@@ -68,8 +64,7 @@ func _input(event: InputEvent) -> void:
 		else:
 			EventBus.wrong_char_typed.emit(converted_char, current_char)
 			_run_incorrect(converted_char)
-			pending_node.reset_animation()
-			_reset_shifts()
+			reset_all_keys()
 		
 
 func _on_current_char_changed(c: String):
@@ -131,6 +126,10 @@ func _reset_shifts():
 
 func _on_new_lesson_id_loaded(_lesson_number: int) -> void:
 	# Reset all
+	reset_all_keys()
+
+func reset_all_keys():
 	if pending_node:
 		pending_node.reset_animation()
 	_reset_shifts()
+	

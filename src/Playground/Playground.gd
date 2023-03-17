@@ -8,6 +8,7 @@ extends Control
 @onready var accuracy: AccuracyLabel = %Accuracy
 @onready var keyboard: Control = %Keyboard
 @onready var char_per_min: Label = %CharPerMin
+@onready var next_practice_btn: Button = $MarginContainer/VBoxContainer/HBoxContainer/NextPracticeBtn
 
 var current_exercise_text = ''
 
@@ -38,9 +39,11 @@ func _ready():
 			)
 	)
 	EventBus.settings_menu_closed.connect(line_edit.grab_focus)
+
 	
 	if is_progressing_lesson:
 		_start_lesson_progress()
+		next_practice_btn.visible = false
 	else:
 		_start_extra_lesson()
 
@@ -207,3 +210,12 @@ func _randomize_exercise():
 		tmp.append(e)
 	tmp.shuffle()
 	exercises = PackedStringArray(tmp)
+
+
+func _on_next_practice_btn_pressed() -> void:
+	if lesson_idx < lesson_ids.size():
+		if keyboard.pending_node:
+			keyboard.pending_node.reset_animation()
+		keyboard.reset_shifts()
+		_load_exercise()
+	pass # Replace with function body.
