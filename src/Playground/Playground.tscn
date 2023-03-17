@@ -192,9 +192,14 @@ layout_mode = 2
 
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
+theme_override_constants/separation = 20
 
-[node name="Title" parent="MarginContainer/VBoxContainer/HBoxContainer" instance=ExtResource("3_711yg")]
+[node name="Title" parent="MarginContainer/VBoxContainer/HBoxContainer" groups=["scene_change_element"] instance=ExtResource("3_711yg")]
 layout_mode = 2
+
+[node name="NextPracticeBtn" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer" groups=["scene_change_element"]]
+layout_mode = 2
+text = "Next Practice"
 
 [node name="FollowUpRichText" type="RichTextLabel" parent="MarginContainer/VBoxContainer" groups=["scene_change_element"]]
 unique_name_in_owner = true
@@ -241,11 +246,11 @@ theme_override_constants/separation = 60
 [node name="StatusLabelContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/StatsContainer" groups=["scene_change_element"]]
 layout_mode = 2
 
-[node name="StatusLabel" type="Label" parent="MarginContainer/VBoxContainer/StatsContainer/StatusLabelContainer"]
+[node name="StatusLabel" type="Label" parent="MarginContainer/VBoxContainer/StatsContainer/StatusLabelContainer" groups=["scene_change_element"]]
 layout_mode = 2
 text = "Status: "
 
-[node name="Status" type="Label" parent="MarginContainer/VBoxContainer/StatsContainer/StatusLabelContainer"]
+[node name="Status" type="Label" parent="MarginContainer/VBoxContainer/StatsContainer/StatusLabelContainer" groups=["scene_change_element"]]
 unique_name_in_owner = true
 layout_mode = 2
 text = "Ok"
@@ -253,11 +258,11 @@ text = "Ok"
 [node name="AccuracyContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/StatsContainer" groups=["scene_change_element"]]
 layout_mode = 2
 
-[node name="AccuracyLabel" type="Label" parent="MarginContainer/VBoxContainer/StatsContainer/AccuracyContainer"]
+[node name="AccuracyLabel" type="Label" parent="MarginContainer/VBoxContainer/StatsContainer/AccuracyContainer" groups=["scene_change_element"]]
 layout_mode = 2
 text = "Accuracy:"
 
-[node name="Accuracy" type="Label" parent="MarginContainer/VBoxContainer/StatsContainer/AccuracyContainer"]
+[node name="Accuracy" type="Label" parent="MarginContainer/VBoxContainer/StatsContainer/AccuracyContainer" groups=["scene_change_element"]]
 unique_name_in_owner = true
 layout_mode = 2
 text = "100 %"
@@ -267,11 +272,11 @@ script = ExtResource("6_240wa")
 [node name="CharacterPerMinContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/StatsContainer" groups=["scene_change_element"]]
 layout_mode = 2
 
-[node name="CharPerMinLabel" type="Label" parent="MarginContainer/VBoxContainer/StatsContainer/CharacterPerMinContainer"]
+[node name="CharPerMinLabel" type="Label" parent="MarginContainer/VBoxContainer/StatsContainer/CharacterPerMinContainer" groups=["scene_change_element"]]
 layout_mode = 2
 text = "Char Per Min: "
 
-[node name="CharPerMin" type="Label" parent="MarginContainer/VBoxContainer/StatsContainer/CharacterPerMinContainer"]
+[node name="CharPerMin" type="Label" parent="MarginContainer/VBoxContainer/StatsContainer/CharacterPerMinContainer" groups=["scene_change_element"]]
 unique_name_in_owner = true
 layout_mode = 2
 text = "120"
@@ -342,6 +347,7 @@ anchor_left = 1.0
 anchor_right = 1.0
 grow_horizontal = 0
 
+[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/NextPracticeBtn" to="." method="_on_next_practice_btn_pressed"]
 [connection signal="text_changed" from="MarginContainer/VBoxContainer/LineEdit" to="." method="_on_text_edit_text_changed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/BottomButtonsContainer/ExitToMenu" to="MarginContainer/VBoxContainer/BottomButtonsContainer/ExitToMenu" method="_on_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/BottomButtonsContainer/SettingsBtn" to="MarginContainer/VBoxContainer/BottomButtonsContainer/SettingsBtn" method="_on_pressed"]
