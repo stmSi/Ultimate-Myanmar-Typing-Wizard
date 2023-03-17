@@ -30,4 +30,4 @@ func _ready() -> void:
 	var tween := get_tree().create_tween()
 	tween.tween_property(texture_progress_bar, "value", accuracy, 2.0).set_trans(Tween.TRANS_SINE)
 
-	percentage_label.text = str(accuracy) + " %"
+	percentage_label.text = ("%.2f" % accuracy) + " %"
