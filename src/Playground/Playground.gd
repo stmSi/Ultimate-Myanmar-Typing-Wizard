@@ -6,7 +6,7 @@ extends Control
 @onready var line_edit: LineEdit = %LineEdit
 @onready var status: Label = %Status
 @onready var accuracy: AccuracyLabel = %Accuracy
-@onready var keyboard: Control = %Keyboard
+@onready var keyboard: Keyboard = %Keyboard
 @onready var char_per_min: Label = %CharPerMin
 @onready var next_practice_btn: Button = $MarginContainer/VBoxContainer/HBoxContainer/NextPracticeBtn
 
@@ -219,8 +219,7 @@ func _randomize_packed_array(packed_array: PackedStringArray):
 
 func _on_next_practice_btn_pressed() -> void:
 	if lesson_idx < lesson_ids.size():
-		if keyboard.pending_node:
-			keyboard.pending_node.reset_animation()
-		keyboard.reset_shifts()
+		keyboard.reset_all_keys()
 		_load_exercise()
+		
 	pass # Replace with function body.
