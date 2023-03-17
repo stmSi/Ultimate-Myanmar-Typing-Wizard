@@ -48,7 +48,7 @@ shadow_size = 2
 [sub_resource type="GDScript" id="GDScript_3afo8"]
 script/source = "extends Label
 
-var max_chars_to_calculate = 50
+var max_chars_to_calculate = 20
 var times_taken = []
 var last_time_char_typed = 0.0
 var cpm = 0

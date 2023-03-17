@@ -228,3 +228,8 @@ func load_stats() -> Array:
 		})
 	
 	return stats
+
+func reset_progress():
+	if FileAccess.file_exists(profile_data_file):
+		OS.move_to_trash(ProjectSettings.globalize_path(profile_data_file))
+		print('moved to trash')
