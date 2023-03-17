@@ -160,26 +160,26 @@ layout_mode = 2
 size_flags_vertical = 3
 theme_override_constants/separation = 20
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer2/VBoxContainer/HBoxContainer"]
+[node name="LessonsContainer" type="VBoxContainer" parent="MarginContainer2/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 0
 
-[node name="Label" type="Label" parent="MarginContainer2/VBoxContainer/HBoxContainer/VBoxContainer" groups=["scene_change_element"]]
+[node name="Label" type="Label" parent="MarginContainer2/VBoxContainer/HBoxContainer/LessonsContainer" groups=["scene_change_element"]]
 layout_mode = 2
-text = "Choose Difficulty:"
+text = "Choose Level:"
 
-[node name="DifficulitiesButtons" type="VBoxContainer" parent="MarginContainer2/VBoxContainer/HBoxContainer/VBoxContainer" groups=["scene_change_element"]]
+[node name="DifficulitiesButtons" type="VBoxContainer" parent="MarginContainer2/VBoxContainer/HBoxContainer/LessonsContainer" groups=["scene_change_element"]]
 layout_mode = 2
 theme_override_constants/separation = 8
 
-[node name="BasicBtn" type="Button" parent="MarginContainer2/VBoxContainer/HBoxContainer/VBoxContainer/DifficulitiesButtons"]
+[node name="BasicBtn" type="Button" parent="MarginContainer2/VBoxContainer/HBoxContainer/LessonsContainer/DifficulitiesButtons"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
 text = "Basic"
 script = SubResource("GDScript_8ua3w")
 
-[node name="IntermediateBtn" type="Button" parent="MarginContainer2/VBoxContainer/HBoxContainer/VBoxContainer/DifficulitiesButtons"]
+[node name="IntermediateBtn" type="Button" parent="MarginContainer2/VBoxContainer/HBoxContainer/LessonsContainer/DifficulitiesButtons"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
@@ -187,61 +187,61 @@ text = "Intermediate
 "
 script = SubResource("GDScript_85bbl")
 
-[node name="AdvancedBtn" type="Button" parent="MarginContainer2/VBoxContainer/HBoxContainer/VBoxContainer/DifficulitiesButtons"]
+[node name="AdvancedBtn" type="Button" parent="MarginContainer2/VBoxContainer/HBoxContainer/LessonsContainer/DifficulitiesButtons"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
 text = "Advanced"
 script = SubResource("GDScript_ilpda")
 
-[node name="PanelContainer" type="PanelContainer" parent="MarginContainer2/VBoxContainer/HBoxContainer/VBoxContainer/DifficulitiesButtons"]
+[node name="PanelContainer" type="PanelContainer" parent="MarginContainer2/VBoxContainer/HBoxContainer/LessonsContainer/DifficulitiesButtons"]
 custom_minimum_size = Vector2(0, 2)
 layout_mode = 2
 
-[node name="ExtraExerciseBtn" type="Button" parent="MarginContainer2/VBoxContainer/HBoxContainer/VBoxContainer/DifficulitiesButtons"]
+[node name="ExtraExerciseBtn" type="Button" parent="MarginContainer2/VBoxContainer/HBoxContainer/LessonsContainer/DifficulitiesButtons"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
 text = "Extra Exercises"
 script = SubResource("GDScript_0sc1r")
 
-[node name="PanelContainer2" type="PanelContainer" parent="MarginContainer2/VBoxContainer/HBoxContainer/VBoxContainer/DifficulitiesButtons"]
+[node name="PanelContainer2" type="PanelContainer" parent="MarginContainer2/VBoxContainer/HBoxContainer/LessonsContainer/DifficulitiesButtons"]
 custom_minimum_size = Vector2(0, 2)
 layout_mode = 2
 
-[node name="CancelBtn" type="Button" parent="MarginContainer2/VBoxContainer/HBoxContainer/VBoxContainer/DifficulitiesButtons"]
+[node name="CancelBtn" type="Button" parent="MarginContainer2/VBoxContainer/HBoxContainer/LessonsContainer/DifficulitiesButtons"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
 text = "Cancel"
 script = SubResource("GDScript_r4dsf")
 
-[node name="MarginContainer" type="MarginContainer" parent="MarginContainer2/VBoxContainer/HBoxContainer/VBoxContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer2/VBoxContainer/HBoxContainer/LessonsContainer"]
 layout_mode = 2
 theme_override_constants/margin_top = 5
 
-[node name="LessonIdsLbl" type="Label" parent="MarginContainer2/VBoxContainer/HBoxContainer/VBoxContainer" groups=["scene_change_element"]]
+[node name="LessonIdsLbl" type="Label" parent="MarginContainer2/VBoxContainer/HBoxContainer/LessonsContainer" groups=["scene_change_element"]]
 unique_name_in_owner = true
 layout_mode = 2
 text = "No Difficulty Selected
 "
 
-[node name="LessonIds" type="ItemList" parent="MarginContainer2/VBoxContainer/HBoxContainer/VBoxContainer" groups=["scene_change_element"]]
+[node name="LessonIds" type="ItemList" parent="MarginContainer2/VBoxContainer/HBoxContainer/LessonsContainer" groups=["scene_change_element"]]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 size_flags_vertical = 3
 script = ExtResource("2_ockha")
 
-[node name="SwapLessonContainer" type="HBoxContainer" parent="MarginContainer2/VBoxContainer/HBoxContainer/VBoxContainer"]
+[node name="SwapLessonContainer" type="HBoxContainer" parent="MarginContainer2/VBoxContainer/HBoxContainer/LessonsContainer"]
 layout_mode = 2
 
-[node name="UpDownLbl2" type="Label" parent="MarginContainer2/VBoxContainer/HBoxContainer/VBoxContainer/SwapLessonContainer" groups=["scene_change_element"]]
+[node name="UpDownLbl2" type="Label" parent="MarginContainer2/VBoxContainer/HBoxContainer/LessonsContainer/SwapLessonContainer" groups=["scene_change_element"]]
 layout_mode = 2
 size_flags_vertical = 0
 text = "  Alt+↑         Swap Lessons        Alt+↓"
 
-[node name="AddNewLessonsFileBtn" type="Button" parent="MarginContainer2/VBoxContainer/HBoxContainer/VBoxContainer" groups=["scene_change_element"]]
+[node name="AddNewLessonsFileBtn" type="Button" parent="MarginContainer2/VBoxContainer/HBoxContainer/LessonsContainer" groups=["scene_change_element"]]
 unique_name_in_owner = true
 layout_mode = 2
 shortcut = SubResource("Shortcut_jhxwp")
@@ -249,7 +249,7 @@ text = "Add New
 (Ctrl+N)"
 script = SubResource("GDScript_y6yfr")
 
-[node name="ExitToMenuBtn" type="Button" parent="MarginContainer2/VBoxContainer/HBoxContainer/VBoxContainer" groups=["scene_change_element"]]
+[node name="ExitToMenuBtn" type="Button" parent="MarginContainer2/VBoxContainer/HBoxContainer/LessonsContainer" groups=["scene_change_element"]]
 custom_minimum_size = Vector2(200, 60)
 layout_mode = 2
 text = "Exit To Menu"
@@ -450,16 +450,16 @@ anchor_left = 1.0
 anchor_right = 1.0
 grow_horizontal = 0
 
-[connection signal="pressed" from="MarginContainer2/VBoxContainer/HBoxContainer/VBoxContainer/DifficulitiesButtons/BasicBtn" to="." method="_on_basic_btn_pressed"]
-[connection signal="pressed" from="MarginContainer2/VBoxContainer/HBoxContainer/VBoxContainer/DifficulitiesButtons/IntermediateBtn" to="." method="_on_intermediate_btn_pressed"]
-[connection signal="pressed" from="MarginContainer2/VBoxContainer/HBoxContainer/VBoxContainer/DifficulitiesButtons/AdvancedBtn" to="." method="_on_advance_btn_pressed"]
-[connection signal="pressed" from="MarginContainer2/VBoxContainer/HBoxContainer/VBoxContainer/DifficulitiesButtons/ExtraExerciseBtn" to="." method="_on_extra_exercise_btn_pressed"]
-[connection signal="pressed" from="MarginContainer2/VBoxContainer/HBoxContainer/VBoxContainer/DifficulitiesButtons/CancelBtn" to="." method="_on_cancel_btn_pressed"]
-[connection signal="delete_lesson_from_delete_key" from="MarginContainer2/VBoxContainer/HBoxContainer/VBoxContainer/LessonIds" to="." method="_on_lesson_ids_delete_lesson_from_delete_key"]
-[connection signal="item_selected" from="MarginContainer2/VBoxContainer/HBoxContainer/VBoxContainer/LessonIds" to="." method="_on_lesson_ids_item_selected"]
-[connection signal="swap_lesson" from="MarginContainer2/VBoxContainer/HBoxContainer/VBoxContainer/LessonIds" to="." method="_on_lesson_ids_swap_lesson"]
-[connection signal="pressed" from="MarginContainer2/VBoxContainer/HBoxContainer/VBoxContainer/AddNewLessonsFileBtn" to="." method="_on_add_lessons_file_btn_pressed"]
-[connection signal="pressed" from="MarginContainer2/VBoxContainer/HBoxContainer/VBoxContainer/ExitToMenuBtn" to="MarginContainer2/VBoxContainer/HBoxContainer/VBoxContainer/ExitToMenuBtn" method="_on_pressed"]
+[connection signal="pressed" from="MarginContainer2/VBoxContainer/HBoxContainer/LessonsContainer/DifficulitiesButtons/BasicBtn" to="." method="_on_basic_btn_pressed"]
+[connection signal="pressed" from="MarginContainer2/VBoxContainer/HBoxContainer/LessonsContainer/DifficulitiesButtons/IntermediateBtn" to="." method="_on_intermediate_btn_pressed"]
+[connection signal="pressed" from="MarginContainer2/VBoxContainer/HBoxContainer/LessonsContainer/DifficulitiesButtons/AdvancedBtn" to="." method="_on_advance_btn_pressed"]
+[connection signal="pressed" from="MarginContainer2/VBoxContainer/HBoxContainer/LessonsContainer/DifficulitiesButtons/ExtraExerciseBtn" to="." method="_on_extra_exercise_btn_pressed"]
+[connection signal="pressed" from="MarginContainer2/VBoxContainer/HBoxContainer/LessonsContainer/DifficulitiesButtons/CancelBtn" to="." method="_on_cancel_btn_pressed"]
+[connection signal="delete_lesson_from_delete_key" from="MarginContainer2/VBoxContainer/HBoxContainer/LessonsContainer/LessonIds" to="." method="_on_lesson_ids_delete_lesson_from_delete_key"]
+[connection signal="item_selected" from="MarginContainer2/VBoxContainer/HBoxContainer/LessonsContainer/LessonIds" to="." method="_on_lesson_ids_item_selected"]
+[connection signal="swap_lesson" from="MarginContainer2/VBoxContainer/HBoxContainer/LessonsContainer/LessonIds" to="." method="_on_lesson_ids_swap_lesson"]
+[connection signal="pressed" from="MarginContainer2/VBoxContainer/HBoxContainer/LessonsContainer/AddNewLessonsFileBtn" to="." method="_on_add_lessons_file_btn_pressed"]
+[connection signal="pressed" from="MarginContainer2/VBoxContainer/HBoxContainer/LessonsContainer/ExitToMenuBtn" to="MarginContainer2/VBoxContainer/HBoxContainer/LessonsContainer/ExitToMenuBtn" method="_on_pressed"]
 [connection signal="value_changed" from="MarginContainer2/VBoxContainer/HBoxContainer/VBoxContainer2/LessonSettingsContainer/RepeatContainer/RepeatsBox" to="." method="_on_repeats_box_value_changed"]
 [connection signal="value_changed" from="MarginContainer2/VBoxContainer/HBoxContainer/VBoxContainer2/LessonSettingsContainer/AllowableContainer/AllowMistakesBox" to="." method="_on_allow_mistakes_box_value_changed"]
 [connection signal="toggled" from="MarginContainer2/VBoxContainer/HBoxContainer/VBoxContainer2/LessonSettingsContainer/RandomizeContainer/RandomizeCheck" to="." method="_on_randomize_check_toggled"]
