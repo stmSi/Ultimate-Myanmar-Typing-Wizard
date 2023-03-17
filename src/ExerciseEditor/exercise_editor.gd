@@ -134,6 +134,9 @@ func _on_add_lessons_file_btn_pressed() -> void:
 	var success = LessonAccess.create_new_lesson_file(lesson_number, selected_difficulty)
 	if success:
 		_populate_files_list()
+		lesson_ids.select(files.size())
+		_on_lesson_ids_item_selected(files.size())
+	
 
 
 func _on_lesson_ids_item_selected(index: int) -> void:
