@@ -59,7 +59,7 @@ func save_message(lesson_number: int, difficulty: String, msg: String) -> bool:
 	return true
 
 
-func get_lesson_files(difficulty: String) -> PackedStringArray:
+func get_lesson_files(difficulty: String, randomize_lessons: bool = false) -> PackedStringArray:
 	var difficulty_lesson_path = _determine_difficulty_lessons_path(difficulty)
 	if difficulty_lesson_path == '':
 		return []
@@ -81,6 +81,8 @@ func get_lesson_files(difficulty: String) -> PackedStringArray:
 			file_name = dir.get_next()
 	else:
 		EventBus.message_popup.emit("An error occurred when trying to access the lessons path: " + difficulty_lesson_path)
+
+
 	return text_files
 
 

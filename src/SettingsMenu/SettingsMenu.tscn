@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://bdwpvsp2xyw50"]
+[gd_scene load_steps=8 format=3 uid="uid://bdwpvsp2xyw50"]
 
 [ext_resource type="Script" path="res://src/SettingsMenu/SettingsMenu.gd" id="1_lnpdd"]
 [ext_resource type="Script" path="res://src/SettingsMenu/FPSOptions.gd" id="2_o2ea0"]
@@ -52,6 +52,19 @@ func _ready() -> void:
 
 func _on_toggled(btn_pressed: bool) -> void:
 	GeneralSettings.set_popup_helper_disabled(btn_pressed)
+	pass # Replace with function body.
+"
+
+[sub_resource type="GDScript" id="GDScript_xxsy6"]
+script/source = "extends CheckButton
+
+func _ready() -> void:
+	self.button_pressed = GeneralSettings.get_hightlight_current_character_disabled()
+	pass
+
+
+func _on_toggled(btn_pressed: bool) -> void:
+	GeneralSettings.set_hightlight_current_character_char(btn_pressed)
 	pass # Replace with function body.
 "
 
@@ -152,9 +165,21 @@ theme_override_constants/separation = 20
 
 [node name="PopupHelperDisable" type="CheckButton" parent="MarginContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/PopupHelperDisableContainer"]
 layout_mode = 2
+size_flags_horizontal = 3
 theme = SubResource("Theme_80615")
 text = "Hide Typing Helper Popup"
 script = SubResource("GDScript_fpfuc")
+
+[node name="HightlightCurrentCharDisableContainer2" type="HBoxContainer" parent="MarginContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="HightlightCurrentCharDisable" type="CheckButton" parent="MarginContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/HightlightCurrentCharDisableContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = SubResource("Theme_80615")
+text = "Disable Highlight Current Character"
+script = SubResource("GDScript_xxsy6")
 
 [node name="Close" type="Button" parent="MarginContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer"]
 unique_name_in_owner = true
@@ -165,4 +190,5 @@ text = "Close"
 [connection signal="item_selected" from="MarginContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/ResolutioonContainer/ResolutionOptions" to="MarginContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/ResolutioonContainer/ResolutionOptions" method="_on_item_selected"]
 [connection signal="item_selected" from="MarginContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/FPSOptionsContainer/FPSOptions" to="MarginContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/FPSOptionsContainer/FPSOptions" method="_on_item_selected"]
 [connection signal="toggled" from="MarginContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/PopupHelperDisableContainer/PopupHelperDisable" to="MarginContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/PopupHelperDisableContainer/PopupHelperDisable" method="_on_toggled"]
+[connection signal="toggled" from="MarginContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/HightlightCurrentCharDisableContainer2/HightlightCurrentCharDisable" to="MarginContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/HightlightCurrentCharDisableContainer2/HightlightCurrentCharDisable" method="_on_toggled"]
 [connection signal="pressed" from="MarginContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/Close" to="." method="_on_close_pressed"]
