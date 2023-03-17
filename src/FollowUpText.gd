@@ -9,11 +9,19 @@ var written_text = ''
 @export var current_char_color: Color = Color.LIGHT_SKY_BLUE
 @export var current_char_bgcolor: Color = Color.DARK_SLATE_BLUE
 
+@export var is_popup: bool = true
+
+var disable_highlight_curr_char = false
 
 func _ready():
 	EventBus.exercise_loaded.connect(self._set_raw_text)
 	EventBus.written_string_changed.connect(self._on_written_string_changed)
-
+	GeneralSettings.hightlight_current_char_disabled_changed.connect(
+		func(disabled: bool):
+			disable_highlight_curr_char = disabled
+			_on_written_string_changed(written_text)
+	)
+	disable_highlight_curr_char = GeneralSettings.get_hightlight_current_character_disabled()
 
 func _set_raw_text(t: String) -> void:
 	raw_text = t
@@ -71,10 +79,11 @@ func _on_written_string_changed(s: String):
 	if wrong or correct:
 		pop()
 	
-	# color the current character where cursor will locate
-	if(i < len(raw_text)):
-		_color_cursor_character(i)
-		i += 1
+	if is_popup or not disable_highlight_curr_char:
+		# color the current character where cursor will locate
+		if(i < len(raw_text)):
+			_color_cursor_character(i)
+			i += 1
 		
 
 	## show the rest	

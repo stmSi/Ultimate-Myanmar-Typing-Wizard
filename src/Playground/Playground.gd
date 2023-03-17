@@ -45,9 +45,9 @@ func _ready():
 		_start_lesson_progress()
 		next_practice_btn.visible = false
 	else:
-		_start_extra_lesson()
+		_start_extra_lesson(true)
 
-func _start_extra_lesson():
+func _start_extra_lesson(randomize_lessons: bool = true):
 	line_edit.grab_focus()
 	lesson_ids = []
 	exercises = []
@@ -59,8 +59,12 @@ func _start_extra_lesson():
 
 	lesson_idx = 0;
 
-	var files: PackedStringArray = LessonAccess.get_lesson_files('extra')
-	files.sort()
+	var files: PackedStringArray = LessonAccess.get_lesson_files('extra', randomize_lessons)
+	if randomize_lessons:
+		files = _randomize_packed_array(files)
+	else:
+		files.sort()
+
 	for f in files:
 		lesson_ids.push_back(f.get_basename().get_file())
 	_load_exercise()
@@ -118,7 +122,7 @@ func _load_lesson():
 	exercise_idx = 0
 	lesson_idx += 1
 	if lesson_data['randomize']:
-		_randomize_exercise()
+		exercises = _randomize_packed_array(exercises)
 	
 	if lesson_data['message']:
 		EventBus.message_popup.emit(lesson_data['message'])
@@ -201,15 +205,16 @@ func _on_text_edit_text_changed(_t: String) -> void:
 		EventBus.exercise_line_finished.emit()
 
 
-func _randomize_exercise():
+func _randomize_packed_array(packed_array: PackedStringArray):
 	# PackedStringArray doesn't support shuffle()
 	# convert to array, shuffle, and reassign
 	randomize()
 	var tmp = []
-	for e in exercises:
+	for e in packed_array:
 		tmp.append(e)
 	tmp.shuffle()
-	exercises = PackedStringArray(tmp)
+	packed_array = PackedStringArray(tmp)
+	return packed_array
 
 
 func _on_next_practice_btn_pressed() -> void:

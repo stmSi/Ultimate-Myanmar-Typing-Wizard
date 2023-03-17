@@ -220,6 +220,7 @@ language = "my_MM"
 script = ExtResource("4_86oy8")
 current_char_color = Color(0.984314, 0.823529, 0, 1)
 current_char_bgcolor = Color(0.184314, 0.301961, 0.376471, 0)
+is_popup = false
 
 [node name="LineEdit" type="LineEdit" parent="MarginContainer/VBoxContainer" groups=["scene_change_element"]]
 unique_name_in_owner = true
