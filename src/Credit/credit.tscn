@@ -1,4 +1,4 @@
-[gd_scene load_steps=3 format=3 uid="uid://dv4nca1f6kjlv"]
+[gd_scene load_steps=4 format=3 uid="uid://dv4nca1f6kjlv"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5v3y7"]
 bg_color = Color(0.0980392, 0.0980392, 0.0980392, 0.176471)
@@ -11,13 +11,29 @@ func _on_meta_clicked(meta) -> void:
 	OS.shell_open(str(meta))
 "
 
+[sub_resource type="GDScript" id="GDScript_svjeb"]
+script/source = "extends RichTextLabel
+
+
+func _on_meta_clicked(meta) -> void:
+	OS.shell_open(str(meta))
+"
+
 [node name="Credit" type="PanelContainer"]
+scale = Vector2(0.75, 0.75)
 theme_override_styles/panel = SubResource("StyleBoxFlat_5v3y7")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+theme_override_constants/margin_left = 6
+theme_override_constants/margin_top = 6
+theme_override_constants/margin_right = 6
+theme_override_constants/margin_bottom = 6
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
 layout_mode = 2
 
-[node name="Label" type="RichTextLabel" parent="VBoxContainer"]
+[node name="Label" type="RichTextLabel" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 bbcode_enabled = true
@@ -27,12 +43,18 @@ fit_content = true
 autowrap_mode = 0
 script = SubResource("GDScript_xdtob")
 
-[node name="Label3" type="Label" parent="VBoxContainer"]
+[node name="Label3" type="Label" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
 text = "___________"
 
-[node name="Label2" type="Label" parent="VBoxContainer"]
+[node name="Label2" type="RichTextLabel" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
-text = "Background Image created by: Matt Bango "
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+bbcode_enabled = true
+text = "[url=https://stocksnap.io/photo/bokeh-abstract-VEPGYOBHJV]Background Image[/url] created by: Mary Maaret"
+fit_content = true
+autowrap_mode = 0
+script = SubResource("GDScript_svjeb")
 
-[connection signal="meta_clicked" from="VBoxContainer/Label" to="VBoxContainer/Label" method="_on_meta_clicked"]
+[connection signal="meta_clicked" from="MarginContainer/VBoxContainer/Label" to="MarginContainer/VBoxContainer/Label" method="_on_meta_clicked"]
+[connection signal="meta_clicked" from="MarginContainer/VBoxContainer/Label2" to="MarginContainer/VBoxContainer/Label2" method="_on_meta_clicked"]
