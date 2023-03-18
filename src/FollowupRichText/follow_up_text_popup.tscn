@@ -5,12 +5,11 @@
 [ext_resource type="FontFile" uid="uid://chygow7my3v5g" path="res://Assets/Fonts/NotoSansMyanmar-Regular.ttf" id="3_cd8lu"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5p4r3"]
-bg_color = Color(0, 0.219608, 0.223529, 0.705882)
-border_width_left = 3
-border_width_top = 3
-border_width_right = 3
-border_width_bottom = 3
-border_blend = true
+bg_color = Color(0, 0.521569, 0.556863, 0.509804)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
 
 [node name="FollowUpTextPopup" type="Control"]
 layout_mode = 3

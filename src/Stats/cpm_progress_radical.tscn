@@ -13,7 +13,7 @@ layout_mode = 2
 size_flags_vertical = 0
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 bbcode_enabled = true
-text = "Character Per Min: 120"
+text = "Characters Per Min: 120"
 fit_content = true
 autowrap_mode = 0
 
