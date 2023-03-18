@@ -1,9 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://ht8awqgvfuqm"]
+[gd_scene load_steps=10 format=3 uid="uid://ht8awqgvfuqm"]
 
 [ext_resource type="Theme" uid="uid://dppj17ign8l2n" path="res://src/Themes/main.tres" id="1_vmvdo"]
 [ext_resource type="PackedScene" uid="uid://dt77txqgdnenu" path="res://src/Stats/lesson_progress.tscn" id="2_yhi57"]
 [ext_resource type="PackedScene" uid="uid://cutg85e3pxlo4" path="res://src/Stats/accuracy_progress_radical.tscn" id="3_tvg2n"]
 [ext_resource type="PackedScene" uid="uid://c5xfv7x86npfh" path="res://src/Stats/cpm_progress_radical.tscn" id="4_hg0c2"]
+[ext_resource type="PackedScene" uid="uid://bdhclvssm0s4g" path="res://src/FrequentMistakesReport/frequent_mistakes_report.tscn" id="5_qmmtd"]
 [ext_resource type="Script" path="res://src/Stats/ResetProgressBtn.gd" id="5_v02w4"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_488jg"]
@@ -32,27 +33,51 @@ corner_radius_bottom_left = 3
 shadow_color = Color(1, 0, 0, 1)
 shadow_size = 8
 
+[sub_resource type="GDScript" id="GDScript_q7ty1"]
+script/source = "extends Button
+
+var origin_text
+
+var confirm = false
+
+func _ready() -> void:
+	origin_text = self.text
+
+func _on_pressed() -> void:
+	if not confirm:
+		self.text = \"Are you sure to Reset Statistics?\"
+	else:
+		UserProfileManager.reset_statistics()
+		SceneChanger.change_to_main_scene()
+		return
+	confirm = true
+	
+	await get_tree().create_timer(3).timeout
+	confirm = false
+	self.text = origin_text
+"
+
 [node name="Stats" type="PanelContainer"]
-offset_right = 449.0
-offset_bottom = 27.0
+custom_minimum_size = Vector2(800, 550)
+offset_right = 800.0
+offset_bottom = 500.0
 theme = ExtResource("1_vmvdo")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 2
-theme_override_constants/margin_left = 40
-theme_override_constants/margin_top = 40
-theme_override_constants/margin_right = 40
-theme_override_constants/margin_bottom = 40
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
 layout_mode = 2
 theme_override_constants/separation = 20
 
-[node name="LessonProgress" parent="MarginContainer/VBoxContainer" instance=ExtResource("2_yhi57")]
-layout_mode = 2
-
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
 
 [node name="Label" type="Label" parent="MarginContainer/VBoxContainer/VBoxContainer"]
 visible = false
@@ -62,17 +87,31 @@ text = "Statistics from Last Lesson"
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
+theme_override_constants/separation = 20
 
 [node name="AccuracyProgressRadical" parent="MarginContainer/VBoxContainer/VBoxContainer/HBoxContainer" instance=ExtResource("3_tvg2n")]
 layout_mode = 2
 
 [node name="CPMProgressRadical" parent="MarginContainer/VBoxContainer/VBoxContainer/HBoxContainer" instance=ExtResource("4_hg0c2")]
 layout_mode = 2
-size_flags_horizontal = 6
+size_flags_horizontal = 2
 size_flags_vertical = 4
 
-[node name="Actions" type="VBoxContainer" parent="MarginContainer/VBoxContainer"]
+[node name="LessonProgress" parent="MarginContainer/VBoxContainer" instance=ExtResource("2_yhi57")]
 layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+
+[node name="FrequentMistakesReport" parent="MarginContainer/VBoxContainer" instance=ExtResource("5_qmmtd")]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 6
+
+[node name="Actions" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+theme_override_constants/separation = 60
 
 [node name="ResetProgressBtn" type="Button" parent="MarginContainer/VBoxContainer/Actions"]
 custom_minimum_size = Vector2(200, 50)
@@ -82,7 +121,19 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_488jg")
 theme_override_styles/hover = SubResource("StyleBoxFlat_yq5ds")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_488jg")
 theme_override_styles/focus = SubResource("StyleBoxFlat_488jg")
-text = "Reset Progress & Stats"
+text = "Reset Progress"
 script = ExtResource("5_v02w4")
 
+[node name="ResetStatisticsBtn" type="Button" parent="MarginContainer/VBoxContainer/Actions"]
+custom_minimum_size = Vector2(200, 50)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_styles/normal = SubResource("StyleBoxFlat_488jg")
+theme_override_styles/hover = SubResource("StyleBoxFlat_yq5ds")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_488jg")
+theme_override_styles/focus = SubResource("StyleBoxFlat_488jg")
+text = "Reset Statistics"
+script = SubResource("GDScript_q7ty1")
+
 [connection signal="pressed" from="MarginContainer/VBoxContainer/Actions/ResetProgressBtn" to="MarginContainer/VBoxContainer/Actions/ResetProgressBtn" method="_on_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Actions/ResetStatisticsBtn" to="MarginContainer/VBoxContainer/Actions/ResetStatisticsBtn" method="_on_pressed"]

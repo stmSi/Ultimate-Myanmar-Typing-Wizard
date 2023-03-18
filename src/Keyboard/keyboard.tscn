@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://bu35jrqg64j60"]
+[gd_scene load_steps=19 format=3 uid="uid://bu35jrqg64j60"]
 
 [ext_resource type="Script" path="res://src/Keyboard/keyboard.gd" id="1_ceo6d"]
 [ext_resource type="PackedScene" uid="uid://6ji1y6g83r7r" path="res://src/Keyboard/key_button.tscn" id="1_ik4w2"]
@@ -8,111 +8,91 @@
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_scc4s"]
 resource_local_to_scene = true
 bg_color = Color(0.117647, 0.117647, 0.117647, 0.827451)
-border_width_left = 1
-border_width_top = 1
-border_width_right = 1
-border_width_bottom = 1
 border_blend = true
 shadow_color = Color(1, 1, 1, 0.6)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dr5yv"]
 resource_local_to_scene = true
 bg_color = Color(0.117647, 0.117647, 0.117647, 0.827451)
-border_width_left = 1
-border_width_top = 1
-border_width_right = 1
-border_width_bottom = 1
 border_blend = true
 shadow_color = Color(1, 1, 1, 0.6)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ng5ll"]
 resource_local_to_scene = true
 bg_color = Color(0.117647, 0.117647, 0.117647, 0.827451)
-border_width_left = 1
-border_width_top = 1
-border_width_right = 1
-border_width_bottom = 1
 border_blend = true
 shadow_color = Color(1, 1, 1, 0.6)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xbnwi"]
 resource_local_to_scene = true
 bg_color = Color(0.117647, 0.117647, 0.117647, 0.827451)
-border_width_left = 1
-border_width_top = 1
-border_width_right = 1
-border_width_bottom = 1
 border_blend = true
 shadow_color = Color(1, 1, 1, 0.6)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8djne"]
 resource_local_to_scene = true
 bg_color = Color(0.117647, 0.117647, 0.117647, 0.827451)
-border_width_left = 1
-border_width_top = 1
-border_width_right = 1
-border_width_bottom = 1
 border_blend = true
 shadow_color = Color(1, 1, 1, 0.6)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jjy0n"]
 resource_local_to_scene = true
 bg_color = Color(0.117647, 0.117647, 0.117647, 0.827451)
-border_width_left = 1
-border_width_top = 1
-border_width_right = 1
-border_width_bottom = 1
 border_blend = true
 shadow_color = Color(1, 1, 1, 0.6)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bbdjs"]
 resource_local_to_scene = true
 bg_color = Color(0.117647, 0.117647, 0.117647, 0.827451)
-border_width_left = 1
-border_width_top = 1
-border_width_right = 1
-border_width_bottom = 1
 border_blend = true
 shadow_color = Color(1, 1, 1, 0.6)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_apsic"]
 resource_local_to_scene = true
 bg_color = Color(0.117647, 0.117647, 0.117647, 0.827451)
-border_width_left = 1
-border_width_top = 1
-border_width_right = 1
-border_width_bottom = 1
 border_blend = true
 shadow_color = Color(1, 1, 1, 0.6)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_aoubn"]
 resource_local_to_scene = true
 bg_color = Color(0.117647, 0.117647, 0.117647, 0.827451)
-border_width_left = 1
-border_width_top = 1
-border_width_right = 1
-border_width_bottom = 1
 border_blend = true
 shadow_color = Color(1, 1, 1, 0.6)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_axx0v"]
 resource_local_to_scene = true
 bg_color = Color(0.117647, 0.117647, 0.117647, 0.827451)
-border_width_left = 1
-border_width_top = 1
-border_width_right = 1
-border_width_bottom = 1
 border_blend = true
 shadow_color = Color(1, 1, 1, 0.6)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6fusu"]
+
+[sub_resource type="GDScript" id="GDScript_ojmd3"]
+script/source = "extends HBoxContainer
+@onready var perfect_rect: TextureRect = %PerfectColor
+@onready var ninty_rect: TextureRect = %NintyColor
+@onready var fifty_rect: TextureRect = %FiftyColor
+@onready var below_50_rect: TextureRect = %Below50Color
+@onready var not_available_color: TextureRect = %NotAvailableColor
+
+func set_color_hints(perfect: Color, ninty: Color, fifty: Color, below_fifty: Color):
+	visible = true
+	perfect_rect.modulate = perfect
+	ninty_rect.modulate = ninty
+	fifty_rect.modulate = fifty
+	below_50_rect.modulate = below_fifty
+	
+"
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_7mmg5"]
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_cqmte"]
 
 [node name="Keyboard" type="Control"]
 editor_description = "KeyButtons will automatically Fill the all the Keys. 
 Check \"populate.gd\""
 layout_mode = 3
 anchors_preset = 0
-pivot_offset = Vector2(0, -3)
 size_flags_horizontal = 0
 size_flags_vertical = 0
 script = ExtResource("1_ceo6d")
@@ -126,7 +106,7 @@ grow_horizontal = 2
 grow_vertical = 2
 alignment = 1
 
-[node name="1234567890" type="HBoxContainer" parent="VBoxContainer" groups=["scene_change_element"]]
+[node name="1234567890" type="HBoxContainer" parent="VBoxContainer"]
 layout_mode = 2
 alignment = 1
 script = ExtResource("1_xnj8i")
@@ -145,7 +125,7 @@ char = "BackSpace"
 custom_minimum_size = Vector2(160, 80)
 theme_override_styles/panel = SubResource("StyleBoxFlat_scc4s")
 
-[node name="qwerty" type="HBoxContainer" parent="VBoxContainer" groups=["scene_change_element"]]
+[node name="qwerty" type="HBoxContainer" parent="VBoxContainer"]
 layout_mode = 2
 script = ExtResource("1_xnj8i")
 char = "ဆတနမအပကငသစဟဩ၏"
@@ -164,7 +144,7 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_dr5yv")
 [node name="qwerty" type="Control" parent="VBoxContainer/qwerty"]
 layout_mode = 2
 
-[node name="asdfgh" type="HBoxContainer" parent="VBoxContainer" groups=["scene_change_element"]]
+[node name="asdfgh" type="HBoxContainer" parent="VBoxContainer"]
 layout_mode = 2
 script = ExtResource("1_xnj8i")
 char = "ေျိ်ါ့ြုူး'"
@@ -192,7 +172,7 @@ char = "Enter"
 custom_minimum_size = Vector2(160, 80)
 theme_override_styles/panel = SubResource("StyleBoxFlat_xbnwi")
 
-[node name="zxcvb" type="HBoxContainer" parent="VBoxContainer" groups=["scene_change_element"]]
+[node name="zxcvb" type="HBoxContainer" parent="VBoxContainer"]
 layout_mode = 2
 script = ExtResource("1_xnj8i")
 char = "ဖထခလဘညာ,./"
@@ -220,7 +200,7 @@ char = "Shift"
 custom_minimum_size = Vector2(204, 80)
 theme_override_styles/panel = SubResource("StyleBoxFlat_jjy0n")
 
-[node name="ctrl_win_alt_space_alt_win_menu_ctrl" type="HBoxContainer" parent="VBoxContainer" groups=["scene_change_element"]]
+[node name="ctrl_win_alt_space_alt_win_menu_ctrl" type="HBoxContainer" parent="VBoxContainer"]
 layout_mode = 2
 
 [node name="ctrl" parent="VBoxContainer/ctrl_win_alt_space_alt_win_menu_ctrl" instance=ExtResource("1_ik4w2")]
@@ -353,6 +333,83 @@ char = "Ctrl"
 [node name="Panel" parent="VBoxContainer/ctrl_win_alt_space_alt_win_menu_ctrl/ctrl2" index="0"]
 custom_minimum_size = Vector2(185, 80)
 theme_override_styles/panel = SubResource("StyleBoxFlat_bbdjs")
+
+[node name="ColorHint" type="HBoxContainer" parent="VBoxContainer"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+theme_override_constants/separation = 100
+script = SubResource("GDScript_ojmd3")
+
+[node name="PerfectColorHint" type="HBoxContainer" parent="VBoxContainer/ColorHint"]
+layout_mode = 2
+
+[node name="PerfectColor" type="TextureRect" parent="VBoxContainer/ColorHint/PerfectColorHint"]
+unique_name_in_owner = true
+modulate = Color(0.478431, 1, 1, 1)
+custom_minimum_size = Vector2(30, 0)
+layout_mode = 2
+texture = SubResource("CanvasTexture_7mmg5")
+
+[node name="Label" type="Label" parent="VBoxContainer/ColorHint/PerfectColorHint"]
+layout_mode = 2
+text = "Perfect 100%"
+
+[node name="NintyColorHint" type="HBoxContainer" parent="VBoxContainer/ColorHint"]
+layout_mode = 2
+
+[node name="NintyColor" type="TextureRect" parent="VBoxContainer/ColorHint/NintyColorHint"]
+unique_name_in_owner = true
+modulate = Color(0.478431, 1, 1, 1)
+custom_minimum_size = Vector2(30, 0)
+layout_mode = 2
+texture = SubResource("CanvasTexture_cqmte")
+
+[node name="Label" type="Label" parent="VBoxContainer/ColorHint/NintyColorHint"]
+layout_mode = 2
+text = "At least 90% Correct"
+
+[node name="FiftyColorHint" type="HBoxContainer" parent="VBoxContainer/ColorHint"]
+layout_mode = 2
+
+[node name="FiftyColor" type="TextureRect" parent="VBoxContainer/ColorHint/FiftyColorHint"]
+unique_name_in_owner = true
+modulate = Color(0.478431, 1, 1, 1)
+custom_minimum_size = Vector2(30, 0)
+layout_mode = 2
+texture = SubResource("CanvasTexture_cqmte")
+
+[node name="Label" type="Label" parent="VBoxContainer/ColorHint/FiftyColorHint"]
+layout_mode = 2
+text = "At Least 50% Correct"
+
+[node name="Below50ColorHint" type="HBoxContainer" parent="VBoxContainer/ColorHint"]
+layout_mode = 2
+
+[node name="Below50Color" type="TextureRect" parent="VBoxContainer/ColorHint/Below50ColorHint"]
+unique_name_in_owner = true
+modulate = Color(0.478431, 1, 1, 1)
+custom_minimum_size = Vector2(30, 0)
+layout_mode = 2
+texture = SubResource("CanvasTexture_cqmte")
+
+[node name="Label" type="Label" parent="VBoxContainer/ColorHint/Below50ColorHint"]
+layout_mode = 2
+text = "Below 50% Correct"
+
+[node name="NAColorHint" type="HBoxContainer" parent="VBoxContainer/ColorHint"]
+layout_mode = 2
+
+[node name="NotAvailableColor" type="TextureRect" parent="VBoxContainer/ColorHint/NAColorHint"]
+unique_name_in_owner = true
+modulate = Color(1, 1, 1, 0.509804)
+custom_minimum_size = Vector2(30, 0)
+layout_mode = 2
+texture = SubResource("CanvasTexture_cqmte")
+
+[node name="Label" type="Label" parent="VBoxContainer/ColorHint/NAColorHint"]
+layout_mode = 2
+text = "N/A"
 
 [connection signal="new_key_node_added" from="VBoxContainer/1234567890" to="." method="_on_new_key_node_added"]
 [connection signal="new_key_node_added" from="VBoxContainer/qwerty" to="." method="_on_new_key_node_added"]

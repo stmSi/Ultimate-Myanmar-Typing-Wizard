@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://bdhclvssm0s4g"]
+
+[ext_resource type="PackedScene" uid="uid://bu35jrqg64j60" path="res://src/Keyboard/keyboard.tscn" id="1_hukts"]
+[ext_resource type="Script" path="res://src/FrequentMistakesReport/frequent_mistakes_report.gd" id="1_tjcdk"]
+
+[node name="FrequentMistakesReport" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_tjcdk")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+scale = Vector2(0.6, 0.6)
+
+[node name="Keyboard" parent="VBoxContainer" instance=ExtResource("1_hukts")]
+unique_name_in_owner = true
+layout_mode = 2

@@ -1,6 +1,6 @@
 @icon("res://Assets/Icons/keyboard-icon.png")
 extends Control
-class_name  Keyboard 
+class_name  Keyboard
 
 var key_node_mapping: Dictionary = {}
 var current_char: String = ''
@@ -11,6 +11,7 @@ var pending_shift_node: KeyButton = null
 @onready var l_shift: KeyButton = $VBoxContainer/zxcvb/LShift
 @onready var r_shift: KeyButton = $VBoxContainer/zxcvb/RShift
 @onready var space: KeyButton = %space
+@onready var color_hint: HBoxContainer = %ColorHint
 
 var ignored_keycodes = [
 	'Backspace',
