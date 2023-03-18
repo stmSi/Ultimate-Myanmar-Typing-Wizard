@@ -13,6 +13,7 @@ script = ExtResource("1_b7qi6")
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 3
+step = 0.01
 value = 60.0
 fill_mode = 5
 texture_under = ExtResource("2_e4d7n")
