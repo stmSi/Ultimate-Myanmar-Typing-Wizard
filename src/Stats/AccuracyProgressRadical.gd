@@ -4,10 +4,11 @@ extends VBoxContainer
 
 @onready var percentage_label: Label = $TextureProgressBar/PercentageLabel
 
-var accuracy : float = 0
+var accuracy : float = 0.0
 
 func _ready() -> void:
 	var stats = UserProfileManager.load_stats()
+	texture_progress_bar.value = 0
 	if stats == []:
 		# default value
 		stats = \
@@ -28,9 +29,16 @@ func _ready() -> void:
 		accuracy = stat[timestamp]['accuracy']
 		
 	var tween := get_tree().create_tween()
-	tween.tween_property(texture_progress_bar, "value", accuracy, 2.0).set_trans(Tween.TRANS_SINE)
+	tween.finished.connect(func(): set_process(false))
+	tween \
+		.tween_property(texture_progress_bar, "value", accuracy, 2.0) \
+		.set_trans(Tween.TRANS_SINE) \
+		.set_ease(Tween.EASE_OUT)
 	if accuracy == 100:
 		percentage_label.modulate = Color.PALE_TURQUOISE
 	elif accuracy >= 90.0:
 		percentage_label.modulate = Color(1, 1, 0, 1)
-	percentage_label.text = ("%.2f" % accuracy) + " %"
+
+func _process(delta: float) -> void:
+	# **Warning** _process will stop running when tween is finished
+	percentage_label.text = ("%.2f" % texture_progress_bar.value) + " %"
