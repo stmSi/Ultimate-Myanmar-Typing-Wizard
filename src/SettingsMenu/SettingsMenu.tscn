@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://bdwpvsp2xyw50"]
+[gd_scene load_steps=9 format=3 uid="uid://bdwpvsp2xyw50"]
 
 [ext_resource type="Script" path="res://src/SettingsMenu/SettingsMenu.gd" id="1_lnpdd"]
 [ext_resource type="Script" path="res://src/SettingsMenu/FPSOptions.gd" id="2_o2ea0"]
@@ -9,6 +9,32 @@ border_width_left = 3
 border_width_top = 3
 border_width_right = 3
 border_width_bottom = 3
+
+[sub_resource type="GDScript" id="GDScript_igjqi"]
+script/source = "extends OptionButton
+
+func _ready() -> void:
+	clear()
+	add_item(\"Windowed\")
+	set_item_metadata(0, DisplayServer.WINDOW_MODE_WINDOWED)
+	if DisplayServer.window_get_mode() == DisplayServer.WINDOW_MODE_WINDOWED:
+		select(0)
+	
+	add_item(\"Fullscreen\")
+	set_item_metadata(1, DisplayServer.WINDOW_MODE_FULLSCREEN)
+	if DisplayServer.window_get_mode() == DisplayServer.WINDOW_MODE_FULLSCREEN:
+		select(1)
+	
+	add_item(\"Exclusive Fullscreen\")
+	set_item_metadata(2, DisplayServer.WINDOW_MODE_EXCLUSIVE_FULLSCREEN)
+	if DisplayServer.window_get_mode() == DisplayServer.WINDOW_MODE_EXCLUSIVE_FULLSCREEN:
+		select(2)
+	
+
+func _on_item_selected(index: int) -> void:
+	DisplaySettings.change_window_mode(get_item_metadata(index))
+	pass
+"
 
 [sub_resource type="GDScript" id="GDScript_o5mfk"]
 script/source = "extends OptionButton
@@ -119,6 +145,24 @@ layout_mode = 2
 size_flags_vertical = 4
 theme_override_constants/separation = 20
 
+[node name="WindowsModeContainer" type="HBoxContainer" parent="MarginContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="Label" type="Label" parent="MarginContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/WindowsModeContainer"]
+layout_mode = 2
+text = "Window Mode:"
+
+[node name="WindowModeOptions" type="OptionButton" parent="MarginContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/WindowsModeContainer"]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+size_flags_horizontal = 10
+item_count = 1
+selected = 0
+popup/item_0/text = "Windowed"
+popup/item_0/id = 0
+script = SubResource("GDScript_igjqi")
+
 [node name="ResolutioonContainer" type="HBoxContainer" parent="MarginContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_constants/separation = 20
@@ -187,6 +231,7 @@ custom_minimum_size = Vector2(140, 40)
 layout_mode = 2
 text = "Close"
 
+[connection signal="item_selected" from="MarginContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/WindowsModeContainer/WindowModeOptions" to="MarginContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/WindowsModeContainer/WindowModeOptions" method="_on_item_selected"]
 [connection signal="item_selected" from="MarginContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/ResolutioonContainer/ResolutionOptions" to="MarginContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/ResolutioonContainer/ResolutionOptions" method="_on_item_selected"]
 [connection signal="item_selected" from="MarginContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/FPSOptionsContainer/FPSOptions" to="MarginContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/FPSOptionsContainer/FPSOptions" method="_on_item_selected"]
 [connection signal="toggled" from="MarginContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/PopupHelperDisableContainer/PopupHelperDisable" to="MarginContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/PopupHelperDisableContainer/PopupHelperDisable" method="_on_toggled"]
