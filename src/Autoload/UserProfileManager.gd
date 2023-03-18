@@ -9,6 +9,10 @@ var mistakes = {
 	"timestamps": [],
 }
 
+var corrected_chars = []
+var corrected_chars_frequency = []
+
+
 func _ready() -> void:
 	if not FileAccess.file_exists(profile_data_file):
 		save_file = ConfigFile.new()
@@ -19,7 +23,17 @@ func _ready() -> void:
 		save_file.set_value("LessonProgress", "last_time", Time.get_datetime_string_from_system())
 		
 		save_file.save(profile_data_file)
-		
+	
+	EventBus.correct_char_typed.connect(
+		func(correct_c: String):
+			var idx = corrected_chars.find(correct_c)
+			if idx == -1:
+				corrected_chars.push_back(correct_c)
+				corrected_chars_frequency.push_back(1)
+			else:
+				corrected_chars_frequency[idx] += 1
+	)
+
 	EventBus.wrong_char_typed.connect(func(wrong_char: String, correct_char: String):
 		mistakes["correct_chars"].append(correct_char)
 		mistakes["wrong_chars"].append(wrong_char)
@@ -27,7 +41,19 @@ func _ready() -> void:
 	)
 	
 	EventBus.lesson_finished.connect(func(lesson_number: int, difficulty: String):
-		save_mistakes(mistakes["correct_chars"], mistakes["wrong_chars"], mistakes["timestamps"])
+		
+		save_correct_characters()
+		corrected_chars = []
+		corrected_chars_frequency = []
+		
+		save_mistake_details(mistakes["correct_chars"], mistakes["wrong_chars"], mistakes["timestamps"])
+		# reset mistakes
+		mistakes = {
+			"correct_chars": [],
+			"wrong_chars": [],
+			"timestamps": [],
+		}
+		
 		if difficulty == "extra":
 			return # don't save lesson progress on extra practice
 		save_lesson_progress(lesson_number, difficulty, true)
@@ -95,7 +121,7 @@ func load_lesson_progress() -> Dictionary:
 	return lesson_progress
 
 
-func save_mistakes(
+func save_mistake_details(
 	correct_chars: Array, 
 	wrong_chars: Array, 
 	timestamps: Array) -> bool:
@@ -104,7 +130,7 @@ func save_mistakes(
 		save_file = ConfigFile.new()
 	
 	if len(correct_chars) != len(wrong_chars) || len(wrong_chars) != len(timestamps):
-		print("Error in save_mistakes: wrong parameter lengths.")
+		print("Error in save_mistake_details: wrong parameter lengths.")
 		return false
 	
 	var err = save_file.load(profile_data_file)
@@ -123,7 +149,7 @@ func save_mistakes(
 		# 	{another_w_char: how_many_times, "last_time": last_time_mistake}
 		#	]
 		
-		var mistake_char_data : Array = save_file.get_value("Mistakes", correct_char, [] )
+		var mistake_char_data : Array = save_file.get_value("MistakesDetails", correct_char, [] )
 		
 		var j := 0;
 		while j < len(mistake_char_data):
@@ -141,7 +167,7 @@ func save_mistakes(
 			})
 	
 		
-		save_file.set_value("Mistakes", correct_char, mistake_char_data)
+		save_file.set_value("MistakeDetails", correct_char, mistake_char_data)
 		i += 1
 		
 	err = save_file.save(profile_data_file)
@@ -152,7 +178,7 @@ func save_mistakes(
 	return true
 
 
-func load_mistakes() -> Array:
+func load_mistake_details() -> Array:
 	# 
 	# [
 	#	{"correct_char":
@@ -172,16 +198,74 @@ func load_mistakes() -> Array:
 
 	var err = save_file.load(profile_data_file)
 	if err != OK:
-		print("Error in load_mistakes: loading save file data fails.")
+		print("Error in load_mistake_details: loading save file data fails.")
 		return [];
 	
-	var correct_chars = save_file.get_section_keys("Mistakes")
+	var correct_chars = save_file.get_section_keys("MistakeDetails")
 	for c in correct_chars:
 		_mistakes.append({
-			c: save_file.get_value("Mistakes", c, []) 
+			c: save_file.get_value("MistakeDetails", c, []) 
 		})
 	
 	return _mistakes
+
+
+func save_correct_characters() -> bool:
+	if len(corrected_chars) != len(corrected_chars_frequency):
+		print("Error in save_correct_characters: incorrect parameter lengths.")
+		return false
+
+	if not save_file:
+		save_file = ConfigFile.new()
+		
+	var err = save_file.load(profile_data_file)
+	if err != OK:
+		print("Error in save_correct_characters: loading save file data fails.")
+		return false;
+	
+	var i := 0
+	while(i < len(corrected_chars)):
+		# [Corrects]
+		# "correct_char"=total_corrected_char_freq
+		# ....
+		var corrected_char = corrected_chars[i]
+		var total_corrected_char_freq : int = \
+			save_file.get_value("Corrects", corrected_char, 0) \
+			+ \
+			corrected_chars_frequency[i]
+		save_file.set_value("Corrects", corrected_char, total_corrected_char_freq)
+		i += 1
+		
+	err = save_file.save(profile_data_file)
+	if err != OK:
+		print("Error in save_correct_characters: Saving/Updating profile data")
+		return false
+		
+	return true
+
+
+func load_correct_characters() -> Array:
+	# [Corrects]
+	# "correct_char"=total_corrected_char_freq
+	# ....
+	var corrected_chars = []
+	if not save_file:
+		save_file = ConfigFile.new()
+
+	var err = save_file.load(profile_data_file)
+	if err != OK:
+		print("Error in load_mistake_details: loading save file data fails.")
+		return [];
+	
+	var chars = save_file.get_section_keys("Corrects")
+	for c in chars:
+		corrected_chars.append({
+			c: save_file.get_value("Corrects", c, 0) 
+		})
+	
+	return corrected_chars
+
+
 
 
 func save_stats(accuracy: float, char_per_min: int, lesson_number: int, difficulty: String) -> bool:
@@ -229,7 +313,37 @@ func load_stats() -> Array:
 	
 	return stats
 
+
 func reset_progress():
-	if FileAccess.file_exists(profile_data_file):
-		OS.move_to_trash(ProjectSettings.globalize_path(profile_data_file))
-		print('moved to trash')
+	if not save_file:
+		save_file = ConfigFile.new()
+
+	var err = save_file.load(profile_data_file)
+	if err != OK:
+		print("Error in reset_progress: loading save file data fails.")
+		return;
+	
+	save_file.erase_section("LessonProgress")
+	err = save_file.save(profile_data_file)
+	if err != OK:
+		print("Error in reset_progress: resetting lesson progress fails.")
+		return
+
+func reset_statistics():
+	if not save_file:
+		save_file = ConfigFile.new()
+	
+	var err = save_file.load(profile_data_file)
+	if err != OK:
+		print("Error in reset_progress: loading save file data fails.")
+		return
+	
+	save_file.erase_section("Statistics")
+	save_file.erase_section("MistakeDetails")
+	save_file.erase_section("Corrects")
+	
+	err = save_file.save(profile_data_file)
+	if err != OK:
+		print("Error in reset_progress: resetting lesson progress fails.")
+		return
+		
