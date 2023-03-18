@@ -16,7 +16,8 @@ var ignored_keycodes = [
 	'Backspace',
 	'Delete',
 	'Semicolon',
-	'Space'
+	'Space',
+	'QuoteLeft'
 ]
 
 func _ready() -> void:
@@ -48,8 +49,13 @@ func _input(event: InputEvent) -> void:
 		if len(converted_char) > 1: # Shift/Alt/Ctrl
 			### Allow 'Backspace', 'Delete', etc..
 			if ignored_keycodes.find(converted_char) == -1:
+#				print("ignored converted_char: ", converted_char)
 				return
 		
+#		print("Time: ", Time.get_ticks_msec())
+#		print("current_char: ", current_char)
+#		print("converted_char: ", converted_char)
+#		print("-----------")
 		if converted_char.begins_with("Backsp"): #ignore Backspace
 			pending_node.reset_animation()
 			_reset_shifts()

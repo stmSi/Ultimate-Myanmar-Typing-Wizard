@@ -1,7 +1,7 @@
 extends HBoxContainer
 
-@export var char = '၁၂၃၄၅၆၇၈၉၀-='
-@export var shift_char = 'ဍၒဋ$%^ရ*()_+'
+@export var char = '`၁၂၃၄၅၆၇၈၉၀-='
+@export var shift_char = 'ဎဍၒဋ$%^ရ*()_+'
 @export var replacing_node_name = '1234567890'
 
 var key_button_resource = preload("res://src/Keyboard/key_button.tscn")
