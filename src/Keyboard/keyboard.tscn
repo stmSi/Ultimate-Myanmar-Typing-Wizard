@@ -132,11 +132,6 @@ alignment = 1
 script = ExtResource("1_xnj8i")
 replacing_node_name = "1_plus_populate"
 
-[node name="tide" parent="VBoxContainer/1234567890" instance=ExtResource("1_ik4w2")]
-layout_mode = 2
-shift_char = "~"
-char = "`"
-
 [node name="1_plus_populate" type="Control" parent="VBoxContainer/1234567890"]
 layout_mode = 2
 
