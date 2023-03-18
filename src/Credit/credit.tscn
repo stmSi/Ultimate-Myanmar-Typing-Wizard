@@ -51,7 +51,7 @@ text = "___________"
 layout_mode = 2
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 bbcode_enabled = true
-text = "[url=https://stocksnap.io/photo/bokeh-abstract-VEPGYOBHJV]Background Image[/url] created by: Mary Maaret"
+text = "[url=https://stocksnap.io/photo/bokeh-abstract-VEPGYOBHJV]Background Image[/url] created by: [url=https://stocksnap.io/author/marymaaret]Mary Maaret[/url]"
 fit_content = true
 autowrap_mode = 0
 script = SubResource("GDScript_svjeb")

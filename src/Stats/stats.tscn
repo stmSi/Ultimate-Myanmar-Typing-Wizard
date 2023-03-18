@@ -121,7 +121,7 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_488jg")
 theme_override_styles/hover = SubResource("StyleBoxFlat_yq5ds")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_488jg")
 theme_override_styles/focus = SubResource("StyleBoxFlat_488jg")
-text = "Reset Progress"
+text = "Reset Lesson Progress"
 script = ExtResource("5_v02w4")
 
 [node name="ResetStatisticsBtn" type="Button" parent="MarginContainer/VBoxContainer/Actions"]
