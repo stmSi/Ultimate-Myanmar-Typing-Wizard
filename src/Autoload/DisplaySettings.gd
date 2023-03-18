@@ -30,9 +30,6 @@ var aspect_ratio: float
 
 var resolutions = []
 var recommended_resolution: Vector2i
-var settings_data = {
-	
-}
 
 var display_settings_file = "user://display_settings.cfg"
 var config : ConfigFile = null
@@ -64,7 +61,9 @@ func _ready() -> void:
 		if screen_size.x >= scr_size[0] and screen_size.y >= scr_size[1]:
 			recommended_resolution = scr_size
 			break
-
+	
+	var window_mode = config.get_value("Settings", "WindowMode", DisplayServer.WINDOW_MODE_WINDOWED)
+	DisplayServer.window_set_mode(window_mode)
 	
 func change_screen_resolution(reso: Vector2i) -> void:
 	if not config:
@@ -116,3 +115,20 @@ func change_max_fps(max_fps: int) -> void:
 		return
 		
 	
+
+func change_window_mode(mode: DisplayServer.WindowMode):
+	if not config:
+		config = ConfigFile.new()
+		var err = config.load(display_settings_file)
+		if err != OK:
+			print("change_window_mode: Loading display_settings file failed.")
+	
+	DisplayServer.window_set_mode(mode)
+
+	config.set_value("Settings", "WindowMode", mode)
+	
+	var err = config.save(display_settings_file)
+	if err != OK:
+		print("change_window_mode: Saving display_settings file failed.")
+		return
+
