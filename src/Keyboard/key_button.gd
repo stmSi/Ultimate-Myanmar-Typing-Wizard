@@ -79,3 +79,10 @@ func _reset_modulate_color():
 	
 	if char == ' ': # special condition for "Space" key
 		get_node('line').modulate = ori_modulate_shift_char_color # only "Space" key has line
+
+func highlight_character(c: String, highlight_color: Color):
+	# used by frequent_mistakes_report
+	if char_lbl.text == c:
+		char_lbl.modulate = highlight_color
+	elif shift_char_lbl.text == c:
+		shift_char_lbl.modulate = highlight_color
