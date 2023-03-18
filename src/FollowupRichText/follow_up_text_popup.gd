@@ -26,7 +26,7 @@ func _ready() -> void:
 func _set_raw_text(t: String) -> void:
 	raw_text = t
 
-func _on_followup_popup_pos_changed(pos: Vector2, node: KeyButton):
+func _on_followup_popup_pos_changed(_pos: Vector2, node: KeyButton):
 	self.pending_node = node
 	call_deferred("_animate_position") # Hack for first time position not working
 
@@ -48,6 +48,6 @@ func _animate_position():
 	
 
 func _on_written_string_changed(s: String):
-	var delta_move = ((s.length())  * follow_up_rich_text.get_theme_font_size("normal_font_size")) / 2.5
+	var delta_move = ((s.length())  * follow_up_rich_text.get_theme_font_size("normal_font_size")) / 2
 #	margin_container.position.x = -delta_move
 	follow_up_rich_text.custom_minimum_size.x =  (ori_richtext_minimum_size_x + delta_move)

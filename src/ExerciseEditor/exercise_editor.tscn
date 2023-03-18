@@ -226,20 +226,29 @@ layout_mode = 2
 text = "No Difficulty Selected
 "
 
-[node name="LessonIds" type="ItemList" parent="MarginContainer2/VBoxContainer/HBoxContainer/LessonsContainer" groups=["scene_change_element"]]
-unique_name_in_owner = true
-custom_minimum_size = Vector2(200, 0)
+[node name="LessonsIdsContainer" type="HBoxContainer" parent="MarginContainer2/VBoxContainer/HBoxContainer/LessonsContainer"]
 layout_mode = 2
+size_flags_vertical = 3
+
+[node name="LessonIds" type="ItemList" parent="MarginContainer2/VBoxContainer/HBoxContainer/LessonsContainer/LessonsIdsContainer" groups=["scene_change_element"]]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+size_flags_horizontal = 3
 size_flags_vertical = 3
 script = ExtResource("2_ockha")
 
-[node name="SwapLessonContainer" type="HBoxContainer" parent="MarginContainer2/VBoxContainer/HBoxContainer/LessonsContainer"]
-layout_mode = 2
-
-[node name="UpDownLbl2" type="Label" parent="MarginContainer2/VBoxContainer/HBoxContainer/LessonsContainer/SwapLessonContainer" groups=["scene_change_element"]]
+[node name="UpDownLbl2" type="Label" parent="MarginContainer2/VBoxContainer/HBoxContainer/LessonsContainer/LessonsIdsContainer" groups=["scene_change_element"]]
 layout_mode = 2
 size_flags_vertical = 0
-text = "  Alt+↑         Swap Lessons        Alt+↓"
+text = " Alt+↑
+
+Swap
+
+Alt+↓"
+
+[node name="SwapLessonContainer" type="HBoxContainer" parent="MarginContainer2/VBoxContainer/HBoxContainer/LessonsContainer"]
+layout_mode = 2
 
 [node name="AddNewLessonsFileBtn" type="Button" parent="MarginContainer2/VBoxContainer/HBoxContainer/LessonsContainer" groups=["scene_change_element"]]
 unique_name_in_owner = true
@@ -455,9 +464,9 @@ grow_horizontal = 0
 [connection signal="pressed" from="MarginContainer2/VBoxContainer/HBoxContainer/LessonsContainer/DifficulitiesButtons/AdvancedBtn" to="." method="_on_advance_btn_pressed"]
 [connection signal="pressed" from="MarginContainer2/VBoxContainer/HBoxContainer/LessonsContainer/DifficulitiesButtons/ExtraExerciseBtn" to="." method="_on_extra_exercise_btn_pressed"]
 [connection signal="pressed" from="MarginContainer2/VBoxContainer/HBoxContainer/LessonsContainer/DifficulitiesButtons/CancelBtn" to="." method="_on_cancel_btn_pressed"]
-[connection signal="delete_lesson_from_delete_key" from="MarginContainer2/VBoxContainer/HBoxContainer/LessonsContainer/LessonIds" to="." method="_on_lesson_ids_delete_lesson_from_delete_key"]
-[connection signal="item_selected" from="MarginContainer2/VBoxContainer/HBoxContainer/LessonsContainer/LessonIds" to="." method="_on_lesson_ids_item_selected"]
-[connection signal="swap_lesson" from="MarginContainer2/VBoxContainer/HBoxContainer/LessonsContainer/LessonIds" to="." method="_on_lesson_ids_swap_lesson"]
+[connection signal="delete_lesson_from_delete_key" from="MarginContainer2/VBoxContainer/HBoxContainer/LessonsContainer/LessonsIdsContainer/LessonIds" to="." method="_on_lesson_ids_delete_lesson_from_delete_key"]
+[connection signal="item_selected" from="MarginContainer2/VBoxContainer/HBoxContainer/LessonsContainer/LessonsIdsContainer/LessonIds" to="." method="_on_lesson_ids_item_selected"]
+[connection signal="swap_lesson" from="MarginContainer2/VBoxContainer/HBoxContainer/LessonsContainer/LessonsIdsContainer/LessonIds" to="." method="_on_lesson_ids_swap_lesson"]
 [connection signal="pressed" from="MarginContainer2/VBoxContainer/HBoxContainer/LessonsContainer/AddNewLessonsFileBtn" to="." method="_on_add_lessons_file_btn_pressed"]
 [connection signal="pressed" from="MarginContainer2/VBoxContainer/HBoxContainer/LessonsContainer/ExitToMenuBtn" to="MarginContainer2/VBoxContainer/HBoxContainer/LessonsContainer/ExitToMenuBtn" method="_on_pressed"]
 [connection signal="value_changed" from="MarginContainer2/VBoxContainer/HBoxContainer/VBoxContainer2/LessonSettingsContainer/RepeatContainer/RepeatsBox" to="." method="_on_repeats_box_value_changed"]

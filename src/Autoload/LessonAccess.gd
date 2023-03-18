@@ -59,7 +59,7 @@ func save_message(lesson_number: int, difficulty: String, msg: String) -> bool:
 	return true
 
 
-func get_lesson_files(difficulty: String, randomize_lessons: bool = false) -> PackedStringArray:
+func get_lesson_files(difficulty: String) -> PackedStringArray:
 	var difficulty_lesson_path = _determine_difficulty_lessons_path(difficulty)
 	if difficulty_lesson_path == '':
 		return []

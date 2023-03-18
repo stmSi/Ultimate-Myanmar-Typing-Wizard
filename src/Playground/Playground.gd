@@ -59,7 +59,7 @@ func _start_extra_lesson(randomize_lessons: bool = true):
 
 	lesson_idx = 0;
 
-	var files: PackedStringArray = LessonAccess.get_lesson_files('extra', randomize_lessons)
+	var files: PackedStringArray = LessonAccess.get_lesson_files('extra')
 	if randomize_lessons:
 		files = _randomize_packed_array(files)
 	else:

@@ -29,6 +29,8 @@ func _ready() -> void:
 		
 	var tween := get_tree().create_tween()
 	tween.tween_property(texture_progress_bar, "value", accuracy, 2.0).set_trans(Tween.TRANS_SINE)
-	if accuracy >= 90.0:
+	if accuracy == 100:
+		percentage_label.modulate = Color.PALE_TURQUOISE
+	elif accuracy >= 90.0:
 		percentage_label.modulate = Color(1, 1, 0, 1)
 	percentage_label.text = ("%.2f" % accuracy) + " %"
