@@ -7,6 +7,9 @@
 layout_mode = 3
 anchors_preset = 0
 script = ExtResource("1_tjcdk")
+color_char_90 = Color(0, 1, 0, 1)
+color_char_50 = Color(1, 0.776471, 0, 1)
+color_char_below = Color(1, 0.247059, 0.188235, 1)
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 0
