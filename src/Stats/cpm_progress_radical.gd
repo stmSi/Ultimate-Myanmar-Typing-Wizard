@@ -3,8 +3,8 @@ extends VBoxContainer
 
 var cpm : int
 
-var average_cpm : int = 190
-var professional_cpm : int = 360
+@export var average_cpm : int = 180
+@export var professional_cpm : int = 320
 
 @export var lower_average_cpm_color : Color = Color.DARK_CYAN
 @export var above_average_cpm_color : Color = Color.MEDIUM_SPRING_GREEN
