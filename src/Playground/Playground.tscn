@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://d2kbd35uuv0p7"]
+[gd_scene load_steps=21 format=3 uid="uid://d2kbd35uuv0p7"]
 
 [ext_resource type="Theme" uid="uid://dppj17ign8l2n" path="res://src/Themes/main.tres" id="1_7djnc"]
 [ext_resource type="Script" path="res://src/Playground/Playground.gd" id="1_tmfyy"]
@@ -9,7 +9,6 @@
 [ext_resource type="PackedScene" uid="uid://bu35jrqg64j60" path="res://src/Keyboard/keyboard.tscn" id="5_3d5ha"]
 [ext_resource type="Script" path="res://src/Playground/AccuracyLabel.gd" id="6_240wa"]
 [ext_resource type="PackedScene" uid="uid://bulscf8jamb2b" path="res://src/FollowupRichText/follow_up_text_popup.tscn" id="6_vw22j"]
-[ext_resource type="Texture2D" uid="uid://5n4mh44uc3c4" path="res://Assets/Icons/audio.png" id="7_4yl2m"]
 [ext_resource type="AudioStream" uid="uid://cdqui2diupr13" path="res://Assets/Sounds/error-sound.mp3" id="8_ylc3d"]
 [ext_resource type="AudioStream" uid="uid://bjeu8c6senasm" path="res://Assets/Sounds/correct-sound.mp3" id="9_otsg4"]
 [ext_resource type="PackedScene" uid="uid://bdwpvsp2xyw50" path="res://src/SettingsMenu/SettingsMenu.tscn" id="13_cmjcr"]
@@ -25,9 +24,6 @@ func _ready():
 	EventBus.exercise_line_finished.connect(self._exercise_line_finished)
 	EventBus.message_popup_closed.connect(self._on_message_popup_closed)
 	EventBus.lesson_id_loaded.connect(self._on_new_lesson_id_loaded)
-
-	SoundSettings.mute.connect(func(): grab_focus())
-	SoundSettings.unmute.connect(func(): grab_focus())
 
 	pass # Replace with function body.
 
@@ -101,25 +97,18 @@ func _on_pressed() -> void:
 	pass # Replace with function body.
 "
 
-[sub_resource type="GDScript" id="GDScript_fg15e"]
-script/source = "extends TextureButton
-var mute : bool = false
-@onready var audio = preload(\"res://Assets/Icons/audio.png\")
-@onready var audio_mute = preload(\"res://Assets/Icons/audio-mute.png\")
+[sub_resource type="GDScript" id="GDScript_fjrcb"]
+script/source = "extends AudioStreamPlayer
+
+var mute: bool = false
 
 func _ready() -> void:
-	SoundSettings.mute.connect(func(): texture_normal = audio_mute)
-	SoundSettings.unmute.connect(func(): texture_normal = audio)
+	EventBus.correct_char_typed.connect(self._on_correct_char_typed)
+	SoundSettings.mute_correct_beep.connect(func(m): mute = m)
 
-
-func _on_pressed() -> void:
-	if mute:
-		SoundSettings.unmute.emit()
-	else:
-		SoundSettings.mute.emit()
-	
-	mute = not mute # toggle
-
+func _on_correct_char_typed(_correct_ch: String):
+	if not mute:
+		play()
 "
 
 [sub_resource type="GDScript" id="GDScript_7njul"]
@@ -129,27 +118,10 @@ var mute : bool = false
 
 func _ready() -> void:
 	EventBus.wrong_char_typed.connect(self._on_wrong_char_typed)
-	SoundSettings.mute.connect(func(): mute = true)
-	SoundSettings.unmute.connect(func(): mute = false)
-	
+	SoundSettings.mute_incorrect_beep.connect(func(m): mute = m)
+
 
 func _on_wrong_char_typed(_wrong_c: String, _correct_c: String):
-	if not mute:
-		play()
-"
-
-[sub_resource type="GDScript" id="GDScript_fjrcb"]
-script/source = "extends AudioStreamPlayer
-
-var mute: bool = false
-
-func _ready() -> void:
-	EventBus.correct_char_typed.connect(self._on_correct_char_typed)
-	SoundSettings.mute.connect(func(): mute = true)
-	SoundSettings.unmute.connect(func(): mute = false)
-	pass
-
-func _on_correct_char_typed(_correct_ch: String):
 	if not mute:
 		play()
 "
@@ -313,14 +285,12 @@ size_flags_vertical = 4
 text = "Settings"
 script = SubResource("GDScript_s74fc")
 
-[node name="AudioBtn" type="TextureButton" parent="MarginContainer/VBoxContainer/BottomButtonsContainer" groups=["scene_change_element"]]
-visible = false
-layout_mode = 2
-size_flags_horizontal = 6
-size_flags_vertical = 4
-texture_normal = ExtResource("7_4yl2m")
-stretch_mode = 3
-script = SubResource("GDScript_fg15e")
+[node name="CorrectAudioPlayer" type="AudioStreamPlayer" parent="."]
+process_mode = 3
+stream = ExtResource("9_otsg4")
+volume_db = -20.0
+max_polyphony = 3
+script = SubResource("GDScript_fjrcb")
 
 [node name="ErrorAudioPlayer" type="AudioStreamPlayer" parent="."]
 process_mode = 3
@@ -329,13 +299,6 @@ volume_db = -25.0
 pitch_scale = 1.2
 max_polyphony = 3
 script = SubResource("GDScript_7njul")
-
-[node name="CorrectAudioPlayer" type="AudioStreamPlayer" parent="."]
-process_mode = 3
-stream = ExtResource("9_otsg4")
-volume_db = -20.0
-max_polyphony = 3
-script = SubResource("GDScript_fjrcb")
 
 [node name="SettingsMenu" parent="." instance=ExtResource("13_cmjcr")]
 visible = false
@@ -352,4 +315,3 @@ grow_horizontal = 0
 [connection signal="text_changed" from="MarginContainer/VBoxContainer/LineEdit" to="." method="_on_text_edit_text_changed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/BottomButtonsContainer/ExitToMenu" to="MarginContainer/VBoxContainer/BottomButtonsContainer/ExitToMenu" method="_on_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/BottomButtonsContainer/SettingsBtn" to="MarginContainer/VBoxContainer/BottomButtonsContainer/SettingsBtn" method="_on_pressed"]
-[connection signal="pressed" from="MarginContainer/VBoxContainer/BottomButtonsContainer/AudioBtn" to="MarginContainer/VBoxContainer/BottomButtonsContainer/AudioBtn" method="_on_pressed"]

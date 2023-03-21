@@ -105,6 +105,7 @@ func start_lesson_progress():
 		lesson_ids.push_back(f.get_basename().get_file())
 	_load_exercise()
 
+
 func _on_exercise_line_finished():
 	_load_exercise()
 
