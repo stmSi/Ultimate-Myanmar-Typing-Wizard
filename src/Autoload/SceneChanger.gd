@@ -6,7 +6,7 @@ var test_game_scene = "res://src/MiniGames/TestGame/test_game.tscn"
 var playground_scene = "res://src/Playground/Playground.tscn"
 var take_lesson_scene = "res://src/Playground/take_lesson_scene.tscn"
 var take_exercise_scene = "res://src/Playground/exercise_scene.tscn"
-
+var network_competition_scene = "res://src/NetworkCompetition/network_competition.tscn"
 var current_scene = null
 
 func _ready() -> void:
@@ -63,6 +63,9 @@ func change_to_main_scene():
 
 func change_to_test_game_scene():
 	goto_scene(test_game_scene)
+
+func change_to_network_competition_scene():
+	goto_scene(network_competition_scene)
 
 func _animate_appear():
 	# Animate Panel first using "scene_change_bg" group

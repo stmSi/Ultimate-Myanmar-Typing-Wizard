@@ -1,0 +1,173 @@
+[gd_scene load_steps=7 format=3 uid="uid://fcbb6a1xr6d3"]
+
+[ext_resource type="Script" path="res://src/NetworkCompetition/network_competition.gd" id="1_wgkal"]
+[ext_resource type="PackedScene" uid="uid://jlkyjmkbpshr" path="res://src/Background/background.tscn" id="2_bg33i"]
+[ext_resource type="PackedScene" uid="uid://d2kbd35uuv0p7" path="res://src/Playground/Playground.tscn" id="3_3s8f4"]
+[ext_resource type="Script" path="res://src/Playground/AccuracyLabel.gd" id="4_7wqpv"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_ublys"]
+shadow_size = 2
+
+[sub_resource type="GDScript" id="GDScript_j3n0s"]
+script/source = "extends Label
+
+var max_chars_to_calculate = 20
+var times_taken = []
+var last_time_char_typed = 0.0
+var cpm = 0
+
+
+func _ready() -> void:
+	EventBus.wrong_char_typed.connect(
+		func(_wrong_c: String, _correct_c: String):
+			self._calculate_time_taken()
+	)
+	
+	EventBus.correct_char_typed.connect(
+		func(_correct_c: String):
+			self._calculate_time_taken()
+	)
+
+func _calculate_time_taken():
+	var now_in_minute = (Time.get_ticks_msec() / 1000.0) / 60
+
+	if last_time_char_typed != 0:
+		times_taken.push_back(now_in_minute - last_time_char_typed)
+		var total_in_sec = 0
+		for t in times_taken:
+			total_in_sec += t
+		
+		cpm = str(roundf(times_taken.size() / (total_in_sec)))
+		self.text = cpm
+	
+	if times_taken.size() > max_chars_to_calculate:
+		times_taken.pop_front()
+
+	last_time_char_typed = now_in_minute
+
+"
+
+[node name="NetworkCompetition" type="Node"]
+script = ExtResource("1_wgkal")
+
+[node name="Background" parent="." instance=ExtResource("2_bg33i")]
+
+[node name="NetworkLocalUI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="NetworkLocalUI"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -212.5
+offset_top = -20.0
+offset_right = 212.5
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="NetworkLocalUI/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="NetworkLocalUI/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "Direct"
+
+[node name="HostBtn" type="Button" parent="NetworkLocalUI/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "Host"
+
+[node name="ConnectBtn" type="Button" parent="NetworkLocalUI/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "Connect"
+
+[node name="RemoteLineEdit" type="LineEdit" parent="NetworkLocalUI/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(250, 0)
+layout_mode = 2
+text = "127.0.0.1"
+
+[node name="Playground" parent="." instance=ExtResource("3_3s8f4")]
+
+[node name="Background" parent="Playground" index="0"]
+visible = false
+
+[node name="NextPracticeBtn" parent="Playground/MarginContainer/VBoxContainer/HBoxContainer" index="1"]
+visible = false
+
+[node name="KeyboardContainer" parent="Playground/MarginContainer/VBoxContainer" index="4"]
+visible = false
+
+[node name="BottomButtonsContainer" parent="Playground/MarginContainer/VBoxContainer" index="5"]
+visible = false
+
+[node name="PlayersContainer" type="VBoxContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 424.0
+offset_bottom = -45.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
+_spawnable_scenes = PackedStringArray("res://src/NetworkCompetition/player.tscn")
+spawn_path = NodePath("../PlayersContainer")
+spawn_limit = 4
+
+[node name="StatsContainer" type="HBoxContainer" parent="."]
+size_flags_horizontal = 4
+size_flags_vertical = 8
+theme_override_constants/separation = 60
+
+[node name="StatusLabelContainer" type="HBoxContainer" parent="StatsContainer" groups=["scene_change_element"]]
+layout_mode = 2
+
+[node name="StatusLabel" type="Label" parent="StatsContainer/StatusLabelContainer" groups=["scene_change_element"]]
+layout_mode = 2
+text = "Status: "
+
+[node name="Status" type="Label" parent="StatsContainer/StatusLabelContainer" groups=["scene_change_element"]]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Ok"
+
+[node name="AccuracyContainer" type="HBoxContainer" parent="StatsContainer" groups=["scene_change_element"]]
+layout_mode = 2
+
+[node name="AccuracyLabel" type="Label" parent="StatsContainer/AccuracyContainer" groups=["scene_change_element"]]
+layout_mode = 2
+text = "Accuracy:"
+
+[node name="Accuracy" type="Label" parent="StatsContainer/AccuracyContainer" groups=["scene_change_element"]]
+unique_name_in_owner = true
+layout_mode = 2
+text = "100 %"
+label_settings = SubResource("LabelSettings_ublys")
+script = ExtResource("4_7wqpv")
+
+[node name="CharacterPerMinContainer" type="HBoxContainer" parent="StatsContainer" groups=["scene_change_element"]]
+layout_mode = 2
+
+[node name="CharPerMinLabel" type="Label" parent="StatsContainer/CharacterPerMinContainer" groups=["scene_change_element"]]
+layout_mode = 2
+text = "Char Per Min: "
+
+[node name="CharPerMin" type="Label" parent="StatsContainer/CharacterPerMinContainer" groups=["scene_change_element"]]
+unique_name_in_owner = true
+layout_mode = 2
+text = "120"
+script = SubResource("GDScript_j3n0s")
+
+[connection signal="pressed" from="NetworkLocalUI/VBoxContainer/HBoxContainer/HostBtn" to="." method="_on_host_btn_pressed"]
+[connection signal="pressed" from="NetworkLocalUI/VBoxContainer/HBoxContainer/ConnectBtn" to="." method="_on_connect_btn_pressed"]
+
+[editable path="Playground"]

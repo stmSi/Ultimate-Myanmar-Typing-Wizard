@@ -1,4 +1,5 @@
 extends Control
+class_name Playground
 
 @onready var follow_up_rich_text: RichTextLabel = %FollowUpRichText
 @onready var follow_up_text_popup: Control = $FollowUpTextPopup
@@ -24,7 +25,7 @@ var exercises = []
 var exercise_idx = 0
 
 var difficulty = 'basic'
-@export var is_progressing_lesson := false
+#@export var is_progressing_lesson := false
 
 
 func _ready():
@@ -41,13 +42,13 @@ func _ready():
 	EventBus.settings_menu_closed.connect(line_edit.grab_focus)
 
 	
-	if is_progressing_lesson:
-		_start_lesson_progress()
-		next_practice_btn.visible = false
-	else:
-		_start_extra_lesson(true)
+#	if is_progressing_lesson:
+#		start_lesson_progress()
+#		next_practice_btn.visible = false
+#	else:
+#		start_extra_lesson(true)
 
-func _start_extra_lesson(randomize_lessons: bool = true):
+func start_extra_lesson(randomize_lessons: bool = true):
 	line_edit.grab_focus()
 	lesson_ids = []
 	exercises = []
@@ -70,7 +71,7 @@ func _start_extra_lesson(randomize_lessons: bool = true):
 	_load_exercise()
 
 
-func _start_lesson_progress():
+func start_lesson_progress():
 	line_edit.grab_focus()
 	lesson_ids = []
 	exercises = []
@@ -176,7 +177,7 @@ func _finished_all_difficulty_lessons():
 				"Made Too many mistakes."
 
 	EventBus.message_popup.emit(msg)
-	_start_lesson_progress()
+	start_lesson_progress()
 
 
 func _on_text_edit_text_changed(_t: String) -> void:
