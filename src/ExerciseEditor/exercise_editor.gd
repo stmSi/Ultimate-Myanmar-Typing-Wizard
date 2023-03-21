@@ -354,7 +354,14 @@ func _on_hide_keyboard_check_toggled(_button_pressed: bool) -> void:
 
 
 func _toggle_disable_line_buttons(disabled: bool) -> void:
-	randomize_check.disabled = disabled
+	# Do not randomize extra exercises (For Networking for now?)
+	if selected_difficulty == 'extra':
+		randomize_check.disabled = true 
+		randomize_check.tooltip_text = "Disabled for extra lessons."
+	else:
+		randomize_check.disabled = disabled
+		randomize_check.tooltip_text = ""
+	
 	hide_keyboard_check.disabled = disabled
 	add_update_line_btn.disabled = disabled
 	reset_btn.disabled = disabled
