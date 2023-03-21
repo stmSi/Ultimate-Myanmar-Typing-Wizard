@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://cnx3k4cy1imd"]
+[gd_scene load_steps=16 format=3 uid="uid://cnx3k4cy1imd"]
 
 [ext_resource type="Theme" uid="uid://dppj17ign8l2n" path="res://src/Themes/main.tres" id="1_wgeyo"]
 [ext_resource type="Script" path="res://src/main.gd" id="1_xgqc1"]
@@ -26,6 +26,14 @@ script/source = "extends CustomButton
 func _on_pressed() -> void:
 	SceneChanger.change_to_take_exercise_scene()
 	pass # R%TakeLessonBtneplace with function body.
+"
+
+[sub_resource type="GDScript" id="GDScript_v6y7b"]
+script/source = "extends Button
+
+
+func _on_pressed() -> void:
+	SceneChanger.change_to_network_competition_scene()
 "
 
 [sub_resource type="GDScript" id="GDScript_hpd8f"]
@@ -107,13 +115,20 @@ text = "Step by Step Lessons"
 script = SubResource("GDScript_6o4cl")
 
 [node name="PracticeBtn" type="Button" parent="MarginContainer/HBoxContainer/MenuButtonsContainer"]
-unique_name_in_owner = true
 custom_minimum_size = Vector2(250, 60)
 layout_mode = 2
 size_flags_vertical = 4
 theme_override_font_sizes/font_size = 21
 text = "Practice"
 script = SubResource("GDScript_dlcgn")
+
+[node name="NetworkCompetitionBtn" type="Button" parent="MarginContainer/HBoxContainer/MenuButtonsContainer"]
+custom_minimum_size = Vector2(250, 60)
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_font_sizes/font_size = 21
+text = "Network Competition"
+script = SubResource("GDScript_v6y7b")
 
 [node name="LessonEditorBtn" type="Button" parent="MarginContainer/HBoxContainer/MenuButtonsContainer"]
 custom_minimum_size = Vector2(250, 60)
@@ -189,6 +204,7 @@ pivot_offset = Vector2(450, 100)
 
 [connection signal="pressed" from="MarginContainer/HBoxContainer/MenuButtonsContainer/TakeLessonBtn" to="MarginContainer/HBoxContainer/MenuButtonsContainer/TakeLessonBtn" method="_on_pressed"]
 [connection signal="pressed" from="MarginContainer/HBoxContainer/MenuButtonsContainer/PracticeBtn" to="MarginContainer/HBoxContainer/MenuButtonsContainer/PracticeBtn" method="_on_pressed"]
+[connection signal="pressed" from="MarginContainer/HBoxContainer/MenuButtonsContainer/NetworkCompetitionBtn" to="MarginContainer/HBoxContainer/MenuButtonsContainer/NetworkCompetitionBtn" method="_on_pressed"]
 [connection signal="pressed" from="MarginContainer/HBoxContainer/MenuButtonsContainer/LessonEditorBtn" to="MarginContainer/HBoxContainer/MenuButtonsContainer/LessonEditorBtn" method="_on_pressed"]
 [connection signal="pressed" from="MarginContainer/HBoxContainer/MenuButtonsContainer/SettingsBtn" to="MarginContainer/HBoxContainer/MenuButtonsContainer/SettingsBtn" method="_on_pressed"]
 [connection signal="pressed" from="MarginContainer/HBoxContainer/MenuButtonsContainer/ExitBtn" to="MarginContainer/HBoxContainer/MenuButtonsContainer/ExitBtn" method="_on_pressed"]

@@ -1,10 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://bllqf3ag5cr38"]
+[gd_scene load_steps=6 format=3 uid="uid://bllqf3ag5cr38"]
 
 [ext_resource type="Script" path="res://src/MiniGames/TestGame/test_game.gd" id="1_iypay"]
 [ext_resource type="PackedScene" uid="uid://bulscf8jamb2b" path="res://src/FollowupRichText/follow_up_text_popup.tscn" id="3_raquw"]
 [ext_resource type="PackedScene" uid="uid://c1j3315qqetyc" path="res://src/MiniGames/TestGame/npc.tscn" id="4_vf1i6"]
 [ext_resource type="Script" path="res://src/MiniGames/TestGame/game_text_popup.gd" id="5_7iwhk"]
-[ext_resource type="PackedScene" uid="uid://b7i3rua60ewr4" path="res://src/EscMenu/esc_menu.tscn" id="5_7ufpc"]
 
 [sub_resource type="GDScript" id="GDScript_3jnh1"]
 script/source = "extends LineEdit
@@ -65,12 +64,6 @@ offset_top = -54.0
 offset_right = -31.9375
 offset_bottom = -23.0
 script = SubResource("GDScript_3jnh1")
-
-[node name="EscMenu" parent="." instance=ExtResource("5_7ufpc")]
-offset_left = 690.0
-offset_top = 301.0
-offset_right = 690.0
-offset_bottom = 301.0
 
 [connection signal="text_changed" from="LineEdit" to="LineEdit" method="_on_text_changed"]
 

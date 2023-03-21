@@ -1,5 +1,6 @@
-[gd_scene load_steps=2 format=3 uid="uid://b8yx3kwa5j6r0"]
+[gd_scene load_steps=3 format=3 uid="uid://b8yx3kwa5j6r0"]
 
+[ext_resource type="Script" path="res://src/Playground/take_lesson_scene.gd" id="1_jw0qx"]
 [ext_resource type="PackedScene" uid="uid://d2kbd35uuv0p7" path="res://src/Playground/Playground.tscn" id="1_pfip3"]
 
 [node name="TakeLessonScene" type="Control"]
@@ -9,10 +10,10 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_jw0qx")
 
 [node name="Playground" parent="." instance=ExtResource("1_pfip3")]
 layout_mode = 1
-is_progressing_lesson = true
 
 [node name="Title" parent="Playground/MarginContainer/VBoxContainer/HBoxContainer" index="0"]
 text = "Lessons"
