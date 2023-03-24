@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://ccwqlevrxwoc8"]
+[gd_scene load_steps=8 format=3 uid="uid://ccwqlevrxwoc8"]
 
 [ext_resource type="Script" path="res://src/NetworkCompetition/player.gd" id="1_kqdkv"]
 [ext_resource type="Script" path="res://src/NetworkCompetition/InputSynchronizer.gd" id="2_5jm28"]
 [ext_resource type="FontFile" uid="uid://chygow7my3v5g" path="res://Assets/Fonts/NotoSansMyanmar-Regular.ttf" id="2_gcoef"]
-[ext_resource type="Script" path="res://src/FollowUpText.gd" id="3_nijoe"]
+[ext_resource type="Script" path="res://src/NetworkCompetition/CharPerMin.gd" id="4_i2dxj"]
+[ext_resource type="Script" path="res://src/NetworkCompetition/Accuracy.gd" id="4_p1tlh"]
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_wt3l3"]
 properties/0/path = NodePath(".:cpm")
@@ -24,18 +25,19 @@ properties/4/sync = true
 properties/5/path = NodePath(".:player_id")
 properties/5/spawn = true
 properties/5/sync = true
+properties/6/path = NodePath(".:exercise_ids")
+properties/6/spawn = true
+properties/6/sync = false
 
-[sub_resource type="LabelSettings" id="LabelSettings_bg7di"]
+[sub_resource type="LabelSettings" id="LabelSettings_x56b5"]
 shadow_size = 2
 
 [node name="Player" type="Control"]
-custom_minimum_size = Vector2(200, 100)
+custom_minimum_size = Vector2(810, 150)
 layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+anchors_preset = 0
+offset_right = 200.0
+offset_bottom = 100.0
 script = ExtResource("1_kqdkv")
 
 [node name="ServerSynchronizer" type="MultiplayerSynchronizer" parent="."]
@@ -46,12 +48,22 @@ unique_name_in_owner = true
 root_path = NodePath(".")
 script = ExtResource("2_5jm28")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
+[node name="PanelContainer" type="PanelContainer" parent="."]
 layout_mode = 0
-offset_right = 800.0
-offset_bottom = 137.0
+offset_right = 40.0
+offset_bottom = 40.0
 
-[node name="FollowUpRichText" type="RichTextLabel" parent="VBoxContainer" groups=["scene_change_element"]]
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="FollowUpRichText" type="RichTextLabel" parent="PanelContainer/MarginContainer/VBoxContainer" groups=["scene_change_element"]]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(800, 80)
 layout_mode = 2
@@ -67,55 +79,53 @@ fit_content = true
 autowrap_mode = 0
 shortcut_keys_enabled = false
 language = "my_MM"
-script = ExtResource("3_nijoe")
-current_char_color = Color(0.984314, 0.823529, 0, 1)
-current_char_bgcolor = Color(0.184314, 0.301961, 0.376471, 0)
-is_popup = false
 
-[node name="StatsContainer" type="HBoxContainer" parent="VBoxContainer"]
+[node name="StatsContainer" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 8
 theme_override_constants/separation = 60
 
-[node name="StatusLabelContainer" type="HBoxContainer" parent="VBoxContainer/StatsContainer" groups=["scene_change_element"]]
+[node name="StatusLabelContainer" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/StatsContainer" groups=["scene_change_element"]]
 layout_mode = 2
 
-[node name="StatusLabel" type="Label" parent="VBoxContainer/StatsContainer/StatusLabelContainer" groups=["scene_change_element"]]
+[node name="StatusLabel" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/StatsContainer/StatusLabelContainer" groups=["scene_change_element"]]
 layout_mode = 2
 text = "Status: "
 
-[node name="Status" type="Label" parent="VBoxContainer/StatsContainer/StatusLabelContainer" groups=["scene_change_element"]]
+[node name="Status" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/StatsContainer/StatusLabelContainer" groups=["scene_change_element"]]
 unique_name_in_owner = true
 layout_mode = 2
 text = "Ok"
 
-[node name="AccuracyContainer" type="HBoxContainer" parent="VBoxContainer/StatsContainer" groups=["scene_change_element"]]
+[node name="AccuracyContainer" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/StatsContainer" groups=["scene_change_element"]]
 layout_mode = 2
 
-[node name="AccuracyLabel" type="Label" parent="VBoxContainer/StatsContainer/AccuracyContainer" groups=["scene_change_element"]]
+[node name="AccuracyLabel" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/StatsContainer/AccuracyContainer" groups=["scene_change_element"]]
 layout_mode = 2
 text = "Accuracy:"
 
-[node name="Accuracy" type="Label" parent="VBoxContainer/StatsContainer/AccuracyContainer" groups=["scene_change_element"]]
+[node name="Accuracy" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/StatsContainer/AccuracyContainer" groups=["scene_change_element"]]
 unique_name_in_owner = true
 layout_mode = 2
 text = "100 %"
-label_settings = SubResource("LabelSettings_bg7di")
+label_settings = SubResource("LabelSettings_x56b5")
+script = ExtResource("4_p1tlh")
 
-[node name="CharacterPerMinContainer" type="HBoxContainer" parent="VBoxContainer/StatsContainer" groups=["scene_change_element"]]
+[node name="CharacterPerMinContainer" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/StatsContainer" groups=["scene_change_element"]]
 layout_mode = 2
 
-[node name="CharPerMinLabel" type="Label" parent="VBoxContainer/StatsContainer/CharacterPerMinContainer" groups=["scene_change_element"]]
+[node name="CharPerMinLabel" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/StatsContainer/CharacterPerMinContainer" groups=["scene_change_element"]]
 layout_mode = 2
 text = "Char Per Min: "
 
-[node name="CharPerMin" type="Label" parent="VBoxContainer/StatsContainer/CharacterPerMinContainer" groups=["scene_change_element"]]
+[node name="CharPerMin" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/StatsContainer/CharacterPerMinContainer" groups=["scene_change_element"]]
 unique_name_in_owner = true
 layout_mode = 2
 text = "120"
+script = ExtResource("4_i2dxj")
 
-[node name="PlayerName" type="Label" parent="VBoxContainer"]
+[node name="PlayerName" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 text = "Hello"

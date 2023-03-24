@@ -9,7 +9,15 @@ const PORT = 4433
 #@onready var player_scene = preload("res://src/NetworkCompetition/player.tscn")
 @onready var players_container: Node = $PlayersContainer
 
+@export var lesson_ids := []:
+	set(l_ids):
+		lesson_ids = l_ids
+		print('starting newtork exercise')
+		$Playground.start_network_exercise(l_ids)
+
+
 func _ready() -> void:
+	lesson_ids.clear()
 	network_local_ui.show()
 	playground.hide()
 	
@@ -42,7 +50,14 @@ func _on_connect_btn_pressed() -> void:
 		return
 	
 	var peer = ENetMultiplayerPeer.new()
-	peer.create_client(txt, PORT)
+	var error = peer.create_client(txt, PORT)
+
+	if error != OK:
+		OS.alert("Failed to connect.")
+		return
+	
+	print(peer.get_connection_status())
+
 	if peer.get_connection_status() == MultiplayerPeer.CONNECTION_DISCONNECTED:
 		OS.alert("Failed to start client.")
 		return
@@ -55,10 +70,11 @@ func start_competition() -> void:
 	
 	if not multiplayer.is_server():
 		return
-		
-	print('Server!!')
+
 	multiplayer.peer_connected.connect(add_player)
 	multiplayer.peer_disconnected.connect(del_player)
+	
+	prepare_exercises()
 	# Spawn already connected players.
 	for id in multiplayer.get_peers():
 		add_player(id)
@@ -66,15 +82,25 @@ func start_competition() -> void:
 	# Spawn the local player unless this is a dedicated server export.
 	if not OS.has_feature("dedicated_server"):
 		add_player(1)
-
+	
 #	get_tree().paused = false
 
 func end_competition():
+	lesson_ids.clear()
 	if not multiplayer.is_server():
 		return
 		
 	multiplayer.peer_connected.disconnect(add_player)
 	multiplayer.peer_disconnected.disconnect(del_player)
+
+func prepare_exercises():
+	var files: PackedStringArray = LessonAccess.get_lesson_files('extra')
+	files = Utils.randomize_packed_array(files)
+	var tmp_ids = []
+	for f in files:
+		tmp_ids.push_back(f.get_basename().get_file())
+	lesson_ids = tmp_ids
+	pass
 
 
 func add_player(id: int):
@@ -83,14 +109,13 @@ func add_player(id: int):
 #	# Set player id.
 	player.player_id = id
 	player.name = str(id)
-#	# Randomize character position.
-#	var pos := Vector2.from_angle(randf() * 2 * PI)
-#	character.position = Vector3(pos.x * SPAWN_RANDOM * randf(), 0, pos.y * SPAWN_RANDOM * randf())
-#	character.name = str(id)
-#	$Players.add_child(character, true)
+	player.exercise_ids = lesson_ids
 	players_container.add_child(player, true)
-	pass
+#	await player.ready
 
 
 func del_player(id: int):
 	print('player removed. ', id)
+
+func sync_exercise(s):
+	pass

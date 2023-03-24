@@ -3,4 +3,3 @@ extends Control
 
 func _ready() -> void:
 	playground.start_extra_lesson(true)
-	print('hi')
