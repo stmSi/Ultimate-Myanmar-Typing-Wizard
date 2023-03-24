@@ -2,7 +2,6 @@ extends Node
 
 signal mute_correct_beep(muted: bool)
 signal mute_incorrect_beep(muted: bool)
-signal unmute
 signal volume
 
 var settings_path = "user://sound_settings.cfg"

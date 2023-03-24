@@ -6,7 +6,7 @@ class_name Playground
 
 @onready var line_edit: LineEdit = %LineEdit
 @onready var status: Label = %Status
-@onready var accuracy: AccuracyLabel = %Accuracy
+@onready var accuracy: Label = %Accuracy
 @onready var keyboard: Keyboard = %Keyboard
 @onready var char_per_min: Label = %CharPerMin
 @onready var next_practice_btn: Button = $MarginContainer/VBoxContainer/HBoxContainer/NextPracticeBtn
@@ -25,7 +25,6 @@ var exercises = []
 var exercise_idx = 0
 
 var difficulty = 'basic'
-#@export var is_progressing_lesson := false
 
 
 func _ready():
@@ -40,13 +39,8 @@ func _ready():
 			)
 	)
 	EventBus.settings_menu_closed.connect(line_edit.grab_focus)
+	EventBus.start_network_lessons.connect(self.start_network_exercise)
 
-	
-#	if is_progressing_lesson:
-#		start_lesson_progress()
-#		next_practice_btn.visible = false
-#	else:
-#		start_extra_lesson(true)
 
 func start_extra_lesson(randomize_lessons: bool = true):
 	line_edit.grab_focus()
@@ -54,20 +48,27 @@ func start_extra_lesson(randomize_lessons: bool = true):
 	exercises = []
 	lesson_idx = 0
 	exercise_idx = 0
-	
 	difficulty = "extra"
-	
-
-	lesson_idx = 0;
 
 	var files: PackedStringArray = LessonAccess.get_lesson_files('extra')
 	if randomize_lessons:
-		files = _randomize_packed_array(files)
+		files = Utils.randomize_packed_array(files)
 	else:
 		files.sort()
 
 	for f in files:
 		lesson_ids.push_back(f.get_basename().get_file())
+	_load_exercise()
+
+func start_network_exercise(exercise_ids: Array):
+	line_edit.grab_focus()
+	lesson_ids = exercise_ids
+	exercises = []
+	lesson_idx = 0
+	exercise_idx = 0
+	
+	difficulty = "extra"
+
 	_load_exercise()
 
 
@@ -124,7 +125,7 @@ func _load_lesson():
 	exercise_idx = 0
 	lesson_idx += 1
 	if lesson_data['randomize']:
-		exercises = _randomize_packed_array(exercises)
+		exercises = Utils.randomize_packed_array(exercises)
 	
 	if lesson_data['message']:
 		EventBus.message_popup.emit(lesson_data['message'])
@@ -206,17 +207,6 @@ func _on_text_edit_text_changed(_t: String) -> void:
 	if current_exercise_text != '' and current_exercise_text == line_edit.text:
 		EventBus.exercise_line_finished.emit()
 
-
-func _randomize_packed_array(packed_array: PackedStringArray):
-	# PackedStringArray doesn't support shuffle()
-	# convert to array, shuffle, and reassign
-	randomize()
-	var tmp = []
-	for e in packed_array:
-		tmp.append(e)
-	tmp.shuffle()
-	packed_array = PackedStringArray(tmp)
-	return packed_array
 
 
 func _on_next_practice_btn_pressed() -> void:
