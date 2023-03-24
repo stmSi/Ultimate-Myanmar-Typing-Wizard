@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://d2kbd35uuv0p7"]
+[gd_scene load_steps=22 format=3 uid="uid://d2kbd35uuv0p7"]
 
 [ext_resource type="Theme" uid="uid://dppj17ign8l2n" path="res://src/Themes/main.tres" id="1_7djnc"]
 [ext_resource type="Script" path="res://src/Playground/Playground.gd" id="1_tmfyy"]
@@ -11,6 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://bulscf8jamb2b" path="res://src/FollowupRichText/follow_up_text_popup.tscn" id="6_vw22j"]
 [ext_resource type="AudioStream" uid="uid://cdqui2diupr13" path="res://Assets/Sounds/error-sound.mp3" id="8_ylc3d"]
 [ext_resource type="AudioStream" uid="uid://bjeu8c6senasm" path="res://Assets/Sounds/correct-sound.mp3" id="9_otsg4"]
+[ext_resource type="Texture2D" uid="uid://6lre7o1jj77f" path="res://Assets/Icons/Settings.png" id="10_btoh3"]
 [ext_resource type="PackedScene" uid="uid://bdwpvsp2xyw50" path="res://src/SettingsMenu/SettingsMenu.tscn" id="13_cmjcr"]
 [ext_resource type="PackedScene" uid="uid://cc5rb1nafw717" path="res://src/FPSCounter/fps_counter.tscn" id="14_ui4gi"]
 
@@ -283,6 +284,7 @@ layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 4
 text = "Settings"
+icon = ExtResource("10_btoh3")
 script = SubResource("GDScript_s74fc")
 
 [node name="CorrectAudioPlayer" type="AudioStreamPlayer" parent="."]
