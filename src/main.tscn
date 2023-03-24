@@ -1,12 +1,18 @@
-[gd_scene load_steps=16 format=3 uid="uid://cnx3k4cy1imd"]
+[gd_scene load_steps=22 format=3 uid="uid://cnx3k4cy1imd"]
 
 [ext_resource type="Theme" uid="uid://dppj17ign8l2n" path="res://src/Themes/main.tres" id="1_wgeyo"]
 [ext_resource type="Script" path="res://src/main.gd" id="1_xgqc1"]
 [ext_resource type="PackedScene" uid="uid://jlkyjmkbpshr" path="res://src/Background/background.tscn" id="3_j3ysy"]
+[ext_resource type="Texture2D" uid="uid://b24lc13njxgxo" path="res://Assets/Icons/StepByStep.png" id="4_g7xuq"]
 [ext_resource type="PackedScene" uid="uid://ht8awqgvfuqm" path="res://src/Stats/stats.tscn" id="4_he4w6"]
 [ext_resource type="PackedScene" uid="uid://bdwpvsp2xyw50" path="res://src/SettingsMenu/SettingsMenu.tscn" id="4_ij5vr"]
 [ext_resource type="PackedScene" uid="uid://cc5rb1nafw717" path="res://src/FPSCounter/fps_counter.tscn" id="5_a5ebc"]
+[ext_resource type="Texture2D" uid="uid://s6wal7ueervw" path="res://Assets/Icons/Practice.png" id="5_nb47a"]
+[ext_resource type="Texture2D" uid="uid://cx2li6nxhiobf" path="res://Assets/Icons/Network.png" id="6_vfces"]
+[ext_resource type="Texture2D" uid="uid://b2j05cckkiol2" path="res://Assets/Icons/EditExercise.png" id="7_o4aed"]
 [ext_resource type="PackedScene" uid="uid://dv4nca1f6kjlv" path="res://src/Credit/credit.tscn" id="7_vkm67"]
+[ext_resource type="Texture2D" uid="uid://6lre7o1jj77f" path="res://Assets/Icons/Settings.png" id="8_2y7oh"]
+[ext_resource type="Texture2D" uid="uid://dkja575xbh0a2" path="res://Assets/Icons/Exit.png" id="9_on2em"]
 
 [sub_resource type="Environment" id="Environment_3bxs1"]
 background_color = Color(0.423529, 0.423529, 0.423529, 1)
@@ -112,6 +118,7 @@ layout_mode = 2
 size_flags_vertical = 4
 theme_override_font_sizes/font_size = 21
 text = "Step by Step Lessons"
+icon = ExtResource("4_g7xuq")
 script = SubResource("GDScript_6o4cl")
 
 [node name="PracticeBtn" type="Button" parent="MarginContainer/HBoxContainer/MenuButtonsContainer"]
@@ -120,6 +127,7 @@ layout_mode = 2
 size_flags_vertical = 4
 theme_override_font_sizes/font_size = 21
 text = "Practice"
+icon = ExtResource("5_nb47a")
 script = SubResource("GDScript_dlcgn")
 
 [node name="NetworkCompetitionBtn" type="Button" parent="MarginContainer/HBoxContainer/MenuButtonsContainer"]
@@ -128,6 +136,7 @@ layout_mode = 2
 size_flags_vertical = 4
 theme_override_font_sizes/font_size = 21
 text = "Network Competition"
+icon = ExtResource("6_vfces")
 script = SubResource("GDScript_v6y7b")
 
 [node name="LessonEditorBtn" type="Button" parent="MarginContainer/HBoxContainer/MenuButtonsContainer"]
@@ -136,6 +145,7 @@ layout_mode = 2
 size_flags_vertical = 4
 theme_override_font_sizes/font_size = 21
 text = "Exercise Editor"
+icon = ExtResource("7_o4aed")
 script = SubResource("GDScript_hpd8f")
 
 [node name="SettingsBtn" type="Button" parent="MarginContainer/HBoxContainer/MenuButtonsContainer"]
@@ -144,6 +154,7 @@ layout_mode = 2
 size_flags_vertical = 4
 theme_override_font_sizes/font_size = 21
 text = "Settings"
+icon = ExtResource("8_2y7oh")
 script = SubResource("GDScript_d0c1b")
 
 [node name="ExitBtn" type="Button" parent="MarginContainer/HBoxContainer/MenuButtonsContainer"]
@@ -152,6 +163,7 @@ layout_mode = 2
 size_flags_vertical = 4
 theme_override_font_sizes/font_size = 21
 text = "Exit"
+icon = ExtResource("9_on2em")
 script = SubResource("GDScript_l5vsv")
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="MarginContainer/HBoxContainer/MenuButtonsContainer"]

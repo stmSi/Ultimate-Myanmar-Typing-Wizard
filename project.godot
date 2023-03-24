@@ -15,7 +15,6 @@ run/main_scene="res://src/main.tscn"
 config/features=PackedStringArray("4.0", "Mobile")
 run/max_fps=60
 run/low_processor_mode=true
-boot_splash/bg_color=Color(0, 0, 0, 1)
 
 [autoload]
 
@@ -30,6 +29,7 @@ UserProfileManager="*res://src/Autoload/UserProfileManager.gd"
 SoundSettings="*res://src/Autoload/SoundSettings.gd"
 DisplaySettings="*res://src/Autoload/DisplaySettings.gd"
 GeneralSettings="*res://src/Autoload/GeneralSettings.gd"
+Utils="*res://src/Autoload/Utils.gd"
 
 [display]
 
@@ -53,4 +53,4 @@ enabled=PackedStringArray("res://addons/native_dialogs/plugin.cfg")
 [rendering]
 
 renderer/rendering_method="gl_compatibility"
-environment/defaults/default_clear_color=Color(0.0431373, 0.0431373, 0.0431373, 1)
+environment/defaults/default_clear_color=Color(0.105882, 0.356863, 0.176471, 1)
