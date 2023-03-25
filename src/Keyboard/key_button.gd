@@ -1,6 +1,8 @@
 extends Control
 class_name KeyButton
 
+@onready var panel: Panel = $Panel
+
 @onready var shift_char_lbl: Label = $Panel/ShiftChar
 @onready var char_lbl: Label = $Panel/Char
 @onready var finger_hightlight: Panel = %FingerHightlight
@@ -14,6 +16,8 @@ class_name KeyButton
 
 var chars_to_highlight_for_fingers = "ေျိ်ြုူး" # asdf jkl;
 var highlighted: bool = false
+
+@export var is_hoving_stats = false
 
 @export var char: String:
 	get:
@@ -86,3 +90,15 @@ func highlight_character(c: String, highlight_color: Color):
 		char_lbl.modulate = highlight_color
 	elif shift_char_lbl.text == c:
 		shift_char_lbl.modulate = highlight_color
+
+func _on_panel_mouse_entered() -> void:
+	if not is_hoving_stats:
+		EventBus.keybutton_hovered.emit(self)
+	pass # Replace with function body.
+
+
+func _on_panel_mouse_exited() -> void:
+	if not is_hoving_stats:
+#		EventBus.keybutton_unhovered.emit(self)	
+		pass
+	pass # Replace with function body.
