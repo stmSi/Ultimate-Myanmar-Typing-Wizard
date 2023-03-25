@@ -1,15 +1,12 @@
-[gd_scene load_steps=11 format=3 uid="uid://6ji1y6g83r7r"]
+[gd_scene load_steps=12 format=3 uid="uid://6ji1y6g83r7r"]
 
 [ext_resource type="Script" path="res://src/Keyboard/key_button.gd" id="1_ig80u"]
+[ext_resource type="Script" path="res://src/Keyboard/KeyButtonPanel.gd" id="2_5s4yx"]
 [ext_resource type="FontFile" uid="uid://chygow7my3v5g" path="res://Assets/Fonts/NotoSansMyanmar-Regular.ttf" id="2_ojxqh"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_h4jkf"]
 resource_local_to_scene = true
 bg_color = Color(0.117647, 0.117647, 0.117647, 1)
-border_width_left = 1
-border_width_top = 1
-border_width_right = 1
-border_width_bottom = 1
 corner_radius_top_left = 6
 corner_radius_top_right = 6
 corner_radius_bottom_right = 6
@@ -460,9 +457,10 @@ _data = {
 process_mode = 3
 custom_minimum_size = Vector2(80, 80)
 layout_mode = 3
-anchors_preset = 0
-offset_right = 80.0
-offset_bottom = 80.0
+anchor_right = 0.059
+anchor_bottom = 0.104
+offset_right = -0.594002
+offset_bottom = 0.127998
 script = ExtResource("1_ig80u")
 
 [node name="Panel" type="Panel" parent="."]
@@ -471,6 +469,7 @@ layout_mode = 0
 offset_right = 80.0
 offset_bottom = 80.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_h4jkf")
+script = ExtResource("2_5s4yx")
 
 [node name="FingerHightlight" type="Panel" parent="Panel"]
 unique_name_in_owner = true
@@ -496,6 +495,7 @@ offset_left = 10.0
 offset_top = -1.0
 offset_right = 26.0
 offset_bottom = 58.0
+pivot_offset = Vector2(9, 21)
 theme_override_fonts/font = ExtResource("2_ojxqh")
 theme_override_font_sizes/font_size = 25
 
@@ -508,10 +508,10 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -25.0
-offset_top = -45.0
-offset_right = -11.0
-offset_bottom = 11.0
+offset_left = -39.0
+offset_top = -41.0
+offset_right = 13.0
+offset_bottom = 15.0
 grow_horizontal = 0
 grow_vertical = 0
 theme_override_fonts/font = ExtResource("2_ojxqh")
@@ -523,3 +523,6 @@ autoplay = "RESET"
 libraries = {
 "": SubResource("AnimationLibrary_e6lxs")
 }
+
+[connection signal="mouse_entered" from="Panel" to="." method="_on_panel_mouse_entered"]
+[connection signal="mouse_exited" from="Panel" to="." method="_on_panel_mouse_exited"]

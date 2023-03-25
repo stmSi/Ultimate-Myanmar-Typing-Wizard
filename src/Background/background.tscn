@@ -1,8 +1,28 @@
-[gd_scene load_steps=4 format=3 uid="uid://jlkyjmkbpshr"]
+[gd_scene load_steps=8 format=3 uid="uid://jlkyjmkbpshr"]
 
 [ext_resource type="Texture2D" uid="uid://ciil7l5kvbtaa" path="res://Assets/Background/Background_02.jpg" id="1_bkrpd"]
 [ext_resource type="Texture2D" uid="uid://cqt5fkx3t58of" path="res://Assets/Background/Background_01.jpg" id="1_tvrt4"]
 [ext_resource type="Script" path="res://src/Background/background.gd" id="2_xvhrv"]
+[ext_resource type="Texture2D" uid="uid://bfi8a326l1b7b" path="res://Assets/VFX/textures/256/alpha/spotlight_6.png" id="4_1ookk"]
+
+[sub_resource type="Curve" id="Curve_xx1f3"]
+_data = [Vector2(0.0118203, 0), 0.0, 0.0, 0, 0, Vector2(0.250591, 1), 0.0, 0.0, 0, 0, Vector2(0.4, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_aix82"]
+curve = SubResource("Curve_xx1f3")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_g164k"]
+lifetime_randomness = 1.0
+emission_shape = 3
+emission_box_extents = Vector3(600, 300, 1)
+particle_flag_disable_z = true
+gravity = Vector3(0, 0, 0)
+orbit_velocity_min = 0.0
+orbit_velocity_max = 0.0
+scale_min = 0.2
+scale_max = 0.4
+scale_curve = SubResource("CurveTexture_aix82")
 
 [node name="Background" type="TextureRect"]
 modulate = Color(0.729412, 0.729412, 0.729412, 1)
@@ -15,3 +35,11 @@ texture = ExtResource("1_bkrpd")
 expand_mode = 2
 script = ExtResource("2_xvhrv")
 background_images = Array[Texture2D]([ExtResource("1_tvrt4"), ExtResource("1_bkrpd")])
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+visible = false
+position = Vector2(698, 354)
+amount = 300
+process_material = SubResource("ParticleProcessMaterial_g164k")
+texture = ExtResource("4_1ookk")
+lifetime = 20.0
