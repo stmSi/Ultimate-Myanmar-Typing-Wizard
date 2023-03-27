@@ -23,7 +23,7 @@ func _ready():
 	)
 	disable_highlight_curr_char = GeneralSettings.get_hightlight_current_character_disabled()
 
-func _set_raw_text(t: String) -> void:
+func _set_raw_text(t: String, _idx: int, _e: PackedStringArray) -> void:
 	raw_text = t
 	_on_written_string_changed('')
 
