@@ -7,6 +7,7 @@ class_name RichTextPulse
 # Define the tag name.
 var bbcode = "pulse"
 
+
 func _process_custom_fx(char_fx):
 	# Get parameters, or use the provided default value if missing.
 	var color = char_fx.env.get("color", char_fx.color)

@@ -10,6 +10,6 @@ extends Panel
 #
 #func on_mouse_exited() -> void:
 #	EventBus.keybutton_unhovered.emit(key_button)
-#	print('emitting from panel ... unhovered')	
+#	print('emitting from panel ... unhovered')
 #	pass # Replace with function body.
 #

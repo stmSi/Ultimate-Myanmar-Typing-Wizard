@@ -1,6 +1,5 @@
 extends VBoxContainer
 
-
 @onready var rich_text_label: RichTextLabel = %RichTextLabel
 
 @onready var progress_bar: ProgressBar = %ProgressBar
@@ -13,31 +12,28 @@ var starting_color: Color = Color.DARK_SLATE_GRAY
 
 var lessson_leve_finished := true
 
+
 func _ready() -> void:
 	var lesson_progress = UserProfileManager.load_lesson_progress()
 	rich_text_label.clear()
 	rich_text_label.push_color(Color.GREEN)
-	rich_text_label.add_text(lesson_progress['difficulty'].capitalize())
+	rich_text_label.add_text(lesson_progress["difficulty"].capitalize())
 	rich_text_label.pop()
 	rich_text_label.add_text(" Lesson Progress:")
-	
-	var lesson_files := LessonAccess.get_lesson_files(lesson_progress['difficulty'])
-	var current_lesson_number = lesson_progress['lesson_number']
-	if not lesson_progress['is_finished']:
+
+	var lesson_files := LessonAccess.get_lesson_files(lesson_progress["difficulty"])
+	var current_lesson_number = lesson_progress["lesson_number"]
+	if not lesson_progress["is_finished"]:
 		current_lesson_number -= 1
-	
+
 	lessons_done.text = str(current_lesson_number) + "/" + str(lesson_files.size())
 	if lesson_files.size() > 0:
-		var target_percentage = (
-			float(current_lesson_number) 
-			/ 
-			lesson_files.size()) \
-			* 100.0
+		var target_percentage = (float(current_lesson_number) / lesson_files.size()) * 100.0
 
 		_fill_percentage(target_percentage)
 		pass
 
+
 func _fill_percentage(percentage: int) -> void:
-		var tween := get_tree().create_tween()
-		tween.tween_property(progress_bar, "value", percentage, 1.0).set_trans(Tween.TRANS_SINE)
-	
+	var tween := get_tree().create_tween()
+	tween.tween_property(progress_bar, "value", percentage, 1.0).set_trans(Tween.TRANS_SINE)

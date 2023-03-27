@@ -9,11 +9,13 @@ var take_exercise_scene = "res://src/Playground/exercise_scene.tscn"
 var network_competition_scene = "res://src/NetworkCompetition/network_competition.tscn"
 var current_scene = null
 
+
 func _ready() -> void:
 	var root = get_tree().root
-	
+
 	# the last child of root is always the loaded scene
 	current_scene = root.get_child(root.get_child_count() - 1)
+
 
 func goto_scene(path: String):
 	# This function will usually be called from a signal callback
@@ -26,13 +28,14 @@ func goto_scene(path: String):
 
 	call_deferred("_deferred_goto_scene", path)
 
+
 func _deferred_goto_scene(path: String):
 	# It is now safe to remove the current scene
 	current_scene.free()
-	
+
 	# Load the new scene.
 	var s = ResourceLoader.load(path)
-	
+
 	# Instance the new scene.
 	current_scene = s.instantiate()
 
@@ -42,15 +45,18 @@ func _deferred_goto_scene(path: String):
 	# Optionally, to make it compatible with the SceneTree.change_scene_to_file() API.
 	get_tree().current_scene = current_scene
 	_animate_appear()
-	
+
 	pass
+
 
 func change_to_playground_scene():
 	goto_scene(playground_scene)
 
+
 func change_to_take_lesson_scene():
 	goto_scene(take_lesson_scene)
-	
+
+
 func change_to_take_exercise_scene():
 	goto_scene(take_exercise_scene)
 
@@ -58,29 +64,33 @@ func change_to_take_exercise_scene():
 func change_to_exercise_editor_scene():
 	goto_scene(exercise_editor_scene)
 
+
 func change_to_main_scene():
 	goto_scene(main_scene)
+
 
 func change_to_test_game_scene():
 	goto_scene(test_game_scene)
 
+
 func change_to_network_competition_scene():
 	goto_scene(network_competition_scene)
+
 
 func _animate_appear():
 	# Animate Panel first using "scene_change_bg" group
 	# then Elements "scene_change_element"
 
 #	var scene_change_bg_modulate_colors = [] # save original color
-	var scene_change_bg = get_tree().get_nodes_in_group('scene_change_bg')
+	var scene_change_bg = get_tree().get_nodes_in_group("scene_change_bg")
 	for n in scene_change_bg:
 #		scene_change_bg_modulate_colors.push_back(n.modulate)
 #		scene_change_bg.push_back(n)
 		n.modulate.a = 0
 #		n.scale = Vector2(0, 0)
-		
+
 #	var scene_change_elements_modulate_colors = [] # save original color
-	var scene_change_elements = get_tree().get_nodes_in_group('scene_change_element')
+	var scene_change_elements = get_tree().get_nodes_in_group("scene_change_element")
 	for n in scene_change_elements:
 #		scene_change_elements_modulate_colors.push_back(n.modulate)
 #		scene_change_elements.push_back(n)
@@ -88,12 +98,12 @@ func _animate_appear():
 
 	var bg_tween = get_tree().create_tween()
 	bg_tween.set_parallel(true)
-	
+
 	for n in scene_change_bg:
 		bg_tween.tween_property(n, "modulate", Color.WHITE, .1)
-		bg_tween.tween_property(n, "scale", Vector2(1,1), .1)
+		bg_tween.tween_property(n, "scale", Vector2(1, 1), .1)
 	await bg_tween.finished
-	
+
 	bg_tween = get_tree().create_tween()
 	bg_tween.set_parallel(true)
 	for n in scene_change_elements:

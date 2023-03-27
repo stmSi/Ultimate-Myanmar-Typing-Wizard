@@ -4,6 +4,7 @@ extends TextureRect
 
 @export var background_images: Array[Texture2D]
 
+
 func _ready() -> void:
 	randomize()
 	print(DisplayServer.window_get_size())

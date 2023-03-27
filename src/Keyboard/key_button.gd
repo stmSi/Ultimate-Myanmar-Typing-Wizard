@@ -14,7 +14,7 @@ class_name KeyButton
 		%ShiftChar.text = value
 		shift_char = value
 
-var chars_to_highlight_for_fingers = "ေျိ်ြုူး" # asdf jkl;
+var chars_to_highlight_for_fingers = "ေျိ်ြုူး"  # asdf jkl;
 var highlighted: bool = false
 
 @export var is_hoving_stats = false
@@ -29,13 +29,11 @@ var highlighted: bool = false
 			highlighted = true
 		%Char.text = value
 
-
 @onready var is_char_ascii: bool = false:
 	get:
 		return is_char_ascii
 #	set(value):
 #		(%Char as Label).position = Vector2(55, 35)
-
 
 @onready var is_shift_char_ascii: bool = false:
 	get:
@@ -47,42 +45,46 @@ var highlighted: bool = false
 var ori_modulate_char_color: Color
 var ori_modulate_shift_char_color: Color
 
+
 func _ready() -> void:
 	ori_modulate_char_color = char_lbl.modulate
 	ori_modulate_shift_char_color = shift_char_lbl.modulate
 
 
 func run_pending(use_shift: bool = false):
-	$AnimationPlayer.play('pending')
+	$AnimationPlayer.play("pending")
 	if use_shift:
 		shift_char_lbl.modulate = highlight_modulate_color
 	else:
 		char_lbl.modulate = highlight_modulate_color
-	
-	if char == ' ': # special condition for "Space" key
+
+	if char == " ":  # special condition for "Space" key
 		shift_char_lbl.modulate = highlight_modulate_color
-		get_node('line').modulate = highlight_modulate_color # only "Space" key has line
+		get_node("line").modulate = highlight_modulate_color  # only "Space" key has line
+
 
 func reset_animation():
 	$AnimationPlayer.play("RESET")
 	_reset_modulate_color()
 
+
 func correct_animation():
-	$AnimationPlayer.play('correct')
+	$AnimationPlayer.play("correct")
 	_reset_modulate_color()
 
 
 func incorrect_animation():
-	$AnimationPlayer.play('incorrect')
+	$AnimationPlayer.play("incorrect")
 	_reset_modulate_color()
 
 
 func _reset_modulate_color():
 	char_lbl.modulate = ori_modulate_char_color
 	shift_char_lbl.modulate = ori_modulate_shift_char_color
-	
-	if char == ' ': # special condition for "Space" key
-		get_node('line').modulate = ori_modulate_shift_char_color # only "Space" key has line
+
+	if char == " ":  # special condition for "Space" key
+		get_node("line").modulate = ori_modulate_shift_char_color  # only "Space" key has line
+
 
 func highlight_character(c: String, highlight_color: Color):
 	# used by frequent_mistakes_report
@@ -91,14 +93,15 @@ func highlight_character(c: String, highlight_color: Color):
 	elif shift_char_lbl.text == c:
 		shift_char_lbl.modulate = highlight_color
 
+
 func _on_panel_mouse_entered() -> void:
 	if not is_hoving_stats:
 		EventBus.keybutton_hovered.emit(self)
-	pass # Replace with function body.
+	pass  # Replace with function body.
 
 
 func _on_panel_mouse_exited() -> void:
 	if not is_hoving_stats:
-#		EventBus.keybutton_unhovered.emit(self)	
+#		EventBus.keybutton_unhovered.emit(self)
 		pass
-	pass # Replace with function body.
+	pass  # Replace with function body.
