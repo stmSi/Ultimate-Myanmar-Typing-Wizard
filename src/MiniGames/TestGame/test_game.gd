@@ -39,7 +39,7 @@ func _spawn_enemy():
 	self.focused_enemy.line = sample_texts[idx]
 	
 	EventBus.game_focus_enemy.emit(self.focused_enemy)
-	EventBus.exercise_loaded.emit(sample_texts[idx])
+	EventBus.exercise_loaded.emit(sample_texts[idx], idx, sample_texts)
 	
 	sample_texts.remove_at(idx)
 

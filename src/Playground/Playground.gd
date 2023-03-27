@@ -139,7 +139,12 @@ func _load_lesson():
 		# keep loading lessons one by one until there is exercise 
 		_load_lesson()
 	else:
-		EventBus.lesson_id_loaded.emit(int(lesson_ids[lesson_idx - 1]))
+		EventBus.lesson_id_loaded.emit(
+			int(lesson_ids[lesson_idx - 1]), 
+			lesson_idx -1,
+			lesson_data
+		)
+
 #		EventBus.message_popup.emit(
 #			"Difficulty: " + difficulty.capitalize() + "\r\n" +\
 #			"Lesson ID: " + lesson_ids[lesson_idx - 1] + " is loaded."
@@ -162,7 +167,7 @@ func _load_exercise():
 	current_exercise_text = exercises[exercise_idx]
 	exercise_idx += 1
 	
-	EventBus.exercise_loaded.emit(current_exercise_text)
+	EventBus.exercise_loaded.emit(current_exercise_text, exercise_idx, exercises)
 	EventBus.current_char_changed.emit(current_exercise_text[0])
 
 

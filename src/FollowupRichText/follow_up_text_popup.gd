@@ -23,7 +23,7 @@ func _ready() -> void:
 	)
 	visible = not GeneralSettings.get_popup_helper_disabled()
 
-func _set_raw_text(t: String) -> void:
+func _set_raw_text(t: String, _idx: int, _e: PackedStringArray) -> void:
 	raw_text = t
 
 func _on_followup_popup_pos_changed(_pos: Vector2, node: KeyButton):

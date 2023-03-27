@@ -131,7 +131,7 @@ func _reset_shifts():
 	pending_shift_node = null
 	pass
 
-func _on_new_lesson_id_loaded(_lesson_number: int) -> void:
+func _on_new_lesson_id_loaded(_lesson_number: int, _idx: int, _lessons: Dictionary) -> void:
 	# Reset all
 	reset_all_keys()
 

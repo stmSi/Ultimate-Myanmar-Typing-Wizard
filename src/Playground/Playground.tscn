@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://d2kbd35uuv0p7"]
+[gd_scene load_steps=24 format=3 uid="uid://d2kbd35uuv0p7"]
 
 [ext_resource type="Theme" uid="uid://dppj17ign8l2n" path="res://src/Themes/main.tres" id="1_7djnc"]
 [ext_resource type="Script" path="res://src/Playground/Playground.gd" id="1_tmfyy"]
@@ -14,6 +14,10 @@
 [ext_resource type="Texture2D" uid="uid://6lre7o1jj77f" path="res://Assets/Icons/Settings.png" id="10_btoh3"]
 [ext_resource type="PackedScene" uid="uid://bdwpvsp2xyw50" path="res://src/SettingsMenu/SettingsMenu.tscn" id="13_cmjcr"]
 [ext_resource type="PackedScene" uid="uid://cc5rb1nafw717" path="res://src/FPSCounter/fps_counter.tscn" id="14_ui4gi"]
+
+[sub_resource type="GDScript" id="GDScript_8afg4"]
+script/source = "extends CustomButton
+"
 
 [sub_resource type="GDScript" id="GDScript_l4wjf"]
 script/source = "extends LineEdit
@@ -35,7 +39,7 @@ func _exercise_line_finished() -> void:
 func _on_message_popup_closed() -> void:
 	grab_focus()
 
-func _on_new_lesson_id_loaded(_lesson_id: int) -> void:
+func _on_new_lesson_id_loaded(_lesson_id: int, _idx: int, _lessons: Dictionary) -> void:
 	clear()
 "
 
@@ -79,6 +83,16 @@ func _calculate_time_taken():
 
 	last_time_char_typed = now_in_minute
 
+"
+
+[sub_resource type="GDScript" id="GDScript_43375"]
+script/source = "extends Label
+
+func _ready() -> void:
+	EventBus.exercise_loaded.connect(
+		func(_e: String, idx: int, exercises: PackedStringArray):
+			self.text = \"%s / %s\" % [str(idx), exercises.size()]
+	)
 "
 
 [sub_resource type="GDScript" id="GDScript_r5ri8"]
@@ -173,6 +187,7 @@ layout_mode = 2
 [node name="NextPracticeBtn" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer" groups=["scene_change_element"]]
 layout_mode = 2
 text = "Next Practice"
+script = SubResource("GDScript_8afg4")
 
 [node name="FollowUpRichText" type="RichTextLabel" parent="MarginContainer/VBoxContainer" groups=["scene_change_element"]]
 unique_name_in_owner = true
@@ -255,6 +270,18 @@ unique_name_in_owner = true
 layout_mode = 2
 text = "120"
 script = SubResource("GDScript_3afo8")
+
+[node name="ExerciseProgressContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/StatsContainer" groups=["scene_change_element"]]
+layout_mode = 2
+
+[node name="ExProgressLabel" type="Label" parent="MarginContainer/VBoxContainer/StatsContainer/ExerciseProgressContainer" groups=["scene_change_element"]]
+layout_mode = 2
+text = "Exercises: "
+
+[node name="ExProgress" type="Label" parent="MarginContainer/VBoxContainer/StatsContainer/ExerciseProgressContainer" groups=["scene_change_element"]]
+layout_mode = 2
+text = "120"
+script = SubResource("GDScript_43375")
 
 [node name="KeyboardContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
