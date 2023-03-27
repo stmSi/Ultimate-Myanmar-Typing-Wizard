@@ -6,7 +6,8 @@ signal volume
 
 var settings_path = "user://sound_settings.cfg"
 
-var config : ConfigFile = null
+var config: ConfigFile = null
+
 
 func _ready() -> void:
 	# Settings Config Setup
@@ -14,13 +15,15 @@ func _ready() -> void:
 	var err = config.load(settings_path)
 	if err != OK:
 		config.save(settings_path)
-	
+
+
 func get_correct_beep_muted() -> bool:
 	var err = config.load(settings_path)
 	if err != OK:
 		config.save(settings_path)
-		
+
 	return config.get_value("Settings", "MuteCorrectBeep", false)
+
 
 func set_correct_beep_muted(muted: bool) -> void:
 	var err = config.load(settings_path)
@@ -36,7 +39,7 @@ func get_incorrect_beep_muted() -> bool:
 	var err = config.load(settings_path)
 	if err != OK:
 		config.save(settings_path)
-		
+
 	return config.get_value("Settings", "MuteIncorrectBeep", false)
 
 
