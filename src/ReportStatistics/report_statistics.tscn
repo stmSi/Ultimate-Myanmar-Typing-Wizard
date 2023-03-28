@@ -16,6 +16,7 @@ keycode = 4194309
 events = [SubResource("InputEventKey_wwprm")]
 
 [node name="ReportStatistics" type="PanelContainer"]
+process_mode = 3
 self_modulate = Color(0, 0, 0, 1)
 z_index = 10
 anchors_preset = 15

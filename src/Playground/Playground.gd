@@ -183,7 +183,9 @@ func _finished_all_difficulty_lessons():
 
 func _report_statistics():
 #	$RestartDialog.show()
-	add_child(report_statistics_scene.instantiate())
+	var statistic_scene = report_statistics_scene.instantiate()
+	add_child(statistic_scene)
+	statistic_scene.close.connect(line_edit.grab_focus)
 	
 
 func _on_text_edit_text_changed(_t: String) -> void:
