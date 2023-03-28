@@ -11,18 +11,25 @@ var written_text = ''
 
 @export var is_popup: bool = true
 
-var disable_highlight_curr_char = false
+var disable_highlight_curr_char: bool = false
+var prevent_typing_pass_error: bool = false
 
 func _ready():
 	EventBus.exercise_loaded.connect(self._set_raw_text)
 	EventBus.written_string_changed.connect(self._on_written_string_changed)
+	
+	disable_highlight_curr_char = GeneralSettings.get_hightlight_current_character_disabled()
 	GeneralSettings.hightlight_current_char_disabled_changed.connect(
 		func(disabled: bool):
 			disable_highlight_curr_char = disabled
 			_on_written_string_changed(written_text)
 	)
-	disable_highlight_curr_char = GeneralSettings.get_hightlight_current_character_disabled()
-
+	
+	prevent_typing_pass_error = GeneralSettings.get_prevent_typing_pass_error_character()
+	GeneralSettings.prevent_typing_pass_error_char_changed.connect(
+		func(prevent: bool):
+			prevent_typing_pass_error = prevent
+	)
 func _set_raw_text(t: String, _idx: int, _e: PackedStringArray) -> void:
 	raw_text = t
 	_on_written_string_changed('')
@@ -81,9 +88,12 @@ func _on_written_string_changed(s: String):
 	
 	if is_popup or not disable_highlight_curr_char:
 		# color the current character where cursor will locate
-		if(i < len(raw_text)):
-			_color_cursor_character(i)
-			i += 1
+		if not (wrong and prevent_typing_pass_error): 
+			# don't highlight cur char when both err and prevent are true
+			
+			if(i < len(raw_text)):
+				_color_cursor_character(i)
+				i += 1
 		
 
 	## show the rest	

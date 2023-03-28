@@ -65,6 +65,22 @@ func _ready() -> void:
 		func(_correct_c: String):
 			self._calculate_time_taken()
 	)
+	
+	EventBus.lesson_finished.connect(
+		func(_l: int, _d: String):
+			times_taken = []
+			last_time_char_typed = 0.0
+			cpm = 0
+			self._calculate_time_taken()
+	)
+	
+	EventBus.finished_all_difficulty_lessons.connect(
+		func():
+			times_taken = []
+			last_time_char_typed = 0.0
+			cpm = 0
+			self._calculate_time_taken()
+	)
 
 func _calculate_time_taken():
 	var now_in_minute = (Time.get_ticks_msec() / 1000.0) / 60

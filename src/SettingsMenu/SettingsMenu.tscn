@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://bdwpvsp2xyw50"]
+[gd_scene load_steps=13 format=3 uid="uid://bdwpvsp2xyw50"]
 
 [ext_resource type="Script" path="res://src/SettingsMenu/SettingsMenu.gd" id="1_lnpdd"]
 [ext_resource type="Script" path="res://src/SettingsMenu/FPSOptions.gd" id="2_o2ea0"]
@@ -141,6 +141,19 @@ func _ready() -> void:
 
 func _on_toggled(btn_pressed: bool) -> void:
 	GeneralSettings.set_hightlight_current_character_char(btn_pressed)
+	pass # Replace with function body.
+"
+
+[sub_resource type="GDScript" id="GDScript_ogx3c"]
+script/source = "extends CheckButton
+
+func _ready() -> void:
+	self.button_pressed = GeneralSettings.get_prevent_typing_pass_error_character()
+	pass
+
+
+func _on_toggled(btn_pressed: bool) -> void:
+	GeneralSettings.set_prevent_typing_pass_error_character(btn_pressed)
 	pass # Replace with function body.
 "
 
@@ -299,6 +312,18 @@ theme = SubResource("Theme_80615")
 text = "Disable Highlight Current Character"
 script = SubResource("GDScript_xxsy6")
 
+[node name="PreventTypingPassErrorContainer" type="HBoxContainer" parent="MarginContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="PreventTypingPassError" type="CheckButton" parent="MarginContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/PreventTypingPassErrorContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = SubResource("Theme_80615")
+disabled = true
+text = "Prevent Typing Pass Error"
+script = SubResource("GDScript_ogx3c")
+
 [node name="Close" type="Button" parent="MarginContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(140, 40)
@@ -312,4 +337,5 @@ text = "Close"
 [connection signal="toggled" from="MarginContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/InCrrectBeepContainer/MuteIncorrectBeep" to="MarginContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/InCrrectBeepContainer/MuteIncorrectBeep" method="_on_toggled"]
 [connection signal="toggled" from="MarginContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/PopupHelperDisableContainer/PopupHelperDisable" to="MarginContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/PopupHelperDisableContainer/PopupHelperDisable" method="_on_toggled"]
 [connection signal="toggled" from="MarginContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/HightlightCurrentCharDisableContainer2/HightlightCurrentCharDisable" to="MarginContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/HightlightCurrentCharDisableContainer2/HightlightCurrentCharDisable" method="_on_toggled"]
+[connection signal="toggled" from="MarginContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/PreventTypingPassErrorContainer/PreventTypingPassError" to="MarginContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/PreventTypingPassErrorContainer/PreventTypingPassError" method="_on_toggled"]
 [connection signal="pressed" from="MarginContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/Close" to="." method="_on_close_pressed"]

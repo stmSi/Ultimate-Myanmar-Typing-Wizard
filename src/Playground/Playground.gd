@@ -10,6 +10,7 @@ class_name Playground
 @onready var keyboard: Keyboard = %Keyboard
 @onready var char_per_min: Label = %CharPerMin
 @onready var next_practice_btn: Button = $MarginContainer/VBoxContainer/HBoxContainer/NextPracticeBtn
+@onready var report_statistics_scene := preload("res://src/ReportStatistics/report_statistics.tscn")
 
 var current_exercise_text = ""
 
@@ -25,19 +26,26 @@ var exercises = []
 var exercise_idx = 0
 
 var difficulty = "basic"
-
+var prevent_typing_pass_error: bool = false;
 
 func _ready():
 	EventBus.exercise_line_finished.connect(self._on_exercise_line_finished)
 	EventBus.finished_all_difficulty_lessons.connect(self._finished_all_difficulty_lessons)
 	EventBus.lesson_finished.connect(
-		func(lesson_number: int, diff: String): UserProfileManager.save_stats(
-			accuracy.percentage, int(char_per_min.cpm), lesson_number, diff
-		)
+		func(lesson_number: int, diff: String): 
+			UserProfileManager.save_stats(
+				accuracy.percentage, int(char_per_min.cpm), lesson_number, diff
+			)
+			_report_statistics();
 	)
 	EventBus.settings_menu_closed.connect(line_edit.grab_focus)
 	EventBus.start_network_lessons.connect(self.start_network_exercise)
-
+	
+	prevent_typing_pass_error = GeneralSettings.get_prevent_typing_pass_error_character()
+	GeneralSettings.prevent_typing_pass_error_char_changed.connect(
+		func(prevent: bool):
+			prevent_typing_pass_error = prevent
+	)
 
 func start_extra_lesson(randomize_lessons: bool = true):
 	line_edit.grab_focus()
@@ -170,24 +178,13 @@ func _load_exercise():
 
 
 func _finished_all_difficulty_lessons():
-#	$RestartDialog.show()
-	var accuracy_txt = (
-		"Accuracy: "
-		+ "[color="
-		+ accuracy.get_accuracy_color_hex()
-		+ "][b]"
-		+ ("%.2f" % accuracy.percentage)
-		+ " %[/b][/color]"
-	)
-
-	var msg = accuracy_txt
-
-	if accuracy.percentage < allow_mistakes_percent:
-		msg += "\r\n" + "Made Too many mistakes."
-
-	EventBus.message_popup.emit(msg)
+	_report_statistics()
 	start_lesson_progress()
 
+func _report_statistics():
+#	$RestartDialog.show()
+	add_child(report_statistics_scene.instantiate())
+	
 
 func _on_text_edit_text_changed(_t: String) -> void:
 	if not _eng_to_mm_converted:
@@ -197,18 +194,23 @@ func _on_text_edit_text_changed(_t: String) -> void:
 
 	_eng_to_mm_converted = false
 
+	
+	EventBus.written_string_changed.emit(line_edit.text)
 	##### Status Update #####
 	if current_exercise_text.begins_with(line_edit.text):
 		status.text = "OK"
 	else:
 		status.text = "Error"
+		if prevent_typing_pass_error:
+			line_edit.text = line_edit.text.rsplit("", true, 1)[0]
+			line_edit.caret_column = len(line_edit.text)
+			return
 
 	###### Update Next Char ######
 	var l = len(line_edit.text)
 	if l < len(current_exercise_text):
 		EventBus.current_char_changed.emit(current_exercise_text[l])
 
-	EventBus.written_string_changed.emit(line_edit.text)
 
 	###### Determine Finish Section #########
 	if current_exercise_text != "" and current_exercise_text == line_edit.text:
