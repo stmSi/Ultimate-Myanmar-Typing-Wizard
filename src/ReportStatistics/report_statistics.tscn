@@ -1,0 +1,84 @@
+[gd_scene load_steps=8 format=3 uid="uid://ct55k3htqgkmu"]
+
+[ext_resource type="Theme" uid="uid://dppj17ign8l2n" path="res://src/Themes/main.tres" id="1_wj0h4"]
+[ext_resource type="Script" path="res://src/ReportStatistics/report_statistics.gd" id="2_fqthk"]
+[ext_resource type="PackedScene" uid="uid://cutg85e3pxlo4" path="res://src/Stats/accuracy_progress_radical.tscn" id="2_s2ykr"]
+[ext_resource type="PackedScene" uid="uid://c5xfv7x86npfh" path="res://src/Stats/cpm_progress_radical.tscn" id="3_gj1kv"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_spbgk"]
+bg_color = Color(0.121569, 0.188235, 0.121569, 1)
+
+[sub_resource type="InputEventKey" id="InputEventKey_wwprm"]
+device = -1
+keycode = 4194309
+
+[sub_resource type="Shortcut" id="Shortcut_xb3uu"]
+events = [SubResource("InputEventKey_wwprm")]
+
+[node name="ReportStatistics" type="PanelContainer"]
+self_modulate = Color(0, 0, 0, 1)
+z_index = 10
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme = ExtResource("1_wj0h4")
+script = ExtResource("2_fqthk")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_spbgk")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 6
+theme_override_constants/separation = 30
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/VBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/VBoxContainer2/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 20
+
+[node name="AccuracyProgressRadical" parent="MarginContainer/VBoxContainer/VBoxContainer2/VBoxContainer/HBoxContainer" instance=ExtResource("2_s2ykr")]
+layout_mode = 2
+tween_duration = 0.5
+
+[node name="CPMProgressRadical" parent="MarginContainer/VBoxContainer/VBoxContainer2/VBoxContainer/HBoxContainer" instance=ExtResource("3_gj1kv")]
+layout_mode = 2
+size_flags_horizontal = 2
+size_flags_vertical = 4
+
+[node name="Actions" type="HBoxContainer" parent="MarginContainer/VBoxContainer/VBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+theme_override_constants/separation = 60
+
+[node name="ContinueBtn" type="Button" parent="MarginContainer/VBoxContainer/VBoxContainer2/Actions"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(250, 50)
+layout_mode = 2
+theme_override_font_sizes/font_size = 21
+shortcut = SubResource("Shortcut_xb3uu")
+text = "Continue Next Lesson"
+
+[connection signal="pressed" from="MarginContainer/VBoxContainer/VBoxContainer2/Actions/ContinueBtn" to="." method="_on_continue_btn_pressed"]

@@ -91,6 +91,7 @@ theme_override_constants/separation = 20
 
 [node name="AccuracyProgressRadical" parent="MarginContainer/VBoxContainer/VBoxContainer/HBoxContainer" instance=ExtResource("3_tvg2n")]
 layout_mode = 2
+tween_duration = 1.5
 
 [node name="CPMProgressRadical" parent="MarginContainer/VBoxContainer/VBoxContainer/HBoxContainer" instance=ExtResource("4_hg0c2")]
 layout_mode = 2

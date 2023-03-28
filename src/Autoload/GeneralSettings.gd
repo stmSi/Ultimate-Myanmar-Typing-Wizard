@@ -7,6 +7,7 @@ var config: ConfigFile = null
 
 signal popup_helper_disabled_changed(disabled: bool)
 signal hightlight_current_char_disabled_changed(disabled: bool)
+signal prevent_typing_pass_error_char_changed(prevent: bool)
 
 
 func _ready() -> void:
@@ -51,3 +52,20 @@ func set_hightlight_current_character_char(disabled: bool) -> void:
 	config.set_value("Settings", "HightlightCurrentCharacterDisabled", disabled)
 	config.save(general_settings_path)
 	self.hightlight_current_char_disabled_changed.emit(disabled)
+
+func get_prevent_typing_pass_error_character() -> bool:
+	var err = config.load(general_settings_path)
+	if err != OK:
+		config.save(general_settings_path)
+
+	return config.get_value("Settings", "PreventTypingPassErrorChar", false)
+
+
+func set_prevent_typing_pass_error_character(prevent: bool) -> void:
+	var err = config.load(general_settings_path)
+	if err != OK:
+		config = ConfigFile.new()
+
+	config.set_value("Settings", "PreventTypingPassErrorChar", prevent)
+	config.save(general_settings_path)
+	self.prevent_typing_pass_error_char_changed.emit(prevent)

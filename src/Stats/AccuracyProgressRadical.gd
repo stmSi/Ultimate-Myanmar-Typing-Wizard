@@ -6,7 +6,8 @@ extends VBoxContainer
 
 var accuracy: float = 0.0
 
-
+@export var tween_duration := 2.0
+@export var perfect_100_color := Color.GREEN_YELLOW
 func _ready() -> void:
 	var stats = UserProfileManager.load_stats()
 	texture_progress_bar.value = 0
@@ -27,14 +28,15 @@ func _ready() -> void:
 	tween.finished.connect(func(): set_process(false))
 	(
 		tween
-		. tween_property(texture_progress_bar, "value", accuracy, 2.0)
+		. tween_property(texture_progress_bar, "value", accuracy, tween_duration)
 		. set_trans(Tween.TRANS_SINE)
 		. set_ease(Tween.EASE_OUT)
 	)
+#	accuracy = 80
 	if accuracy == 100:
-		percentage_label.modulate = Color.PALE_TURQUOISE
+		percentage_label.modulate = perfect_100_color
 	elif accuracy >= 90.0:
-		percentage_label.modulate = Color(1, 1, 0, 1)
+		percentage_label.modulate = Color(1, 1, 1, 1)
 
 
 func _process(delta: float) -> void:
