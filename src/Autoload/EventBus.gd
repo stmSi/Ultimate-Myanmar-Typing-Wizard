@@ -14,6 +14,7 @@ signal correct_text(char_pos: int)
 signal lesson_id_loaded(lesson_id: int, idx: int, lesson_data: Dictionary)
 signal lesson_finished(lesson_number: int, difficulty: String)
 signal exercise_loaded(text: String, idx: int, exercises: PackedStringArray)
+signal lesson_repeated(remaining_repeat: int)
 signal exercise_line_finished
 signal finished_all_difficulty_lessons(difficulty: String)
 
