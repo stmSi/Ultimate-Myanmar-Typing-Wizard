@@ -14,6 +14,7 @@ var cpm: int
 
 func _ready() -> void:
 	var stats = UserProfileManager.load_stats()
+
 	if stats == []:
 		# default value
 		stats = [

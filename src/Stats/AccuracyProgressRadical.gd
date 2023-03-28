@@ -8,6 +8,7 @@ var accuracy: float = 0.0
 
 @export var tween_duration := 2.0
 @export var perfect_100_color := Color.GREEN_YELLOW
+
 func _ready() -> void:
 	var stats = UserProfileManager.load_stats()
 	texture_progress_bar.value = 0
@@ -25,6 +26,7 @@ func _ready() -> void:
 		accuracy = stat[timestamp]["accuracy"]
 
 	var tween := get_tree().create_tween()
+	tween.set_pause_mode(Tween.TWEEN_PAUSE_PROCESS)
 	tween.finished.connect(func(): set_process(false))
 	(
 		tween

@@ -7,7 +7,6 @@ extends TextureRect
 
 func _ready() -> void:
 	randomize()
-	print(DisplayServer.window_get_size())
 	if is_random:
 #		texture
 		pass
