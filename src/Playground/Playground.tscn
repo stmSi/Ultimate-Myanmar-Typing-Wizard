@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://d2kbd35uuv0p7"]
+[gd_scene load_steps=25 format=3 uid="uid://d2kbd35uuv0p7"]
 
 [ext_resource type="Theme" uid="uid://dppj17ign8l2n" path="res://src/Themes/main.tres" id="1_7djnc"]
 [ext_resource type="Script" path="res://src/Playground/Playground.gd" id="1_tmfyy"]
@@ -92,6 +92,15 @@ func _ready() -> void:
 	EventBus.exercise_loaded.connect(
 		func(_e: String, idx: int, exercises: PackedStringArray):
 			self.text = \"%s / %s\" % [str(idx), exercises.size()]
+	)
+"
+
+[sub_resource type="GDScript" id="GDScript_o657a"]
+script/source = "extends Label
+func _ready() -> void:
+	EventBus.lesson_repeated.connect(
+		func(remaining_repeats: int):
+			self.text = \"%d\" % [remaining_repeats]
 	)
 "
 
@@ -237,7 +246,7 @@ layout_mode = 2
 
 [node name="StatusLabel" type="Label" parent="MarginContainer/VBoxContainer/StatsContainer/StatusLabelContainer" groups=["scene_change_element"]]
 layout_mode = 2
-text = "Status: "
+text = "Status:"
 
 [node name="Status" type="Label" parent="MarginContainer/VBoxContainer/StatsContainer/StatusLabelContainer" groups=["scene_change_element"]]
 unique_name_in_owner = true
@@ -263,7 +272,7 @@ layout_mode = 2
 
 [node name="CharPerMinLabel" type="Label" parent="MarginContainer/VBoxContainer/StatsContainer/CharacterPerMinContainer" groups=["scene_change_element"]]
 layout_mode = 2
-text = "Char Per Min: "
+text = "Char Per Min:"
 
 [node name="CharPerMin" type="Label" parent="MarginContainer/VBoxContainer/StatsContainer/CharacterPerMinContainer" groups=["scene_change_element"]]
 unique_name_in_owner = true
@@ -276,12 +285,24 @@ layout_mode = 2
 
 [node name="ExProgressLabel" type="Label" parent="MarginContainer/VBoxContainer/StatsContainer/ExerciseProgressContainer" groups=["scene_change_element"]]
 layout_mode = 2
-text = "Exercises: "
+text = "Exercises:"
 
 [node name="ExProgress" type="Label" parent="MarginContainer/VBoxContainer/StatsContainer/ExerciseProgressContainer" groups=["scene_change_element"]]
 layout_mode = 2
-text = "120"
+text = "0 / 2"
 script = SubResource("GDScript_43375")
+
+[node name="RepeatContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/StatsContainer" groups=["scene_change_element"]]
+layout_mode = 2
+
+[node name="RepeateLabel" type="Label" parent="MarginContainer/VBoxContainer/StatsContainer/RepeatContainer" groups=["scene_change_element"]]
+layout_mode = 2
+text = "Repeats:"
+
+[node name="Repeat" type="Label" parent="MarginContainer/VBoxContainer/StatsContainer/RepeatContainer" groups=["scene_change_element"]]
+layout_mode = 2
+text = "0"
+script = SubResource("GDScript_o657a")
 
 [node name="KeyboardContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2

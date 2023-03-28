@@ -115,7 +115,10 @@ func _load_lesson():
 
 	lesson_data = LessonAccess.get_lesson_data(int(lesson_ids[lesson_idx]), difficulty)
 	exercises = lesson_data["texts"]
+	
 	repeats = lesson_data["repeats"]
+	EventBus.lesson_repeated.emit(repeats)
+	
 	allow_mistakes_percent = lesson_data["allow_mistakes"]
 
 	exercise_idx = 0
@@ -150,6 +153,8 @@ func _load_exercise():
 		if exercises.size() > 0 and repeats > 0:
 			exercise_idx = 0
 			repeats -= 1
+			EventBus.lesson_repeated.emit(repeats)
+			
 		else:  # Fetch Next Lesson
 			if lesson_data != {}:
 				EventBus.lesson_finished.emit(int(lesson_ids[lesson_idx - 1]), difficulty)
