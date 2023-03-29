@@ -18,7 +18,7 @@ func _ready():
 	EventBus.exercise_loaded.connect(self._exercise_loaded)
 	EventBus.exercise_line_finished.connect(self._exercise_line_finished)
 
-func _exercise_loaded(exercise_text: String) -> void:
+func _exercise_loaded(exercise_text: String, _idx: int, _exercises: PackedStringArray) -> void:
 	self.current_exercise_text = exercise_text
 	clear()
 	grab_focus()

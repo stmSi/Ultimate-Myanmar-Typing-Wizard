@@ -10,12 +10,15 @@ var pending_shift_node: KeyButton = null
 
 @onready var l_shift: KeyButton = $VBoxContainer/zxcvb/LShift
 @onready var r_shift: KeyButton = $VBoxContainer/zxcvb/RShift
+@onready var back_space: KeyButton = $"VBoxContainer/1234567890/BackSpace"
+
 @onready var space: KeyButton = %space
 @onready var color_hint: HBoxContainer = %ColorHint
 
 var ignored_keycodes = ["Backspace", "Delete", "Semicolon", "Space", "QuoteLeft"]
 
 var written_string := ''
+var exercise := ''
 
 func _ready() -> void:
 	key_node_mapping[" "] = space
@@ -23,8 +26,21 @@ func _ready() -> void:
 	EventBus.lesson_id_loaded.connect(self._on_new_lesson_id_loaded)
 
 	EventBus.finished_all_difficulty_lessons.connect(self.reset_all_keys)
-	EventBus.written_string_changed.connect(func(text: String): written_string = text)
-
+	
+	EventBus.exercise_loaded.connect(
+		func(ex: String, ex_idx: int, _exercises: PackedStringArray):
+			self.exercise = ex
+	)
+	
+	EventBus.written_string_changed.connect(
+		func(text: String): 
+			written_string = text
+			if not self.exercise.begins_with(written_string):
+				back_space.run_pending();
+			else:
+				back_space.reset_animation();
+	)
+	
 func _on_new_key_node_added(key_name, node) -> void:
 	key_node_mapping[key_name] = node
 

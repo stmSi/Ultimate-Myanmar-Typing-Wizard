@@ -30,6 +30,7 @@ func _ready():
 		func(prevent: bool):
 			prevent_typing_pass_error = prevent
 	)
+
 func _set_raw_text(t: String, _idx: int, _e: PackedStringArray) -> void:
 	raw_text = t
 	_on_written_string_changed('')

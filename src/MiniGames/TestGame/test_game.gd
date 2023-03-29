@@ -8,7 +8,7 @@ var text
 
 @onready var spawn_point: Node2D = $SpawnPoint
 
-var sample_texts = PackedStringArray(["န်", "မ်", "တ်"])
+var sample_texts = PackedStringArray(["စားလာသလား", "အိပ်လာသလား", "ယူလာသလား"])
 
 var written_text = ""
 var focused_enemy: Node2D = null

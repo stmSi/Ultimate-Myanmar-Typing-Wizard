@@ -33,6 +33,7 @@ func _ready():
 	EventBus.finished_all_difficulty_lessons.connect(self._finished_all_difficulty_lessons)
 	EventBus.lesson_finished.connect(
 		func(lesson_number: int, diff: String): 
+			print('saved percentage: ', accuracy.percentage, '\tcpm: ', int(char_per_min.cpm))
 			UserProfileManager.save_stats(
 				accuracy.percentage, int(char_per_min.cpm), lesson_number, diff
 			)
