@@ -15,6 +15,7 @@ var pending_shift_node: KeyButton = null
 
 var ignored_keycodes = ["Backspace", "Delete", "Semicolon", "Space", "QuoteLeft"]
 
+var written_string := ''
 
 func _ready() -> void:
 	key_node_mapping[" "] = space
@@ -22,7 +23,7 @@ func _ready() -> void:
 	EventBus.lesson_id_loaded.connect(self._on_new_lesson_id_loaded)
 
 	EventBus.finished_all_difficulty_lessons.connect(self.reset_all_keys)
-
+	EventBus.written_string_changed.connect(func(text: String): written_string = text)
 
 func _on_new_key_node_added(key_name, node) -> void:
 	key_node_mapping[key_name] = node
@@ -50,9 +51,10 @@ func _input(event: InputEvent) -> void:
 #		print("converted_char: ", converted_char)
 #		print("-----------")
 		if converted_char.begins_with("Backsp"):  #ignore Backspace
-			pending_node.reset_animation()
-			_reset_shifts()
-			return
+			if not written_string.is_empty():
+				pending_node.reset_animation()
+				_reset_shifts()
+				return
 
 		elif current_char == converted_char:
 			EventBus.correct_char_typed.emit(converted_char)
