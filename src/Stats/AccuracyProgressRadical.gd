@@ -1,4 +1,5 @@
 extends VBoxContainer
+class_name AccuracyProgressRadical
 
 @onready var texture_progress_bar: TextureProgressBar = $TextureProgressBar
 
@@ -24,7 +25,9 @@ func _ready() -> void:
 
 	for timestamp in stat:
 		accuracy = stat[timestamp]["accuracy"]
+	show_accuracy()
 
+func show_accuracy():
 	var tween := get_tree().create_tween()
 	tween.set_pause_mode(Tween.TWEEN_PAUSE_PROCESS)
 	tween.finished.connect(func(): set_process(false))

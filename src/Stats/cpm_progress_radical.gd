@@ -1,4 +1,6 @@
 extends VBoxContainer
+class_name CPMProgressRadical
+
 @onready var cpm_lbl: RichTextLabel = $CPM
 
 var cpm: int
@@ -27,7 +29,9 @@ func _ready() -> void:
 
 	for timestamp in stat:
 		cpm = stat[timestamp]["char_per_min"]
+	show_cpm()
 
+func show_cpm():
 	cpm_lbl.clear()
 	next_target.clear()
 	cpm_lbl.add_text("Character Per Min (CPM): ")

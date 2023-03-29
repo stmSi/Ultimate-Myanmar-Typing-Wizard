@@ -70,16 +70,14 @@ func _ready() -> void:
 		func(_l: int, _d: String):
 			times_taken = []
 			last_time_char_typed = 0.0
-			cpm = 0
-			self._calculate_time_taken()
+			self.text = '0'
 	)
 	
 	EventBus.finished_all_difficulty_lessons.connect(
 		func():
 			times_taken = []
 			last_time_char_typed = 0.0
-			cpm = 0
-			self._calculate_time_taken()
+			self.text = '0'
 	)
 
 func _calculate_time_taken():

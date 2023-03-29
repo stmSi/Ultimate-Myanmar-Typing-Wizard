@@ -14,7 +14,7 @@ corner_radius_bottom_left = 6
 shadow_color = Color(1, 1, 1, 0.6)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_os870"]
-bg_color = Color(1, 1, 0.721569, 0.235294)
+bg_color = Color(0, 0.921569, 0.709804, 0.188235)
 
 [sub_resource type="Animation" id="Animation_n8113"]
 length = 0.001
@@ -475,16 +475,16 @@ script = ExtResource("2_5s4yx")
 unique_name_in_owner = true
 visible = false
 layout_mode = 1
-anchors_preset = 12
-anchor_top = 1.0
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 6.0
-offset_top = -14.0
+offset_left = 4.0
+offset_top = 4.0
 offset_right = -5.0
-offset_bottom = -3.0
+offset_bottom = -4.0
 grow_horizontal = 2
-grow_vertical = 0
+grow_vertical = 2
+mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_os870")
 
 [node name="ShiftChar" type="Label" parent="Panel"]
