@@ -125,6 +125,12 @@ char = "BackSpace"
 custom_minimum_size = Vector2(160, 80)
 theme_override_styles/panel = SubResource("StyleBoxFlat_scc4s")
 
+[node name="Char" parent="VBoxContainer/1234567890/BackSpace/Panel" index="2"]
+offset_left = -64.0
+offset_top = -40.0
+offset_right = -12.0
+offset_bottom = 16.0
+
 [node name="qwerty" type="HBoxContainer" parent="VBoxContainer"]
 layout_mode = 2
 script = ExtResource("1_xnj8i")
@@ -140,6 +146,10 @@ char = "Tab"
 [node name="Panel" parent="VBoxContainer/qwerty/tab" index="0"]
 custom_minimum_size = Vector2(120, 80)
 theme_override_styles/panel = SubResource("StyleBoxFlat_dr5yv")
+
+[node name="Char" parent="VBoxContainer/qwerty/tab/Panel" index="2"]
+offset_left = -55.0
+offset_right = -3.0
 
 [node name="qwerty" type="Control" parent="VBoxContainer/qwerty"]
 layout_mode = 2
@@ -160,6 +170,10 @@ char = "Caps Lock"
 custom_minimum_size = Vector2(160, 80)
 theme_override_styles/panel = SubResource("StyleBoxFlat_ng5ll")
 
+[node name="Char" parent="VBoxContainer/asdfgh/CapsLock/Panel" index="2"]
+offset_left = -56.0
+offset_right = -4.0
+
 [node name="asdfgh" type="Control" parent="VBoxContainer/asdfgh"]
 layout_mode = 2
 
@@ -171,6 +185,12 @@ char = "Enter"
 [node name="Panel" parent="VBoxContainer/asdfgh/Enter" index="0"]
 custom_minimum_size = Vector2(160, 80)
 theme_override_styles/panel = SubResource("StyleBoxFlat_xbnwi")
+
+[node name="Char" parent="VBoxContainer/asdfgh/Enter/Panel" index="2"]
+offset_left = -61.0
+offset_top = -41.0
+offset_right = -9.0
+offset_bottom = 15.0
 
 [node name="zxcvb" type="HBoxContainer" parent="VBoxContainer"]
 layout_mode = 2
@@ -188,6 +208,10 @@ char = "Shift"
 custom_minimum_size = Vector2(200, 80)
 theme_override_styles/panel = SubResource("StyleBoxFlat_8djne")
 
+[node name="Char" parent="VBoxContainer/zxcvb/LShift/Panel" index="2"]
+offset_left = -59.0
+offset_right = -7.0
+
 [node name="zxcvb" type="Control" parent="VBoxContainer/zxcvb"]
 layout_mode = 2
 
@@ -199,6 +223,10 @@ char = "Shift"
 [node name="Panel" parent="VBoxContainer/zxcvb/RShift" index="0"]
 custom_minimum_size = Vector2(204, 80)
 theme_override_styles/panel = SubResource("StyleBoxFlat_jjy0n")
+
+[node name="Char" parent="VBoxContainer/zxcvb/RShift/Panel" index="2"]
+offset_left = -58.0
+offset_right = -6.0
 
 [node name="ctrl_win_alt_space_alt_win_menu_ctrl" type="HBoxContainer" parent="VBoxContainer"]
 layout_mode = 2
@@ -212,6 +240,10 @@ char = "Ctrl"
 custom_minimum_size = Vector2(120, 80)
 theme_override_styles/panel = SubResource("StyleBoxFlat_bbdjs")
 
+[node name="Char" parent="VBoxContainer/ctrl_win_alt_space_alt_win_menu_ctrl/ctrl/Panel" index="2"]
+offset_left = -54.0
+offset_right = -2.0
+
 [node name="win" parent="VBoxContainer/ctrl_win_alt_space_alt_win_menu_ctrl" instance=ExtResource("1_ik4w2")]
 custom_minimum_size = Vector2(120, 80)
 layout_mode = 2
@@ -220,6 +252,10 @@ char = "Win"
 [node name="Panel" parent="VBoxContainer/ctrl_win_alt_space_alt_win_menu_ctrl/win" index="0"]
 custom_minimum_size = Vector2(120, 80)
 theme_override_styles/panel = SubResource("StyleBoxFlat_apsic")
+
+[node name="Char" parent="VBoxContainer/ctrl_win_alt_space_alt_win_menu_ctrl/win/Panel" index="2"]
+offset_left = -47.0
+offset_right = 5.0
 
 [node name="TextureRect" type="TextureRect" parent="VBoxContainer/ctrl_win_alt_space_alt_win_menu_ctrl/win"]
 modulate = Color(1, 1, 1, 0.705882)
@@ -248,6 +284,10 @@ char = "Alt"
 custom_minimum_size = Vector2(120, 80)
 theme_override_styles/panel = SubResource("StyleBoxFlat_aoubn")
 
+[node name="Char" parent="VBoxContainer/ctrl_win_alt_space_alt_win_menu_ctrl/alt/Panel" index="2"]
+offset_left = -57.0
+offset_right = -5.0
+
 [node name="space" parent="VBoxContainer/ctrl_win_alt_space_alt_win_menu_ctrl" instance=ExtResource("1_ik4w2")]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(440, 80)
@@ -271,6 +311,10 @@ offset_right = -11.0
 offset_bottom = 11.0
 grow_horizontal = 0
 grow_vertical = 0
+
+[node name="Char" parent="VBoxContainer/ctrl_win_alt_space_alt_win_menu_ctrl/space/Panel" index="2"]
+offset_left = -57.0
+offset_right = -5.0
 
 [node name="line" type="Panel" parent="VBoxContainer/ctrl_win_alt_space_alt_win_menu_ctrl/space"]
 unique_name_in_owner = true
@@ -298,6 +342,10 @@ char = "Alt"
 custom_minimum_size = Vector2(120, 80)
 theme_override_styles/panel = SubResource("StyleBoxFlat_aoubn")
 
+[node name="Char" parent="VBoxContainer/ctrl_win_alt_space_alt_win_menu_ctrl/alt2/Panel" index="2"]
+offset_left = -56.0
+offset_right = -4.0
+
 [node name="win2" parent="VBoxContainer/ctrl_win_alt_space_alt_win_menu_ctrl" instance=ExtResource("1_ik4w2")]
 custom_minimum_size = Vector2(120, 80)
 layout_mode = 2
@@ -306,6 +354,10 @@ char = "Win"
 [node name="Panel" parent="VBoxContainer/ctrl_win_alt_space_alt_win_menu_ctrl/win2" index="0"]
 custom_minimum_size = Vector2(120, 80)
 theme_override_styles/panel = SubResource("StyleBoxFlat_apsic")
+
+[node name="Char" parent="VBoxContainer/ctrl_win_alt_space_alt_win_menu_ctrl/win2/Panel" index="2"]
+offset_left = -54.0
+offset_right = -2.0
 
 [node name="TextureRect" type="TextureRect" parent="VBoxContainer/ctrl_win_alt_space_alt_win_menu_ctrl/win2"]
 modulate = Color(1, 1, 1, 0.705882)
@@ -333,6 +385,10 @@ char = "Ctrl"
 [node name="Panel" parent="VBoxContainer/ctrl_win_alt_space_alt_win_menu_ctrl/ctrl2" index="0"]
 custom_minimum_size = Vector2(185, 80)
 theme_override_styles/panel = SubResource("StyleBoxFlat_bbdjs")
+
+[node name="Char" parent="VBoxContainer/ctrl_win_alt_space_alt_win_menu_ctrl/ctrl2/Panel" index="2"]
+offset_left = -57.0
+offset_right = -5.0
 
 [node name="ColorHint" type="HBoxContainer" parent="VBoxContainer"]
 unique_name_in_owner = true
