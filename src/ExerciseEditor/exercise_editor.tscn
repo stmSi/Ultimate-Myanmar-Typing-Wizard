@@ -72,9 +72,10 @@ var _eng_to_mm_converted = false
 func _on_text_changed(new_text: String) -> void:
 	if not _eng_to_mm_converted:
 		_eng_to_mm_converted = true
+		var current_caret_column = caret_column
 		self.text = EngToMmConverter.convert_str(new_text)
-		self.caret_column = len(self.text)
-		
+		self.caret_column = current_caret_column
+
 	_eng_to_mm_converted = false
 	
 	pass # Replace with function body.

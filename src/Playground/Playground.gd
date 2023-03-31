@@ -191,8 +191,9 @@ func _report_statistics():
 func _on_text_edit_text_changed(_t: String) -> void:
 	if not _eng_to_mm_converted:
 		_eng_to_mm_converted = true
+		var current_caret_column = line_edit.caret_column
 		line_edit.text = EngToMmConverter.convert_str(_t)
-		line_edit.caret_column = len(line_edit.text)
+		line_edit.caret_column = current_caret_column
 
 	_eng_to_mm_converted = false
 
