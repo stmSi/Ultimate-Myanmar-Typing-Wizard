@@ -34,9 +34,10 @@ var recommended_resolution: Vector2i
 var display_settings_file = "user://display_settings.cfg"
 var config: ConfigFile = null
 
+signal renderer_changed(new_renderer: String)
+
 signal resolution_try_changing(original: Vector2i, new: Vector2i)
 signal max_fps_changed(fps: int)
-
 func _ready() -> void:
 	# Settings Config Setup
 	config = ConfigFile.new()
@@ -118,10 +119,28 @@ func get_max_fps() -> int:
 		config = ConfigFile.new()
 		var err = config.load(display_settings_file)
 		if err != OK:
-			print("get_screen_settings: Loading display_settings failed.")
+			print("get_max_fps: Loading display_settings failed.")
 			return Engine.max_fps
 			
 	return config.get_value("Settings", "max_fps", Engine.max_fps)
+
+
+func change_renderer(renderer: String) -> void:
+	var project_override = ConfigFile.new()
+	var err = project_override.load(ProjectSettings.get_setting('application/config/project_settings_override'))
+	if err != OK:
+		print("change_renderer: Loading override.cfg file failed.")
+	
+	project_override.set_value("rendering", "renderer/rendering_method", renderer)
+	err = project_override.save(ProjectSettings.get_setting('application/config/project_settings_override'))
+	if err != OK:
+		print("change_renderer: Saving override.cfg file failed.")
+		return
+	
+	self.renderer_changed.emit(renderer)
+
+func get_renderer() -> String:
+	return ProjectSettings.get_setting("rendering/renderer/rendering_method")
 
 
 func change_window_mode(mode: DisplayServer.WindowMode):

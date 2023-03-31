@@ -1,6 +1,7 @@
-[gd_scene load_steps=13 format=3 uid="uid://bdwpvsp2xyw50"]
+[gd_scene load_steps=15 format=3 uid="uid://bdwpvsp2xyw50"]
 
 [ext_resource type="Script" path="res://src/SettingsMenu/SettingsMenu.gd" id="1_lnpdd"]
+[ext_resource type="Script" path="res://src/SettingsMenu/RendererOptions.gd" id="2_7dvu5"]
 [ext_resource type="Script" path="res://src/SettingsMenu/FPSOptions.gd" id="2_o2ea0"]
 [ext_resource type="Texture2D" uid="uid://5n4mh44uc3c4" path="res://Assets/Icons/audio.png" id="3_gx4m5"]
 
@@ -10,6 +11,21 @@ border_width_left = 3
 border_width_top = 3
 border_width_right = 3
 border_width_bottom = 3
+
+[sub_resource type="GDScript" id="GDScript_qsukm"]
+script/source = "extends Label
+
+func _ready() -> void:
+	DisplaySettings.renderer_changed.connect(self._on_renderer_changed)
+	self.visible = false
+	
+func _on_renderer_changed(new_renderer: String):
+	if new_renderer != DisplaySettings.get_renderer():
+		self.visible = true
+	else:
+		self.visible = false
+	pass
+"
 
 [sub_resource type="GDScript" id="GDScript_igjqi"]
 script/source = "extends OptionButton
@@ -208,6 +224,38 @@ layout_mode = 2
 size_flags_vertical = 4
 theme_override_constants/separation = 20
 
+[node name="RendererOptions" type="HBoxContainer" parent="MarginContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="Label" type="Label" parent="MarginContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/RendererOptions"]
+layout_mode = 2
+text = "Renderer:"
+
+[node name="RendererOptions" type="OptionButton" parent="MarginContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/RendererOptions"]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+size_flags_horizontal = 10
+item_count = 2
+selected = 0
+popup/item_0/text = "OpenGL (Low End)"
+popup/item_0/id = 0
+popup/item_1/text = "Vulkan (High End)"
+popup/item_1/id = 1
+script = ExtResource("2_7dvu5")
+
+[node name="RestartRequiredLabel" type="Label" parent="MarginContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/RendererOptions/RendererOptions"]
+layout_mode = 2
+offset_top = 32.5
+offset_right = 148.0
+offset_bottom = 58.5
+text = "*Restart Required*"
+script = SubResource("GDScript_qsukm")
+
+[node name="RendererChangedRestartRequired" type="HBoxContainer" parent="MarginContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
 [node name="WindowsModeContainer" type="HBoxContainer" parent="MarginContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_constants/separation = 20
@@ -331,6 +379,7 @@ custom_minimum_size = Vector2(140, 40)
 layout_mode = 2
 text = "Close"
 
+[connection signal="item_selected" from="MarginContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/RendererOptions/RendererOptions" to="MarginContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/RendererOptions/RendererOptions" method="_on_item_selected"]
 [connection signal="item_selected" from="MarginContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/WindowsModeContainer/WindowModeOptions" to="MarginContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/WindowsModeContainer/WindowModeOptions" method="_on_item_selected"]
 [connection signal="item_selected" from="MarginContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/ResolutioonContainer/ResolutionOptions" to="MarginContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/ResolutioonContainer/ResolutionOptions" method="_on_item_selected"]
 [connection signal="item_selected" from="MarginContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/FPSOptionsContainer/FPSOptions" to="MarginContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/FPSOptionsContainer/FPSOptions" method="_on_item_selected"]
