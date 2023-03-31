@@ -35,7 +35,7 @@ var display_settings_file = "user://display_settings.cfg"
 var config: ConfigFile = null
 
 signal resolution_try_changing(original: Vector2i, new: Vector2i)
-
+signal max_fps_changed(fps: int)
 
 func _ready() -> void:
 	# Settings Config Setup
@@ -64,7 +64,8 @@ func _ready() -> void:
 
 	var window_mode = config.get_value("Settings", "WindowMode", DisplayServer.WINDOW_MODE_WINDOWED)
 	DisplayServer.window_set_mode(window_mode)
-
+	
+	Engine.max_fps = self.get_max_fps()
 
 func change_screen_resolution(reso: Vector2i) -> void:
 	if not config:
@@ -111,6 +112,16 @@ func change_max_fps(max_fps: int) -> void:
 	if err != OK:
 		print("change_max_fps: Saving display_settings file failed.")
 		return
+
+func get_max_fps() -> int:
+	if not config:
+		config = ConfigFile.new()
+		var err = config.load(display_settings_file)
+		if err != OK:
+			print("get_screen_settings: Loading display_settings failed.")
+			return Engine.max_fps
+			
+	return config.get_value("Settings", "max_fps", Engine.max_fps)
 
 
 func change_window_mode(mode: DisplayServer.WindowMode):
