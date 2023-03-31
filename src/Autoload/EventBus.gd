@@ -34,3 +34,6 @@ signal game_focus_enemy(enemy: Node2D)
 signal game_enemy_pos_changed(pos: Vector2, enemy: Node2D)
 signal game_enemy_dead(enemy: Node2D)
 signal game_enemy_hit_npc(npc: Node2D)
+
+# Network Events
+signal peer_discovered(ip_address: String)

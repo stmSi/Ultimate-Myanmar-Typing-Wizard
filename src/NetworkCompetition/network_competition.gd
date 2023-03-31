@@ -38,8 +38,8 @@ func _on_host_btn_pressed() -> void:
 	if peer.get_connection_status() == MultiplayerPeer.CONNECTION_DISCONNECTED:
 		OS.alert("Failed to start multiplayer server.")
 	multiplayer.multiplayer_peer = peer
-
-	start_competition()
+	
+#	start_competition()
 
 
 func _on_connect_btn_pressed() -> void:
