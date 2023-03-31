@@ -1,8 +1,11 @@
-[gd_scene load_steps=4 format=3 uid="uid://fcbb6a1xr6d3"]
+[gd_scene load_steps=7 format=3 uid="uid://fcbb6a1xr6d3"]
 
 [ext_resource type="Script" path="res://src/NetworkCompetition/network_competition.gd" id="1_wgkal"]
 [ext_resource type="PackedScene" uid="uid://jlkyjmkbpshr" path="res://src/Background/background.tscn" id="2_bg33i"]
 [ext_resource type="PackedScene" uid="uid://d2kbd35uuv0p7" path="res://src/Playground/Playground.tscn" id="3_3s8f4"]
+[ext_resource type="Script" path="res://src/NetworkCompetition/DiscoveryClients.gd" id="3_fe5a6"]
+[ext_resource type="Script" path="res://src/NetworkCompetition/Broadcast.gd" id="4_0uvne"]
+[ext_resource type="Script" path="res://src/NetworkCompetition/BroadcastListener.gd" id="5_2uu04"]
 
 [node name="NetworkCompetition" type="Node"]
 script = ExtResource("1_wgkal")
@@ -63,7 +66,23 @@ custom_minimum_size = Vector2(250, 0)
 layout_mode = 2
 text = "127.0.0.1"
 
+[node name="HBoxContainer2" type="HBoxContainer" parent="NetworkLocalUI/VBoxContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="NetworkLocalUI/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="NetworkLocalUI/VBoxContainer/HBoxContainer2/VBoxContainer"]
+layout_mode = 2
+text = "Discovering Game Clients..."
+
+[node name="DiscoveryClients" type="ItemList" parent="NetworkLocalUI/VBoxContainer/HBoxContainer2/VBoxContainer"]
+custom_minimum_size = Vector2(300, 500)
+layout_mode = 2
+script = ExtResource("3_fe5a6")
+
 [node name="Playground" parent="." instance=ExtResource("3_3s8f4")]
+visible = false
 
 [node name="Background" parent="Playground" index="0"]
 visible = false
@@ -83,7 +102,23 @@ visible = false
 [node name="BottomButtonsContainer" parent="Playground/MarginContainer/VBoxContainer" index="5"]
 visible = false
 
+[node name="LobbyClients" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Broadcast" type="Node" parent="."]
+script = ExtResource("4_0uvne")
+
+[node name="Timer" type="Timer" parent="Broadcast"]
+autostart = true
+
+[node name="BroadcastListener" type="Node" parent="."]
+script = ExtResource("5_2uu04")
+
 [connection signal="pressed" from="NetworkLocalUI/VBoxContainer/HBoxContainer/HostBtn" to="." method="_on_host_btn_pressed"]
 [connection signal="pressed" from="NetworkLocalUI/VBoxContainer/HBoxContainer/ConnectBtn" to="." method="_on_connect_btn_pressed"]
+[connection signal="timeout" from="Broadcast/Timer" to="Broadcast" method="_on_timer_timeout"]
 
 [editable path="Playground"]
