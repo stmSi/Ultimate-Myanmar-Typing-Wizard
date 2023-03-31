@@ -258,11 +258,11 @@ theme_override_constants/separation = 60
 [node name="StatusLabelContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/StatsContainer" groups=["scene_change_element"]]
 layout_mode = 2
 
-[node name="StatusLabel" type="Label" parent="MarginContainer/VBoxContainer/StatsContainer/StatusLabelContainer" groups=["scene_change_element"]]
+[node name="StatusLabel" type="Label" parent="MarginContainer/VBoxContainer/StatsContainer/StatusLabelContainer"]
 layout_mode = 2
 text = "Status:"
 
-[node name="Status" type="Label" parent="MarginContainer/VBoxContainer/StatsContainer/StatusLabelContainer" groups=["scene_change_element"]]
+[node name="Status" type="Label" parent="MarginContainer/VBoxContainer/StatsContainer/StatusLabelContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 text = "Ok"
@@ -270,11 +270,11 @@ text = "Ok"
 [node name="AccuracyContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/StatsContainer" groups=["scene_change_element"]]
 layout_mode = 2
 
-[node name="AccuracyLabel" type="Label" parent="MarginContainer/VBoxContainer/StatsContainer/AccuracyContainer" groups=["scene_change_element"]]
+[node name="AccuracyLabel" type="Label" parent="MarginContainer/VBoxContainer/StatsContainer/AccuracyContainer"]
 layout_mode = 2
 text = "Accuracy:"
 
-[node name="Accuracy" type="Label" parent="MarginContainer/VBoxContainer/StatsContainer/AccuracyContainer" groups=["scene_change_element"]]
+[node name="Accuracy" type="Label" parent="MarginContainer/VBoxContainer/StatsContainer/AccuracyContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 text = "100 %"
@@ -284,11 +284,11 @@ script = ExtResource("6_240wa")
 [node name="CharacterPerMinContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/StatsContainer" groups=["scene_change_element"]]
 layout_mode = 2
 
-[node name="CharPerMinLabel" type="Label" parent="MarginContainer/VBoxContainer/StatsContainer/CharacterPerMinContainer" groups=["scene_change_element"]]
+[node name="CharPerMinLabel" type="Label" parent="MarginContainer/VBoxContainer/StatsContainer/CharacterPerMinContainer"]
 layout_mode = 2
 text = "Char Per Min:"
 
-[node name="CharPerMin" type="Label" parent="MarginContainer/VBoxContainer/StatsContainer/CharacterPerMinContainer" groups=["scene_change_element"]]
+[node name="CharPerMin" type="Label" parent="MarginContainer/VBoxContainer/StatsContainer/CharacterPerMinContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 text = "120"
@@ -297,11 +297,11 @@ script = SubResource("GDScript_3afo8")
 [node name="ExerciseProgressContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/StatsContainer" groups=["scene_change_element"]]
 layout_mode = 2
 
-[node name="ExProgressLabel" type="Label" parent="MarginContainer/VBoxContainer/StatsContainer/ExerciseProgressContainer" groups=["scene_change_element"]]
+[node name="ExProgressLabel" type="Label" parent="MarginContainer/VBoxContainer/StatsContainer/ExerciseProgressContainer"]
 layout_mode = 2
 text = "Exercises:"
 
-[node name="ExProgress" type="Label" parent="MarginContainer/VBoxContainer/StatsContainer/ExerciseProgressContainer" groups=["scene_change_element"]]
+[node name="ExProgress" type="Label" parent="MarginContainer/VBoxContainer/StatsContainer/ExerciseProgressContainer"]
 layout_mode = 2
 text = "0 / 2"
 script = SubResource("GDScript_43375")
@@ -309,11 +309,11 @@ script = SubResource("GDScript_43375")
 [node name="RepeatContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/StatsContainer" groups=["scene_change_element"]]
 layout_mode = 2
 
-[node name="RepeateLabel" type="Label" parent="MarginContainer/VBoxContainer/StatsContainer/RepeatContainer" groups=["scene_change_element"]]
+[node name="RepeateLabel" type="Label" parent="MarginContainer/VBoxContainer/StatsContainer/RepeatContainer"]
 layout_mode = 2
 text = "Repeats:"
 
-[node name="Repeat" type="Label" parent="MarginContainer/VBoxContainer/StatsContainer/RepeatContainer" groups=["scene_change_element"]]
+[node name="Repeat" type="Label" parent="MarginContainer/VBoxContainer/StatsContainer/RepeatContainer"]
 layout_mode = 2
 text = "0"
 script = SubResource("GDScript_o657a")
