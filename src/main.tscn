@@ -38,6 +38,9 @@ func _on_pressed() -> void:
 [sub_resource type="GDScript" id="GDScript_v6y7b"]
 script/source = "extends CustomButton
 
+func _ready() -> void:
+	if OS.get_name() == \"Web\":
+		disabled = true
 
 func _on_pressed() -> void:
 	SceneChanger.change_to_network_competition_scene()
@@ -46,6 +49,9 @@ func _on_pressed() -> void:
 [sub_resource type="GDScript" id="GDScript_hpd8f"]
 script/source = "extends CustomButton
 
+func _ready() -> void:
+	if OS.get_name() == \"Web\":
+		disabled = true
 
 func _on_pressed() -> void:
 	SceneChanger.change_to_exercise_editor_scene()

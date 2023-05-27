@@ -14,8 +14,6 @@ func _ready() -> void:
 	if DisplaySettings.get_renderer() == 'forward_plus':
 		select(1)
 
-
-
 func _on_item_selected(index: int) -> void:
 	DisplaySettings.change_renderer(get_item_metadata(index))
 
