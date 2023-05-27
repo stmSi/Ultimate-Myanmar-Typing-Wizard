@@ -39,6 +39,8 @@ signal renderer_changed(new_renderer: String)
 signal resolution_try_changing(original: Vector2i, new: Vector2i)
 signal max_fps_changed(fps: int)
 func _ready() -> void:
+	Utils.check_and_create_user_dir()
+	
 	# Settings Config Setup
 	config = ConfigFile.new()
 	var err = config.load(display_settings_file)
