@@ -141,7 +141,9 @@ script = SubResource("GDScript_dlcgn")
 custom_minimum_size = Vector2(250, 60)
 layout_mode = 2
 size_flags_vertical = 4
+tooltip_text = "Work In Progress.."
 theme_override_font_sizes/font_size = 21
+disabled = true
 text = "Network Competition
 (WIP)"
 icon = ExtResource("6_vfces")
