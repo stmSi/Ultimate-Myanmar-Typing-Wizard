@@ -10,6 +10,7 @@ var config: ConfigFile = null
 
 
 func _ready() -> void:
+	Utils.check_and_create_user_dir()
 	# Settings Config Setup
 	config = ConfigFile.new()
 	var err = config.load(settings_path)

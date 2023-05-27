@@ -14,6 +14,7 @@ var corrected_chars_frequency = []
 
 
 func _ready() -> void:
+	Utils.check_and_create_user_dir()
 	if not FileAccess.file_exists(profile_data_file):
 		save_file = ConfigFile.new()
 		# save Default data

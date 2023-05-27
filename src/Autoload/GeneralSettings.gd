@@ -11,6 +11,7 @@ signal prevent_typing_pass_error_char_changed(prevent: bool)
 
 
 func _ready() -> void:
+	Utils.check_and_create_user_dir()
 	# Settings Config Setup
 	config = ConfigFile.new()
 	var err = config.load(general_settings_path)
