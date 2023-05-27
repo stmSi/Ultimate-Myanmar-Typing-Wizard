@@ -4,13 +4,6 @@ Created in [Godot Engine 4.0 Stable](https://godotengine.org/download) (Godot 3.
 
 [Download Linux/Windows Builds](https://github.com/stmSi/Ultimate-Myanmar-Typing-Wizard/releases/)
 
-If you want to download `latest` commit build (CI build has lots of errors. Not Recommended),
-
-1. Go to [Github `Actions` Tab](https://github.com/stmSi/Ultimate-Myanmar-Typing-Wizard/actions)
-2. Select the lastest `master` workflow
-3. Scroll down to the bottom `Artifacts` area
-4. Download zip file according to your platform.
-
 ---
 
 ### **Requirements**
