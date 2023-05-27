@@ -66,18 +66,6 @@ Feel free to [report](https://github.com/stmSi/Ultimate-Myanmar-Typing-Wizard/is
 ![](screenshots/Playground.png)
 -------------------------------
 
-**Exercise Editor Showcase Video**
-
-https://user-images.githubusercontent.com/32661049/222511307-2d69d482-4424-4706-9908-92767fee9d7d.mp4
-
----
-
-#### **Playground Showcase Video**
-
-https://user-images.githubusercontent.com/32661049/222511322-08bec3fa-689e-416e-8c0f-1baf2d4a756f.mp4
-
----
-
 MIT License
 
 Copyright (c) 2023 stmSi
