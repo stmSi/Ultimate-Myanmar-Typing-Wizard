@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=3 uid="uid://dusuxw5u4uhul"]
+[gd_scene load_steps=34 format=3 uid="uid://dusuxw5u4uhul"]
 
 [ext_resource type="Theme" uid="uid://dppj17ign8l2n" path="res://src/Themes/main.tres" id="1_p01ag"]
 [ext_resource type="Script" path="res://src/ExerciseEditor/exercise_editor.gd" id="1_sslhb"]
@@ -6,6 +6,7 @@
 [ext_resource type="FontFile" uid="uid://chygow7my3v5g" path="res://Assets/Fonts/NotoSansMyanmar-Regular.ttf" id="2_tt6nc"]
 [ext_resource type="Script" path="res://src/ExerciseEditor/LinesList.gd" id="3_5mn8u"]
 [ext_resource type="PackedScene" uid="uid://jlkyjmkbpshr" path="res://src/Background/background.tscn" id="3_b0jon"]
+[ext_resource type="Script" path="res://src/ExerciseEditor/TestExerciseBtn.gd" id="5_ngtc0"]
 [ext_resource type="PackedScene" uid="uid://bdwpvsp2xyw50" path="res://src/SettingsMenu/SettingsMenu.tscn" id="7_sqtqw"]
 [ext_resource type="PackedScene" uid="uid://cc5rb1nafw717" path="res://src/FPSCounter/fps_counter.tscn" id="8_vtx0r"]
 
@@ -260,7 +261,7 @@ text = "Add New
 script = SubResource("GDScript_y6yfr")
 
 [node name="ExitToMenuBtn" type="Button" parent="MarginContainer2/VBoxContainer/HBoxContainer/LessonsContainer" groups=["scene_change_element"]]
-custom_minimum_size = Vector2(200, 60)
+custom_minimum_size = Vector2(200, 40)
 layout_mode = 2
 text = "Exit To Menu"
 script = SubResource("GDScript_5es36")
@@ -378,6 +379,7 @@ script = SubResource("GDScript_lc0i3")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer2/VBoxContainer/HBoxContainer/VBoxContainer2"]
 layout_mode = 2
+theme_override_constants/separation = 18
 
 [node name="AddUpdateLineBtn" type="Button" parent="MarginContainer2/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer" groups=["scene_change_element"]]
 unique_name_in_owner = true
@@ -387,6 +389,13 @@ size_flags_horizontal = 3
 text = "Add Line 
 (Enter)"
 script = SubResource("GDScript_pfoee")
+
+[node name="TestExerciseBtn" type="Button" parent="MarginContainer2/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer" groups=["scene_change_element"]]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(200, 40)
+layout_mode = 2
+text = "Test Exercise"
+script = ExtResource("5_ngtc0")
 
 [node name="ResetBtn" type="Button" parent="MarginContainer2/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer" groups=["scene_change_element"]]
 unique_name_in_owner = true
@@ -483,6 +492,7 @@ grow_horizontal = 0
 [connection signal="text_changed" from="MarginContainer2/VBoxContainer/HBoxContainer/VBoxContainer2/LineEditContainer/LineEdit" to="MarginContainer2/VBoxContainer/HBoxContainer/VBoxContainer2/LineEditContainer/LineEdit" method="_on_text_changed"]
 [connection signal="text_submitted" from="MarginContainer2/VBoxContainer/HBoxContainer/VBoxContainer2/LineEditContainer/LineEdit" to="." method="_on_line_edit_text_submitted"]
 [connection signal="pressed" from="MarginContainer2/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer/AddUpdateLineBtn" to="." method="_on_add_update_line_btn_pressed"]
+[connection signal="pressed" from="MarginContainer2/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer/TestExerciseBtn" to="." method="_on_test_exercise_btn_pressed"]
 [connection signal="pressed" from="MarginContainer2/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer/ResetBtn" to="." method="_on_reset_btn_pressed"]
 [connection signal="pressed" from="MarginContainer2/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer/RemoveLineBtn" to="." method="_on_remove_line_btn_pressed"]
 [connection signal="pressed" from="AddLessonMessage/VBoxContainer/HBoxContainer/CancelLessonMsgBtn" to="." method="_on_cancel_lesson_msg_btn_pressed"]

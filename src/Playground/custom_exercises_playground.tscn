@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://cxl5e5fjq2ol0"]
+
+[ext_resource type="PackedScene" uid="uid://d2kbd35uuv0p7" path="res://src/Playground/Playground.tscn" id="1_bnoxy"]
+[ext_resource type="Script" path="res://src/Playground/custom_exercises_playground.gd" id="1_j1llj"]
+
+[node name="CustomExercisesPlayground" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_j1llj")
+
+[node name="Playground" parent="." instance=ExtResource("1_bnoxy")]
+layout_mode = 1
