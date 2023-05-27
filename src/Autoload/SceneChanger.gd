@@ -6,9 +6,11 @@ var test_game_scene = "res://src/MiniGames/TestGame/test_game.tscn"
 var playground_scene = "res://src/Playground/Playground.tscn"
 var take_lesson_scene = "res://src/Playground/take_lesson_scene.tscn"
 var take_exercise_scene = "res://src/Playground/exercise_scene.tscn"
+var take_custom_exercises_scene = "res://src/Playground/custom_exercises_playground.tscn"
 var network_competition_scene = "res://src/NetworkCompetition/network_competition.tscn"
 var current_scene = null
 
+var custom_exercises = []
 
 func _ready() -> void:
 	var root = get_tree().root
@@ -56,12 +58,14 @@ func change_to_playground_scene():
 func change_to_take_lesson_scene():
 	goto_scene(take_lesson_scene)
 
+func change_to_take_custom_exercises_scene(exercises: PackedStringArray):
+	custom_exercises = exercises;
+	goto_scene(take_custom_exercises_scene)
 
-func change_to_take_exercise_scene():
-	goto_scene(take_exercise_scene)
 
 
 func change_to_exercise_editor_scene():
+	get_tree().paused = false
 	goto_scene(exercise_editor_scene)
 
 

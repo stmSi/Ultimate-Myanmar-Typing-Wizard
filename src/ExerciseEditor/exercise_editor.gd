@@ -9,6 +9,7 @@ extends Control
 @onready var lesson_ids: ItemList = %LessonIds
 
 @onready var add_new_lessons_file_btn: Button = %AddNewLessonsFileBtn
+@onready var test_exercise_btn: Button = %TestExerciseBtn
 
 @onready var lines_list: ItemList = %LinesList
 
@@ -102,6 +103,7 @@ func _reset_difficulty_theme_color_override() -> void:
 func _populate_files_list() -> void:
 	lesson_ids.clear()
 	add_new_lessons_file_btn.disabled = false
+	
 	_toggle_disable_line_buttons(true) # disable buttons
 	var files = LessonAccess.get_lesson_files(selected_difficulty)
 	files.sort()
@@ -367,6 +369,7 @@ func _toggle_disable_line_buttons(disabled: bool) -> void:
 	reset_btn.disabled = disabled
 	remove_line_btn.disabled = disabled
 	add_messsage_btn.disabled = disabled
+	test_exercise_btn.disabled = disabled
 	pass
 
 func _scroll_to_bottom(list: ItemList):
@@ -375,3 +378,8 @@ func _scroll_to_bottom(list: ItemList):
 	scrollbar.value = scrollbar.max_value
 	scrollbar.allow_greater = false
 	
+
+
+func _on_test_exercise_btn_pressed() -> void:
+	var lesson_data = LessonAccess.get_lesson_data(selected_lesson_number, selected_difficulty)
+	SceneChanger.change_to_take_custom_exercises_scene(lesson_data['texts'])

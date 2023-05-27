@@ -28,6 +28,7 @@ var exercise_idx = 0
 var difficulty = "basic"
 var prevent_typing_pass_error: bool = false;
 
+
 func _ready():
 	EventBus.exercise_line_finished.connect(self._on_exercise_line_finished)
 	EventBus.finished_all_difficulty_lessons.connect(self._finished_all_difficulty_lessons)
@@ -46,6 +47,17 @@ func _ready():
 		func(prevent: bool):
 			prevent_typing_pass_error = prevent
 	)
+
+func start_custom_exercises(exercises: PackedStringArray = []):
+	line_edit.grab_focus()
+	lesson_ids = []
+	self.exercises = exercises
+	lesson_idx = 0
+	exercise_idx = 0
+	difficulty = "custom"
+
+	_load_exercise()
+
 
 func start_extra_lesson(randomize_lessons: bool = true):
 	line_edit.grab_focus()
