@@ -62,7 +62,8 @@ func change_to_take_custom_exercises_scene(exercises: PackedStringArray):
 	custom_exercises = exercises;
 	goto_scene(take_custom_exercises_scene)
 
-
+func change_to_take_exercise_scene():
+	goto_scene(take_exercise_scene)
 
 func change_to_exercise_editor_scene():
 	get_tree().paused = false
