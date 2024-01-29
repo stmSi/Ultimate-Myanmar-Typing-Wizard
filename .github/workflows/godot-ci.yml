@@ -2,7 +2,7 @@ name: "godot-ci export"
 on: push
 
 env:
-  GODOT_VERSION: "4.0"
+  GODOT_VERSION: "4.2"
   EXPORT_NAME: ultimate-myanmar-typing-wizard
   PROJECT_PATH: ./
   
@@ -11,7 +11,7 @@ jobs:
     name: Windows Export
     runs-on: ubuntu-20.04
     container:
-      image: 09799474633/mm-typing-game-godot
+      image: twstm/mm-typing-game-godot
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -37,7 +37,7 @@ jobs:
     name: Linux Export
     runs-on: ubuntu-20.04
     container:
-      image: 09799474633/mm-typing-game-godot
+      image: twstm/mm-typing-game-godot
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -116,3 +116,48 @@ jobs:
   #       with:
   #         name: mac
   #         path: build/mac
+  create-release:
+    name: Create Release
+    needs: [export-windows, export-linux]
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+
+    - name: Download Artifacts
+      uses: actions/download-artifact@v2
+      with:
+        path: build/
+
+    - name: Create Release
+      id: create_release
+      uses: actions/create-release@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        tag_name: ${{ github.ref }}
+        release_name: Release ${{ github.ref }}
+        draft: false
+        prerelease: false
+        body: ""
+    
+    - name: Upload Windows Build to Release
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: ./build/ultimate-myanmar-typing-wizard_windows_debug_x64_64.zip
+        asset_name: ultimate-myanmar-typing-wizard_windows_debug_x64_64.zip
+        asset_content_type: application/zip
+
+    - name: Upload Linux Build to Release
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: ./build/ultimate-myanmar-typing-wizard_linux_debug_x86_x64.zip
+        asset_name: ultimate-myanmar-typing-wizard_linux_debug_x86_x64.zip
+        asset_content_type: application/zip
+
