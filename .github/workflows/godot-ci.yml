@@ -11,7 +11,7 @@ jobs:
     name: Windows Export
     runs-on: ubuntu-20.04
     container:
-      image: twstm/mm-typing-game-godot
+      image: 09799474633/mm-typing-game-godot
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -37,7 +37,7 @@ jobs:
     name: Linux Export
     runs-on: ubuntu-20.04
     container:
-      image: twstm/mm-typing-game-godot
+      image: 09799474633/mm-typing-game-godot
     steps:
       - name: Checkout
         uses: actions/checkout@v2
