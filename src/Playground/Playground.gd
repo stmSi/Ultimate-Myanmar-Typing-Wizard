@@ -124,6 +124,7 @@ func start_lesson_progress():
 
 
 func _on_exercise_line_finished():
+	keyboard.reset_all_keys()
 	_load_exercise()
 
 
