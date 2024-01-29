@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://cnx3k4cy1imd"]
+[gd_scene load_steps=33 format=3 uid="uid://cnx3k4cy1imd"]
 
 [ext_resource type="Theme" uid="uid://dppj17ign8l2n" path="res://src/Themes/main.tres" id="1_wgeyo"]
 [ext_resource type="Script" path="res://src/main.gd" id="1_xgqc1"]
@@ -19,6 +19,14 @@
 background_color = Color(0.423529, 0.423529, 0.423529, 1)
 ambient_light_source = 2
 
+[sub_resource type="InputEventKey" id="InputEventKey_1l8wj"]
+device = -1
+keycode = 76
+unicode = 108
+
+[sub_resource type="Shortcut" id="Shortcut_25xlf"]
+events = [SubResource("InputEventKey_1l8wj")]
+
 [sub_resource type="GDScript" id="GDScript_6o4cl"]
 script/source = "extends CustomButton
 
@@ -26,6 +34,14 @@ func _on_pressed() -> void:
 	SceneChanger.change_to_take_lesson_scene()
 	pass # R%TakeLessonBtneplace with function body.
 "
+
+[sub_resource type="InputEventKey" id="InputEventKey_4a3hf"]
+device = -1
+keycode = 80
+unicode = 112
+
+[sub_resource type="Shortcut" id="Shortcut_cxmsr"]
+events = [SubResource("InputEventKey_4a3hf")]
 
 [sub_resource type="GDScript" id="GDScript_dlcgn"]
 script/source = "extends CustomButton
@@ -46,6 +62,14 @@ func _on_pressed() -> void:
 	SceneChanger.change_to_network_competition_scene()
 "
 
+[sub_resource type="InputEventKey" id="InputEventKey_ws8em"]
+device = -1
+keycode = 69
+unicode = 101
+
+[sub_resource type="Shortcut" id="Shortcut_haa07"]
+events = [SubResource("InputEventKey_ws8em")]
+
 [sub_resource type="GDScript" id="GDScript_hpd8f"]
 script/source = "extends CustomButton
 
@@ -58,6 +82,14 @@ func _on_pressed() -> void:
 	pass # Replace with function body.
 "
 
+[sub_resource type="InputEventKey" id="InputEventKey_e8w6m"]
+device = -1
+keycode = 83
+unicode = 115
+
+[sub_resource type="Shortcut" id="Shortcut_fdxuy"]
+events = [SubResource("InputEventKey_e8w6m")]
+
 [sub_resource type="GDScript" id="GDScript_d0c1b"]
 script/source = "extends CustomButton
 
@@ -66,6 +98,14 @@ func _on_pressed() -> void:
 	EventBus.open_settings_menu.emit()
 	pass # Replace with function body.
 "
+
+[sub_resource type="InputEventKey" id="InputEventKey_0fb7p"]
+device = -1
+keycode = 88
+unicode = 120
+
+[sub_resource type="Shortcut" id="Shortcut_ucryw"]
+events = [SubResource("InputEventKey_0fb7p")]
 
 [sub_resource type="GDScript" id="GDScript_l5vsv"]
 script/source = "extends CustomButton
@@ -124,7 +164,8 @@ custom_minimum_size = Vector2(250, 60)
 layout_mode = 2
 size_flags_vertical = 4
 theme_override_font_sizes/font_size = 21
-text = "Step by Step Lessons"
+shortcut = SubResource("Shortcut_25xlf")
+text = "Step by Step (L)essons"
 icon = ExtResource("4_g7xuq")
 script = SubResource("GDScript_6o4cl")
 
@@ -133,7 +174,8 @@ custom_minimum_size = Vector2(250, 60)
 layout_mode = 2
 size_flags_vertical = 4
 theme_override_font_sizes/font_size = 21
-text = "Practice"
+shortcut = SubResource("Shortcut_cxmsr")
+text = "(P)ractice"
 icon = ExtResource("5_nb47a")
 script = SubResource("GDScript_dlcgn")
 
@@ -154,7 +196,8 @@ custom_minimum_size = Vector2(250, 60)
 layout_mode = 2
 size_flags_vertical = 4
 theme_override_font_sizes/font_size = 21
-text = "Exercise Editor"
+shortcut = SubResource("Shortcut_haa07")
+text = "(E)xercise Editor"
 icon = ExtResource("7_o4aed")
 script = SubResource("GDScript_hpd8f")
 
@@ -163,7 +206,8 @@ custom_minimum_size = Vector2(250, 60)
 layout_mode = 2
 size_flags_vertical = 4
 theme_override_font_sizes/font_size = 21
-text = "Settings"
+shortcut = SubResource("Shortcut_fdxuy")
+text = "(S)ettings"
 icon = ExtResource("8_2y7oh")
 script = SubResource("GDScript_d0c1b")
 
@@ -172,7 +216,8 @@ custom_minimum_size = Vector2(250, 60)
 layout_mode = 2
 size_flags_vertical = 4
 theme_override_font_sizes/font_size = 21
-text = "Exit"
+shortcut = SubResource("Shortcut_ucryw")
+text = "E(x)it"
 icon = ExtResource("9_on2em")
 script = SubResource("GDScript_l5vsv")
 
