@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=3 uid="uid://dusuxw5u4uhul"]
+[gd_scene load_steps=36 format=3 uid="uid://dusuxw5u4uhul"]
 
 [ext_resource type="Theme" uid="uid://dppj17ign8l2n" path="res://src/Themes/main.tres" id="1_p01ag"]
 [ext_resource type="Script" path="res://src/ExerciseEditor/exercise_editor.gd" id="1_sslhb"]
@@ -42,6 +42,14 @@ events = [SubResource("InputEventKey_iny2v")]
 [sub_resource type="GDScript" id="GDScript_y6yfr"]
 script/source = "extends CustomButton
 "
+
+[sub_resource type="InputEventKey" id="InputEventKey_378uw"]
+device = -1
+keycode = 88
+unicode = 120
+
+[sub_resource type="Shortcut" id="Shortcut_d871w"]
+events = [SubResource("InputEventKey_378uw")]
 
 [sub_resource type="GDScript" id="GDScript_5es36"]
 script/source = "extends CustomButton
@@ -263,7 +271,8 @@ script = SubResource("GDScript_y6yfr")
 [node name="ExitToMenuBtn" type="Button" parent="MarginContainer2/VBoxContainer/HBoxContainer/LessonsContainer" groups=["scene_change_element"]]
 custom_minimum_size = Vector2(200, 40)
 layout_mode = 2
-text = "Exit To Menu"
+shortcut = SubResource("Shortcut_d871w")
+text = "E(x)it To Menu"
 script = SubResource("GDScript_5es36")
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="MarginContainer2/VBoxContainer/HBoxContainer"]
