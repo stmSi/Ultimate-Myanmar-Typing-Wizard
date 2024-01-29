@@ -519,10 +519,10 @@ theme_override_font_sizes/font_size = 25
 text = "test"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-autoplay = "RESET"
 libraries = {
 "": SubResource("AnimationLibrary_e6lxs")
 }
+autoplay = "RESET"
 
 [connection signal="mouse_entered" from="Panel" to="." method="_on_panel_mouse_entered"]
 [connection signal="mouse_exited" from="Panel" to="." method="_on_panel_mouse_exited"]
