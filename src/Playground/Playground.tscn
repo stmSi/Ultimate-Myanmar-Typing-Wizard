@@ -24,7 +24,7 @@ script/source = "extends LineEdit
 
 
 # Called when the node enters the scene tree for the first time.
-func _ready():
+func _ready() -> void:
 	grab_focus()
 	EventBus.exercise_line_finished.connect(self._exercise_line_finished)
 	EventBus.message_popup_closed.connect(self._on_message_popup_closed)
@@ -49,49 +49,49 @@ shadow_size = 2
 [sub_resource type="GDScript" id="GDScript_3afo8"]
 script/source = "extends Label
 
-var max_chars_to_calculate = 20
-var times_taken = []
-var last_time_char_typed = 0.0
-var cpm = 0
+var max_chars_to_calculate := 20
+var times_taken : Array[float] = []
+var last_time_char_typed := 0.0
+var cpm := \"0\"
 
 
 func _ready() -> void:
 	EventBus.wrong_char_typed.connect(
-		func(_wrong_c: String, _correct_c: String):
+		func(_wrong_c: String, _correct_c: String) -> void:
 			self._calculate_time_taken()
 	)
-	
+
 	EventBus.correct_char_typed.connect(
-		func(_correct_c: String):
+		func(_correct_c: String) -> void:
 			self._calculate_time_taken()
 	)
-	
+
 	EventBus.lesson_finished.connect(
-		func(_l: int, _d: String):
-			times_taken = []
-			last_time_char_typed = 0.0
-			self.text = '0'
-	)
-	
-	EventBus.finished_all_difficulty_lessons.connect(
-		func():
+		func(_l: int, _d: String) -> void:
 			times_taken = []
 			last_time_char_typed = 0.0
 			self.text = '0'
 	)
 
-func _calculate_time_taken():
-	var now_in_minute = (Time.get_ticks_msec() / 1000.0) / 60
+	EventBus.finished_all_difficulty_lessons.connect(
+		func() -> void:
+			times_taken = []
+			last_time_char_typed = 0.0
+			self.text = '0'
+	)
+
+func _calculate_time_taken() -> void:
+	var now_in_minute := (Time.get_ticks_msec() / 1000.0) / 60
 
 	if last_time_char_typed != 0:
 		times_taken.push_back(now_in_minute - last_time_char_typed)
-		var total_in_sec = 0
+		var total_in_sec := 0
 		for t in times_taken:
 			total_in_sec += t
-		
-		cpm = str(roundf(times_taken.size() / (total_in_sec)))
+		if total_in_sec != 0:
+			cpm = str(roundf(times_taken.size() / (total_in_sec)))
 		self.text = cpm
-	
+
 	if times_taken.size() > max_chars_to_calculate:
 		times_taken.pop_front()
 
@@ -104,7 +104,7 @@ script/source = "extends Label
 
 func _ready() -> void:
 	EventBus.exercise_loaded.connect(
-		func(_e: String, idx: int, exercises: PackedStringArray):
+		func(_e: String, idx: int, exercises: PackedStringArray) -> void:
 			self.text = \"%s / %s\" % [str(idx), exercises.size()]
 	)
 "
@@ -113,7 +113,7 @@ func _ready() -> void:
 script/source = "extends Label
 func _ready() -> void:
 	EventBus.lesson_repeated.connect(
-		func(remaining_repeats: int):
+		func(remaining_repeats: int) -> void:
 			self.text = \"%d\" % [remaining_repeats]
 	)
 "
@@ -142,9 +142,9 @@ var mute: bool = false
 
 func _ready() -> void:
 	EventBus.correct_char_typed.connect(self._on_correct_char_typed)
-	SoundSettings.mute_correct_beep.connect(func(m): mute = m)
+	SoundSettings.mute_correct_beep.connect(func(m: bool) -> void: mute = m)
 
-func _on_correct_char_typed(_correct_ch: String):
+func _on_correct_char_typed(_correct_ch: String) -> void:
 	if not mute:
 		play()
 "
@@ -156,10 +156,10 @@ var mute : bool = false
 
 func _ready() -> void:
 	EventBus.wrong_char_typed.connect(self._on_wrong_char_typed)
-	SoundSettings.mute_incorrect_beep.connect(func(m): mute = m)
+	SoundSettings.mute_incorrect_beep.connect(func(m: bool) -> void: mute = m)
 
 
-func _on_wrong_char_typed(_wrong_c: String, _correct_c: String):
+func _on_wrong_char_typed(_wrong_c: String, _correct_c: String) -> void:
 	if not mute:
 		play()
 "

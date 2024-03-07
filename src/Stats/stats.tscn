@@ -36,9 +36,9 @@ shadow_size = 8
 [sub_resource type="GDScript" id="GDScript_q7ty1"]
 script/source = "extends Button
 
-var origin_text
+var origin_text: String
 
-var confirm = false
+var confirm := false
 
 func _ready() -> void:
 	origin_text = self.text
@@ -51,7 +51,7 @@ func _on_pressed() -> void:
 		SceneChanger.change_to_main_scene()
 		return
 	confirm = true
-	
+
 	await get_tree().create_timer(3).timeout
 	confirm = false
 	self.text = origin_text
@@ -118,10 +118,10 @@ theme_override_constants/separation = 60
 custom_minimum_size = Vector2(200, 50)
 layout_mode = 2
 size_flags_horizontal = 4
-theme_override_styles/normal = SubResource("StyleBoxFlat_488jg")
+theme_override_styles/focus = SubResource("StyleBoxFlat_488jg")
 theme_override_styles/hover = SubResource("StyleBoxFlat_yq5ds")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_488jg")
-theme_override_styles/focus = SubResource("StyleBoxFlat_488jg")
+theme_override_styles/normal = SubResource("StyleBoxFlat_488jg")
 text = "Reset Lesson Progress"
 script = ExtResource("5_v02w4")
 
@@ -129,10 +129,10 @@ script = ExtResource("5_v02w4")
 custom_minimum_size = Vector2(200, 50)
 layout_mode = 2
 size_flags_horizontal = 4
-theme_override_styles/normal = SubResource("StyleBoxFlat_488jg")
+theme_override_styles/focus = SubResource("StyleBoxFlat_488jg")
 theme_override_styles/hover = SubResource("StyleBoxFlat_yq5ds")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_488jg")
-theme_override_styles/focus = SubResource("StyleBoxFlat_488jg")
+theme_override_styles/normal = SubResource("StyleBoxFlat_488jg")
 text = "Reset Statistics"
 script = SubResource("GDScript_q7ty1")
 

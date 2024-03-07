@@ -7,7 +7,7 @@ bg_color = Color(0.0980392, 0.0980392, 0.0980392, 0.176471)
 script/source = "extends RichTextLabel
 
 
-func _on_meta_clicked(meta) -> void:
+func _on_meta_clicked(meta: Variant) -> void:
 	OS.shell_open(str(meta))
 "
 
@@ -15,7 +15,7 @@ func _on_meta_clicked(meta) -> void:
 script/source = "extends RichTextLabel
 
 
-func _on_meta_clicked(meta) -> void:
+func _on_meta_clicked(meta: Variant) -> void:
 	OS.shell_open(str(meta))
 "
 

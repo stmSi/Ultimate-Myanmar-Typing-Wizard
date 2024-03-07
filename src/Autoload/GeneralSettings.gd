@@ -1,8 +1,8 @@
 extends Node
 
-var settings_data = {}
+var settings_data : Dictionary = {}
 
-var general_settings_path = "user://general_settings.cfg"
+var general_settings_path := "user://general_settings.cfg"
 var config: ConfigFile = null
 
 signal popup_helper_disabled_changed(disabled: bool)
@@ -14,13 +14,13 @@ func _ready() -> void:
 	Utils.check_and_create_user_dir()
 	# Settings Config Setup
 	config = ConfigFile.new()
-	var err = config.load(general_settings_path)
+	var err := config.load(general_settings_path)
 	if err != OK:
 		config.save(general_settings_path)
 
 
 func get_popup_helper_disabled() -> bool:
-	var err = config.load(general_settings_path)
+	var err := config.load(general_settings_path)
 	if err != OK:
 		config.save(general_settings_path)
 
@@ -28,7 +28,7 @@ func get_popup_helper_disabled() -> bool:
 
 
 func set_popup_helper_disabled(disabled: bool) -> void:
-	var err = config.load(general_settings_path)
+	var err := config.load(general_settings_path)
 	if err != OK:
 		config = ConfigFile.new()
 
@@ -38,7 +38,7 @@ func set_popup_helper_disabled(disabled: bool) -> void:
 
 
 func get_hightlight_current_character_disabled() -> bool:
-	var err = config.load(general_settings_path)
+	var err := config.load(general_settings_path)
 	if err != OK:
 		config.save(general_settings_path)
 
@@ -46,7 +46,7 @@ func get_hightlight_current_character_disabled() -> bool:
 
 
 func set_hightlight_current_character_char(disabled: bool) -> void:
-	var err = config.load(general_settings_path)
+	var err := config.load(general_settings_path)
 	if err != OK:
 		config = ConfigFile.new()
 
@@ -55,7 +55,7 @@ func set_hightlight_current_character_char(disabled: bool) -> void:
 	self.hightlight_current_char_disabled_changed.emit(disabled)
 
 func get_prevent_typing_pass_error_character() -> bool:
-	var err = config.load(general_settings_path)
+	var err := config.load(general_settings_path)
 	if err != OK:
 		config.save(general_settings_path)
 
@@ -63,7 +63,7 @@ func get_prevent_typing_pass_error_character() -> bool:
 
 
 func set_prevent_typing_pass_error_character(prevent: bool) -> void:
-	var err = config.load(general_settings_path)
+	var err := config.load(general_settings_path)
 	if err != OK:
 		config = ConfigFile.new()
 

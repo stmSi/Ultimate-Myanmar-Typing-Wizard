@@ -27,8 +27,8 @@ func _input(event: InputEvent) -> void:
 			get_tree().root.get_viewport().set_input_as_handled()
 
 
-func _move_up_selected_item():
-	var idx = get_selected_items()[0]
+func _move_up_selected_item() -> void:
+	var idx := get_selected_items()[0]
 	if idx == 0:  # index => 0 => at top.... ignore
 		return
 
@@ -36,8 +36,8 @@ func _move_up_selected_item():
 	self.item_moved.emit()
 
 
-func _move_down_selected_item():
-	var idx = get_selected_items()[0]
+func _move_down_selected_item() -> void:
+	var idx := get_selected_items()[0]
 	if idx == item_count - 1:  # index =>  => at bottom.... ignore
 		return
 

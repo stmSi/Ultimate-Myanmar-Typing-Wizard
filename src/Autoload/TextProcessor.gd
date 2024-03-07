@@ -1,6 +1,6 @@
 extends Node
 
-var use_r_shift_ids = [
+var use_r_shift_ids: Array[int] = [
 	0,
 	1,
 	2,
@@ -26,7 +26,7 @@ var use_r_shift_ids = [
 
 
 func need_shift(c: String) -> String:
-	var idx = GlobalHardCoded.mm_shift_chars.find(c)
+	var idx := GlobalHardCoded.mm_shift_chars.find(c)
 
 	if idx == -1:
 		return ""

@@ -4,8 +4,8 @@ extends Control
 
 
 func _ready() -> void:
-	var lesson_progress = UserProfileManager.load_lesson_progress()
-	var next_lesson = (
+	var lesson_progress := UserProfileManager.load_lesson_progress()
+	var next_lesson := (
 		LessonAccess
 		. get_next_lesson(
 			lesson_progress["lesson_number"],

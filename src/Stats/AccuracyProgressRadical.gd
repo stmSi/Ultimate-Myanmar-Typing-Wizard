@@ -5,32 +5,23 @@ class_name AccuracyProgressRadical
 
 @onready var percentage_label: Label = $TextureProgressBar/PercentageLabel
 
-var accuracy: float = 0.0
+var accuracy := 0.0
 
 @export var tween_duration := 2.0
 @export var perfect_100_color := Color.GREEN_YELLOW
 
 func _ready() -> void:
-	var stats = UserProfileManager.load_stats()
+	var stats : Array[StatisticEntry]= UserProfileManager.load_stats()
 	texture_progress_bar.value = 0
-	if stats == []:
-		# default value
-		stats = [
-			{
-				"2023-03-08T14:14:43":
-				{"accuracy": 0.0, "char_per_min": 0, "difficulty": "basic", "lesson_number": 1}
-			}
-		]
-	var stat = stats[stats.size() - 1]
+	var stat := stats[stats.size() - 1]
 
-	for timestamp in stat:
-		accuracy = stat[timestamp]["accuracy"]
+	accuracy = stat.accuracy
 	show_accuracy()
 
-func show_accuracy():
+func show_accuracy() -> void:
 	var tween := get_tree().create_tween()
 	tween.set_pause_mode(Tween.TWEEN_PAUSE_PROCESS)
-	tween.finished.connect(func(): set_process(false))
+	tween.finished.connect(func() -> void: set_process(false))
 	(
 		tween
 		. tween_property(texture_progress_bar, "value", accuracy, tween_duration)

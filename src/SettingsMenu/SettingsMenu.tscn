@@ -18,8 +18,8 @@ script/source = "extends Label
 func _ready() -> void:
 	DisplaySettings.renderer_changed.connect(self._on_renderer_changed)
 	self.visible = false
-	
-func _on_renderer_changed(new_renderer: String):
+
+func _on_renderer_changed(new_renderer: String) -> void:
 	if new_renderer != DisplaySettings.get_renderer():
 		self.visible = true
 	else:
@@ -59,22 +59,22 @@ script/source = "extends OptionButton
 func _ready() -> void:
 	clear() # reset items
 	var current_resolution := DisplaySettings.get_screen_resolution()
-	
+
 	var recommended := false
 	for reso in DisplaySettings.resolutions:
-		var scr_size_str = reso.split(\" x \")
+		var scr_size_str := reso.split(\" x \")
 		var scr_size := Vector2i(int(scr_size_str[0]), int(scr_size_str[1]))
 		if not recommended and DisplaySettings.recommended_resolution >= scr_size:
 			add_item(reso + \" (Recommended)\")
 			recommended = true
 		else:
 			add_item(reso)
-	
+
 		if scr_size >= current_resolution:
 			select(item_count - 1)
 
 		set_item_metadata(item_count - 1, scr_size)
-		
+
 
 
 
@@ -87,8 +87,8 @@ func _on_item_selected(index: int) -> void:
 
 [sub_resource type="GDScript" id="GDScript_n4rm5"]
 script/source = "extends CheckButton
-@onready var muted_image = preload(\"res://Assets/Icons/audio-mute.png\")
-@onready var unmuted_image = preload(\"res://Assets/Icons/audio.png\")
+@onready var muted_image := preload(\"res://Assets/Icons/audio-mute.png\")
+@onready var unmuted_image := preload(\"res://Assets/Icons/audio.png\")
 
 
 func _ready() -> void:
@@ -112,8 +112,8 @@ func _on_toggled(btn_pressed: bool) -> void:
 [sub_resource type="GDScript" id="GDScript_dngkv"]
 script/source = "extends CheckButton
 
-@onready var muted_image = preload(\"res://Assets/Icons/audio-mute.png\")
-@onready var unmuted_image = preload(\"res://Assets/Icons/audio.png\")
+@onready var muted_image := preload(\"res://Assets/Icons/audio-mute.png\")
+@onready var unmuted_image := preload(\"res://Assets/Icons/audio.png\")
 
 
 func _ready() -> void:
@@ -236,8 +236,8 @@ text = "Renderer:"
 custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
 size_flags_horizontal = 10
-item_count = 2
 selected = 0
+item_count = 2
 popup/item_0/text = "OpenGL (Low End)"
 popup/item_0/id = 0
 popup/item_1/text = "Vulkan (High End)"
@@ -268,8 +268,8 @@ text = "Window Mode:"
 custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
 size_flags_horizontal = 10
-item_count = 1
 selected = 0
+item_count = 1
 popup/item_0/text = "Windowed"
 popup/item_0/id = 0
 script = SubResource("GDScript_igjqi")
@@ -287,8 +287,8 @@ custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
 size_flags_horizontal = 10
 disabled = true
-item_count = 1
 selected = 0
+item_count = 1
 popup/item_0/text = "1920 x 1080"
 popup/item_0/id = 0
 script = SubResource("GDScript_o5mfk")
@@ -305,8 +305,8 @@ text = "Max FPS:"
 custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
 size_flags_horizontal = 10
-item_count = 3
 selected = 1
+item_count = 3
 popup/item_0/text = "Unlimited"
 popup/item_0/id = 0
 popup/item_1/text = "60"

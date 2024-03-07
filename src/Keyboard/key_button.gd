@@ -14,10 +14,10 @@ class_name KeyButton
 		%ShiftChar.text = value
 		shift_char = value
 
-var chars_to_highlight_for_fingers = "ေျိ်ြုူး"  # asdf jkl;
+var chars_to_highlight_for_fingers := "ေျိ်ြုူး"  # asdf jkl;
 var highlighted: bool = false
 
-@export var is_hoving_stats = false
+@export var is_hoving_stats : bool = false
 
 @export var char: String:
 	get:
@@ -51,7 +51,7 @@ func _ready() -> void:
 	ori_modulate_shift_char_color = shift_char_lbl.modulate
 
 
-func run_pending(use_shift: bool = false):
+func run_pending(use_shift: bool = false) -> void:
 	$AnimationPlayer.play("pending")
 	if use_shift:
 		shift_char_lbl.modulate = highlight_modulate_color
@@ -63,22 +63,22 @@ func run_pending(use_shift: bool = false):
 		get_node("line").modulate = highlight_modulate_color  # only "Space" key has line
 
 
-func reset_animation():
+func reset_animation() -> void:
 	$AnimationPlayer.play("RESET")
 	_reset_modulate_color()
 
 
-func correct_animation():
+func correct_animation() -> void:
 	$AnimationPlayer.play("correct")
 	_reset_modulate_color()
 
 
-func incorrect_animation():
+func incorrect_animation() -> void:
 	$AnimationPlayer.play("incorrect")
 	_reset_modulate_color()
 
 
-func _reset_modulate_color():
+func _reset_modulate_color() -> void:
 	char_lbl.modulate = ori_modulate_char_color
 	shift_char_lbl.modulate = ori_modulate_shift_char_color
 
@@ -86,7 +86,7 @@ func _reset_modulate_color():
 		get_node("line").modulate = ori_modulate_shift_char_color  # only "Space" key has line
 
 
-func highlight_character(c: String, highlight_color: Color):
+func highlight_character(c: String, highlight_color: Color) -> void:
 	# used by frequent_mistakes_report
 	if char_lbl.text == c:
 		char_lbl.modulate = highlight_color

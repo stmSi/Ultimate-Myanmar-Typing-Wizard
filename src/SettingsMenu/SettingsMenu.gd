@@ -19,10 +19,10 @@ func _unhandled_input(event: InputEvent) -> void:
 				_open()
 
 
-func _open():
+func _open() -> void:
 	for n in get_tree().get_nodes_in_group("appear_animate"):
 		n.modulate.a = 0
-	var node = margin_container
+	var node := margin_container
 	node.scale = Vector2(0, 0)
 	node.modulate = Color(0, 0, 0, 0)
 
@@ -35,15 +35,15 @@ func _open():
 
 	await main_tween.finished
 	for n in get_tree().get_nodes_in_group("appear_animate"):
-		var tween = get_tree().create_tween()
+		var tween := get_tree().create_tween()
 		tween.tween_property(n, "modulate", Color.WHITE, .15)
 		await tween.finished
 
 
-func _close():
-	var node = margin_container
+func _close() -> void:
+	var node := margin_container
 	for n in get_tree().get_nodes_in_group("appear_animate"):
-		var tween = get_tree().create_tween()
+		var tween := get_tree().create_tween()
 		tween.tween_property(n, "modulate", Color(1, 1, 1, 0), .15)
 		await tween.finished
 
