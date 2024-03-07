@@ -42,7 +42,7 @@ func _ready() -> void:
 func _on_basic_btn_pressed() -> void:
 	lesson_ids_lbl.text = 'Basic Files:'
 	selected_difficulty = 'basic'
-	
+
 	_reset_difficulty_theme_color_override()
 	basic_btn.add_theme_color_override("font_color", Color.GOLD)
 
@@ -52,10 +52,10 @@ func _on_basic_btn_pressed() -> void:
 func _on_intermediate_btn_pressed() -> void:
 	lesson_ids_lbl.text = 'Intermediate Files:'
 	selected_difficulty = 'intermediate'
-	
+
 	_reset_difficulty_theme_color_override()
 	intermediate_btn.add_theme_color_override("font_color", Color.GOLD)
-	
+
 	_populate_files_list()
 
 
@@ -75,7 +75,7 @@ func _on_extra_exercise_btn_pressed() -> void:
 
 	_reset_difficulty_theme_color_override()
 	extra_exercise_btn.add_theme_color_override("font_color", Color.GOLD)
-	
+
 	_populate_files_list()
 
 
@@ -83,7 +83,7 @@ func _on_cancel_btn_pressed() -> void:
 	lesson_ids_lbl.text = 'No Difficulty Selected'
 	selected_difficulty = ''
 	lesson_ids.clear()
-	
+
 	_reset_difficulty_theme_color_override()
 	_toggle_disable_line_buttons(true)
 
@@ -93,7 +93,7 @@ func _reset_difficulty_theme_color_override() -> void:
 	intermediate_btn.release_focus()
 	advance_btn.release_focus()
 	extra_exercise_btn.release_focus()
-	
+
 	basic_btn.remove_theme_color_override("font_color")
 	intermediate_btn.remove_theme_color_override("font_color")
 	advance_btn.remove_theme_color_override("font_color")
@@ -103,18 +103,18 @@ func _reset_difficulty_theme_color_override() -> void:
 func _populate_files_list() -> void:
 	lesson_ids.clear()
 	add_new_lessons_file_btn.disabled = false
-	
+
 	_toggle_disable_line_buttons(true) # disable buttons
 	var files = LessonAccess.get_lesson_files(selected_difficulty)
 	files.sort()
 	for f in files:
 		lesson_ids.add_item(f.get_basename().get_file())
 #		lesson_ids.set_item_metadata(-1, f)
-	
+
 	# Scroll to bottom
 	if len(files) > 0:
 		_scroll_to_bottom(lesson_ids)
-	
+
 	# Reset lines_list, line_edit, button
 	_on_lines_list_empty_clicked()
 	add_lesson_message_text_edit.text = ''
@@ -132,21 +132,21 @@ func _on_add_lessons_file_btn_pressed() -> void:
 	if len(files) > 0:
 		var last_file = files[files.size() - 1]
 		lesson_number = int(last_file.get_basename().get_file()) + 1 # next number
-	
+
 	var success = LessonAccess.create_new_lesson_file(lesson_number, selected_difficulty)
 	if success:
 		_populate_files_list()
 		lesson_ids.select(files.size())
 		_on_lesson_ids_item_selected(files.size())
-	
+
 
 
 func _on_lesson_ids_item_selected(index: int) -> void:
-	_toggle_disable_line_buttons(false) # enable 
+	_toggle_disable_line_buttons(false) # enable
 	selected_lesson_number = int(lesson_ids.get_item_text(index))
-	
+
 	var lesson_data: Dictionary = LessonAccess.get_lesson_data(selected_lesson_number, selected_difficulty)
-	
+
 	# populate lines_list
 	var lines = lesson_data['texts']
 	lines_list.clear()
@@ -154,9 +154,9 @@ func _on_lesson_ids_item_selected(index: int) -> void:
 		lines_list.add_item(l)
 
 	# populate lesson settings
-	# Danger: 
+	# Danger:
 	#	Do not put above "lines_list" population
-	#	becuz value_changed will emit 
+	#	becuz value_changed will emit
 	#	and save the empty lines_list
 	repeats_box.value = int(lesson_data['repeats'])
 	allow_mistakes_box.value = int(lesson_data['allow_mistakes'])
@@ -167,18 +167,18 @@ func _on_lesson_ids_item_selected(index: int) -> void:
 		add_messsage_btn.add_theme_color_override("font_color", Color.GOLD)
 	else:
 		add_messsage_btn.remove_theme_color_override("font_color")
-		
+
 	# Scroll to bottom
 	if len(lines) > 0:
 		_scroll_to_bottom(lines_list)
-	
+
 	# Reset lines_list, line_edit, button
 	_on_lines_list_empty_clicked()
 
 
 func _on_lines_list_item_selected(index: int) -> void:
 	line_edit.text = lines_list.get_item_text(index)
-	
+
 	selected_line_idx = index
 	add_update_line_btn.text = "Update Line"
 	pass # Replace with function body.
@@ -201,11 +201,11 @@ func _on_line_edit_text_submitted(_new_text: String) -> void:
 func _on_add_update_line_btn_pressed() -> void:
 	if line_edit.text.is_empty():
 		return
-	
+
 	if selected_difficulty == '':
 		EventBus.message_popup.emit("Please Choose Difficulty")
 		return
-	if selected_lesson_number == 0: 
+	if selected_lesson_number == 0:
 		EventBus.message_popup.emit("Please Choose Lesson Number")
 		return
 
@@ -217,7 +217,7 @@ func _on_add_update_line_btn_pressed() -> void:
 		lines_list.add_item(line_edit.text)
 		_scroll_to_bottom(lines_list)
 	_save_lesson()
-	
+
 	# Reset shit
 	_on_lines_list_empty_clicked()
 
@@ -231,7 +231,7 @@ func _on_remove_line_btn_pressed() -> void:
 
 	# Reset shit
 	_on_lines_list_empty_clicked()
-	
+
 	if lines_list.item_count > 0:
 		var next_selected_idx = min(lines_list.item_count - 1, idx )
 		lines_list.select(next_selected_idx)
@@ -251,7 +251,7 @@ func _on_lines_list_item_moved() -> void:
 
 func _save_lesson():
 	var texts: PackedStringArray = []
-	
+
 	var i = 0
 	while i < lines_list.item_count:
 		texts.push_back(lines_list.get_item_text(i))
@@ -316,11 +316,11 @@ func _on_cancel_lesson_msg_btn_pressed() -> void:
 func _on_lesson_ids_swap_lesson(lesson1: int, lesson2: int, direction: String) -> void:
 	LessonAccess.swap_lesson_contents(lesson1, lesson2, selected_difficulty)
 	_populate_files_list()
-	
+
 	var reselect_lesson = lesson1
 	if direction == 'up':
 			reselect_lesson = lesson2 - 1
-	
+
 	lesson_ids.select(clamp(reselect_lesson, 0, lesson_ids.item_count - 1))
 	_on_lesson_ids_item_selected(clamp(reselect_lesson, 0, lesson_ids.item_count - 1))
 	lesson_ids.grab_focus()
@@ -330,12 +330,12 @@ func _on_lesson_ids_swap_lesson(lesson1: int, lesson2: int, direction: String) -
 func _on_lesson_ids_delete_lesson_from_delete_key(idx) -> void:
 
 	var confirm_dialog := NativeConfirmationDialog.new()
-	
+
 	confirm_dialog.title = "Delete Lessson: " + lesson_ids.get_item_text(idx)
 	confirm_dialog.dialog_text = "Are you sure you want to delete Lesson File: %s" % lesson_ids.get_item_text(idx)
 	confirm_dialog.buttons_texts = NativeConfirmationDialog.BUTTONS_TEXTS_YES_NO
-	
-	confirm_dialog.confirmed.connect(func(): 
+
+	confirm_dialog.confirmed.connect(func():
 		LessonAccess.delete_lesson_file(
 			selected_lesson_number,
 			selected_difficulty,
@@ -343,8 +343,8 @@ func _on_lesson_ids_delete_lesson_from_delete_key(idx) -> void:
 		_populate_files_list()
 		confirm_dialog.queue_free()
 	)
-	confirm_dialog.cancelled.connect(func(): confirm_dialog.queue_free())
-	
+	confirm_dialog.canceled.connect(func(): confirm_dialog.queue_free())
+
 #	confirm_dialog.cancelled.connect(func(): confirm_dialog.queue_free())
 	add_child(confirm_dialog)
 	confirm_dialog.show()
@@ -358,12 +358,12 @@ func _on_hide_keyboard_check_toggled(_button_pressed: bool) -> void:
 func _toggle_disable_line_buttons(disabled: bool) -> void:
 	# Do not randomize extra exercises (For Networking for now?)
 	if selected_difficulty == 'extra':
-		randomize_check.disabled = true 
+		randomize_check.disabled = true
 		randomize_check.tooltip_text = "Disabled for extra lessons."
 	else:
 		randomize_check.disabled = disabled
 		randomize_check.tooltip_text = ""
-	
+
 	hide_keyboard_check.disabled = disabled
 	add_update_line_btn.disabled = disabled
 	reset_btn.disabled = disabled
@@ -377,7 +377,7 @@ func _scroll_to_bottom(list: ItemList):
 	scrollbar.allow_greater = true
 	scrollbar.value = scrollbar.max_value
 	scrollbar.allow_greater = false
-	
+
 
 
 func _on_test_exercise_btn_pressed() -> void:
