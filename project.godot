@@ -13,7 +13,7 @@ config_version=5
 config/name="Ultimate Myanmar Typing Wizard"
 run/main_scene="res://src/main.tscn"
 config/project_settings_override="user://override.cfg"
-config/features=PackedStringArray("4.2", "Mobile")
+config/features=PackedStringArray("4.3", "Mobile")
 run/max_fps=60
 run/low_processor_mode=true
 
@@ -32,6 +32,14 @@ DisplaySettings="*res://src/Autoload/DisplaySettings.gd"
 GeneralSettings="*res://src/Autoload/GeneralSettings.gd"
 Utils="*res://src/Autoload/Utils.gd"
 
+[debug]
+
+gdscript/warnings/untyped_declaration=2
+gdscript/warnings/unsafe_property_access=1
+gdscript/warnings/unsafe_method_access=1
+gdscript/warnings/unsafe_cast=1
+gdscript/warnings/unsafe_call_argument=1
+
 [display]
 
 window/size/viewport_width=1366
@@ -44,7 +52,7 @@ script/search_in_file_extensions=PackedStringArray("gd", "gdshader", "tscn")
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/native_dialogs/plugin.cfg")
+enabled=PackedStringArray("res://addons/gdLinter/plugin.cfg", "res://addons/native_dialogs/plugin.cfg")
 
 [layer_names]
 

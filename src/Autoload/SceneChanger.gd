@@ -1,25 +1,25 @@
 extends Node
 
-var exercise_editor_scene = "res://src/ExerciseEditor/exercise_editor.tscn"
-var main_scene = "res://src/main.tscn"
-var test_game_scene = "res://src/MiniGames/TestGame/test_game.tscn"
-var playground_scene = "res://src/Playground/Playground.tscn"
-var take_lesson_scene = "res://src/Playground/take_lesson_scene.tscn"
-var take_exercise_scene = "res://src/Playground/exercise_scene.tscn"
-var take_custom_exercises_scene = "res://src/Playground/custom_exercises_playground.tscn"
-var network_competition_scene = "res://src/NetworkCompetition/network_competition.tscn"
-var current_scene = null
+var exercise_editor_scene: = "res://src/ExerciseEditor/exercise_editor.tscn"
+var main_scene := "res://src/main.tscn"
+var test_game_scene := "res://src/MiniGames/TestGame/test_game.tscn"
+var playground_scene := "res://src/Playground/Playground.tscn"
+var take_lesson_scene := "res://src/Playground/take_lesson_scene.tscn"
+var take_exercise_scene := "res://src/Playground/exercise_scene.tscn"
+var take_custom_exercises_scene := "res://src/Playground/custom_exercises_playground.tscn"
+var network_competition_scene := "res://src/NetworkCompetition/network_competition.tscn"
+var current_scene: Node = null
 
-var custom_exercises = []
+var custom_exercises : PackedStringArray = []
 
 func _ready() -> void:
-	var root = get_tree().root
+	var root := get_tree().root
 
 	# the last child of root is always the loaded scene
 	current_scene = root.get_child(root.get_child_count() - 1)
 
 
-func goto_scene(path: String):
+func goto_scene(path: String) -> void:
 	# This function will usually be called from a signal callback
 	# Deleting the current scene at this point is
 	# a bad idea, because it may still be executing code.
@@ -31,12 +31,12 @@ func goto_scene(path: String):
 	call_deferred("_deferred_goto_scene", path)
 
 
-func _deferred_goto_scene(path: String):
+func _deferred_goto_scene(path: String) -> void:
 	# It is now safe to remove the current scene
 	current_scene.free()
 
 	# Load the new scene.
-	var s = ResourceLoader.load(path)
+	var s := ResourceLoader.load(path)
 
 	# Instance the new scene.
 	current_scene = s.instantiate()
@@ -48,46 +48,45 @@ func _deferred_goto_scene(path: String):
 	get_tree().current_scene = current_scene
 	_animate_appear()
 
-	pass
 
 
-func change_to_playground_scene():
+func change_to_playground_scene() -> void:
 	goto_scene(playground_scene)
 
 
-func change_to_take_lesson_scene():
+func change_to_take_lesson_scene() -> void:
 	goto_scene(take_lesson_scene)
 
-func change_to_take_custom_exercises_scene(exercises: PackedStringArray):
+func change_to_take_custom_exercises_scene(exercises: PackedStringArray) -> void:
 	custom_exercises = exercises;
 	goto_scene(take_custom_exercises_scene)
 
-func change_to_take_exercise_scene():
+func change_to_take_exercise_scene() -> void:
 	goto_scene(take_exercise_scene)
 
-func change_to_exercise_editor_scene():
+func change_to_exercise_editor_scene() -> void:
 	get_tree().paused = false
 	goto_scene(exercise_editor_scene)
 
 
-func change_to_main_scene():
+func change_to_main_scene() -> void:
 	goto_scene(main_scene)
 
 
-func change_to_test_game_scene():
+func change_to_test_game_scene() -> void:
 	goto_scene(test_game_scene)
 
 
-func change_to_network_competition_scene():
+func change_to_network_competition_scene() -> void:
 	goto_scene(network_competition_scene)
 
 
-func _animate_appear():
+func _animate_appear() -> void:
 	# Animate Panel first using "scene_change_bg" group
 	# then Elements "scene_change_element"
 
 #	var scene_change_bg_modulate_colors = [] # save original color
-	var scene_change_bg = get_tree().get_nodes_in_group("scene_change_bg")
+	var scene_change_bg := get_tree().get_nodes_in_group("scene_change_bg")
 	for n in scene_change_bg:
 #		scene_change_bg_modulate_colors.push_back(n.modulate)
 #		scene_change_bg.push_back(n)
@@ -95,13 +94,13 @@ func _animate_appear():
 #		n.scale = Vector2(0, 0)
 
 #	var scene_change_elements_modulate_colors = [] # save original color
-	var scene_change_elements = get_tree().get_nodes_in_group("scene_change_element")
+	var scene_change_elements := get_tree().get_nodes_in_group("scene_change_element")
 	for n in scene_change_elements:
 #		scene_change_elements_modulate_colors.push_back(n.modulate)
 #		scene_change_elements.push_back(n)
 		n.modulate.a = 0
 
-	var bg_tween = get_tree().create_tween()
+	var bg_tween := get_tree().create_tween()
 	bg_tween.set_parallel(true)
 
 	for n in scene_change_bg:
@@ -119,7 +118,7 @@ func _animate_appear():
 	await bg_tween.finished
 
 
-func _animate_disappear():
+func _animate_disappear() -> void:
 	# Animate Panel first using "scene_change_panel" group
 	# then Elements "scene_change_element"
 	pass

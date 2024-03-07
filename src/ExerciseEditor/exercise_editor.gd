@@ -105,7 +105,7 @@ func _populate_files_list() -> void:
 	add_new_lessons_file_btn.disabled = false
 
 	_toggle_disable_line_buttons(true) # disable buttons
-	var files = LessonAccess.get_lesson_files(selected_difficulty)
+	var files := LessonAccess.get_lesson_files(selected_difficulty)
 	files.sort()
 	for f in files:
 		lesson_ids.add_item(f.get_basename().get_file())
@@ -130,10 +130,10 @@ func _on_add_lessons_file_btn_pressed() -> void:
 	var files: PackedStringArray = LessonAccess.get_lesson_files(selected_difficulty)
 	files.sort()
 	if len(files) > 0:
-		var last_file = files[files.size() - 1]
+		var last_file := files[files.size() - 1]
 		lesson_number = int(last_file.get_basename().get_file()) + 1 # next number
 
-	var success = LessonAccess.create_new_lesson_file(lesson_number, selected_difficulty)
+	var success := LessonAccess.create_new_lesson_file(lesson_number, selected_difficulty)
 	if success:
 		_populate_files_list()
 		lesson_ids.select(files.size())
@@ -145,10 +145,10 @@ func _on_lesson_ids_item_selected(index: int) -> void:
 	_toggle_disable_line_buttons(false) # enable
 	selected_lesson_number = int(lesson_ids.get_item_text(index))
 
-	var lesson_data: Dictionary = LessonAccess.get_lesson_data(selected_lesson_number, selected_difficulty)
+	var lesson_data := LessonAccess.get_lesson_data(selected_lesson_number, selected_difficulty)
 
 	# populate lines_list
-	var lines = lesson_data['texts']
+	var lines := lesson_data.texts
 	lines_list.clear()
 	for l in lines:
 		lines_list.add_item(l)
@@ -233,7 +233,7 @@ func _on_remove_line_btn_pressed() -> void:
 	_on_lines_list_empty_clicked()
 
 	if lines_list.item_count > 0:
-		var next_selected_idx = min(lines_list.item_count - 1, idx )
+		var next_selected_idx : int = min(lines_list.item_count - 1, idx )
 		lines_list.select(next_selected_idx)
 	_save_lesson()
 
@@ -249,28 +249,29 @@ func _on_lines_list_item_moved() -> void:
 	_save_lesson()
 	pass # Replace with function body.
 
-func _save_lesson():
+func _save_lesson() -> void:
 	var texts: PackedStringArray = []
 
-	var i = 0
+	var i := 0
 	while i < lines_list.item_count:
 		texts.push_back(lines_list.get_item_text(i))
 		i += 1
+	var newLesson := LessonData.new(
+		texts,
+		repeats_box.value,
+		allow_mistakes_box.value,
+		randomize_check.button_pressed,
+		hide_keyboard_check.button_pressed,
+		add_lesson_message_text_edit.text,
+	)
 	LessonAccess.create_update_new_exercise(
 		selected_lesson_number,
 		selected_difficulty,
-		{
-			"texts": texts,
-			"repeats": repeats_box.value,
-			"allow_mistakes": allow_mistakes_box.value,
-			"randomize": randomize_check.button_pressed,
-			"hide_keyboard": hide_keyboard_check.button_pressed,
-#			"message": add_lesson_message_text_edit.text,
-		}
+		newLesson
 	)
 
 
-func _on_lines_list_delete_item_from_delete_key(_idx) -> void:
+func _on_lines_list_delete_item_from_delete_key(_idx: int) -> void:
 	_on_remove_line_btn_pressed()
 
 
@@ -287,7 +288,7 @@ func _on_randomize_check_toggled(_button_pressed: bool) -> void:
 
 
 func _on_add_messsage_btn_pressed() -> void:
-	var tween = get_tree().create_tween()
+	var tween := get_tree().create_tween()
 	add_lesson_message.modulate.a = 0
 	add_lesson_message.visible = true
 	tween.tween_property(add_lesson_message, "modulate", Color.WHITE, 0.2)
@@ -295,7 +296,7 @@ func _on_add_messsage_btn_pressed() -> void:
 
 
 func _on_save_lesson_msg_btn_pressed() -> void:
-	var tween = get_tree().create_tween()
+	var tween := get_tree().create_tween()
 	tween.tween_property(add_lesson_message, "modulate", Color(1, 1, 1, 0), 0.2)
 	await tween.finished
 	add_lesson_message.visible = false
@@ -307,7 +308,7 @@ func _on_save_lesson_msg_btn_pressed() -> void:
 	)
 
 func _on_cancel_lesson_msg_btn_pressed() -> void:
-	var tween = get_tree().create_tween()
+	var tween := get_tree().create_tween()
 	tween.tween_property(add_lesson_message, "modulate", Color(1, 1, 1, 0), 0.2)
 	await tween.finished
 	add_lesson_message.visible = false
@@ -317,7 +318,7 @@ func _on_lesson_ids_swap_lesson(lesson1: int, lesson2: int, direction: String) -
 	LessonAccess.swap_lesson_contents(lesson1, lesson2, selected_difficulty)
 	_populate_files_list()
 
-	var reselect_lesson = lesson1
+	var reselect_lesson := lesson1
 	if direction == 'up':
 			reselect_lesson = lesson2 - 1
 
@@ -327,7 +328,7 @@ func _on_lesson_ids_swap_lesson(lesson1: int, lesson2: int, direction: String) -
 	pass # Replace with function body.
 
 
-func _on_lesson_ids_delete_lesson_from_delete_key(idx) -> void:
+func _on_lesson_ids_delete_lesson_from_delete_key(idx: int) -> void:
 
 	var confirm_dialog := NativeConfirmationDialog.new()
 
@@ -335,7 +336,7 @@ func _on_lesson_ids_delete_lesson_from_delete_key(idx) -> void:
 	confirm_dialog.dialog_text = "Are you sure you want to delete Lesson File: %s" % lesson_ids.get_item_text(idx)
 	confirm_dialog.buttons_texts = NativeConfirmationDialog.BUTTONS_TEXTS_YES_NO
 
-	confirm_dialog.confirmed.connect(func():
+	confirm_dialog.confirmed.connect(func() -> void:
 		LessonAccess.delete_lesson_file(
 			selected_lesson_number,
 			selected_difficulty,
@@ -343,7 +344,10 @@ func _on_lesson_ids_delete_lesson_from_delete_key(idx) -> void:
 		_populate_files_list()
 		confirm_dialog.queue_free()
 	)
-	confirm_dialog.canceled.connect(func(): confirm_dialog.queue_free())
+	confirm_dialog.canceled.connect(
+		func() -> void:
+			confirm_dialog.queue_free()
+	)
 
 #	confirm_dialog.cancelled.connect(func(): confirm_dialog.queue_free())
 	add_child(confirm_dialog)
@@ -372,7 +376,7 @@ func _toggle_disable_line_buttons(disabled: bool) -> void:
 	test_exercise_btn.disabled = disabled
 	pass
 
-func _scroll_to_bottom(list: ItemList):
+func _scroll_to_bottom(list: ItemList) -> void:
 	var scrollbar: VScrollBar = list.get_v_scroll_bar()
 	scrollbar.allow_greater = true
 	scrollbar.value = scrollbar.max_value
@@ -381,5 +385,5 @@ func _scroll_to_bottom(list: ItemList):
 
 
 func _on_test_exercise_btn_pressed() -> void:
-	var lesson_data = LessonAccess.get_lesson_data(selected_lesson_number, selected_difficulty)
+	var lesson_data := LessonAccess.get_lesson_data(selected_lesson_number, selected_difficulty)
 	SceneChanger.change_to_take_custom_exercises_scene(lesson_data['texts'])

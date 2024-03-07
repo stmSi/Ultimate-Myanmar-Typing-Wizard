@@ -75,13 +75,13 @@ script/source = "extends HBoxContainer
 @onready var below_50_rect: TextureRect = %Below50Color
 @onready var not_available_color: TextureRect = %NotAvailableColor
 
-func set_color_hints(perfect: Color, ninty: Color, fifty: Color, below_fifty: Color):
+func set_color_hints(perfect: Color, ninty: Color, fifty: Color, below_fifty: Color) -> void:
 	visible = true
 	perfect_rect.modulate = perfect
 	ninty_rect.modulate = ninty
 	fifty_rect.modulate = fifty
 	below_50_rect.modulate = below_fifty
-	
+
 "
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_7mmg5"]

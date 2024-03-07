@@ -1,8 +1,8 @@
 extends Button
 
-var origin_text
+var origin_text: String
 
-var confirm = false
+var confirm := false
 
 
 func _ready() -> void:

@@ -2,7 +2,7 @@
 extends Control
 class_name Keyboard
 
-var key_node_mapping: Dictionary = {}
+var key_node_mapping := KeyNodeMapping.new()
 var current_char: String = ""
 
 var pending_node: KeyButton = null
@@ -15,34 +15,34 @@ var pending_shift_node: KeyButton = null
 @onready var space: KeyButton = %space
 @onready var color_hint: HBoxContainer = %ColorHint
 
-var ignored_keycodes = ["Backspace", "Delete", "Semicolon", "Space", "QuoteLeft"]
+var ignored_keycodes : Array[String] = ["Backspace", "Delete", "Semicolon", "Space", "QuoteLeft"]
 
 var written_string := ''
 var exercise := ''
 
 func _ready() -> void:
-	key_node_mapping[" "] = space
+	key_node_mapping.add_key_node(" ", space)
 	EventBus.current_char_changed.connect(self._on_current_char_changed)
 	EventBus.lesson_id_loaded.connect(self._on_new_lesson_id_loaded)
 
 	EventBus.finished_all_difficulty_lessons.connect(self.reset_all_keys)
-	
+
 	EventBus.exercise_loaded.connect(
-		func(ex: String, ex_idx: int, _exercises: PackedStringArray):
+		func(ex: String, ex_idx: int, _exercises: PackedStringArray) -> void:
 			self.exercise = ex
 	)
-	
+
 	EventBus.written_string_changed.connect(
-		func(text: String): 
+		func(text: String) -> void:
 			written_string = text
 			if not self.exercise.begins_with(written_string):
 				back_space.run_pending();
 			else:
 				back_space.reset_animation();
 	)
-	
-func _on_new_key_node_added(key_name, node) -> void:
-	key_node_mapping[key_name] = node
+
+func _on_new_key_node_added(key_name: String, node: KeyButton) -> void:
+	key_node_mapping.add_key_node(key_name, node)
 
 
 func _input(event: InputEvent) -> void:
@@ -50,10 +50,10 @@ func _input(event: InputEvent) -> void:
 		return
 
 	if pending_node and event is InputEventKey and event.is_pressed():
-		var keycode_str = OS.get_keycode_string(event.keycode)
+		var keycode_str := OS.get_keycode_string(event.keycode)
 
 		## eng -> mm
-		var converted_char = EngToMmConverter.convert_char(keycode_str, event.shift_pressed)[1]  ### [Success, Char]
+		var converted_char := EngToMmConverter.convert_char(keycode_str, event.shift_pressed).char
 #		print('converted: ' + converted_char)
 
 		if len(converted_char) > 1:  # Shift/Alt/Ctrl
@@ -84,10 +84,10 @@ func _input(event: InputEvent) -> void:
 			reset_all_keys()
 
 
-func _on_current_char_changed(c: String):
+func _on_current_char_changed(c: String) -> void:
 	current_char = c
 	pending_shift_node = null
-	var shift = TextProcessor.need_shift(current_char)
+	var shift := TextProcessor.need_shift(current_char)
 	if shift == "l_shift":
 		_run_pending_l_shift()
 	elif shift == "r_shift":
@@ -96,12 +96,12 @@ func _on_current_char_changed(c: String):
 	_run_pending(len(shift) != 0)
 
 
-func _run_pending(use_shift: bool):
-	if key_node_mapping.has(current_char):
-		pending_node = key_node_mapping[current_char]
+func _run_pending(use_shift: bool) -> void:
+	if key_node_mapping.has_key(current_char):
+		pending_node = key_node_mapping.get_node(current_char)
 
 		# calculate Center of key_button
-		var pos = Vector2(
+		var pos := Vector2(
 			pending_node.global_position.x + (pending_node.size.x / 2),
 			pending_node.global_position.y
 		)
@@ -111,29 +111,29 @@ func _run_pending(use_shift: bool):
 	pass
 
 
-func _run_incorrect(c: String):
-	if key_node_mapping.has(c):
-		var incorrect_node = key_node_mapping[c]
+func _run_incorrect(c: String) -> void:
+	if key_node_mapping.has_key(c):
+		var incorrect_node := key_node_mapping.get_node(c)
 		incorrect_node.incorrect_animation()
 
-		var shift = TextProcessor.need_shift(c)
+		var shift := TextProcessor.need_shift(c)
 		if shift == "l_shift":
 			l_shift.incorrect_animation()
 		elif shift == "r_shift":
 			r_shift.incorrect_animation()
 
 
-func _run_pending_l_shift():
+func _run_pending_l_shift() -> void:
 	pending_shift_node = l_shift
 	l_shift.run_pending()
 
 
-func _run_pending_r_shift():
+func _run_pending_r_shift() -> void:
 	pending_shift_node = r_shift
 	r_shift.run_pending()
 
 
-func _reset_shifts():
+func _reset_shifts() -> void:
 	if l_shift:
 		l_shift.reset_animation()
 	if r_shift:
@@ -147,7 +147,6 @@ func _on_new_lesson_id_loaded(_lesson_number: int, _idx: int, _lessons: Dictiona
 	reset_all_keys()
 
 
-func reset_all_keys():
-	if pending_node:
-		pending_node.reset_animation()
+func reset_all_keys() -> void:
+	key_node_mapping.reset_all_keys()
 	_reset_shifts()

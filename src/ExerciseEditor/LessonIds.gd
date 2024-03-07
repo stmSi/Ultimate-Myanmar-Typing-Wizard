@@ -22,16 +22,16 @@ func _input(event: InputEvent) -> void:
 			get_tree().root.get_viewport().set_input_as_handled()
 
 
-func _move_up_selected_item():
-	var lesson_id = int(get_item_text(get_selected_items()[0]))
+func _move_up_selected_item() -> void:
+	var lesson_id := int(get_item_text(get_selected_items()[0]))
 	if lesson_id == 1:  # 1 => at top.... ignore
 		return
 
 	self.swap_lesson.emit(lesson_id, lesson_id - 1, "up")
 
 
-func _move_down_selected_item():
-	var lesson_id = int(get_item_text(get_selected_items()[0]))
+func _move_down_selected_item() -> void:
+	var lesson_id := int(get_item_text(get_selected_items()[0]))
 	if lesson_id == item_count:  # last_item => at bottom.... ignore
 		return
 

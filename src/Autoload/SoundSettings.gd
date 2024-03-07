@@ -4,7 +4,7 @@ signal mute_correct_beep(muted: bool)
 signal mute_incorrect_beep(muted: bool)
 signal volume
 
-var settings_path = "user://sound_settings.cfg"
+var settings_path := "user://sound_settings.cfg"
 
 var config: ConfigFile = null
 
@@ -13,13 +13,13 @@ func _ready() -> void:
 	Utils.check_and_create_user_dir()
 	# Settings Config Setup
 	config = ConfigFile.new()
-	var err = config.load(settings_path)
+	var err := config.load(settings_path)
 	if err != OK:
 		config.save(settings_path)
 
 
 func get_correct_beep_muted() -> bool:
-	var err = config.load(settings_path)
+	var err := config.load(settings_path)
 	if err != OK:
 		config.save(settings_path)
 
@@ -27,7 +27,7 @@ func get_correct_beep_muted() -> bool:
 
 
 func set_correct_beep_muted(muted: bool) -> void:
-	var err = config.load(settings_path)
+	var err := config.load(settings_path)
 	if err != OK:
 		config = ConfigFile.new()
 
@@ -37,7 +37,7 @@ func set_correct_beep_muted(muted: bool) -> void:
 
 
 func get_incorrect_beep_muted() -> bool:
-	var err = config.load(settings_path)
+	var err := config.load(settings_path)
 	if err != OK:
 		config.save(settings_path)
 
@@ -45,7 +45,7 @@ func get_incorrect_beep_muted() -> bool:
 
 
 func set_incorrect_beep_muted(muted: bool) -> void:
-	var err = config.load(settings_path)
+	var err := config.load(settings_path)
 	if err != OK:
 		config = ConfigFile.new()
 
