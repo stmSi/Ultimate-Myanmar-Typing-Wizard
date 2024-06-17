@@ -336,4 +336,3 @@ func reset_statistics() -> void:
 	if err != OK:
 		print("Error in reset_progress: resetting lesson progress fails.")
 		return
-

@@ -1,4 +1,5 @@
 extends Label
+class_name AccuracyLabel
 
 var num_corrects := 0.0
 var num_wrongs := 0.0

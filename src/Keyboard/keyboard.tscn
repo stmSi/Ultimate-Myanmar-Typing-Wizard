@@ -119,7 +119,6 @@ layout_mode = 2
 custom_minimum_size = Vector2(160, 80)
 layout_mode = 2
 size_flags_horizontal = 3
-char = "BackSpace"
 
 [node name="Panel" parent="VBoxContainer/1234567890/BackSpace" index="0"]
 custom_minimum_size = Vector2(160, 80)
@@ -141,7 +140,6 @@ replacing_node_name = "qwerty"
 [node name="tab" parent="VBoxContainer/qwerty" instance=ExtResource("1_ik4w2")]
 custom_minimum_size = Vector2(120, 80)
 layout_mode = 2
-char = "Tab"
 
 [node name="Panel" parent="VBoxContainer/qwerty/tab" index="0"]
 custom_minimum_size = Vector2(120, 80)
@@ -164,7 +162,6 @@ replacing_node_name = "asdfgh"
 [node name="CapsLock" parent="VBoxContainer/asdfgh" instance=ExtResource("1_ik4w2")]
 custom_minimum_size = Vector2(160, 80)
 layout_mode = 2
-char = "Caps Lock"
 
 [node name="Panel" parent="VBoxContainer/asdfgh/CapsLock" index="0"]
 custom_minimum_size = Vector2(160, 80)
@@ -180,7 +177,6 @@ layout_mode = 2
 [node name="Enter" parent="VBoxContainer/asdfgh" instance=ExtResource("1_ik4w2")]
 custom_minimum_size = Vector2(160, 80)
 layout_mode = 2
-char = "Enter"
 
 [node name="Panel" parent="VBoxContainer/asdfgh/Enter" index="0"]
 custom_minimum_size = Vector2(160, 80)
@@ -202,7 +198,6 @@ replacing_node_name = "zxcvb"
 [node name="LShift" parent="VBoxContainer/zxcvb" instance=ExtResource("1_ik4w2")]
 custom_minimum_size = Vector2(200, 80)
 layout_mode = 2
-char = "Shift"
 
 [node name="Panel" parent="VBoxContainer/zxcvb/LShift" index="0"]
 custom_minimum_size = Vector2(200, 80)
@@ -218,7 +213,6 @@ layout_mode = 2
 [node name="RShift" parent="VBoxContainer/zxcvb" instance=ExtResource("1_ik4w2")]
 custom_minimum_size = Vector2(200, 80)
 layout_mode = 2
-char = "Shift"
 
 [node name="Panel" parent="VBoxContainer/zxcvb/RShift" index="0"]
 custom_minimum_size = Vector2(204, 80)
@@ -234,7 +228,6 @@ layout_mode = 2
 [node name="ctrl" parent="VBoxContainer/ctrl_win_alt_space_alt_win_menu_ctrl" instance=ExtResource("1_ik4w2")]
 custom_minimum_size = Vector2(120, 80)
 layout_mode = 2
-char = "Ctrl"
 
 [node name="Panel" parent="VBoxContainer/ctrl_win_alt_space_alt_win_menu_ctrl/ctrl" index="0"]
 custom_minimum_size = Vector2(120, 80)
@@ -247,7 +240,6 @@ offset_right = -2.0
 [node name="win" parent="VBoxContainer/ctrl_win_alt_space_alt_win_menu_ctrl" instance=ExtResource("1_ik4w2")]
 custom_minimum_size = Vector2(120, 80)
 layout_mode = 2
-char = "Win"
 
 [node name="Panel" parent="VBoxContainer/ctrl_win_alt_space_alt_win_menu_ctrl/win" index="0"]
 custom_minimum_size = Vector2(120, 80)
@@ -278,7 +270,6 @@ texture = ExtResource("4_fck4r")
 [node name="alt" parent="VBoxContainer/ctrl_win_alt_space_alt_win_menu_ctrl" instance=ExtResource("1_ik4w2")]
 custom_minimum_size = Vector2(120, 80)
 layout_mode = 2
-char = "Alt"
 
 [node name="Panel" parent="VBoxContainer/ctrl_win_alt_space_alt_win_menu_ctrl/alt" index="0"]
 custom_minimum_size = Vector2(120, 80)
@@ -293,7 +284,6 @@ unique_name_in_owner = true
 custom_minimum_size = Vector2(440, 80)
 layout_mode = 2
 shift_char = "Space"
-char = " "
 
 [node name="Panel" parent="VBoxContainer/ctrl_win_alt_space_alt_win_menu_ctrl/space" index="0"]
 custom_minimum_size = Vector2(440, 80)
@@ -336,7 +326,6 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_6fusu")
 [node name="alt2" parent="VBoxContainer/ctrl_win_alt_space_alt_win_menu_ctrl" instance=ExtResource("1_ik4w2")]
 custom_minimum_size = Vector2(120, 80)
 layout_mode = 2
-char = "Alt"
 
 [node name="Panel" parent="VBoxContainer/ctrl_win_alt_space_alt_win_menu_ctrl/alt2" index="0"]
 custom_minimum_size = Vector2(120, 80)
@@ -349,7 +338,6 @@ offset_right = -4.0
 [node name="win2" parent="VBoxContainer/ctrl_win_alt_space_alt_win_menu_ctrl" instance=ExtResource("1_ik4w2")]
 custom_minimum_size = Vector2(120, 80)
 layout_mode = 2
-char = "Win"
 
 [node name="Panel" parent="VBoxContainer/ctrl_win_alt_space_alt_win_menu_ctrl/win2" index="0"]
 custom_minimum_size = Vector2(120, 80)
@@ -380,7 +368,6 @@ texture = ExtResource("4_fck4r")
 [node name="ctrl2" parent="VBoxContainer/ctrl_win_alt_space_alt_win_menu_ctrl" instance=ExtResource("1_ik4w2")]
 custom_minimum_size = Vector2(120, 80)
 layout_mode = 2
-char = "Ctrl"
 
 [node name="Panel" parent="VBoxContainer/ctrl_win_alt_space_alt_win_menu_ctrl/ctrl2" index="0"]
 custom_minimum_size = Vector2(185, 80)

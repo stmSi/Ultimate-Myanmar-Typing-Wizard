@@ -7,7 +7,6 @@ func _ready() -> void:
 
 func check_and_create_user_dir() -> void:
 	var dir := DirAccess.open(OS.get_user_data_dir())
-	print("Checking User Dir: ", OS.get_user_data_dir())
 	if dir == null:
 		print("User Dir Not Found.")
 		print("Making: ", OS.get_user_data_dir())
