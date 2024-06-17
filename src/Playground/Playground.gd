@@ -6,9 +6,9 @@ class_name Playground
 
 @onready var line_edit: LineEdit = %LineEdit
 @onready var status: Label = %Status
-@onready var accuracy: Label = %Accuracy
+@onready var accuracy: AccuracyLabel = %Accuracy
 @onready var keyboard: Keyboard = %Keyboard
-@onready var char_per_min: Label = %CharPerMin
+@onready var char_per_min: CPMLabel = %CharPerMin
 @onready var next_practice_btn: Button = $MarginContainer/VBoxContainer/HBoxContainer/NextPracticeBtn
 @onready var report_statistics_scene := preload("res://src/ReportStatistics/report_statistics.tscn")
 
@@ -16,7 +16,7 @@ var current_exercise_text := ""
 
 var _eng_to_mm_converted := false
 
-var lesson_ids := []
+var lesson_ids : Array[String] = []
 var lesson_idx := 0
 
 var lesson_data: LessonData = LessonData.new()
@@ -48,10 +48,10 @@ func _ready() -> void:
 			prevent_typing_pass_error = prevent
 	)
 
-func start_custom_exercises(exercises: PackedStringArray = []) -> void:
+func start_custom_exercises(_custom_exercises: PackedStringArray = []) -> void:
 	line_edit.grab_focus()
 	lesson_ids = []
-	self.exercises = exercises
+	self.exercises = _custom_exercises
 	lesson_idx = 0
 	exercise_idx = 0
 	difficulty = "custom"
@@ -108,7 +108,6 @@ func start_lesson_progress() -> void:
 			EventBus.message_popup.emit(
 				"No More lesson available.", SceneChanger.change_to_main_scene  # Call when OK button pressed
 			)
-#			SceneChanger.change_to_main_scene()
 			return
 		lesson_idx = next_lesson[0] - 1  # index are off by one
 		difficulty = next_lesson[1]
@@ -148,7 +147,7 @@ func _load_lesson() -> void:
 		exercises = Utils.randomize_packed_array(exercises)
 
 	if lesson_data["message"]:
-		EventBus.message_popup.emit(lesson_data["message"])
+		EventBus.message_popup.emit(lesson_data["message"], func () -> void: pass)
 
 	keyboard.visible = not lesson_data["hide_keyboard"]
 	if not keyboard.visible:
@@ -158,13 +157,8 @@ func _load_lesson() -> void:
 		# keep loading lessons one by one until there is exercise
 		_load_lesson()
 	else:
+		print(typeof(lesson_data))
 		EventBus.lesson_id_loaded.emit(int(lesson_ids[lesson_idx - 1]), lesson_idx - 1, lesson_data)
-
-
-#		EventBus.message_popup.emit(
-#			"Difficulty: " + difficulty.capitalize() + "\r\n" +\
-#			"Lesson ID: " + lesson_ids[lesson_idx - 1] + " is loaded."
-#		)
 
 
 func _load_exercise() -> void:
@@ -196,7 +190,7 @@ func _finished_all_difficulty_lessons() -> void:
 
 func _report_statistics() -> void:
 #	$RestartDialog.show()
-	var statistic_scene := report_statistics_scene.instantiate()
+	var statistic_scene : ReportStatisticsUI = report_statistics_scene.instantiate()
 	add_child(statistic_scene)
 	statistic_scene.close.connect(line_edit.grab_focus)
 

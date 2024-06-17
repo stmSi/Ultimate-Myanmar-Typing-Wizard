@@ -1,6 +1,6 @@
 extends Node2D
 
-var text
+var text: String
 @onready var enemy_scene := preload("res://src/MiniGames/TestGame/enemy.tscn")
 
 @onready var game_follow_up_text_popup: Control = $GameFollowUpTextPopup
@@ -8,9 +8,9 @@ var text
 
 @onready var spawn_point: Node2D = $SpawnPoint
 
-var sample_texts = PackedStringArray(["စားလာသလား", "အိပ်လာသလား", "ယူလာသလား"])
+var sample_texts := PackedStringArray(["စားလာသလား", "အိပ်လာသလား", "ယူလာသလား"])
 
-var written_text = ""
+var written_text := ""
 var focused_enemy: Node2D = null
 
 
@@ -21,7 +21,7 @@ func _ready() -> void:
 	_spawn_enemy()
 
 
-func _on_line_finished():
+func _on_line_finished() -> void:
 	if self.focused_enemy:
 		self.focused_enemy.queue_free()
 		self.focused_enemy = null
@@ -33,12 +33,12 @@ func _on_line_finished():
 		EventBus.message_popup.emit("You Won!")
 
 
-func _spawn_enemy():
+func _spawn_enemy() -> void:
 	self.focused_enemy = enemy_scene.instantiate()
 	add_child(self.focused_enemy)
 	self.focused_enemy.global_position = spawn_point.global_position
 
-	var idx = randi() % sample_texts.size()
+	var idx := randi() % sample_texts.size()
 	self.focused_enemy.line = sample_texts[idx]
 
 	EventBus.game_focus_enemy.emit(self.focused_enemy)
@@ -47,5 +47,5 @@ func _spawn_enemy():
 	sample_texts.remove_at(idx)
 
 
-func _on_game_enemy_hit_npc(npc: Node2D):
+func _on_game_enemy_hit_npc(npc: Node2D) -> void:
 	EventBus.message_popup.emit("He Dead.... gone forever... we lost.")

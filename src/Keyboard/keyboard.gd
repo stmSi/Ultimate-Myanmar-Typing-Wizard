@@ -142,7 +142,7 @@ func _reset_shifts() -> void:
 	pass
 
 
-func _on_new_lesson_id_loaded(_lesson_number: int, _idx: int, _lessons: Dictionary) -> void:
+func _on_new_lesson_id_loaded(_lesson_number: int, _idx: int, _lessons: LessonData) -> void:
 	# Reset all
 	reset_all_keys()
 

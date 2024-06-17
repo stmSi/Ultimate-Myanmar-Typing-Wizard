@@ -1,4 +1,5 @@
 extends PanelContainer
+class_name ReportStatisticsUI
 @onready var continue_btn: Button = %ContinueBtn
 
 signal close

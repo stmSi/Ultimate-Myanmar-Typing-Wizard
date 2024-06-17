@@ -10,6 +10,7 @@
 [ext_resource type="Script" path="res://src/Playground/AccuracyLabel.gd" id="6_240wa"]
 [ext_resource type="PackedScene" uid="uid://bulscf8jamb2b" path="res://src/FollowupRichText/follow_up_text_popup.tscn" id="6_vw22j"]
 [ext_resource type="AudioStream" uid="uid://cdqui2diupr13" path="res://Assets/Sounds/error-sound.mp3" id="8_ylc3d"]
+[ext_resource type="Script" path="res://src/Playground/CPMLabel.gd" id="9_3l5j0"]
 [ext_resource type="AudioStream" uid="uid://bjeu8c6senasm" path="res://Assets/Sounds/correct-sound.mp3" id="9_otsg4"]
 [ext_resource type="Texture2D" uid="uid://6lre7o1jj77f" path="res://Assets/Icons/Settings.png" id="10_btoh3"]
 [ext_resource type="PackedScene" uid="uid://bdwpvsp2xyw50" path="res://src/SettingsMenu/SettingsMenu.tscn" id="13_cmjcr"]
@@ -39,65 +40,12 @@ func _exercise_line_finished() -> void:
 func _on_message_popup_closed() -> void:
 	grab_focus()
 
-func _on_new_lesson_id_loaded(_lesson_id: int, _idx: int, _lessons: Dictionary) -> void:
+func _on_new_lesson_id_loaded(_lesson_id: int, _idx: int, _lessons: LessonData) -> void:
 	clear()
 "
 
 [sub_resource type="LabelSettings" id="LabelSettings_fide1"]
 shadow_size = 2
-
-[sub_resource type="GDScript" id="GDScript_3afo8"]
-script/source = "extends Label
-
-var max_chars_to_calculate := 20
-var times_taken : Array[float] = []
-var last_time_char_typed := 0.0
-var cpm := \"0\"
-
-
-func _ready() -> void:
-	EventBus.wrong_char_typed.connect(
-		func(_wrong_c: String, _correct_c: String) -> void:
-			self._calculate_time_taken()
-	)
-
-	EventBus.correct_char_typed.connect(
-		func(_correct_c: String) -> void:
-			self._calculate_time_taken()
-	)
-
-	EventBus.lesson_finished.connect(
-		func(_l: int, _d: String) -> void:
-			times_taken = []
-			last_time_char_typed = 0.0
-			self.text = '0'
-	)
-
-	EventBus.finished_all_difficulty_lessons.connect(
-		func() -> void:
-			times_taken = []
-			last_time_char_typed = 0.0
-			self.text = '0'
-	)
-
-func _calculate_time_taken() -> void:
-	var now_in_minute := (Time.get_ticks_msec() / 1000.0) / 60
-
-	if last_time_char_typed != 0:
-		times_taken.push_back(now_in_minute - last_time_char_typed)
-		var total_in_sec := 0
-		for t in times_taken:
-			total_in_sec += t
-		if total_in_sec != 0:
-			cpm = str(roundf(times_taken.size() / (total_in_sec)))
-		self.text = cpm
-
-	if times_taken.size() > max_chars_to_calculate:
-		times_taken.pop_front()
-
-	last_time_char_typed = now_in_minute
-
-"
 
 [sub_resource type="GDScript" id="GDScript_43375"]
 script/source = "extends Label
@@ -292,7 +240,7 @@ text = "Char Per Min:"
 unique_name_in_owner = true
 layout_mode = 2
 text = "120"
-script = SubResource("GDScript_3afo8")
+script = ExtResource("9_3l5j0")
 
 [node name="ExerciseProgressContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/StatsContainer" groups=["scene_change_element"]]
 layout_mode = 2

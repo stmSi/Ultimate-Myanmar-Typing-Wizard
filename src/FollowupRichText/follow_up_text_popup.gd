@@ -51,7 +51,7 @@ func _animate_position() -> void:
 
 func _on_written_string_changed(s: String) -> void:
 	var delta_move := (
-		((s.length()) * follow_up_rich_text.get_theme_font_size("normal_font_size")) / 2
+		((s.length()) * follow_up_rich_text.get_theme_font_size("normal_font_size")) / 2.0
 	)
 #	margin_container.position.x = -delta_move
 	follow_up_rich_text.custom_minimum_size.x = (ori_richtext_minimum_size_x + delta_move)
