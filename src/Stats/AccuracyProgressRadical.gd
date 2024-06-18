@@ -13,6 +13,8 @@ var accuracy := 0.0
 func _ready() -> void:
 	var stats : Array[StatisticEntry]= UserProfileManager.load_stats()
 	texture_progress_bar.value = 0
+	if stats.size() == 0:
+		return
 	var stat := stats[stats.size() - 1]
 
 	accuracy = stat.accuracy

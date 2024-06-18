@@ -129,6 +129,7 @@ offset_left = -64.0
 offset_top = -40.0
 offset_right = -12.0
 offset_bottom = 16.0
+text = "Backspace"
 
 [node name="qwerty" type="HBoxContainer" parent="VBoxContainer"]
 layout_mode = 2
@@ -148,6 +149,7 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_dr5yv")
 [node name="Char" parent="VBoxContainer/qwerty/tab/Panel" index="2"]
 offset_left = -55.0
 offset_right = -3.0
+text = "Tab"
 
 [node name="qwerty" type="Control" parent="VBoxContainer/qwerty"]
 layout_mode = 2
@@ -170,6 +172,7 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_ng5ll")
 [node name="Char" parent="VBoxContainer/asdfgh/CapsLock/Panel" index="2"]
 offset_left = -56.0
 offset_right = -4.0
+text = "CapsLock"
 
 [node name="asdfgh" type="Control" parent="VBoxContainer/asdfgh"]
 layout_mode = 2
@@ -187,6 +190,7 @@ offset_left = -61.0
 offset_top = -41.0
 offset_right = -9.0
 offset_bottom = 15.0
+text = "Enter"
 
 [node name="zxcvb" type="HBoxContainer" parent="VBoxContainer"]
 layout_mode = 2
@@ -206,6 +210,7 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_8djne")
 [node name="Char" parent="VBoxContainer/zxcvb/LShift/Panel" index="2"]
 offset_left = -59.0
 offset_right = -7.0
+text = "Shift"
 
 [node name="zxcvb" type="Control" parent="VBoxContainer/zxcvb"]
 layout_mode = 2
@@ -221,6 +226,7 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_jjy0n")
 [node name="Char" parent="VBoxContainer/zxcvb/RShift/Panel" index="2"]
 offset_left = -58.0
 offset_right = -6.0
+text = "Shift"
 
 [node name="ctrl_win_alt_space_alt_win_menu_ctrl" type="HBoxContainer" parent="VBoxContainer"]
 layout_mode = 2
@@ -236,6 +242,7 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_bbdjs")
 [node name="Char" parent="VBoxContainer/ctrl_win_alt_space_alt_win_menu_ctrl/ctrl/Panel" index="2"]
 offset_left = -54.0
 offset_right = -2.0
+text = "Ctrl"
 
 [node name="win" parent="VBoxContainer/ctrl_win_alt_space_alt_win_menu_ctrl" instance=ExtResource("1_ik4w2")]
 custom_minimum_size = Vector2(120, 80)
@@ -248,6 +255,7 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_apsic")
 [node name="Char" parent="VBoxContainer/ctrl_win_alt_space_alt_win_menu_ctrl/win/Panel" index="2"]
 offset_left = -47.0
 offset_right = 5.0
+text = "Win"
 
 [node name="TextureRect" type="TextureRect" parent="VBoxContainer/ctrl_win_alt_space_alt_win_menu_ctrl/win"]
 modulate = Color(1, 1, 1, 0.705882)
@@ -278,6 +286,7 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_aoubn")
 [node name="Char" parent="VBoxContainer/ctrl_win_alt_space_alt_win_menu_ctrl/alt/Panel" index="2"]
 offset_left = -57.0
 offset_right = -5.0
+text = "Alt"
 
 [node name="space" parent="VBoxContainer/ctrl_win_alt_space_alt_win_menu_ctrl" instance=ExtResource("1_ik4w2")]
 unique_name_in_owner = true
@@ -305,6 +314,7 @@ grow_vertical = 0
 [node name="Char" parent="VBoxContainer/ctrl_win_alt_space_alt_win_menu_ctrl/space/Panel" index="2"]
 offset_left = -57.0
 offset_right = -5.0
+text = ""
 
 [node name="line" type="Panel" parent="VBoxContainer/ctrl_win_alt_space_alt_win_menu_ctrl/space"]
 unique_name_in_owner = true
@@ -334,6 +344,7 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_aoubn")
 [node name="Char" parent="VBoxContainer/ctrl_win_alt_space_alt_win_menu_ctrl/alt2/Panel" index="2"]
 offset_left = -56.0
 offset_right = -4.0
+text = "Alt"
 
 [node name="win2" parent="VBoxContainer/ctrl_win_alt_space_alt_win_menu_ctrl" instance=ExtResource("1_ik4w2")]
 custom_minimum_size = Vector2(120, 80)
@@ -346,6 +357,7 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_apsic")
 [node name="Char" parent="VBoxContainer/ctrl_win_alt_space_alt_win_menu_ctrl/win2/Panel" index="2"]
 offset_left = -54.0
 offset_right = -2.0
+text = "Win"
 
 [node name="TextureRect" type="TextureRect" parent="VBoxContainer/ctrl_win_alt_space_alt_win_menu_ctrl/win2"]
 modulate = Color(1, 1, 1, 0.705882)
@@ -376,6 +388,7 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_bbdjs")
 [node name="Char" parent="VBoxContainer/ctrl_win_alt_space_alt_win_menu_ctrl/ctrl2/Panel" index="2"]
 offset_left = -57.0
 offset_right = -5.0
+text = "Ctrl"
 
 [node name="ColorHint" type="HBoxContainer" parent="VBoxContainer"]
 unique_name_in_owner = true
