@@ -5,8 +5,8 @@ class_name CPMProgressRadical
 
 var cpm: int
 
-@export var average_cpm: int = 180
-@export var professional_cpm: int = 320
+@export var average_cpm: int = 150
+@export var professional_cpm: int = 250
 
 @export var lower_average_cpm_color: Color = Color.DARK_CYAN
 @export var above_average_cpm_color: Color = Color.MEDIUM_SPRING_GREEN
@@ -16,6 +16,8 @@ var cpm: int
 
 func _ready() -> void:
 	var stats := UserProfileManager.load_stats()
+	if stats.size() == 0:
+		return
 	var stat := stats[stats.size() - 1]
 	cpm = stat.char_per_min
 	show_cpm()
