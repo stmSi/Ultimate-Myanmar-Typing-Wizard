@@ -68,16 +68,21 @@ func _input(event: InputEvent) -> void:
 #		print("-----------")
 		if converted_char.begins_with("Backsp"):  #ignore Backspace
 			if not written_string.is_empty():
-				pending_node.reset_animation()
-				_reset_shifts()
+				_clear_pending_keys()
 				return
 
 		elif current_char == converted_char:
-			EventBus.correct_char_typed.emit(converted_char)
-			pending_node.correct_animation()
+			var completed_node := pending_node
+			var completed_shift_node := pending_shift_node
+			pending_node = null
+			pending_shift_node = null
 
-			if pending_shift_node:
-				pending_shift_node.correct_animation()
+			if completed_node:
+				completed_node.correct_animation()
+			if completed_shift_node:
+				completed_shift_node.correct_animation()
+
+			EventBus.correct_char_typed.emit(converted_char)
 		else:
 			EventBus.wrong_char_typed.emit(converted_char, current_char)
 			_run_incorrect(converted_char)
@@ -85,8 +90,8 @@ func _input(event: InputEvent) -> void:
 
 
 func _on_current_char_changed(c: String) -> void:
+	_clear_pending_keys()
 	current_char = c
-	pending_shift_node = null
 	var shift := TextProcessor.need_shift(current_char)
 	if shift == "l_shift":
 		_run_pending_l_shift()
@@ -108,7 +113,6 @@ func _run_pending(use_shift: bool) -> void:
 		EventBus.followup_popup_pos_changed.emit(pos, pending_node)
 
 		pending_node.run_pending(use_shift)
-	pass
 
 
 func _run_incorrect(c: String) -> void:
@@ -133,13 +137,19 @@ func _run_pending_r_shift() -> void:
 	r_shift.run_pending()
 
 
+func _clear_pending_keys() -> void:
+	if pending_node:
+		pending_node.reset_animation()
+		pending_node = null
+	_reset_shifts()
+
+
 func _reset_shifts() -> void:
 	if l_shift:
 		l_shift.reset_animation()
 	if r_shift:
 		r_shift.reset_animation()
 	pending_shift_node = null
-	pass
 
 
 func _on_new_lesson_id_loaded(_lesson_number: int, _idx: int, _lessons: LessonData) -> void:

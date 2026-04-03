@@ -21,7 +21,7 @@ config/project_settings_override="user://override.cfg"
 config/features=PackedStringArray("4.6", "Mobile")
 run/max_fps=60
 run/low_processor_mode=true
-config/icon="res://Web/favicon.svg"
+config/icon="res://Web/favicon.png"
 
 [autoload]
 
