@@ -12,7 +12,7 @@ import zipfile
 
 
 STATIC_FILES = (
-    ("Web/favicon.svg", "favicon.svg"),
+    ("Web/favicon.png", "favicon.png"),
     ("Web/robots.txt", "robots.txt"),
     ("Web/sitemap.xml", "sitemap.xml"),
     ("Assets/Icons/Logo.png", "logo.png"),
