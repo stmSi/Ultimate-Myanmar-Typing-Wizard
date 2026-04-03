@@ -141,7 +141,7 @@ func save_mistake_details(
 			# Not found wrong_char, first time wrong
 			mistake_char_data.append({
 				wrong_char: 1,
-				"last_time": Time.get_datetime_string_from_system()
+				"last_time": timestamp
 			})
 
 
@@ -185,9 +185,24 @@ func load_mistake_details() -> Array[CharacterMistakeDetails]:
 	for c in correct_chars:
 		var mistake_entries_for_char: Array[MistakeDetailEntry] = []
 		var mistakes : Array = save_file.get_value("MistakeDetails", c, [])
-		for mistake in (mistakes as Array[MistakeDetailEntry]):
+		for idx in mistakes.size():
+			var mistake: Variant = mistakes[idx]
+			if not (mistake is Dictionary):
+				continue
+			var mistake_dict := mistake as Dictionary
+			var wrong_chars := mistake_dict.keys().filter(
+				func(key: Variant) -> bool:
+					return key != "last_time"
+			)
+			if wrong_chars.is_empty():
+				continue
+			var wrong_char := wrong_chars[0] as String
 			mistake_entries_for_char.append(
-				MistakeDetailEntry.new(c, mistake[c], mistake["last_time"])
+				MistakeDetailEntry.new(
+					wrong_char,
+					mistake_dict.get(wrong_char, 0) as int,
+					mistake_dict.get("last_time", "") as String
+				)
 			)
 		mistakes_details.append(CharacterMistakeDetails.new(c, mistake_entries_for_char))
 

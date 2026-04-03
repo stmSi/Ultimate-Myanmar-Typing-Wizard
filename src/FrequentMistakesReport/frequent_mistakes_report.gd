@@ -15,48 +15,44 @@ var corrects : Array[CorrectCharacterEntry] = []
 
 
 func _ready() -> void:
-	var now := Time.get_ticks_msec()
-
-	#var mistakes := UserProfileManager.load_mistake_details()
-	var mistakes := []
+	var mistakes := UserProfileManager.load_mistake_details()
 	corrects = UserProfileManager.load_correct_characters()
-#
-	##### YEPP Algorithm :) ####
-	#for mistake_char_obj in mistakes:
-		#mistake_char_obj = mistake_char_obj
-		#var mistake_char := mistake_char_obj.mistakes[0].wrong_char
-#
-		##var characters_mistaken_with = mistake_char_obj[mistake_char]
-		#var char_total_mistakes := 0
-		##for char_mistaken_with in characters_mistaken_with:
-			##char_mistaken_with.erase("last_time")
-			##char_total_mistakes += char_mistaken_with[char_mistaken_with.keys()[0]]
-##
-		##mistakes_chars.push_back(mistake_char)
-		##mistakes_chars_freq.push_back(char_total_mistakes)
-#
-		#var key_button: KeyButton = keyboard.key_node_mapping[mistake_char]
-#
-		#for correct_char in corrects:
-			#if correct_char.has(mistake_char):
-				#var without_mistakes_percentage := (
-					#100
-					#- (roundf(
-						#(float(char_total_mistakes) / float(correct_char[mistake_char])) * 100.0
-					#))
-				#)
-				#if without_mistakes_percentage >= 90:
-					#key_button.highlight_character(mistake_char, color_char_90)
-				#elif without_mistakes_percentage >= 50:
-					#key_button.highlight_character(mistake_char, color_char_50)
-				#else:
-					#key_button.highlight_character(mistake_char, color_char_below)
-				#corrects.erase(correct_char)
+	var corrects_by_char := {}
 
-	# Remaining will be the perfect characters
-	for perfect_char in corrects:
-		var key_button: KeyButton = keyboard.key_node_mapping.get_node(perfect_char.character)
-		key_button.highlight_character(perfect_char.character, color_char_perfect)
+	for correct_entry in corrects:
+		corrects_by_char[correct_entry.character] = correct_entry.frequency
+
+	for mistake_detail in mistakes:
+		var key_button: KeyButton = keyboard.key_node_mapping.get_node(mistake_detail.correct_char)
+		if key_button == null:
+			continue
+
+		var correct_count := int(corrects_by_char.get(mistake_detail.correct_char, 0))
+		var total_mistakes := 0
+		for entry in mistake_detail.mistakes:
+			total_mistakes += entry.frequency
+
+		var total_attempts := correct_count + total_mistakes
+		var accuracy_percentage := 0.0
+		if total_attempts > 0:
+			accuracy_percentage = (float(correct_count) / float(total_attempts)) * 100.0
+
+		if total_mistakes == 0 and correct_count > 0:
+			key_button.highlight_character(mistake_detail.correct_char, color_char_perfect)
+		elif accuracy_percentage >= 90.0:
+			key_button.highlight_character(mistake_detail.correct_char, color_char_90)
+		elif accuracy_percentage >= 50.0:
+			key_button.highlight_character(mistake_detail.correct_char, color_char_50)
+		else:
+			key_button.highlight_character(mistake_detail.correct_char, color_char_below)
+
+		corrects_by_char.erase(mistake_detail.correct_char)
+
+	# Remaining are characters with only correct inputs recorded.
+	for correct_char in corrects_by_char.keys():
+		var key_button: KeyButton = keyboard.key_node_mapping.get_node(correct_char)
+		if key_button:
+			key_button.highlight_character(correct_char, color_char_perfect)
 
 	keyboard.color_hint.set_color_hints(
 		color_char_perfect, color_char_90, color_char_50, color_char_below
