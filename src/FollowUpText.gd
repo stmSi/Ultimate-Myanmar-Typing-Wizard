@@ -1,5 +1,7 @@
 extends RichTextLabel
 
+static var latin_fallback_font: FontFile
+
 var raw_text := '<Text Are not loaded yet.>'
 var written_text := ''
 
@@ -15,6 +17,7 @@ var disable_highlight_curr_char: bool = false
 var prevent_typing_pass_error: bool = false
 
 func _ready() -> void:
+	_apply_font_fallbacks()
 	EventBus.exercise_loaded.connect(self._set_raw_text)
 	EventBus.written_string_changed.connect(self._on_written_string_changed)
 
@@ -30,6 +33,23 @@ func _ready() -> void:
 		func(prevent: bool) -> void:
 			prevent_typing_pass_error = prevent
 	)
+
+
+func _apply_font_fallbacks() -> void:
+	if latin_fallback_font == null:
+		latin_fallback_font = load("res://Assets/Fonts/NotoSans-Regular.ttf") as FontFile
+
+	_override_font_with_fallback("normal_font")
+	_override_font_with_fallback("bold_font")
+
+
+func _override_font_with_fallback(font_name: String) -> void:
+	var base_font := get_theme_font(font_name)
+	if base_font is FontFile:
+		var font_with_fallback := (base_font as FontFile).duplicate() as FontFile
+		font_with_fallback.fallbacks = [latin_fallback_font]
+		add_theme_font_override(font_name, font_with_fallback)
+
 
 func _set_raw_text(t: String, _idx: int, _e: PackedStringArray) -> void:
 	raw_text = t
