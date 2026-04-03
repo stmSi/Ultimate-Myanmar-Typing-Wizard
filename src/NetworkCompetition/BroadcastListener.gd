@@ -1,25 +1,29 @@
 extends Node
 
-var BROADCAST_PORT = 4488
+const BROADCAST_PORT: int = 4488
 var peer : PacketPeerUDP
-var thread = null
 
 ### To Discover Clients
 
 func _ready() -> void:
 	peer = PacketPeerUDP.new()
-	var err = peer.bind(BROADCAST_PORT, "0.0.0.0")
+	var err: int = peer.bind(BROADCAST_PORT, "0.0.0.0")
 	if err != OK:
 		print("Binding Port: ", BROADCAST_PORT, " Failed.")
 		return
-	
-	thread = Thread.new()
-	thread.start(discover_peers)
+
+	set_process(true)
+
+func _exit_tree() -> void:
+	if peer:
+		peer.close()
 
 
+func _process(_delta: float) -> void:
+	if not peer:
+		return
 
-func discover_peers() -> void:
-	while peer.wait() == OK:
-		var data = peer.get_packet().get_string_from_ascii()
+	while peer.get_available_packet_count() > 0:
+		var data: String = peer.get_packet().get_string_from_ascii()
 		print(peer.get_packet_ip(), " : ", data)
 		EventBus.peer_discovered.emit(peer.get_packet_ip())

@@ -1,6 +1,8 @@
 extends Control
 class_name KeyButton
 
+static var keyboard_font_with_fallback: FontFile
+
 @onready var panel: Panel = $Panel
 
 @onready var shift_char_lbl: Label = $Panel/ShiftChar
@@ -47,6 +49,14 @@ var ori_modulate_shift_char_color: Color
 
 
 func _ready() -> void:
+	if keyboard_font_with_fallback == null:
+		var keyboard_font := load("res://Assets/Fonts/NotoSansMyanmar-Regular.ttf") as FontFile
+		var latin_fallback_font := load("res://Assets/Fonts/NotoSans-Regular.ttf") as FontFile
+		keyboard_font_with_fallback = keyboard_font.duplicate() as FontFile
+		keyboard_font_with_fallback.fallbacks = [latin_fallback_font]
+
+	shift_char_lbl.add_theme_font_override("font", keyboard_font_with_fallback)
+	char_lbl.add_theme_font_override("font", keyboard_font_with_fallback)
 	ori_modulate_char_color = char_lbl.modulate
 	ori_modulate_shift_char_color = shift_char_lbl.modulate
 

@@ -1,11 +1,6 @@
 extends FollowUpTextPopup
 
-@export var enemy: Node2D:
-	get:
-		return enemy
-	set(value):
-		visible = true
-		enemy = value
+var enemy: Enemy = null
 
 
 func _ready() -> void:
@@ -16,13 +11,14 @@ func _ready() -> void:
 	EventBus.game_focus_enemy.connect(self._on_game_focus_enemy)
 
 
-func _on_game_focus_enemy(enemy: Node2D):
-	self.enemy = enemy
+func _on_game_focus_enemy(target_enemy: Node2D) -> void:
+	self.enemy = target_enemy as Enemy
+	visible = self.enemy != null
 	if enemy == null:
 		visible = false
 
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if self.enemy:
 		global_position = Vector2(
 			enemy.global_position.x, enemy.global_position.y - enemy.get_size().y / 2
@@ -33,7 +29,7 @@ func _process(delta: float) -> void:
 #		call_deferred("_animate_position") # Hack for first time position not working
 
 
-func _animate_position():
+func _animate_position() -> void:
 	var pos := enemy.global_position
 
 	# left boundry
@@ -44,5 +40,5 @@ func _animate_position():
 	if enemy.global_position.x + (panel.size.x / 2) > get_viewport_rect().size.x:  # 5 is for some padding
 		pos.x = get_viewport_rect().size.x - (panel.size.x / 2)
 
-	var tween = get_tree().create_tween()
+	var tween: Tween = get_tree().create_tween()
 	tween.tween_property(self, "global_position", pos, .2).set_trans(Tween.TRANS_CUBIC)

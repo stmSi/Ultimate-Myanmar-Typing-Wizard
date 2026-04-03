@@ -1,8 +1,12 @@
 ### Ultimate Myanmar Typing Wizard (WIP) [![MIT License](https://img.shields.io/badge/License-MIT-25B3A0?style=flat-square)](https://github.com/stmSi/myanmar-unicode-typing-trainer/blob/master/LICENSE.md)
 
-Created in [Godot Engine 4.0 Stable](https://godotengine.org/download) (Godot 3.x is not supported.)
+Created in [Godot Engine 4.6.2 Stable](https://godotengine.org/download)
 
 [Download Linux/Windows Builds](https://github.com/stmSi/Ultimate-Myanmar-Typing-Wizard/releases/)
+
+Web exports are built from the `Web` export preset and deployed to GitHub Pages by `.github/workflows/build.yml`.
+Create a local export with `python3 script/export_web_build.py`.
+For local preview after exporting, run `python3 script/serve_web_build.py`.
 
 ---
 
@@ -36,7 +40,7 @@ Feel free to [report](https://github.com/stmSi/Ultimate-Myanmar-Typing-Wizard/is
 
 ### **Contributions**:
 
-1. Download [Godot Engine 4.0 Stable](https://godotengine.org/download). (Should work in future ***4.x*** versions but ***3.x*** is not supported.)
+1. Download [Godot Engine 4.6.2 Stable](https://godotengine.org/download). (Future ***4.x*** versions should be close, but this repo is currently maintained against ***4.6.2***.)
 2. Fork this repo to your github account and `git clone` your forked repo
 3. Open `project.godot` with Godot
 

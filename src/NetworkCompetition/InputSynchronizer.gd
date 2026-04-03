@@ -3,14 +3,6 @@ extends MultiplayerSynchronizer
 
 
 func _ready() -> void:
-	print(
-		get_multiplayer_authority(),
-		"==",
-		multiplayer.get_unique_id(),
-		" : ",
-		get_multiplayer_authority() == multiplayer.get_unique_id()
-	)
-
 	set_process_input(get_multiplayer_authority() == multiplayer.get_unique_id())
 
 

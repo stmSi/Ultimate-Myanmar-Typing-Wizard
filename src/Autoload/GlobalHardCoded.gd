@@ -21,5 +21,3 @@ func _ready() -> void:
 	intermediate_lessons_location = intermediate_lessons_location.format([texts_root])
 	advanced_lessons_location = advanced_lessons_location.format([texts_root])
 	extra_lessons_location = extra_lessons_location.format([texts_root])
-
-	print(basic_lessons_location)

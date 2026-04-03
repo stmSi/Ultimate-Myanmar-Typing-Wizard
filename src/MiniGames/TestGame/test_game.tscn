@@ -8,11 +8,11 @@
 [sub_resource type="GDScript" id="GDScript_3jnh1"]
 script/source = "extends LineEdit
 
-var _eng_to_mm_converted = false
-var current_exercise_text = \"\"
+var _eng_to_mm_converted: bool = false
+var current_exercise_text: String = \"\"
 
 # Called when the node enters the scene tree for the first time.
-func _ready():
+func _ready() -> void:
 	grab_focus()
 	EventBus.lesson_id_loaded.connect(self._on_new_lesson_id_loaded)
 	EventBus.exercise_loaded.connect(self._exercise_loaded)
@@ -26,7 +26,7 @@ func _exercise_loaded(exercise_text: String, _idx: int, _exercises: PackedString
 func _exercise_line_finished() -> void:
 	clear()
 
-func _on_new_lesson_id_loaded(_lesson_id: int) -> void:
+func _on_new_lesson_id_loaded(_lesson_id: int, _idx: int, _lesson_data: Variant) -> void:
 	clear()
 
 

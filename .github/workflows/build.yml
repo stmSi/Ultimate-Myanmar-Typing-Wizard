@@ -1,0 +1,111 @@
+name: Build Web Export
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+      - master
+    tags:
+      - "v*"
+  pull_request:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+env:
+  GODOT_VERSION: "4.6.2"
+  GODOT_RELEASE_TAG: "4.6.2-stable"
+  GODOT_EDITOR_URL: "https://github.com/godotengine/godot-builds/releases/download/4.6.2-stable/Godot_v4.6.2-stable_linux.x86_64.zip"
+  GODOT_TEMPLATES_URL: "https://github.com/godotengine/godot-builds/releases/download/4.6.2-stable/Godot_v4.6.2-stable_export_templates.tpz"
+
+jobs:
+  export-web:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          lfs: true
+
+      - name: Cache Godot editor and templates
+        id: cache-godot
+        uses: actions/cache@v4
+        with:
+          path: |
+            .godot-ci/${{ env.GODOT_VERSION }}
+            ~/.local/share/godot/export_templates/${{ env.GODOT_VERSION }}.stable
+          key: godot-${{ runner.os }}-${{ env.GODOT_RELEASE_TAG }}
+
+      - name: Install Godot editor and export templates
+        if: steps.cache-godot.outputs.cache-hit != 'true'
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          GODOT_DIR="$GITHUB_WORKSPACE/.godot-ci/${GODOT_VERSION}"
+          TEMPLATE_DIR="$HOME/.local/share/godot/export_templates/${GODOT_VERSION}.stable"
+
+          mkdir -p "$GODOT_DIR" "$TEMPLATE_DIR"
+
+          curl -L "$GODOT_EDITOR_URL" -o /tmp/godot_editor.zip
+          unzip -q /tmp/godot_editor.zip -d "$GODOT_DIR"
+
+          EDITOR_BIN="$(find "$GODOT_DIR" -maxdepth 1 -type f -name 'Godot_v*-stable_linux.x86_64' | head -n 1)"
+          mv "$EDITOR_BIN" "$GODOT_DIR/godot"
+          chmod +x "$GODOT_DIR/godot"
+
+          curl -L "$GODOT_TEMPLATES_URL" -o /tmp/godot_templates.tpz
+          TMP_TEMPLATES_DIR="$(mktemp -d)"
+          unzip -q /tmp/godot_templates.tpz -d "$TMP_TEMPLATES_DIR"
+
+          if [ -d "$TMP_TEMPLATES_DIR/templates" ]; then
+            cp -a "$TMP_TEMPLATES_DIR/templates/." "$TEMPLATE_DIR/"
+          else
+            cp -a "$TMP_TEMPLATES_DIR/." "$TEMPLATE_DIR/"
+          fi
+
+      - name: Export web build
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          GODOT_BIN="$GITHUB_WORKSPACE/.godot-ci/${GODOT_VERSION}/godot"
+          chmod +x "$GODOT_BIN"
+
+          rm -rf "$GITHUB_WORKSPACE/build" "$GITHUB_WORKSPACE/dist"
+          python3 "$GITHUB_WORKSPACE/script/export_web_build.py" --godot-bin "$GODOT_BIN"
+
+      - name: Configure GitHub Pages
+        if: (github.event_name == 'workflow_dispatch' || github.event_name == 'push') && (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master')
+        uses: actions/configure-pages@v5
+
+      - name: Upload GitHub Pages artifact
+        if: (github.event_name == 'workflow_dispatch' || github.event_name == 'push') && (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master')
+        uses: actions/upload-pages-artifact@v4
+        with:
+          path: build/web
+
+      - name: Upload build artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: godot-web-export-${{ github.sha }}
+          path: dist/*
+          if-no-files-found: error
+
+  deploy-pages:
+    if: (github.event_name == 'workflow_dispatch' || github.event_name == 'push') && (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master')
+    runs-on: ubuntu-latest
+    needs: export-web
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

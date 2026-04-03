@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://stmsi.github.io/Ultimate-Myanmar-Typing-Wizard/sitemap.xml

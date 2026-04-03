@@ -9,13 +9,13 @@ class_name Player
 		%InputSynchronizer.set_multiplayer_authority(id)
 
 # Player synchronized input.
-@onready var input = %InputSynchronizer
+@onready var input: MultiplayerSynchronizer = %InputSynchronizer
 
 @export var cpm: int = 0
 @export var accuracy: float = 0.0
 @export var mistakes: int = 0
 @export var corrects: int = 0
-@export var exercise_ids := []:
+@export var exercise_ids: Array[String] = []:
 	set(ids):
 		exercise_ids = ids
 #		print(multiplayer.get_unique_id(), " start network lessons emits")

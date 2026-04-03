@@ -127,7 +127,7 @@ func save_mistake_details(
 		# 	{another_w_char: how_many_times, "last_time": last_time_mistake}
 		#	]
 
-		var mistake_char_data : Array = save_file.get_value("MistakesDetails", correct_char, [] )
+		var mistake_char_data : Array = save_file.get_value("MistakeDetails", correct_char, [] )
 
 		var j := 0;
 		while j < len(mistake_char_data):
@@ -177,6 +177,9 @@ func load_mistake_details() -> Array[CharacterMistakeDetails]:
 	if err != OK:
 		print("Error in load_mistake_details: loading save file data fails.")
 		return [];
+
+	if not save_file.has_section("MistakeDetails"):
+		return []
 
 	var correct_chars := save_file.get_section_keys("MistakeDetails")
 	for c in correct_chars:
@@ -238,6 +241,9 @@ func load_correct_characters() -> Array[CorrectCharacterEntry]:
 		print("Error in load_mistake_details: loading save file data fails.")
 		return [];
 
+	if not save_file.has_section("Corrects"):
+		return []
+
 	var chars := save_file.get_section_keys("Corrects")
 	for c in chars:
 		var frequency := save_file.get_value("Corrects", c, 0) as int
@@ -288,6 +294,9 @@ func load_stats() -> Array[StatisticEntry]:
 			"basic",
 			1
 		)]
+
+	if not save_file.has_section("Statistics"):
+		return []
 
 	var stats_timestamps := save_file.get_section_keys("Statistics")
 	for timestamp in stats_timestamps:

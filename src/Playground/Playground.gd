@@ -157,7 +157,6 @@ func _load_lesson() -> void:
 		# keep loading lessons one by one until there is exercise
 		_load_lesson()
 	else:
-		print(typeof(lesson_data))
 		EventBus.lesson_id_loaded.emit(int(lesson_ids[lesson_idx - 1]), lesson_idx - 1, lesson_data)
 
 

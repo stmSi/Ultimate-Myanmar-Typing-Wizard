@@ -9,37 +9,36 @@ var accuracy_color: Color
 @export var color_99: Color = Color.GREEN
 @export var color_0: Color = Color.RED
 
-@onready var player: Control = $"../../../../../.."
+@onready var player: Player = $"../../../../../.."
 
 func _ready() -> void:
-	print(owner, player, owner == player)
 	if label_settings:
 		label_settings = label_settings.duplicate(true)
 	
 	# if this node belongs to the current player
 	if player.player_id == multiplayer.get_unique_id(): 
 		EventBus.wrong_char_typed.connect(
-			func(_wrong_char: String, _correct_char: String): 
+			func(_wrong_char: String, _correct_char: String) -> void:
 				num_wrongs += 1
 				_calculate_show()
 		)
 		
 		EventBus.correct_char_typed.connect(
-			func(_c: String):
+			func(_c: String) -> void:
 				num_corrects += 1
 				_calculate_show()
 		)
 		
 		EventBus.finished_all_difficulty_lessons.connect(
-			func():
+			func() -> void:
 				num_corrects = 0.0
 				num_wrongs = 0.0
 				_calculate_show()
 		)
 
 
-func _calculate_show():
-	var total = num_corrects + num_wrongs
+func _calculate_show() -> void:
+	var total: float = num_corrects + num_wrongs
 	if total == 0:
 		self.text = "100 %" # Division by 0 error
 	else:

@@ -9,10 +9,9 @@ const PORT = 4433
 #@onready var player_scene = preload("res://src/NetworkCompetition/player.tscn")
 @onready var players_container: Node = $PlayersContainer
 
-@export var lesson_ids := []:
+@export var lesson_ids: Array[String] = []:
 	set(l_ids):
 		lesson_ids = l_ids
-		print("starting newtork exercise")
 		$Playground.start_network_exercise(l_ids)
 
 
@@ -24,7 +23,6 @@ func _ready() -> void:
 	multiplayer.server_relay = false
 	# Automatically start the server in headless mode.
 	if DisplayServer.get_name() == "headless":
-		print("Automatically starting dedicated server.")
 		_on_host_btn_pressed()
 
 
@@ -33,7 +31,7 @@ func _exit_tree() -> void:
 
 
 func _on_host_btn_pressed() -> void:
-	var peer = ENetMultiplayerPeer.new()
+	var peer: ENetMultiplayerPeer = ENetMultiplayerPeer.new()
 	peer.create_server(PORT)
 	if peer.get_connection_status() == MultiplayerPeer.CONNECTION_DISCONNECTED:
 		OS.alert("Failed to start multiplayer server.")
@@ -49,14 +47,12 @@ func _on_connect_btn_pressed() -> void:
 		OS.alert("Need a remote to connect to.")
 		return
 
-	var peer = ENetMultiplayerPeer.new()
-	var error = peer.create_client(txt, PORT)
+	var peer: ENetMultiplayerPeer = ENetMultiplayerPeer.new()
+	var error: int = peer.create_client(txt, PORT)
 
 	if error != OK:
 		OS.alert("Failed to connect.")
 		return
-
-	print(peer.get_connection_status())
 
 	if peer.get_connection_status() == MultiplayerPeer.CONNECTION_DISCONNECTED:
 		OS.alert("Failed to start client.")
@@ -88,28 +84,29 @@ func start_competition() -> void:
 #	get_tree().paused = false
 
 
-func end_competition():
+func end_competition() -> void:
 	lesson_ids.clear()
 	if not multiplayer.is_server():
 		return
 
-	multiplayer.peer_connected.disconnect(add_player)
-	multiplayer.peer_disconnected.disconnect(del_player)
+	if multiplayer.peer_connected.is_connected(add_player):
+		multiplayer.peer_connected.disconnect(add_player)
+	if multiplayer.peer_disconnected.is_connected(del_player):
+		multiplayer.peer_disconnected.disconnect(del_player)
 
 
-func prepare_exercises():
+func prepare_exercises() -> void:
 	var files: PackedStringArray = LessonAccess.get_lesson_files("extra")
 	files = Utils.randomize_packed_array(files)
-	var tmp_ids = []
+	var tmp_ids: Array[String] = []
 	for f in files:
 		tmp_ids.push_back(f.get_basename().get_file())
 	lesson_ids = tmp_ids
-	pass
 
 
-func add_player(id: int):
-	var player_scene = preload("res://src/NetworkCompetition/player.tscn")
-	var player = player_scene.instantiate()
+func add_player(id: int) -> void:
+	var player_scene: PackedScene = preload("res://src/NetworkCompetition/player.tscn")
+	var player: Player = player_scene.instantiate()
 #	# Set player id.
 	player.player_id = id
 	player.name = str(id)
@@ -120,9 +117,11 @@ func add_player(id: int):
 #	await player.ready
 
 
-func del_player(id: int):
-	print("player removed. ", id)
+func del_player(id: int) -> void:
+	var player := players_container.get_node_or_null(str(id))
+	if player:
+		player.queue_free()
 
 
-func sync_exercise(s):
+func sync_exercise(s: String) -> void:
 	pass
