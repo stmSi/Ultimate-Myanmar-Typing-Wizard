@@ -2,9 +2,11 @@
 
 Created in [Godot Engine 4.6.2 Stable](https://godotengine.org/download)
 
-[Download Linux/Windows Builds](https://github.com/stmSi/Ultimate-Myanmar-Typing-Wizard/releases/)
+[Download Release Builds](https://github.com/stmSi/Ultimate-Myanmar-Typing-Wizard/releases/)
 
 Web exports are built from the `Web` export preset and deployed to GitHub Pages by `.github/workflows/build.yml`.
+GitHub Releases can publish Linux, Windows, macOS, and web build assets through `.github/workflows/release.yml`.
+Create local desktop release builds with `python3 script/export_desktop_builds.py`.
 Create a local export with `python3 script/export_web_build.py`.
 For local preview after exporting, run `python3 script/serve_web_build.py`.
 

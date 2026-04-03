@@ -3,3 +3,4 @@
 build/*
 !build/Typing-Trainer.build
 dist/
+__pycache__/

@@ -68,4 +68,5 @@ enabled=PackedStringArray("res://addons/gdLinter/plugin.cfg", "res://addons/nati
 [rendering]
 
 renderer/rendering_method="gl_compatibility"
+textures/vram_compression/import_etc2_astc=true
 environment/defaults/default_clear_color=Color(0.105882, 0.356863, 0.176471, 1)
