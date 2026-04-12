@@ -49,7 +49,7 @@ func _ready() -> void:
 		corrects_by_char.erase(mistake_detail.correct_char)
 
 	# Remaining are characters with only correct inputs recorded.
-	for correct_char in corrects_by_char.keys():
+	for correct_char: String in corrects_by_char.keys():
 		var key_button: KeyButton = keyboard.key_node_mapping.get_node(correct_char)
 		if key_button:
 			key_button.highlight_character(correct_char, color_char_perfect)
